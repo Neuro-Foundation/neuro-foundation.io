@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A783EC6-A5EA-4457-8447-CC55E045DD11}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		neuro-foundation.io.manifest = neuro-foundation.io.manifest
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{B864C64F-AB7C-49C3-A403-DDE2D96D6ED3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neuro-foundation.io", "{FE17EE9B-9567-430E-8317-6B411D781F78}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\ContentAdmin.md = Root\neuro-foundation.io\ContentAdmin.md
+		Root\neuro-foundation.io\ContentAnonymous.md = Root\neuro-foundation.io\ContentAnonymous.md
+		Root\neuro-foundation.io\ContentNeuroAccess.md = Root\neuro-foundation.io\ContentNeuroAccess.md
+		Root\neuro-foundation.io\Index.md = Root\neuro-foundation.io\Index.md
+		Root\neuro-foundation.io\Invitation.md = Root\neuro-foundation.io\Invitation.md
+		Root\neuro-foundation.io\Login.js = Root\neuro-foundation.io\Login.js
+		Root\neuro-foundation.io\Login.md = Root\neuro-foundation.io\Login.md
+		Root\neuro-foundation.io\LogOut.md = Root\neuro-foundation.io\LogOut.md
+		Root\neuro-foundation.io\Master.md = Root\neuro-foundation.io\Master.md
+		Root\neuro-foundation.io\NeuroFoundationStyles.cssx = Root\neuro-foundation.io\NeuroFoundationStyles.cssx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE17EE9B-9567-430E-8317-6B411D781F78} = {B864C64F-AB7C-49C3-A403-DDE2D96D6ED3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}
+	EndGlobalSection
+EndGlobal

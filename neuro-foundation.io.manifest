@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Module xmlns="http://waher.se/Schema/ModuleManifest.xsd">
 	<Folder name="Root">
-		<Folder name="TemplateContent">
+		<Folder name="neuro-foundation.io">
 			<Content fileName="ContentAdmin.md"/>
 			<Content fileName="ContentAnonymous.md"/>
 			<Content fileName="ContentNeuroAccess.md"/>
