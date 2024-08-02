@@ -14,14 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{B864C64F-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neuro-foundation.io", "{FE17EE9B-9567-430E-8317-6B411D781F78}"
 	ProjectSection(SolutionItems) = preProject
-		Root\neuro-foundation.io\ContentAdmin.md = Root\neuro-foundation.io\ContentAdmin.md
-		Root\neuro-foundation.io\ContentAnonymous.md = Root\neuro-foundation.io\ContentAnonymous.md
-		Root\neuro-foundation.io\ContentNeuroAccess.md = Root\neuro-foundation.io\ContentNeuroAccess.md
 		Root\neuro-foundation.io\Index.md = Root\neuro-foundation.io\Index.md
-		Root\neuro-foundation.io\Invitation.md = Root\neuro-foundation.io\Invitation.md
-		Root\neuro-foundation.io\Login.js = Root\neuro-foundation.io\Login.js
-		Root\neuro-foundation.io\Login.md = Root\neuro-foundation.io\Login.md
-		Root\neuro-foundation.io\LogOut.md = Root\neuro-foundation.io\LogOut.md
 		Root\neuro-foundation.io\Master.md = Root\neuro-foundation.io\Master.md
 		Root\neuro-foundation.io\NeuroFoundationStyles.cssx = Root\neuro-foundation.io\NeuroFoundationStyles.cssx
 	EndProjectSection

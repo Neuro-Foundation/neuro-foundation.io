@@ -2,14 +2,7 @@
 <Module xmlns="http://waher.se/Schema/ModuleManifest.xsd">
 	<Folder name="Root">
 		<Folder name="neuro-foundation.io">
-			<Content fileName="ContentAdmin.md"/>
-			<Content fileName="ContentAnonymous.md"/>
-			<Content fileName="ContentNeuroAccess.md"/>
 			<Content fileName="Index.md"/>
-			<Content fileName="Invitation.md"/>
-			<Content fileName="Login.js"/>
-			<Content fileName="Login.md"/>
-			<Content fileName="LogOut.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="TemplateStyles.cssx"/>
 		</Folder>
