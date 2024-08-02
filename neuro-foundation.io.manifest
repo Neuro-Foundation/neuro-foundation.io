@@ -4,7 +4,7 @@
 		<Folder name="neuro-foundation.io">
 			<Content fileName="Index.md"/>
 			<Content fileName="Master.md"/>
-			<Content fileName="TemplateStyles.cssx"/>
+			<Content fileName="NeuroFoundationStyles.cssx"/>
 		</Folder>
 	</Folder>
 </Module>
