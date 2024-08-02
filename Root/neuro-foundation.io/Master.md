@@ -1,6 +1,6 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
-CSS: /TemplateContent/TemplateStyles.cssx
+CSS: /NeuroFoundationStyles.cssx
 Javascript: /Events.js
 Icon: /favicon.ico
 
@@ -8,25 +8,25 @@ Icon: /favicon.ico
 <nav>
 
 * &#9776;
-* [Home](/TemplateContent/Index.md)
-* [Content](#)
-	* [Anonymous](ContentAnonymous.md)
-	* [Authenticated (Neuro-Access)](ContentNeuroAccess.md)
-	* [Authenticated (Admin)](ContentAdmin.md)
-* [Placeholder](#)
+* [Home](/Index.md)
+* [Neuro-Foundation](#)
+	* [neuro-foundation.com](https://neuro-foundation.com/)
+	* [neuro-foundation.io](https://neuro-foundation.io/)
+	* [neuro-foundation.net](https://neuro-foundation.net/)
+	* [neuro-foundation.org](https://neuro-foundation.org/)
+* [Trust Anchor Group](#)
+	* [Home Page](https://trustanchorgroup.com/)
+	* [LinkedIn](https://www.linkedin.com/company/trust-anchor-group/)
+	* [GitHub](https://github.com/Trust-Anchor-Group)
 * [%Title]
-* {{exists(QuickLoginUser)?]][<img id='userAvatar' alt="((QuickLoginUser.UserName))" with="40" height="40" src="((QuickLoginUser.AvatarUrl))?Width=40&Height=40"/> ((QuickLoginUser.UserName))](#)
-	* [Logout](/TemplateContent/LogOut.md)[[ : ]]<a href="/TemplateContent/Login.md?from=((UrlEncode(Request.Header.GetURL() ) ))">Login</a>[[}}
+* [Quick Login](https://quicklog.in/)
+* [Neuro-Exchange](https://neuro-exchange.com/)
 * [Help](#)
 	* [Documentation](https://lab.tagroot.io/Documentation/Index.md)
 	* [Community](https://lab.tagroot.io/Community/Index.md)
 	* [Markdown](/Markdown.md)
 	* [Script](/Script.md)
-	* [LinkedIn](https://www.linkedin.com/company/trust-anchor-group/)
-	* [GitHub](https://github.com/Trust-Anchor-Group)
-	* [Repository](https://github.com/Trust-Anchor-Group/TemplateContentOnlyPackage)
-	* [Contact](https://lab.tagroot.io/Feedback.md)
-* [Placeholder](#)
+	* [Contact](/Feedback.md)
 
 </nav>
 </header>
