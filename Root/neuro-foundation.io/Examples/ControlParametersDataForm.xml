@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns="urn:ieee:iot:ctr:1.0">
+  <x type='form'
+      xmlns='jabber:x:data'
+      xmlns:xdv='http://jabber.org/protocol/xdata-validate'
+      xmlns:xdl='http://jabber.org/protocol/xdata-layout'
+      xmlns:xdd='urn:xmpp:xdata:dynamic'>
+    <title>Spotlight</title>
+    <xdl:page label='Output'>
+      <xdl:fieldref var='MainSwitch'/>
+    </xdl:page>
+    <xdl:page label='Direction'>
+      <xdl:fieldref var='HorizontalAngle'/>
+      <xdl:fieldref var='ElevationAngle'/>
+    </xdl:page>
+    <field var='xdd session' type='hidden'>
+      <value>83CAA4BC-6D3A-40E6-90DC-5C3CAA030AE1</value>
+    </field>
+    <field var='MainSwitch' type='boolean' label='Main switch'>
+      <desc>If the spotlight is turned on or off.</desc>
+      <value>true</value>
+      <xdd:notSame/>
+    </field>
+    <field var='HorizontalAngle' type='text-single' label='Horizontal angle:'>
+      <desc>Horizontal angle of the spotlight.</desc>
+      <value>0</value>
+      <xdv:validate datatype='xs:double'>
+        <xdv:range min='-180' max='180'/>
+      </xdv:validate>
+      <xdd:notSame/>
+      <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+    </field>
+    <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
+     <desc>Elevation angle of the spotlight.</desc>
+     <value>0</value>
+     <xdv:validate datatype='xs:double'>
+       <xdv:range min='-90' max='90'/>
+     </xdv:validate>
+     <xdd:notSame/>
+     <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+    </field>
+  </x>
+</set>

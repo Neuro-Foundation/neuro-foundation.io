@@ -1,0 +1,479 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:ctr:1.0'
+    xmlns='urn:ieee:iot:ctr:1.0'
+    xmlns:sd='urn:ieee:iot:sd:1.0'
+    xmlns:xd="jabber:x:data"
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:import namespace='jabber:x:data'>
+		<xs:annotation>
+			<xs:documentation>XEP-0004: Data Forms.</xs:documentation>
+		</xs:annotation>
+	</xs:import>
+
+	<xs:element name='set'>
+		<xs:annotation>
+			<xs:documentation>Sets control parameters in the destination.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='0'>
+				<xs:element ref='nd'>
+					<xs:annotation>
+						<xs:documentation>Defines a node restriction of the request.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='b'>
+					<xs:annotation>
+						<xs:documentation>Sets a boolean control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='cl'>
+					<xs:annotation>
+						<xs:documentation>Sets a color control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='d'>
+					<xs:annotation>
+						<xs:documentation>Sets a date control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='dt'>
+					<xs:annotation>
+						<xs:documentation>Sets a date &amp; time control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='db'>
+					<xs:annotation>
+						<xs:documentation>Sets a double-precision floating-point control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='dr'>
+					<xs:annotation>
+						<xs:documentation>Sets a duration control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='e'>
+					<xs:annotation>
+						<xs:documentation>Sets an enumeration control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='i'>
+					<xs:annotation>
+						<xs:documentation>Sets a 32-bit signed integer control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='l'>
+					<xs:annotation>
+						<xs:documentation>Sets a 64-bit signed integer control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='s'>
+					<xs:annotation>
+						<xs:documentation>Sets a string control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='t'>
+					<xs:annotation>
+						<xs:documentation>Sets a time control parameter.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref='xd:x'>
+					<xs:annotation>
+						<xs:documentation>Sets control parameters based on values in a data form.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:attributeGroup ref='tokens'>
+				<xs:annotation>
+					<xs:documentation>Provides credentials through the use of tokens.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='resp'>
+		<xs:annotation>
+			<xs:documentation>Contains information about the control operation performed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element ref='nd'>
+					<xs:annotation>
+						<xs:documentation>Lists nodes affected, unless the same as in the request.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='p'>
+					<xs:annotation>
+						<xs:documentation>Lists parameters affected, unless the same as in the request.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='n' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Name of parameter.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='nd'>
+		<xs:annotation>
+			<xs:documentation>Defines a node reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Node identity. (Required)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='src' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Source identity. (Optional. Scopes the node identity.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='pt' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Source partition. (Optional. Scopes the node identity, within a source.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='paramError'>
+		<xs:annotation>
+			<xs:documentation>Contains information about why a control operation failed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='xs:string'>
+					<xs:attribute name='var' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>Name of corresponding control parameter.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='getForm'>
+		<xs:annotation>
+			<xs:documentation>Requests a control form for the device, a node or a set of nodes.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element ref='nd'>
+					<xs:annotation>
+						<xs:documentation>Defines a node restriction of the request.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref='tokens'>
+				<xs:annotation>
+					<xs:documentation>Provides credentials through the use of tokens.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='pGroup'>
+		<xs:annotation>
+			<xs:documentation>Can be used to group parameters in a data form.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='n' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Name of parameter group.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name='tokens'>
+		<xs:annotation>
+			<xs:documentation>Credentials, in the form of tokens, identifying the original requestor.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='st' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Service token, identifying the service generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='dt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Device token, identifying the device generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='ut' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>User token, identifying the user generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:complexType name='Parameter' abstract='true'>
+		<xs:attribute name='n' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Name of parameter.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:element name='b'>
+		<xs:annotation>
+			<xs:documentation>Sets a boolean control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:boolean' use='required'>
+						<xs:annotation>
+							<xs:documentation>Boolean value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='cl'>
+		<xs:annotation>
+			<xs:documentation>Sets a color control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='Color' use='required'>
+						<xs:annotation>
+							<xs:documentation>Color value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='d'>
+		<xs:annotation>
+			<xs:documentation>Sets a date control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:date' use='required'>
+						<xs:annotation>
+							<xs:documentation>Date value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='dt'>
+		<xs:annotation>
+			<xs:documentation>Sets a date &amp; time control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:dateTime' use='required'>
+						<xs:annotation>
+							<xs:documentation>Date &amp; time value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='db'>
+		<xs:annotation>
+			<xs:documentation>Sets a double-precision floating-point control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:double' use='required'>
+						<xs:annotation>
+							<xs:documentation>Double-precision floating-point value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='dr'>
+		<xs:annotation>
+			<xs:documentation>Sets a duration control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:duration' use='required'>
+						<xs:annotation>
+							<xs:documentation>Duration value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='e'>
+		<xs:annotation>
+			<xs:documentation>Sets an enumeration control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>String value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='t' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>Type name of enumerated value.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='i'>
+		<xs:annotation>
+			<xs:documentation>Sets a 32-bit signed integer control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:int' use='required'>
+						<xs:annotation>
+							<xs:documentation>32-bit signed integer value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='l'>
+		<xs:annotation>
+			<xs:documentation>Sets a 64-bit signed integer control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:long' use='required'>
+						<xs:annotation>
+							<xs:documentation>64-bit signed integer value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='s'>
+		<xs:annotation>
+			<xs:documentation>Sets a string control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>String value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='t'>
+		<xs:annotation>
+			<xs:documentation>Sets a time control parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='Parameter'>
+					<xs:attribute name='v' type='xs:time' use='required'>
+						<xs:annotation>
+							<xs:documentation>Time value to be set.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='Color'>
+		<xs:annotation>
+			<xs:documentation>Defines am RGB or an RGBA color using 6 or 8 hexadecimal digits.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:pattern value='^([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$'/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

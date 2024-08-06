@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<contract xmlns="urn:ieee:iot:leg:sc:1.0"
+          archiveOpt="P1Y"
+          archiveReq="P2Y"
+          canActAsTemplate="false"
+          duration="P3M"
+          id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+          visibility="Public">
+  <nd id="Device" xmlns="urn:ieee:iot:sd:1.0">
+    <ts v="2019-07-19T10:19:23Z">
+      <s n="Overall Rating" v="B" m="true"/>
+      <q n="Certificate" v="100" u="%" m="true"/>
+      <q n="Protocol Support" v="95" u="%" m="true"/>
+      <q n="Key Exchange" v="70" u="%" m="true"/>
+      <q n="Cipher Strength" v="90" u="%"/>
+      <s n="X.509, Subject" v="*.ieee.org" s="true"/>
+      <!-- More X.509 fields -->
+      <b n="SSL 2" v="false" s="true"/>
+      <b n="SSL 3" v="false" s="true"/>
+      <b n="TLS 1.0" v="false" s="true"/>
+      <b n="TLS 1.1" v="true" s="true"/>
+      <b n="TLS 1.2" v="true" s="true"/>
+      <b n="TLS 1.3" v="false" s="true"/>
+      <b n="TLS 1.3" v="false" s="true"/>
+      <!-- More Protocol fields -->
+      <b n="TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256" v="true" s="true"/>
+      <!-- More Cipher fields -->
+      <b n="DROWN" v="true" s="false"/>
+      <!-- More fields related to protocol details / vulnerabilities -->
+    </ts>
+  </nd>
+  <role name="Manufacturer" minCount="1" maxCount="1">
+    <description xml:lang="en">
+      <paragraph>
+        <text>This role represents the manufacturer owner of the device which is referred to.</text>
+      </paragraph>
+    </description>
+  </role>
+  <role name="Authority" minCount="1" maxCount="1">
+    <description xml:lang="en">
+      <paragraph>
+        <text>This role represents the certification authority validating the security declaration specified in this document.</text>
+      </paragraph>
+    </description>
+  </role>
+  <parts>
+    <part role="Manufacturer" legalId="manufacturer@example.org"/>
+    <part role="Authority" legalId="authority@example.org"/>
+  </parts>
+  <parameters>
+    <stringParameter name="Overall Rating" value="B">
+      <description>
+        <paragraph>
+          <text>The overall rating of server-side TLS capabilities, A=best, F=lowest.</text>
+        </paragraph>
+      </description>
+    </stringParameter>
+    <numericalParameter name="Certificate" value="100">
+      <description>
+        <paragraph>
+          <text>Summary rating of certificate capabilities, in percent.</text>
+        </paragraph>
+      </description>
+    </numericalParameter>
+    <numericalParameter name="Protocol Support" value="95">
+      <description>
+        <paragraph>
+          <text>Summary rating of protocol support capabilities, in percent.</text>
+        </paragraph>
+      </description>
+    </numericalParameter>
+    <numericalParameter name="Key Exchange" value="70">
+      <description>
+        <paragraph>
+          <text>Summary rating of key exchange capabilities, in percent.</text>
+        </paragraph>
+      </description>
+    </numericalParameter>
+    <numericalParameter name="Cipher Strength" value="90">
+      <description>
+        <paragraph>
+          <text>Summary rating of cipher strength capabilities, in percent.</text>
+        </paragraph>
+      </description>
+    </numericalParameter>
+  </parameters>
+  <humanReadableText xml:lang="en">
+    <section>
+      <header>
+        <text>SSL Report</text>
+      </header>
+      <body>
+        <paragraph>
+          <text>This contract contains information about a server-side TLS capabilities evaluation.</text>
+        </paragraph>
+        <section>
+          <header>
+            <text>Summary</text>
+          </header>
+          <body>
+            <paragraph>
+              <text>Overall rating: </text>
+              <parameter name="Overall Rating"/>
+            </paragraph>
+            <paragraph>
+              <text>Certificate: </text>
+              <parameter name="Certificate"/>
+              <text> %</text>
+            </paragraph>
+            <paragraph>
+              <text>Protocol Support: </text>
+              <parameter name="Protocol Support"/>
+              <text> %</text>
+            </paragraph>
+            <paragraph>
+              <text>Key Exchange: </text>
+              <parameter name="Key Exchange"/>
+              <text> %</text>
+            </paragraph>
+            <paragraph>
+              <text>Cipher Strength: </text>
+              <parameter name="Key Exchange"/>
+              <text> %</text>
+            </paragraph>
+          </body>
+        </section>
+      </body>
+    </section>
+  </humanReadableText>
+  <signature bareJid="manufacturer@example.org"
+             legalId="9d308bf2d2004bff924049fb6c039484@example.org"
+             role="Manufacturer"
+             timestamp="2019-07-19T11:19:54Z"
+             s="SGwfX9UpcCk4GmAa6u0DgimojoMeQB5bkbM2PlX9xak="/>
+  <signature bareJid="authority@example.org"
+             legalId="a6b8d8318e7540d4b38e5491222e1305@example.org"
+             role="Authority"
+             timestamp="2019-07-19T11:21:43Z"
+             s="aLZB8rcWqVLVPjc0oQvUOwLKHFSd35jWHbIGQ6PVwf8="/>
+  <status created="2019-07-19T10:19:23Z" 
+          from="2019-07-19T11:21:43Z"
+          to="2024-07-19T11:21:43Z"
+          provider="provisioning.example.org" 
+          schemaDigest="tPN8gzgusTSM56q9Se6uUyptnqFT9bTIACShZt+4xY0="
+          schemaHashFunction="SHA256" 
+          state="Approved" 
+          templateId="9aadcc318c104d848ec5215264f5bf68@example.org"/>
+  <serverSignature timestamp="2019-07-19T11:21:43Z"
+                   s="swAqEaR9uDaZLxv/5xAvucj5OFX3+3vU1+pbP4jgUwY/IbPFYH7SHD+U/33WHaepMI9VKf61ASk="/>
+</contract>

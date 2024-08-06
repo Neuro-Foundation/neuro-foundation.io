@@ -1,0 +1,523 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:prov:o:1.0'
+    xmlns='urn:ieee:iot:prov:o:1.0'
+    xmlns:sd='urn:ieee:iot:sd:1.0'
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:import namespace='urn:ieee:iot:sd:1.0'/>
+
+	<xs:element name='isFriend'>
+		<xs:annotation>
+			<xs:documentation>Sent as a message by the provisioning server when it requires the owner to respond to a new presence subscription event raised by one of the owner's devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting presence subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='isFriendRule'>
+		<xs:annotation>
+			<xs:documentation>Sent by the owner to the provisioning server in a request, when it wants to define an answer to a previous isFriend question.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting presence subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='result' type='xs:boolean' use='required'>
+				<xs:annotation>
+					<xs:documentation>How similar future requests should be handled by the device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='range' type='RuleRange' use='optional' default='Caller'>
+				<xs:annotation>
+					<xs:documentation>The range of the rule.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='RuleRange'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Caller'>
+				<xs:annotation>
+					<xs:documentation>If the rule only applies to the caller.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Domain'>
+				<xs:annotation>
+					<xs:documentation>If the rule applies to all future requests from the caller domain.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='All'>
+				<xs:annotation>
+					<xs:documentation>If the rule applies to all future requests.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name='canRead'>
+		<xs:annotation>
+			<xs:documentation>Sent as a message by the provisioning server when it requires the owner to respond to a readout request event raised by one of the owner's devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='f' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Contains a reference to a field to be read.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='n' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Name of field to be read.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref='sd:category'>
+				<xs:annotation>
+					<xs:documentation>Field categories to be read.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name='all' type='xs:boolean' use='optional' default='false'>
+				<xs:annotation>
+					<xs:documentation>If all field categories are to be read.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attributeGroup ref='tokens'>
+				<xs:annotation>
+					<xs:documentation>Optional tokens identifying the original sender of the request.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting the readout.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting readout.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name='tokens'>
+		<xs:attribute name='st' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Service tokens, separated by spaces if they are more than one, identifying the service generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='dt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Device tokens, separated by spaces if they are more than one, identifying the device generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='ut' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>User tokens, separated by spaces if they are more than one, identifying the user generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:element name='canReadRule'>
+		<xs:annotation>
+			<xs:documentation>Sent by the owner to the provisioning server in a request, when it wants to define an answer to a previous canRead question.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='partial' minOccurs='0' maxOccurs='1'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name='f' minOccurs='0' maxOccurs='unbounded'>
+								<xs:annotation>
+									<xs:documentation>Contains a reference to a field to be read.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name='n' type='xs:string' use='required'>
+										<xs:annotation>
+											<xs:documentation>Name of field to be read.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attributeGroup ref='sd:category'>
+							<xs:annotation>
+								<xs:documentation>Field categories to be read.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+						<xs:attribute name='all' type='xs:boolean' use='optional' default='false'>
+							<xs:annotation>
+								<xs:documentation>If all field categories are to be read.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:group ref='origin' minOccurs='1' maxOccurs='1'/>
+			</xs:sequence>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting readout.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='result' type='xs:boolean' use='required'>
+				<xs:annotation>
+					<xs:documentation>How similar future requests should be handled by the device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:group name='origin'>
+		<xs:annotation>
+			<xs:documentation>Defines from what origin a new rule should be based.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name='fromJid' type='Empty'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to future request made from the same bare JID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name='fromDomain' type='Empty'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to future request made from the same domain.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name='fromService' type='Token'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to future request made using the same service token.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name='fromDevice' type='Token'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to future request made using the same device token.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name='fromUser' type='Token'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to future request made using the same user token.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name='all' type='Empty'>
+				<xs:annotation>
+					<xs:documentation>Rule will apply to all future requests.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name='Empty'>
+		<xs:annotation>
+			<xs:documentation>An empty type. Used by rules that do not need further specification.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+
+	<xs:complexType name='Token'>
+		<xs:annotation>
+			<xs:documentation>Type for token-based rules.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='token' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Token to which the rule relates.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:element name='canControl'>
+		<xs:annotation>
+			<xs:documentation>Sent as a message by the provisioning server when it requires the owner to respond to a control request event raised by one of the owner's devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='partial' minOccurs='0' maxOccurs='1'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name='p' minOccurs='0' maxOccurs='unbounded'>
+								<xs:annotation>
+									<xs:documentation>Contains a reference to a parameter to be controlled.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name='n' type='xs:string' use='required'>
+										<xs:annotation>
+											<xs:documentation>Name of parameter to be controlled.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref='tokens'>
+				<xs:annotation>
+					<xs:documentation>Optional tokens identifying the original sender of the request.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting the control operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting readout.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='canControlRule'>
+		<xs:annotation>
+			<xs:documentation>Sent by the owner to the provisioning server in a request, when it wants to define an answer to a previous canControl question.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='partial' minOccurs='0' maxOccurs='1'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name='p' minOccurs='0' maxOccurs='unbounded'>
+								<xs:annotation>
+									<xs:documentation>Contains a reference to a parameter to be controlled.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name='n' type='xs:string' use='required'>
+										<xs:annotation>
+											<xs:documentation>Name of parameter to be controlled.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:group ref='origin' minOccurs='1' maxOccurs='1'/>
+			</xs:sequence>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteJid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting control operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='key' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Key related to the event.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='result' type='xs:boolean' use='required'>
+				<xs:annotation>
+					<xs:documentation>How similar future requests should be handled by the device.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='clearCache'>
+		<xs:annotation>
+			<xs:documentation>The owner sends this in a request to the provisioning server, to ask it to clear the caches of one or all of its owned devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>The bare JID of the device whose cache is to be cleared.</xs:documentation>
+					<xs:documentation>If this attrribute is omitted, all owned devices will get their caches cleared.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='getDevices'>
+		<xs:annotation>
+			<xs:documentation>This element is sent in a request to the provisioning server, to retrieve a list of all devices the sender owns.</xs:documentation>
+			<xs:documentation>The response will contain a found element from the XEP-0347 namespace urn:xmpp:iot:discovery.</xs:documentation>
+			<xs:documentation>The more attribute in the response lets the caller know if there are more devices to fetch.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='offset' type='xs:nonNegativeInteger' use='optional' default='0'>
+				<xs:annotation>
+					<xs:documentation>Starting offset into the list of things to return.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='maxCount' type='xs:positiveInteger' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Maximum number of devices to return in the response.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='deleteRules'>
+		<xs:annotation>
+			<xs:documentation>The owner sends this in a request to the provisioning server, to ask it to delete all rules for one or all of its owned devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>The bare JID of the device whose rules are to be deleted.</xs:documentation>
+					<xs:documentation>If this attrribute is omitted, all owned devices will get their rules deleted.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attributeGroup ref='sd:nodeIdentity'>
+				<xs:annotation>
+					<xs:documentation>Node identification attributes.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

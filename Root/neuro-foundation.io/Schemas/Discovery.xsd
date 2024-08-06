@@ -1,0 +1,489 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:disco:1.0'
+    xmlns='urn:ieee:iot:disco:1.0'
+    xmlns:xd="jabber:x:data"
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:element name='register'>
+		<xs:annotation>
+			<xs:documentation>Registers a device (which can be a node in a concentrator), with the Thing Registry.</xs:documentation>
+			<xs:documentation>Meta-data about the device is provided to allow others to claim the device or to find it.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='MetaData'>
+					<xs:attribute name='selfOwned' type='xs:boolean' use='optional' default='false'>
+						<xs:annotation>
+							<xs:documentation>If the device, or node, owns itself.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='mine'>
+		<xs:annotation>
+			<xs:documentation>Claims a device in the Thing Registry.</xs:documentation>
+			<xs:documentation>Claims must contain exactly the same meta-data as provided by the device being claimed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='MetaData'>
+					<xs:attribute name='public' type='xs:boolean' use='optional' default='true'>
+						<xs:annotation>
+							<xs:documentation>If a successfully claimed device should be publicly searchable (true) or private (false).</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='update'>
+		<xs:annotation>
+			<xs:documentation>Updates the meta-data about a device in the registry. The caller can be the device itself, or the owner of a claimed device.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='MetaData'>
+					<xs:attribute name='jid' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>The JID of the device, if update request is made by the owner of the device.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='MetaData'>
+		<xs:annotation>
+			<xs:documentation>Represents meta-data about a device.</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='str' type='StrTag'/>
+			<xs:element name='num' type='NumTag'/>
+		</xs:choice>
+		<xs:attributeGroup ref='extAddr'>
+			<xs:annotation>
+				<xs:documentation>Extended addresses, if device is a node in a concentrator.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType>
+
+	<xs:attributeGroup name='extAddr'>
+		<xs:annotation>
+			<xs:documentation>Extended addresses, if device is a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='id' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Node Identity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='src' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Data Source Identity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='pt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Data Source Partition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:complexType name='ExtAddr'>
+		<xs:annotation>
+			<xs:documentation>Represents extended addresses of a device.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref='extAddr'/>
+	</xs:complexType>
+
+	<xs:element name='claimed'>
+		<xs:annotation>
+			<xs:documentation>Element sent to device in asynchronous message, and to owner in iq response, when it has been successfully claimed.</xs:documentation>
+			<xs:documentation>The address contains the address of the other party, i.e. the address of the owner, when sent to the device, and the address of the device, when sent to the owner.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='DeviceRef'>
+					<xs:attribute name='public' type='xs:boolean' use='optional' default='false'>
+						<xs:annotation>
+							<xs:documentation>If the device is left public in the Thing Registry.</xs:documentation>
+							<xs:documentation>Things that are claimed, and public, can be found in searches.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='remove' type='DeviceRef'>
+		<xs:annotation>
+			<xs:documentation>Removes a device from the Thing Registry.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='removed' type='ExtAddr'>
+		<xs:annotation>
+			<xs:documentation>Sent in a request to the device, if the device has been removed from the Thing Registry, by its owner.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='unregister' type='ExtAddr'>
+		<xs:annotation>
+			<xs:documentation>Unregisters a device from the Thing Registry.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='disown' type='DeviceRef'>
+		<xs:annotation>
+			<xs:documentation>Sent by the owner to disown one of its devices. It returns the device to an un-claimed state, making it possible for another owner to claim it.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='disowned' type='ExtAddr'>
+		<xs:annotation>
+			<xs:documentation>Sent in a request to the device, if the device has been disowned by its owner.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='DeviceRef'>
+		<xs:annotation>
+			<xs:documentation>Represents a reference to a device.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='jid' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>XMPP Address</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref='extAddr'>
+			<xs:annotation>
+				<xs:documentation>Extended addresses, if device resides in/behind a concentrator.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType>
+
+	<xs:element name='search'>
+		<xs:annotation>
+			<xs:documentation>Performs a search on public, claimed devices.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='1' maxOccurs='unbounded'>
+				<xs:annotation>
+					<xs:documentation>The search element contains a collection of search operators, limiting the result set of the search.</xs:documentation>
+					<xs:documentation>Each search operator must be fulfilled for the item to be part of the result set.</xs:documentation>
+				</xs:annotation>
+				<xs:element name='strEq' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strNEq' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag not equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strGt' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag greater than a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strGtEq' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag greater than or equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strLt' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag lesser than a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strLtEq' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag lesser than or equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strRegEx' type='StrTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag matching a given regular expression.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strRange' type='StrRange'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag within a specific range of values.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strNRange' type='StrRange'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag outside a specific range of values.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='strMask'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named string-valued tag match a value containing wildcards.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'/>
+						<xs:attribute name='value' type='xs:string' use='required'/>
+						<xs:attribute name='wildcard' type='xs:string' use='required'/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='numEq' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numNEq' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag not equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numGt' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag greater than a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numGtEq' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag greater than or equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numLt' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag lesser than a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numLtEq' type='NumTag'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag lesser than or equal to a given value.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numRange' type='NumRange'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag within a specific range of values.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='numNRange' type='NumRange'>
+					<xs:annotation>
+						<xs:documentation>Only return devices having a specific named number-valued tag outside a specific range of values.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name='offset' type='xs:nonNegativeInteger' use='optional' default='0'>
+				<xs:annotation>
+					<xs:documentation>Number of items to skip before returning results.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='maxCount' type='xs:positiveInteger' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Maximum number of items in the result.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='StrTag'>
+		<xs:annotation>
+			<xs:documentation>Base type for string-valued search operators.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Name of tag to search on.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='value' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>String value used by the search operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='NumTag'>
+		<xs:annotation>
+			<xs:documentation>Base type for number-valued search operators.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Name of tag to search on.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='value' type='xs:double' use='required'>
+			<xs:annotation>
+				<xs:documentation>Numeric value used by the search operator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='StrRange'>
+		<xs:annotation>
+			<xs:documentation>Base type for string-valued range search operators.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Name of tag to search on.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='min' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Minimum value in the range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='max' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Maximum value in the range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='NumRange'>
+		<xs:annotation>
+			<xs:documentation>Base type for number-valued range search operators.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Name of tag to search on.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='min' type='xs:double' use='required'>
+			<xs:annotation>
+				<xs:documentation>Minimum value in the range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='max' type='xs:double' use='required'>
+			<xs:annotation>
+				<xs:documentation>Maximum value in the range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:element name='found'>
+		<xs:annotation>
+			<xs:documentation>Represents a result set of a search operation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='thing'>
+					<xs:annotation>
+						<xs:documentation>Represents a thing, or device, found during a search operation.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice minOccurs='0' maxOccurs='unbounded'>
+							<xs:annotation>
+								<xs:documentation>Each thing is reported with a collection of meta-data available about the thing.</xs:documentation>
+							</xs:annotation>
+							<xs:element name='str' type='StrTag'>
+								<xs:annotation>
+									<xs:documentation>Represents a string-valued tag.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='num' type='NumTag'>
+								<xs:annotation>
+									<xs:documentation>Represents a number-valued tag.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+						<xs:attribute name='owner' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>JID of owner of device.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='jid' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>JID of device.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attributeGroup ref='extAddr'>
+							<xs:annotation>
+								<xs:documentation>Extended attributes, if devices resides in/behind a concentrator.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='more' type='xs:boolean' use='optional' default='false'>
+				<xs:annotation>
+					<xs:documentation>If more devices are available, matching the search operators.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

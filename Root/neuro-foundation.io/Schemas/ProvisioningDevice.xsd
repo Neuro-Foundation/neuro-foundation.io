@@ -1,0 +1,295 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:prov:d:1.0'
+    xmlns='urn:ieee:iot:prov:d:1.0'
+    xmlns:sd='urn:ieee:iot:sd:1.0'
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:import namespace='urn:ieee:iot:sd:1.0'/>
+
+	<xs:element name='clearCache'>
+		<xs:annotation>
+			<xs:documentation>Sent to a device to clear its provisioning rule cache.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+
+	<xs:element name='isFriend'>
+		<xs:annotation>
+			<xs:documentation>Sent by a device to check if it is allowed to accept a presence subscription from JID.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting presence subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='isFriendResponse'>
+		<xs:annotation>
+			<xs:documentation>Contains a response to the isFriend question.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of entity requesting presence subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='result' type='xs:boolean' use='required'>
+				<xs:annotation>
+					<xs:documentation>If the device is allowed to accept the presence subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='unfriend'>
+		<xs:annotation>
+			<xs:documentation>Sent to a device to request it to remove the presence subscription from a remote entity.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of remote entity.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='friend'>
+		<xs:annotation>
+			<xs:documentation>Sent to a device to request it to make a presence subscription request to a remote entity.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>JID of remote entity.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='canRead'>
+		<xs:annotation>
+			<xs:documentation>A device sends the canRead request when it wants to know if a remote entity is allowed to read its sensor data.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='CanReadBase'>
+					<xs:attributeGroup ref='tokens'>
+						<xs:annotation>
+							<xs:documentation>Optional tokens identifying the original sender of the request.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='canReadResponse'>
+		<xs:annotation>
+			<xs:documentation>The provisioning server response to a canRead request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='CanReadBase'>
+					<xs:attribute name='result' type='xs:boolean' use='required'>
+						<xs:annotation>
+							<xs:documentation>If the readout is permitted or not.</xs:documentation>
+							<xs:documentation>Note: The permission might be partial. The device needs to check any node and field reference nodes, as well as field category attributes, to see if the original request has been limited. The device needs to use the values provided in the response instead of the elements in the original request.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='CanReadBase' abstract='true'>
+		<xs:sequence>
+			<xs:element name='nd' minOccurs='0' maxOccurs='unbounded'>
+				<xs:annotation>
+					<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref='sd:nodeIdentity'>
+						<xs:annotation>
+							<xs:documentation>Node identification attributes.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='f' minOccurs='0' maxOccurs='unbounded'>
+				<xs:annotation>
+					<xs:documentation>Contains a reference to a field to be read.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name='n' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>Name of field to be read.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref='sd:category'>
+			<xs:annotation>
+				<xs:documentation>Field categories to be read.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name='all' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If all field categories are to be read.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='jid' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>JID of entity requesting the readout.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:attributeGroup name='tokens'>
+		<xs:attribute name='st' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Service tokens, separated by spaces if they are more than one, identifying the service generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='dt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Device tokens, separated by spaces if they are more than one, identifying the device generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='ut' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>User tokens, separated by spaces if they are more than one, identifying the user generating the original request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:element name='canControl'>
+		<xs:annotation>
+			<xs:documentation>A device sends the canControl request when it wants to know if a remote entity is allowed to control any of its control parameters.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='CanControlBase'>
+					<xs:attributeGroup ref='tokens'>
+						<xs:annotation>
+							<xs:documentation>Optional tokens identifying the original sender of the request.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='canControlResponse'>
+		<xs:annotation>
+			<xs:documentation>The provisioning server response to a canControl request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='CanControlBase'>
+					<xs:attribute name='result' type='xs:boolean' use='required'>
+						<xs:annotation>
+							<xs:documentation>If the control operation is permitted or not.</xs:documentation>
+							<xs:documentation>Note: The permission might be partial. The device needs to check any node and parameter reference nodes, to see if the original request has been limited. The device needs to use the values provided in the response instead of the elements in the original request.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='CanControlBase' abstract='true'>
+		<xs:sequence>
+			<xs:element name='nd' minOccurs='0' maxOccurs='unbounded'>
+				<xs:annotation>
+					<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attributeGroup ref='sd:nodeIdentity'>
+						<xs:annotation>
+							<xs:documentation>Node identification attributes.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name='p' minOccurs='0' maxOccurs='unbounded'>
+				<xs:annotation>
+					<xs:documentation>Contains a reference to a parameter to be controlled.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:attribute name='n' type='xs:string' use='required'>
+						<xs:annotation>
+							<xs:documentation>Name of parameter to be controlled.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name='jid' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>JID of entity requesting the control operation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+</xs:schema>

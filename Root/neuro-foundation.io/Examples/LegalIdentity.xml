@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<identity xmlns="urn:ieee:iot:leg:id:1.0"
+          id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org">
+	<clientPublicKey>
+		<ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4F..."
+		       xmlns="urn:ieee:iot:e2e:1.0"/>
+	</clientPublicKey>
+	<property name="FIRST" value="Jon"/>
+	<property name="LAST" value="Doe"/>
+	<property name="PNR" value="123456789-0"/>
+	<property name="ADDR" value="Street 1A"/>
+	<property name="ZIP" value="12345"/>
+	<property name="CITY" value="Metropolis"/>
+	<clientSignature>RKeeeS7CdtKX0rb...</clientSignature>
+	<status created="2019-06-09T21:59:23.000"
+	        from="2019-06-09T00:00:00.000" 
+	        provider="legal.example.org" 
+	        state="Obsoleted" 
+	        to="2021-06-09T00:00:00.000" 
+	        updated="2019-06-09T21:59:24.000"/>
+	<serverSignature>GnlKyllIGAfIDLoY...</serverSignature>
+</identity>
+
+

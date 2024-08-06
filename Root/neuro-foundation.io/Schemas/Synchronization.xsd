@@ -1,0 +1,113 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:synchronization:1.0'
+    xmlns='urn:ieee:iot:synchronization:1.0'
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:element name='req'>
+		<xs:annotation>
+			<xs:documentation>Element used to request clock information.</xs:documentation>
+			<xs:documentation>Used in an iq get stanza.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='resp'>
+		<xs:annotation>
+			<xs:documentation>Element used for clock information responses.</xs:documentation>
+			<xs:documentation>Used in a iq result stanza.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='xs:dateTime'>
+					<xs:annotation>
+						<xs:documentation>Use as high a precision as possible for the fractions of a second portion.</xs:documentation>
+					</xs:annotation>
+					<xs:attribute name='hf' type='xs:long' use='optional'>
+						<xs:annotation>
+							<xs:documentation>Allows the clock source to provide information from an internal high-resolution timer.</xs:documentation>
+							<xs:documentation>The ticks are relative to some unspecified reference point that might change every time the source is restarted.</xs:documentation>
+							<xs:documentation>High-resolution timing is not used for synchronizing timestamps, but to synchronize events in time, where knowledge about absolute time is not important.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='freq' type='xs:long' use='optional'>
+						<xs:annotation>
+							<xs:documentation>Number of incerments of the hf attribute, if provided, per second.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='sourceReq'>
+		<xs:annotation>
+			<xs:documentation>Element used to query about what clock source is used.</xs:documentation>
+			<xs:documentation>Used in an iq get stanza.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='sourceResp' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Used in an iq result stanza containing the Bare JiD of clock source.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,2003 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:concentrator:1.0'
+    xmlns='urn:ieee:iot:concentrator:1.0'
+    xmlns:xd="jabber:x:data"
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:import namespace='jabber:x:data'>
+		<xs:annotation>
+			<xs:documentation>XEP-0004: Data Forms.</xs:documentation>
+		</xs:annotation>
+	</xs:import>
+
+	<!-- Capabilities -->
+	<!-- getCapabilities -->
+
+	<xs:element name='getCapabilities' type='TokenRequest'>
+		<xs:annotation>
+			<xs:documentation>Allows a concentrator client to ask what operations, or elements, are supported by a concentrator server.</xs:documentation>
+			<xs:documentation>It is not mandatory to support all operations. This operation allows the concentrator to inform clients what operations are supported.</xs:documentation>
+			<xs:documentation>Expected response element: strings, containing an array of operations (element names) supported by the concentrator server.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='TokenRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for types accepting tokens.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref='tokens'>
+			<xs:annotation>
+				<xs:documentation>Set of token attributes.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType>
+
+	<xs:attributeGroup name='tokens'>
+		<xs:annotation>
+			<xs:documentation>Tokens can be used to provide additional, optional, distributable information about the origin of a request or message.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='dt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Token(s) for the device(s) originating the stanza.</xs:documentation>
+				<xs:documentation>Multiple tokens are separated using the space character.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='st' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Token(s) for the service(s) originating the stanza.</xs:documentation>
+				<xs:documentation>Multiple tokens are separated using the space character.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='ut' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Token(s) for the user(s) originating the stanza.</xs:documentation>
+				<xs:documentation>Multiple tokens are separated using the space character.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:element name='strings' type='StringArray'>
+		<xs:annotation>
+			<xs:documentation>Array of strings.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='StringArray'>
+		<xs:annotation>
+			<xs:documentation>Type representing an array of strings.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+			<xs:element name='value' type='xs:string'/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Data Sources -->
+	<!-- getAllDataSources -->
+
+	<xs:element name='getAllDataSources' type='TokenRequest'>
+		<xs:annotation>
+			<xs:documentation>Requests a list of all data sources available on a concentrator server, possibly reduced by access rights held by the calling client.</xs:documentation>
+			<xs:documentation>Expected response element: dataSources</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='dataSources'>
+		<xs:annotation>
+			<xs:documentation>List of data sources available (to the caller).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='dataSource'>
+					<xs:annotation>
+						<xs:documentation>Contains reference information about a data source in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='src' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Machine-readable identity of the data source. This identity is used in all references to the data source.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='name' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Human-readable, localized name of the data source.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='hasChildren' type='xs:boolean' use='optional' default='false'>
+							<xs:annotation>
+								<xs:documentation>Data sources can be organized in tree structueres. This attribute lets the caller know if the data source has child data sources or not.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Variable data sources use this attribute to report when the last change in the source took place. Used for synchornization.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getRootDataSources -->
+
+	<xs:element name='getRootDataSources' type='TokenRequest'>
+		<xs:annotation>
+			<xs:documentation>Requests a list of all root data sources available on a concentrator server, possibly reduced by access rights held by the calling client.</xs:documentation>
+			<xs:documentation>Expected response element: dataSources</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- getChildDataSources -->
+
+	<xs:element name='getChildDataSources' type='SourceReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Requests a list of all child data sources available on a concentrator server, given a parent data source, possibly reduced by access rights held by the calling client.</xs:documentation>
+			<xs:documentation>Expected response element: dataSources</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='SourceReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a data source in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='TokenRequest'>
+				<xs:attributeGroup ref='sourceReference'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name='sourceReference'>
+		<xs:annotation>
+			<xs:documentation>Attribute for referencing a data source in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='src' type='xs:string' use='required'/>
+	</xs:attributeGroup>
+
+	<!-- Nodes -->
+	<!-- containsNode -->
+
+	<xs:element name='containsNode' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Checks if a node exists (and visible to the caller).</xs:documentation>
+			<xs:documentation>Expected response element: bool</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='TokenRequest'>
+				<xs:attributeGroup ref='nodeReference'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name='nodeReference'>
+		<xs:annotation>
+			<xs:documentation>Attributes for referencing a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='id' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Required attribute. Identifies the node.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='src' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>In concentrators with data sources, this attribute identifies the data source.</xs:documentation>
+				<xs:documentation>Note: Node identities are unique within the scope of the corresponding data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='pt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Partition identifier. Allows concentrators to divide data sources into partitions.</xs:documentation>
+				<xs:documentation>If used, node identities are unique within the scope of the corresponding data source and partition.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:element name='bool'>
+		<xs:annotation>
+			<xs:documentation>Represents a boolean-valued response.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='xs:boolean'/>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- containsNodes -->
+
+	<xs:element name='containsNodes' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Checks if a set of nodes exist (and visible to the caller).</xs:documentation>
+			<xs:documentation>Expected response element: bools</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a set of nodes in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='TokenRequest'>
+				<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+					<xs:element name='nd' type='NodeReference'/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='NodeReference'>
+		<xs:annotation>
+			<xs:documentation>Base type containing a reference to a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref='nodeReference'/>
+	</xs:complexType>
+
+	<xs:complexType name='bools'>
+		<xs:annotation>
+			<xs:documentation>Contains an array of boolean values.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+			<xs:element ref='bool'/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- getNode -->
+
+	<xs:element name='getNode' type='NodeReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets information about a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfo</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests for a node and its related information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReferenceRequest'>
+				<xs:attributeGroup ref='parametersAndMessages'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attributeGroup name='parametersAndMessages'>
+		<xs:attribute name='parameters' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If node parameters are included in the request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='messages' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If node messages are included in the request.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:element name='nodeInfo' type='NodeInformation'>
+		<xs:annotation>
+			<xs:documentation>Element containing information about a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeInformation'>
+		<xs:annotation>
+			<xs:documentation>Type representing information about a node in a concentrator</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:annotation>
+				<xs:documentation>Node parameters are represented based on their underlying data type.</xs:documentation>
+				<xs:documentation>Parameters allow fine-grained customizable and configurable control over information related to node.</xs:documentation>
+			</xs:annotation>
+			<xs:element name='boolean' type='BooleanParameter'/>
+			<xs:element name='color' type='ColorParameter'/>
+			<xs:element name='dateTime' type='DateTimeParameter'/>
+			<xs:element name='double' type='DoubleParameter'/>
+			<xs:element name='duration' type='DurationParameter'/>
+			<xs:element name='int' type='IntParameter'/>
+			<xs:element name='long' type='LongParameter'/>
+			<xs:element name='string' type='StringParameter'/>
+			<xs:element name='time' type='TimeParameter'/>
+			<xs:element name='message' type='Message'/>
+		</xs:choice>
+		<xs:attributeGroup ref='nodeReference'/>
+		<xs:attributeGroup ref='nodeAltReference'/>
+		<xs:attribute name='displayName' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Human readable, localized node name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeType' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Machine-readable node type, understood by the concentrator.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='state' type='NodeState' use='required'>
+			<xs:annotation>
+				<xs:documentation>Current state of node.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='hasChildren' type='xs:boolean' use='required'>
+			<xs:annotation>
+				<xs:documentation>If the node has child-nodes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='childrenOrdered' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If the order of the child nodes is important in the context.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='isReadable' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If the node is readable, and can deliver sensor data to the client.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='isControllable' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If the node is controllable, and publish control parameters to the client.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='hasCommands' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If the node has commands the client can access.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='sniffable' type='xs:boolean' use='optional' default='false'>
+			<xs:annotation>
+				<xs:documentation>If the node supports sniffing, i.e. can allow the client to attach a sniffer to it, to troubleshoot communication.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='parentId' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>The identity of the parent node, if any. Root nodes do not have parent nodes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='parentPartition' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>The parent node partition, if available.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='lastChanged' type='xs:dateTime' use='optional'>
+			<xs:annotation>
+				<xs:documentation>When the node was last changed, for synchronization.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:attributeGroup name='nodeAltReference'>
+		<xs:annotation>
+			<xs:documentation>Attributes for alternative references of a node.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='localId' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Optional local identity, unique among siblings.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='logId' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Optional log identity, related to node, if different from node identity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:simpleType name='NodeState'>
+		<xs:annotation>
+			<xs:documentation>Represents the state of a node.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='None'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with no messages logged on it.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Information'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with information messages logged on it.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='WarningSigned'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with warning messages logged on it that have been signed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='WarningUnsigned'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with warning messages logged on it that have not been signed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='ErrorSigned'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with error messages logged on it that have been signed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='ErrorUnsigned'>
+				<xs:annotation>
+					<xs:documentation>Represents a node with error messages logged on it that have not been signed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name='Parameter' abstract='true'>
+		<xs:annotation>
+			<xs:documentation>Abstract base type for node parameters.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='id' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Parameter identity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Human-readable, localized parameter name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='BooleanParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a boolean-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:boolean' use='required'>
+					<xs:annotation>
+						<xs:documentation>Boolean parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='ColorParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a color-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='Color' use='required'>
+					<xs:annotation>
+						<xs:documentation>Color parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='DateTimeParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a date and time-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:dateTime' use='required'>
+					<xs:annotation>
+						<xs:documentation>Date and time parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='DoubleParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a double precision floating point-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:double' use='required'>
+					<xs:annotation>
+						<xs:documentation>Double-precision floating-point parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='DurationParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a duration-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:duration' use='required'>
+					<xs:annotation>
+						<xs:documentation>Duration parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='IntParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a 32-bit integer-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:int' use='required'>
+					<xs:annotation>
+						<xs:documentation>32-bit integer parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='LongParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a 64-bit integer-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:long' use='required'>
+					<xs:annotation>
+						<xs:documentation>64-bit integer parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='StringParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a string-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:string' use='required'>
+					<xs:annotation>
+						<xs:documentation>String parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='TimeParameter'>
+		<xs:annotation>
+			<xs:documentation>Type representing a time-valued node parameter.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='Parameter'>
+				<xs:attribute name='value' type='xs:time' use='required'>
+					<xs:annotation>
+						<xs:documentation>Time parameter value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='Message'>
+		<xs:annotation>
+			<xs:documentation>Type representing a node message.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base='xs:string'>
+				<xs:attribute ref='timestamp' use='required'/>
+				<xs:attribute name='type' type='MessageType' use='required'>
+					<xs:annotation>
+						<xs:documentation>Type of message.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name='eventId' type='xs:string' use='optional'>
+					<xs:annotation>
+						<xs:documentation>Optional context/concentrator/manufacturer-specific identity, identifying the type of event the message represents.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:attribute name='timestamp' type='xs:dateTime'>
+		<xs:annotation>
+			<xs:documentation>Timestamp of message.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:simpleType name='MessageType'>
+		<xs:annotation>
+			<xs:documentation>Represents the type of a node message.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Error'>
+				<xs:annotation>
+					<xs:documentation>Represents an error state. A process, device or algorithm failed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Warning'>
+				<xs:annotation>
+					<xs:documentation>Represents a warning state. An error could occur unless action is taken.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Information'>
+				<xs:annotation>
+					<xs:documentation>Represents information about the node that is not a warning or an error.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- getNodes -->
+
+	<xs:element name='getNodes' type='NodeReferencesParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets information about a set of nodes in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfos</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeReferencesParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests for a set of nodes and their related information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReferencesRequest'>
+				<xs:attributeGroup ref='parametersAndMessages'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name='nodeInfos'>
+		<xs:annotation>
+			<xs:documentation>Represents an array of node information elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element ref='nodeInfo'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getAllNodes -->
+
+	<xs:element name='getAllNodes'>
+		<xs:annotation>
+			<xs:documentation>Gets information about all nodes in a concentrator.</xs:documentation>
+			<xs:documentation>The set of nodes can be restricted to nodes that derive from particular types.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfos</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='SourceReferenceParametersRequest'>
+					<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+						<xs:element name='onlyIfDerivedFrom' type='xs:string'>
+							<xs:annotation>
+								<xs:documentation>If specified, only return nodes that derive from one of these node types.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='SourceReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a data source, and related node information.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='SourceReferenceRequest'>
+				<xs:attributeGroup ref='parametersAndMessages'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- getNodeInheritance -->
+
+	<xs:element name='getNodeInheritance' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets the type/class inheritences of a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: inheritance</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='inheritance'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='baseClasses' type='StringArray' minOccurs='1' maxOccurs='1'/>
+				<xs:element name='interfaces' type='StringArray' minOccurs='0' maxOccurs='1'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getRootNodes -->
+
+	<xs:element name='getRootNodes' type='SourceReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets information about all root nodes in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfos</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- getChildNodes -->
+
+	<xs:element name='getChildNodes' type='NodeReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets information about all child nodes to a specified node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfos</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- getAncestors -->
+
+	<xs:element name='getAncestors' type='NodeReferenceParametersRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets the ancestry of a node, beginning with the node, then its parent, grandparent, etc., until a root is reached.</xs:documentation>
+			<xs:documentation>Expected response element: nodeInfos</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Editing -->
+	<!-- getNodeParametersForEdit -->
+
+	<xs:element name='getNodeParametersForEdit' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets node parameters for editing.</xs:documentation>
+			<xs:documentation>Node parameters will be returned in an XMPP data form (xd:x element).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- setNodeParametersAfterEdit -->
+
+	<xs:element name='setNodeParametersAfterEdit'>
+		<xs:annotation>
+			<xs:documentation>Sets node parameters after editing.</xs:documentation>
+			<xs:documentation>Expected response element, if ok: nodeInfo</xs:documentation>
+			<xs:documentation>Expected response element, if error: xd:x data form</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferenceRequest'>
+					<xs:sequence>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getCommonNodeParametersForEdit -->
+
+	<xs:element name='getCommonNodeParametersForEdit' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets parameters that are common among a set of nodes, for editing.</xs:documentation>
+			<xs:documentation>Node parameters will be returned in an XMPP data form (xd:x element).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- setCommonNodeParametersAfterEdit -->
+
+	<xs:element name='setCommonNodeParametersAfterEdit'>
+		<xs:annotation>
+			<xs:documentation>Sets common node parameters on a set of nodes, after editing.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+			<xs:documentation>Expected response element, if error: xd:x data form</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferencesRequest'>
+					<xs:sequence>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getAddableNodeTypes -->
+
+	<xs:element name='getAddableNodeTypes' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets the types of nodes that can be added to a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected response element: nodeTypes</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='nodeTypes'>
+		<xs:annotation>
+			<xs:documentation>Represents an array of node types.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='nodeType'>
+					<xs:annotation>
+						<xs:documentation>Represents a node type.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='type' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Machine-readable, and concentrator specific, node type.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='name' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Human-readable, localized, name of node type.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- getParametersForNewNode -->
+
+	<xs:element name='getParametersForNewNode' type='NodeTypeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets node parameters for the creation of a new node.</xs:documentation>
+			<xs:documentation>Node parameters will be returned in an XMPP data form (xd:x element).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeTypeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a node type and a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReferenceRequest'>
+				<xs:attribute name='type' type='xs:string' use='required'>
+					<xs:annotation>
+						<xs:documentation>Machine-readable, and concentrator specific, node type.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- createNewNode -->
+
+	<xs:element name='createNewNode'>
+		<xs:annotation>
+			<xs:documentation>Creates a new node.</xs:documentation>
+			<xs:documentation>Expected response element, if ok: nodeInfo</xs:documentation>
+			<xs:documentation>Expected response element, if error: xd:x data form</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeTypeReferenceRequest'>
+					<xs:sequence>
+						<xs:element ref='xd:x' minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- destroyNode -->
+
+	<xs:element name='destroyNode' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Destroys a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Node ordering -->
+	<!-- moveNodeUp -->
+
+	<xs:element name='moveNodeUp' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Moves a node up one step among its siblings.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- moveNodeDown -->
+
+	<xs:element name='moveNodeDown' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Moves a node down one step among its siblings.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- moveNodesUp -->
+
+	<xs:element name='moveNodesUp' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Moves a set of nodes up one step among its siblings.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- moveNodesDown -->
+
+	<xs:element name='moveNodesDown' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Moves a set of nodes down one step among its siblings.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Data Source Events -->
+	<!-- subscribe -->
+
+	<xs:element name='subscribe'>
+		<xs:annotation>
+			<xs:documentation>Subscribes to events from a data source in a concentrator.</xs:documentation>
+			<xs:documentation>If an existing subscription exists, that subscription is renewed, and event types added. (No existing event types are removed.)</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='SourceReferenceRequest'>
+					<xs:attribute name='ttl' type='xs:positiveInteger' use='required'>
+						<xs:annotation>
+							<xs:documentation>How long the subscription will be active, in seconds.</xs:documentation>
+							<xs:documentation>Subscription should be renewed before the subscription expires, to maintain receiving events.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='getEventsSince' type='xs:dateTime' use='optional'>
+						<xs:annotation>
+							<xs:documentation>If provided, all events from this point in time (inclusive) are replayed as events sent to the subscriber.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attributeGroup ref='parametersAndMessages'>
+						<xs:annotation>
+							<xs:documentation>If parameters and messages should be included in event messages.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+					<xs:attributeGroup ref='eventTypes'>
+						<xs:annotation>
+							<xs:documentation>What types of events are subscribed to.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name='eventTypes'>
+		<xs:annotation>
+			<xs:documentation>Types of events that can be subscribed to.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='nodeAdded' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when a node has been added to the data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeUpdated' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when a node has been updated in a data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeStatusChanged' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when the state of a node changes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeRemoved' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when a node has been removed from the data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeMovedUp' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when a node has been moved up among its siblings in a data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='nodeMovedDown' type='xs:boolean' use='optional' default='true'>
+			<xs:annotation>
+				<xs:documentation>Event sent when a node has been moved down among its siblings in a data source.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<!-- unsubscribe -->
+
+	<xs:element name='unsubscribe'>
+		<xs:annotation>
+			<xs:documentation>Unsubscribes from events from a data source in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='SourceReferenceRequest'>
+					<xs:attributeGroup ref='eventTypes'>
+						<xs:annotation>
+							<xs:documentation>What types of events are unsubscribed from.</xs:documentation>
+						</xs:annotation>
+					</xs:attributeGroup>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- nodeAdded -->
+
+	<xs:element name='nodeAdded'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when a node has been added to a data source.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeInformation'>
+					<xs:attribute name='aid' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>If provided specifies the new node was added after the sibling identified with this attribute.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='apt' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>If provided, specifies the partition in which the aid attribute refers.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute ref='ts' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='ts' type='xs:dateTime'>
+		<xs:annotation>
+			<xs:documentation>Timestamp of event.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<!-- nodeUpdated -->
+
+	<xs:element name='nodeUpdated'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when a node has been updated in a data source.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeInformation'>
+					<xs:attribute name='oid' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>If provided, contains the identity of the node before the update.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute ref='ts' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- nodeStatusChanged -->
+
+	<xs:element name='nodeStatusChanged'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when the state of a node has changed in a data source.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferenceEvent'>
+					<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+						<xs:element name='message' type='Message'>
+							<xs:annotation>
+								<xs:documentation>messages are listed if included in the subscription.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name='state' type='NodeState' use='required'>
+						<xs:annotation>
+							<xs:documentation>New state of node.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='NodeReferenceEvent'>
+		<xs:annotation>
+			<xs:documentation>Base type for events referencing a node in a data source in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReference'>
+				<xs:attributeGroup ref='nodeReference'/>
+				<xs:attributeGroup ref='nodeAltReference'/>
+				<xs:attribute ref='ts' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- nodeRemoved -->
+
+	<xs:element name='nodeRemoved' type='NodeReferenceEvent'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when a node has been removed from a data source.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- nodeMovedUp -->
+
+	<xs:element name='nodeMovedUp' type='NodeReferenceEvent'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when a node has been moved up among its siblings in a data source.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- nodeMovedDown -->
+
+	<xs:element name='nodeMovedDown' type='NodeReferenceEvent'>
+		<xs:annotation>
+			<xs:documentation>Event sent in a message from concentrator to subscriber, when a node has been moved down among its siblings in a data source.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Commands -->
+	<!-- getNodeCommands -->
+
+	<xs:element name='getNodeCommands' type='NodeReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets a list of available commands for a node.</xs:documentation>
+			<xs:documentation>Expected response element: commands</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='commands'>
+		<xs:annotation>
+			<xs:documentation>Represents an array of commands.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element ref='command'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='command'>
+		<xs:annotation>
+			<xs:documentation>Represents a command</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='command' use='required'/>
+			<xs:attribute name='name' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Human-readable, localized name of command.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='type' type='CommandType' use='required'>
+				<xs:annotation>
+					<xs:documentation>Type of command.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='sortCategory' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Category under which the command should be sorted, in GUIs.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='sortKey' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>How the command should be sorted in its category, in GUIs.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='confirmationString' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>An optional, human-readable, localized, confirmation string shown to human users, before executing the command.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='failureString' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>An optional, human-readable, localized, failure string shown to human users, if failing to execute the command.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='successString' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>An optional, human-readable, localized, string shown to human users, if successfully able to execute the command.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='command' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Machine-readable identity of the command.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:simpleType name='CommandType'>
+		<xs:annotation>
+			<xs:documentation>Represents a type of command.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Simple'>
+				<xs:annotation>
+					<xs:documentation>Simple commands do not need parametrization, and run invisibly.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Parameterized'>
+				<xs:annotation>
+					<xs:documentation>Parametrized commands allow the user to fill in a form of command parameters that can be used to configure the command.</xs:documentation>
+					<xs:documentation>The command is then run invisibly.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Query'>
+				<xs:annotation>
+					<xs:documentation>Allows the user to parametrize the command. During execution of the command, feedback can be sent back to the user asynchronously.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- getCommandParameters -->
+
+	<xs:element name='getCommandParameters' type='NodeCommandReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets the parameters for a parametrized node command or query.</xs:documentation>
+			<xs:documentation>Command parameters will be returned in an XMPP data form (xd:x element).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodeCommandReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a command and a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReferenceRequest'>
+				<xs:attribute ref='command' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- executeNodeCommand -->
+
+	<xs:element name='executeNodeCommand' type='NodeParametrizedCommandRequest'>
+		<xs:annotation>
+			<xs:documentation>Executes a simple or parametrized node command.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+			<xs:documentation>Expected response element, if error: xd:x data form</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="NodeParametrizedCommandRequest">
+		<xs:annotation>
+			<xs:documentation>Base type for requests executing a parametrized command on a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeCommandReferenceRequest'>
+				<xs:sequence>
+					<xs:element ref='xd:x' minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Can be omitted for simple commands.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- executeNodeQuery -->
+
+	<xs:element name='executeNodeQuery' type='NodeParametrizedQueryRequest'>
+		<xs:annotation>
+			<xs:documentation>Executes a parametrized node query.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+			<xs:documentation>Expected response element, if error: xd:x data form</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="NodeParametrizedQueryRequest">
+		<xs:annotation>
+			<xs:documentation>Base type for requests executing a parametrized queries on a node in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeParametrizedCommandRequest'>
+				<xs:attribute ref='queryId' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:attribute name='queryId' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Unique random query identifier. It will be used when sending asynchronous feedback related to the query back to the client.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<!-- getCommonNodeCommands -->
+
+	<xs:element name='getCommonNodeCommands' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets a list of available commands common for a set of nodes.</xs:documentation>
+			<xs:documentation>Expected response element: commands</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- getCommonCommandParameters -->
+
+	<xs:element name='getCommonCommandParameters' type='NodesCommandReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Gets the parameters for a parametrized node command or query common to a set of nodes.</xs:documentation>
+			<xs:documentation>Command parameters will be returned in an XMPP data form (xd:x element).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='NodesCommandReferenceRequest'>
+		<xs:annotation>
+			<xs:documentation>Base type for requests referencing a command and a set of nodes in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodeReferencesRequest'>
+				<xs:attribute ref='command' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- executeCommonNodeCommand -->
+
+	<xs:element name='executeCommonNodeCommand' type='NodesParametrizedCommandRequest'>
+		<xs:annotation>
+			<xs:documentation>Executes a simple or parametrized node command on a set of nodes.</xs:documentation>
+			<xs:documentation>Expected response element, if ok: partialExecution</xs:documentation>
+			<xs:documentation>Expected response element, if form error: xd:x data form</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="NodesParametrizedCommandRequest">
+		<xs:annotation>
+			<xs:documentation>Base type for requests executing a parametrized command on a set of nodes in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodesCommandReferenceRequest'>
+				<xs:sequence>
+					<xs:element ref='xd:x' minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Can be omitted for simple commands.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name='partialExecution'>
+		<xs:annotation>
+			<xs:documentation>Representation of execution status, per individual node a command was executed on.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='result'>
+					<xs:annotation>
+						<xs:documentation>If the command executed successfully on the corresponding node.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base='xs:boolean'>
+								<xs:attribute name='error' type='xs:string' use='optional'>
+									<xs:annotation>
+										<xs:documentation>If a command failed, this attribute contains an error message describing what went wrong for the particular node.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- executeCommonNodeQuery -->
+
+	<xs:element name='executeCommonNodeQuery' type='NodesParametrizedQueryRequest'>
+		<xs:annotation>
+			<xs:documentation>Executes a parametrized node query on a set of nodes.</xs:documentation>
+			<xs:documentation>Expected response element, if ok: partialExecution</xs:documentation>
+			<xs:documentation>Expected response element, if form error: xd:x data form</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="NodesParametrizedQueryRequest">
+		<xs:annotation>
+			<xs:documentation>Base type for requests executing a parametrized queries on a set of nodes in a concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='NodesParametrizedCommandRequest'>
+				<xs:attribute ref='queryId' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- abortNodeQuery -->
+
+	<xs:element name='abortNodeQuery'>
+		<xs:annotation>
+			<xs:documentation>Aborts a query that is being executed on a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeCommandReferenceRequest'>
+					<xs:attribute ref='queryId' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- abortCommonNodeQuery -->
+
+	<xs:element name='abortCommonNodeQuery'>
+		<xs:annotation>
+			<xs:documentation>Aborts a query that is being executed on a set of nodes in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodesCommandReferenceRequest'>
+					<xs:attribute ref='queryId' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Query feedback -->
+	<!-- queryProgress -->
+
+	<xs:element name='queryProgress'>
+		<xs:annotation>
+			<xs:documentation>Progress during the execution of a node query is reported asynchronously in separate messages sent from the concentrator to the client executing the query.</xs:documentation>
+			<xs:documentation>Each message contains a queryProgress element, with one or more child elements containing information about the progress.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='1' maxOccurs='unbounded'>
+				<xs:element ref='queryStarted'/>
+				<xs:element ref='queryDone'/>
+				<xs:element ref='queryAborted'/>
+				<xs:element ref='newTable'/>
+				<xs:element ref='newRecords'/>
+				<xs:element ref='tableDone'/>
+				<xs:element ref='newObject'/>
+				<xs:element ref='queryMessage'/>
+				<xs:element ref='title'/>
+				<xs:element ref='status'/>
+				<xs:element ref='beginSection'/>
+				<xs:element ref='endSection'/>
+			</xs:choice>
+			<xs:attributeGroup ref='nodeReference'/>
+			<xs:attribute ref='queryId' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- queryStarted -->
+
+	<xs:element name='queryStarted' type='Empty'>
+		<xs:annotation>
+			<xs:documentation>Query progress element, showing query execution has started.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='Empty'>
+		<xs:annotation>
+			<xs:documentation>An empty type.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+
+	<!-- queryDone -->
+
+	<xs:element name='queryDone' type='Empty'>
+		<xs:annotation>
+			<xs:documentation>Query progress element, showing query execution has completed.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- queryAborted -->
+
+	<xs:element name='queryAborted' type='Empty'>
+		<xs:annotation>
+			<xs:documentation>Query progress element, showing query execution has been aborted.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- newTable -->
+
+	<xs:element name='newTable'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports the creation of a new table, at the current position in the response.</xs:documentation>
+			<xs:documentation>Note: Reporting records in a table can continue, even if the enclosing section of the report has been closed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='column'>
+					<xs:annotation>
+						<xs:documentation>Provides information about a column in the table.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='columnId' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Identity of the column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='header' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Human-readable, localized header for the column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='src' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>If provided, the values in the column are considered to be references to nodes in a data source, identified by this attribute.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='pt' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>If provided, defines the partition in which the node identities referenced by the values of the column resides.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='fgColor' type='Color' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Foreground color of column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='bgColor' type='Color' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Background color of column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='alignment' type='Alignment' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Alignment of column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='nrDecimals' type='xs:nonNegativeInteger' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Number of deciamals of values in the column.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute ref='tableId' use='required'/>
+			<xs:attribute name='tableName' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Human-readable, localized name of the table.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='tableId' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Identity of the table. Will be used in progress updates adding records to the table.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:simpleType name='Color'>
+		<xs:restriction base='xs:string'>
+			<xs:pattern value='^[0-9a-fA-F]{6}$'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='Alignment'>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Left'/>
+			<xs:enumeration value='Center'/>
+			<xs:enumeration value='Right'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- newRecords -->
+
+	<xs:element name='newRecords'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports new records which have been added to a table.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='record'>
+					<xs:annotation>
+						<xs:documentation>Contains the cells of one row.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='boolean' type='xs:boolean'>
+								<xs:annotation>
+									<xs:documentation>A boolean-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='color' type='Color'>
+								<xs:annotation>
+									<xs:documentation>A color-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='date' type='xs:date'>
+								<xs:annotation>
+									<xs:documentation>A date-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='dateTime' type='xs:dateTime'>
+								<xs:annotation>
+									<xs:documentation>A date and time-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='double' type='xs:double'>
+								<xs:annotation>
+									<xs:documentation>A double precision floating point-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='duration' type='xs:duration'>
+								<xs:annotation>
+									<xs:documentation>A duration-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='int' type='xs:int'>
+								<xs:annotation>
+									<xs:documentation>A 32-bit integer-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='long' type='xs:long'>
+								<xs:annotation>
+									<xs:documentation>A 64-bit integer-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='string' type='xs:string'>
+								<xs:annotation>
+									<xs:documentation>A string-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='time' type='xs:time'>
+								<xs:annotation>
+									<xs:documentation>A time-valued cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='base64'>
+								<xs:annotation>
+									<xs:documentation>A binary, Internet encoded value.</xs:documentation>
+									<xs:documentation>Can be used to encode any type of value, that has an Internet Content Type defining the encoding.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base='xs:base64Binary'>
+											<xs:attribute ref='contentType' use='required'/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name='void' type='Empty'>
+								<xs:annotation>
+									<xs:documentation>An empty cell.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute ref='tableId' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='contentType' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Internet Content Type, defining the encoding of the binary data.</xs:documentation>
+			<xs:documentation>Examples of content that can be transmitted this way: Images (like graphs), formatted text (markdown/html), etc.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<!-- tableDone -->
+
+	<xs:element name='tableDone'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports a table has been marked as completed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='tableId' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- newObject -->
+
+	<xs:element name='newObject'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports the creation of a new object, at the current position in the response.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='xs:base64Binary'>
+					<xs:attribute ref='contentType' use='required'/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- queryMessage -->
+
+	<xs:element name='queryMessage'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports a new message.</xs:documentation>
+			<xs:documentation>Messages are not part of the visual report, rather they contain informative information about happen during the execution.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='xs:string'>
+					<xs:attribute name='type' type='EventType' use='optional' default='Information'>
+						<xs:annotation>
+							<xs:documentation>Type of message being reported.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='level' type='EventLevel' use='optional' default='Minor'>
+						<xs:annotation>
+							<xs:documentation>Level of seriousness/importance of the message being reported.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='EventType'>
+		<xs:annotation>
+			<xs:documentation>Represents a type of event message</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Exception'>
+				<xs:annotation>
+					<xs:documentation>An exception represents an unexpected/unhandled fault condition.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Error'>
+				<xs:annotation>
+					<xs:documentation>Represents an error state. A process, device or algorithm failed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Warning'>
+				<xs:annotation>
+					<xs:documentation>Represents a warning state. An error could occur unless action is taken.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Information'>
+				<xs:annotation>
+					<xs:documentation>Represents information about the node that is not a warning or an error.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='EventLevel'>
+		<xs:annotation>
+			<xs:documentation>Represents a level of seriousness/importance of an event message</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='Minor'>
+				<xs:annotation>
+					<xs:documentation>Event is of lesser importance, frequently occurring, expected or common.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Medium'>
+				<xs:annotation>
+					<xs:documentation>Events of more significance, but probability of affecting operations is small. Represents normal changes in state, audits, events that could become major if not properly managed, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Major'>
+				<xs:annotation>
+					<xs:documentation>Event is of major importance, and probably affect operations. Represents major changes instate, objects created, deleted or failed.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- title -->
+
+	<xs:element name='title'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports a title for the resulting report.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='name' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Human-readable title of table.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- status -->
+
+	<xs:element name='status'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports the current status of the query being executed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='message' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Human-readable, localized status message describing the current state of the query.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- beginSection -->
+
+	<xs:element name='beginSection'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports a new section (or subsection) of the report.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='header' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Human-readable, localized header for the new section.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- endSection -->
+
+	<xs:element name='endSection' type='Empty'>
+		<xs:annotation>
+			<xs:documentation>Query progress element that reports the end of the current section of the report.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Sniffers -->
+	<!-- registerSniffer -->
+
+	<xs:element name='registerSniffer'>
+		<xs:annotation>
+			<xs:documentation>Registers a sniffer on a node in a concentrator, for troubleshooting.</xs:documentation>
+			<xs:documentation>Expected response element, if ok: sniffer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferenceRequest'>
+					<xs:attribute ref='expires' use='optional'>
+						<xs:annotation>
+							<xs:documentation>If not provided, the concentrator automatically chooses an expiration date and time.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='sniffer'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a sniffer in the concentrator.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='snifferId' use='required'/>
+			<xs:attribute ref='expires' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='expires' type='xs:dateTime'>
+		<xs:annotation>
+			<xs:documentation>When the sniffer automatically expires.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:attribute name='snifferId' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Sniffer identity, selected by the concentrator.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<!-- unregisterSniffer -->
+
+	<xs:element name='unregisterSniffer'>
+		<xs:annotation>
+			<xs:documentation>Unregisters a sniffer on a node in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base='NodeReferenceRequest'>
+					<xs:attribute ref='snifferId' use='required'/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- sniff -->
+
+	<xs:element name='sniff'>
+		<xs:annotation>
+			<xs:documentation>Any event detected by a sniffer is reported asynchronously in separate messages sent from the concentrator to the client that registered the sniffer.</xs:documentation>
+			<xs:documentation>Each message contains a sniff element, with one or more child elements containing information about what was detected.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='1' maxOccurs='unbounded'>
+				<xs:element name='expired' type='Empty'>
+					<xs:annotation>
+						<xs:documentation>Informs the client the sniffer has expired.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='rxBin' type='xs:base64Binary'>
+					<xs:annotation>
+						<xs:documentation>Binary data has been received.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='txBin' type='xs:base64Binary'>
+					<xs:annotation>
+						<xs:documentation>Binary data has been transmitted.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='rx' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>Text has been received.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='tx' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>Text has been transmitted.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='info' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>Information about what is happening.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='warning' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>A warning message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='error' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>An error message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='exception' type='xs:string'>
+					<xs:annotation>
+						<xs:documentation>An exception message.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute ref='snifferId' use='required'/>
+			<xs:attribute ref='timestamp' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

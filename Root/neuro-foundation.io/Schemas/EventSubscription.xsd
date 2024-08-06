@@ -1,0 +1,203 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:events:1.0'
+    xmlns='urn:ieee:iot:events:1.0'
+    xmlns:sd='urn:ieee:iot:sd:1.0'
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:import namespace='urn:ieee:iot:sd:1.0'/>
+
+	<xs:element name='subscribe'>
+		<xs:annotation>
+			<xs:documentation>Defines a subscription of sensor data.</xs:documentation>
+			<xs:documentation>This element is sent in an iq set stanza.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice minOccurs='0' maxOccurs='unbounded'>
+				<xs:element name='nd'>
+					<xs:annotation>
+						<xs:documentation>Defines a node restriction of the subscription.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='id' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Node identity. (Required)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='src' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Source identity. (Optional. Scopes the node identity.)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='pt' type='xs:string' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Source partition. (Optional. Scopes the node identity, within a source.)</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='f'>
+					<xs:annotation>
+						<xs:documentation>Defines a field restriction of the request.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='n' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Field name.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='v' type='xs:double' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Clients perception of the current value of the field.</xs:documentation>
+								<xs:documentation>If not provided, server will use the current value, as seen by the server.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='by' type='PositiveDouble' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Trigger event if value changes more than this value, from the current value at the time of subscription, or last event.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='up' type='PositiveDouble' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Trigger event if value changes more than this value upwards, from the current value at the time of subscription, or last event.</xs:documentation>
+								<xs:documentation>Can be used together with the dn attribute, to create different trigger levels around the current value.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='dn' type='PositiveDouble' use='optional'>
+							<xs:annotation>
+								<xs:documentation>Trigger event if value changes more than this value downwards, from the current value at the time of subscription, or last event.</xs:documentation>
+								<xs:documentation>Can be used together with the up attribute, to create different trigger levels around the current value.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Request identity. Will be used when sending sensor data back to the client.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attributeGroup ref='sd:category'>
+				<xs:annotation>
+					<xs:documentation>Categories of fields requested.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
+			<xs:attribute name='all' type='xs:boolean' use='optional' default='false'>
+				<xs:annotation>
+					<xs:documentation>Field used to request all categories of fields.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='maxAge' type='xs:duration' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Maximum age of historical data to return, when event is triggered.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='minInt' type='xs:duration' use='optional'>
+				<xs:annotation>
+					<xs:documentation>The longest time allowed between triggers.</xs:documentation>
+					<xs:documentation>If the event hasn't been triggered withing this amount of time, the event is triggered.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='maxInt' type='xs:duration' use='optional'>
+				<xs:annotation>
+					<xs:documentation>The shortest time allowed between triggers.</xs:documentation>
+					<xs:documentation>If conditions for an event to trigger occur before this time has elapsed, the trigger is delayed until the end of this time period.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='st' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Service token, identifying the service generating the original request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='dt' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Device token, identifying the device generating the original request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='ut' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>User token, identifying the user generating the original request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='req' type='xs:boolean' use='optional' default='false'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='unsubscribe'>
+		<xs:annotation>
+			<xs:documentation>Removes a subscription</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identity of the subscription request to cancel.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='PositiveDouble'>
+		<xs:annotation>
+			<xs:documentation>A positive floating-point value.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:double'>
+			<xs:minExclusive value='0'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

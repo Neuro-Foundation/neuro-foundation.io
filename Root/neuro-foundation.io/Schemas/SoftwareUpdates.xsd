@@ -1,0 +1,199 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:ieee:iot:swu:1.0'
+    xmlns='urn:ieee:iot:swu:1.0'
+    elementFormDefault='qualified'>
+
+	<!--
+Copyright 2017-2021 The Institute of Electrical and Electronics Engineers, 
+Incorporated (IEEE).
+
+This work is licensed to The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) under one or more contributor license
+agreements.
+
+See the LICENSE.md file distributed with this work for additional
+information regarding copyright ownership. Use of this file is
+governed by a BSD-style license, the terms of which are as follows:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+Redistributions of source code must retain the above copyright
+notice, this list of conditions, the following disclaimer, and the
+NOTICE file.
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions, the following disclaimer in the
+documentation and/or other materials provided with the
+distribution, and the NOTICE file.
+Neither the name of The Institute of Electrical and Electronics
+Engineers, Incorporated (IEEE) nor the names of its contributors
+may be used to endorse or promote products derived from this
+software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+SPDX-License-Identifier: BSD-3-Clause
+  
+Disclaimer: This open source repository contains material that may be 
+included-in or referenced by an unapproved draft of a proposed IEEE 
+Standard. All material in this repository is subject to change. The 
+material in this repository is presented "as is" and with all faults. 
+Use of the material is at the sole risk of the user. IEEE specifically 
+disclaims all warranties and representations with respect to all 
+material contained in this repository and shall not be liable, under 
+any theory, for any use of the material. Unapproved drafts of proposed 
+IEEE standards must not be utilized for any conformance/compliance 
+purposes.
+-->
+
+	<xs:element name='getPackageInfo'>
+		<xs:annotation>
+			<xs:documentation>Gets information about a software package.</xs:documentation>
+			<xs:documentation>Expected response element: packageInfo</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='fileName' use='required'/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attribute name='fileName' type='xs:string'>
+		<xs:annotation>
+			<xs:documentation>Local filename of the corresponding software package.</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:element name='packageInfo' type='PackageInfo'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a software package.</xs:documentation>
+			<xs:documentation>Can be sent in responses to requests, or as event notifications.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name='PackageInfo'>
+		<xs:attribute ref='fileName' use='required'/>
+		<xs:attribute name='signature' type='xs:base64Binary' use='required'>
+			<xs:annotation>
+				<xs:documentation>Digital signature for the contents of the file.</xs:documentation>
+				<xs:documentation>The caller must know the algorithm and public key used to generate the signature.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='published' type='xs:dateTime' use='required'>
+			<xs:annotation>
+				<xs:documentation>Timepoint when the software package was published.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='supersedes' type='xs:dateTime' use='optional'>
+			<xs:annotation>
+				<xs:documentation>If the current version supersedes an older version, this attribute contains the timepoint of the previous version of the package</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='created' type='xs:dateTime' use='required'>
+			<xs:annotation>
+				<xs:documentation>Timepoint when the software package record was created (when the first version of the package was published).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='url' type='xs:anyURI' use='required'>
+			<xs:annotation>
+				<xs:documentation>URL to the corresponding software package.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='bytes' type='xs:nonNegativeInteger' use='required'>
+			<xs:annotation>
+				<xs:documentation>Size of package file, in number of bytes.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:element name='packageDeleted' type='PackageInfo'>
+		<xs:annotation>
+			<xs:documentation>Sent in event notifications when a package has been deleted.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name='getPackages'>
+		<xs:annotation>
+			<xs:documentation>Gets information about available software packages.</xs:documentation>
+			<xs:documentation>Expected response element: packages</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='packages'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a set of software packages.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='packageInfo' minOccurs='0' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='subscribe'>
+		<xs:annotation>
+			<xs:documentation>Subscribes the client to receive notifications when new versions of a software package is available.</xs:documentation>
+			<xs:documentation>Expected response element: empty response element</xs:documentation>
+			<xs:documentation>Note: The subscription operator is idempotent. Subscribing to a package that is already subscribed to, does not increase the number of subscriptions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='fileName' use='required'>
+				<xs:annotation>
+					<xs:documentation>If subscribing to the wildcard filename "*", all packages are subscribed to.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='unsubscribe'>
+		<xs:annotation>
+			<xs:documentation>Unsubscribes the client from receiving notifications when new versions of a software package is available.</xs:documentation>
+			<xs:documentation>Expected response element: empty response element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref='fileName' use='required'>
+				<xs:annotation>
+					<xs:documentation>If unsubscribing from the wildcard filename "*", all packages are unsubscribed from.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='getSubscriptions'>
+		<xs:annotation>
+			<xs:documentation>Gets a list of software package subscriptions registered for the sender.</xs:documentation>
+			<xs:documentation>Expected response element: subscriptions</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='subscriptions'>
+		<xs:annotation>
+			<xs:documentation>Conains a list of active subscriptions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='subscription' type='xs:string' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Each subscription element contains the file name of the software package being subscribed to.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

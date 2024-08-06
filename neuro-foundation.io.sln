@@ -14,9 +14,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{B864C64F-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neuro-foundation.io", "{FE17EE9B-9567-430E-8317-6B411D781F78}"
 	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Authentication.md = Root\neuro-foundation.io\Authentication.md
+		Root\neuro-foundation.io\Authorization.md = Root\neuro-foundation.io\Authorization.md
+		Root\neuro-foundation.io\Binding.md = Root\neuro-foundation.io\Binding.md
+		Root\neuro-foundation.io\ClockSynchronization.md = Root\neuro-foundation.io\ClockSynchronization.md
+		Root\neuro-foundation.io\Concentrator.md = Root\neuro-foundation.io\Concentrator.md
+		Root\neuro-foundation.io\ControlDataForm.md = Root\neuro-foundation.io\ControlDataForm.md
+		Root\neuro-foundation.io\ControlParameters.md = Root\neuro-foundation.io\ControlParameters.md
+		Root\neuro-foundation.io\ControlSimpleActions.md = Root\neuro-foundation.io\ControlSimpleActions.md
+		Root\neuro-foundation.io\DecisionSupport.md = Root\neuro-foundation.io\DecisionSupport.md
+		Root\neuro-foundation.io\Discovery.md = Root\neuro-foundation.io\Discovery.md
+		Root\neuro-foundation.io\E2E.md = Root\neuro-foundation.io\E2E.md
+		Root\neuro-foundation.io\Federation.md = Root\neuro-foundation.io\Federation.md
+		Root\neuro-foundation.io\Identities.md = Root\neuro-foundation.io\Identities.md
 		Root\neuro-foundation.io\Index.md = Root\neuro-foundation.io\Index.md
+		Root\neuro-foundation.io\LegalIdentities.md = Root\neuro-foundation.io\LegalIdentities.md
+		Root\neuro-foundation.io\LICENSE.md = Root\neuro-foundation.io\LICENSE.md
 		Root\neuro-foundation.io\Master.md = Root\neuro-foundation.io\Master.md
 		Root\neuro-foundation.io\NeuroFoundationStyles.cssx = Root\neuro-foundation.io\NeuroFoundationStyles.cssx
+		Root\neuro-foundation.io\P2P.md = Root\neuro-foundation.io\P2P.md
+		Root\neuro-foundation.io\Provisioning.md = Root\neuro-foundation.io\Provisioning.md
+		Root\neuro-foundation.io\README.md = Root\neuro-foundation.io\README.md
+		Root\neuro-foundation.io\SensorData.md = Root\neuro-foundation.io\SensorData.md
+		Root\neuro-foundation.io\SensorDataEventSubscription.md = Root\neuro-foundation.io\SensorDataEventSubscription.md
+		Root\neuro-foundation.io\SensorDataPublishSubscribe.md = Root\neuro-foundation.io\SensorDataPublishSubscribe.md
+		Root\neuro-foundation.io\SensorDataRequestResponse.md = Root\neuro-foundation.io\SensorDataRequestResponse.md
+		Root\neuro-foundation.io\SmartContracts.md = Root\neuro-foundation.io\SmartContracts.md
+		Root\neuro-foundation.io\SoftwareUpdates.md = Root\neuro-foundation.io\SoftwareUpdates.md
+		Root\neuro-foundation.io\Tokens.md = Root\neuro-foundation.io\Tokens.md
+		Root\neuro-foundation.io\TransportEncryption.md = Root\neuro-foundation.io\TransportEncryption.md
 	EndProjectSection
 EndProject
 Global
