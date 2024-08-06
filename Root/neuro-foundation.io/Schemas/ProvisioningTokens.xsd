@@ -1,8 +1,8 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:ieee:iot:prov:t:1.0'
-    xmlns='urn:ieee:iot:prov:t:1.0'
+    targetNamespace='urn:nf:iot:prov:t:1.0'
+    xmlns='urn:nf:iot:prov:t:1.0'
     elementFormDefault='qualified'>
 
 	<xs:element name='getToken' type='xs:base64Binary'>

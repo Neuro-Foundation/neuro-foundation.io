@@ -1,15 +1,13 @@
 Sensor Data Event Subscription communication pattern
 ========================================================
 
-You can subscribe to sensor data from a device, or nodes in a device, by sending a subscription request to the device describing the data you are interested in,
-and parameters describing when events should be triggered. This document describes this pattern.
-
-This document outlines the XML representation of sensor data, as defined by the IEEE XMPP IoT Working Group. The XML representation is modelled using
-an annotated XML Schema:
+You can subscribe to sensor data from a device, or nodes in a device, by sending a subscription request to the device describing the data you are 
+interested in, and parameters describing when events should be triggered. This document describes this pattern. This document outlines the XML 
+representation of sensor data. The XML representation is modelled using an annotated XML Schema:
 
 | Event subscription                                                  ||
 | ------------|--------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:events:1.0                                |
+| Namespace:  | urn:nf:iot:events:1.0                                  |
 | Schema:     | [EventSubscription.xsd](Schemas/EventSubscription.xsd) |
 
 It also relies on the [Sensor Data Request/Response pattern](SensorDataRequestResponse.md) and the [Sensor Data Representation](SensorData.md).
@@ -218,7 +216,7 @@ Subscription request:
 
 ```xml
 <iq type='get' id='28' from='client@example.org/1234' to='device@example.org/abcd'>
-  <subscribe xmlns='urn:ieee:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8' m='true' minInt='PT1S' maxInt='PT1M'>
+  <subscribe xmlns='urn:nf:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8' m='true' minInt='PT1S' maxInt='PT1M'>
     <f n='Light' v='25.72' by='1'/>
     <f n='Motion' v='0' by='1'/>
   </subscribe>
@@ -229,7 +227,7 @@ Subscription response:
 
 ```xml
 <iq id='28' type='result' to='client@example.org/1234' from='device@example.org/abcd'>
-  <accepted xmlns='urn:ieee:iot:sd:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
+  <accepted xmlns='urn:nf:iot:sd:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
 </iq>
 ```
 
@@ -237,7 +235,7 @@ Event:
 
 ```xml
 <message to='client@example.org/1234' from='device@example.org/abcd'>
-  <resp id="d4fe61155cb14e649e302092d3b406a8" xmlns="urn:ieee:iot:sd:1.0">
+  <resp id="d4fe61155cb14e649e302092d3b406a8" xmlns="urn:nf:iot:sd:1.0">
     <ts v="2018-07-18T15:19:57.732">
       <q n="Light" m="true" ar="true" v="26.11" u="%" />
       <b n="Motion" m="true" ar="true" v="true" />
@@ -250,7 +248,7 @@ Unsubscription request:
 
 ```xml
 <iq type='get' id='29' from='client@example.org/1234' to='device@example.org/abcd'>
-  <unsubscribe xmlns='urn:ieee:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
+  <unsubscribe xmlns='urn:nf:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
 </iq>
 ```
 

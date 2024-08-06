@@ -1,14 +1,13 @@
 ﻿Tokens
 =============
 
-This document outlines the XML representation of token management, as defined by the IEEE XMPP IoT Working Group. Using tokens is an optional method
-services, users or devices can use to identify themselves. The recipient of sensor or actuator commands can base their security decisions based on the
-XMPP address of the immediate sender, the domain of the immediate sender, and any device, user or service tokens. The XML representation is modelled using
-an annotated XML Schema:
+This document outlines the XML representation of token management. Using tokens is an optional method services, users or devices can use to identify 
+themselves. The recipient of sensor or actuator commands can base their security decisions based on the XMPP address of the immediate sender, the 
+domain of the immediate sender, and any device, user or service tokens. The XML representation is modelled using an annotated XML Schema:
 
 | Tokens                                                                ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:prov:t:1.0                                  |
+| Namespace:  | urn:nf:iot:prov:t:1.0                                    |
 | Schema:     | [ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) |
 
 

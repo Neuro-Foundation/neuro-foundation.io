@@ -1,8 +1,8 @@
 Discovery
 ==================
 
-This document outlines the XML representation of the Thing Registry and discovery service, as defined by the IEEE XMPP IoT Working Group. 
-The Discovery service, and its use of *Thing Registries* provide several important services to IoT networks:
+This document outlines the XML representation of the Thing Registry and discovery service. The Discovery service, and its use of *Thing Registries* 
+provide several important services to IoT networks:
 
 1. Managing the lifecycle of things.
 2. Pairing of things with their corresponding owners.
@@ -13,7 +13,7 @@ The XML representation is modelled using an annotated XML Schema:
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:disco:1.0                                   |
+| Namespace:  | urn:nf:iot:disco:1.0                                     |
 | Schema:     | [Discovery.xsd](Schemas/Discovery.xsd)                   |
 
 Motivation and design goal
@@ -43,7 +43,7 @@ Legacy
 The following data model is based on work done in the [XMPP Standards Foundation (XSF)](https://xmpp.org/about/xmpp-standards-foundation.html),
 [XEP-0347: Internet of Things - Discovery](https://xmpp.org/extensions/xep-0347.html). Following is a list of notable differences:
 
-* An IEEE namespace is used.
+* A Neuro-Foundation namespace is used.
 * Only interfaces and services related to XMPP has been included.
 * Extended address attributes of nodes are updated.
 * The schema is now annotated.
@@ -148,7 +148,7 @@ The following example shows the registration of a stand-alone Thing:
     from='thing@example.org/resource'
     to='discovery.example.org'
     id='1'>
-   <register xmlns='urn:ieee:iot:disco:1.0'>
+   <register xmlns='urn:nf:iot:disco:1.0'>
        <str name='SN' value='98734238472634'/>
        <str name='MAN' value='www.example.org'/>
        <str name='MODEL' value='Device'/>
@@ -182,7 +182,7 @@ instead respond with the following response. When the thing receives this, it ca
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='1'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='owner@example.org'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='owner@example.org'/>
 </iq>
 ```
 
@@ -199,7 +199,7 @@ be publicly available.
     from='thing@example.org/resource'
     to='discovery.example.org'
     id='2'>
-   <register xmlns='urn:ieee:iot:disco:1.0' selfOwned='true'>
+   <register xmlns='urn:nf:iot:disco:1.0' selfOwned='true'>
        <str name='SN' value='98734238472634'/>
        <str name='MAN' value='www.example.org'/>
        <str name='MODEL' value='Device'/>
@@ -231,7 +231,7 @@ registration request, as follows:
     from='rack@example.org/plcs'
     to='discovery.example.org'
     id='3'>
-   <register xmlns='urn:ieee:iot:disco:1.0' id='plc1' src='MeteringTopology'>
+   <register xmlns='urn:nf:iot:disco:1.0' id='plc1' src='MeteringTopology'>
        <str name='SN' value='98734238472634'/>
        <str name='MAN' value='www.example.org'/>
        <str name='MODEL' value='Device'/>
@@ -302,7 +302,7 @@ Once the owner has the required meta information about the Thing to claim owners
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='4'>
-   <mine xmlns='urn:ieee:iot:disco:1.0'>
+   <mine xmlns='urn:nf:iot:disco:1.0'>
        <str name='SN' value='98734238472634'/>
        <str name='MAN' value='www.example.org'/>
        <str name='MODEL' value='Device'/>
@@ -320,7 +320,7 @@ to claim a private Thing, you can add the `public` attribute with value `false` 
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='4'>
-   <mine xmlns='urn:ieee:iot:disco:1.0' public='false'>
+   <mine xmlns='urn:nf:iot:disco:1.0' public='false'>
        <str name='SN' value='98734238472634'/>
        <str name='MAN' value='www.example.org'/>
        <str name='MODEL' value='Device'/>
@@ -341,7 +341,7 @@ an `<iq type="result"/>` stanza.
     from='discovery.example.org'
     to='owner@example.org/phone'
     id='4'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='thing@example.org'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='thing@example.org'/>
 </iq>
 ```
 
@@ -354,7 +354,7 @@ Thing. The following example illustrates a response where a Thing behind a Conce
     from='discovery.example.org'
     to='owner@example.org/phone'
     id='4'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -380,7 +380,7 @@ it that it has been claimed and what the bare JID of owner is. After receiving t
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='5'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='owner@example.org'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='owner@example.org'/>
 </iq>
 ```
 
@@ -391,7 +391,7 @@ If the Thing was claimed as a private Thing, this is shown using the `public` at
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='5'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='owner@example.org' public='false'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='owner@example.org' public='false'/>
 </iq>
 ```
 
@@ -405,7 +405,7 @@ If the Thing resides behind a concentrator, the request must contain those of th
     from='discovery.example.org'
     to='rack@example.org/plcs'
     id='5'>
-   <claimed xmlns='urn:ieee:iot:disco:1.0' jid='owner@example.org' id='plc1' src='MeteringTopology'/>
+   <claimed xmlns='urn:nf:iot:disco:1.0' jid='owner@example.org' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -452,7 +452,7 @@ the Thing from the Registry, to avoid that the Thing appears in future searches.
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='6'>
-   <remove xmlns='urn:ieee:iot:disco:1.0' jid='thing@example.org'/>
+   <remove xmlns='urn:nf:iot:disco:1.0' jid='thing@example.org'/>
 </iq>
 ```
 
@@ -463,7 +463,7 @@ If the Thing resides behind a concentrator, the request must contain those of th
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='6'>
-   <remove xmlns='urn:ieee:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
+   <remove xmlns='urn:nf:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -498,7 +498,7 @@ stop updating the Registry with updated meta data.
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='7'>
-   <removed xmlns='urn:ieee:iot:disco:1.0'/>
+   <removed xmlns='urn:nf:iot:disco:1.0'/>
 </iq>
 
 <iq type='result'
@@ -514,7 +514,7 @@ If the Thing lies behind a concentrator, the removal request must include the ap
     from='discovery.example.org'
     to='rack@example.org/plcs'
     id='7'>
-   <removed xmlns='urn:ieee:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
+   <removed xmlns='urn:nf:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -548,7 +548,7 @@ To update meta data about itself, a Thing simply sends a request to the Thing Re
     from='thing@example.org/resource'
     to='discovery.example.org'
     id='8'>
-   <update xmlns='urn:ieee:iot:disco:1.0'>
+   <update xmlns='urn:nf:iot:disco:1.0'>
        <str name='CLASS' value='PLC'/>
        <num name='LON' value='-71.519722'/>
        <num name='LAT' value='-33.008055'/>
@@ -563,7 +563,7 @@ If the Thing resides behind a concentrator, the request must contain those of th
     from='rack@example.org/plcs'
     to='discovery.example.org'
     id='8'>
-   <update xmlns='urn:ieee:iot:disco:1.0' id='plc1' src='MeteringTopology'>
+   <update xmlns='urn:nf:iot:disco:1.0' id='plc1' src='MeteringTopology'>
        <str name='CLASS' value='PLC'/>
        <num name='LON' value='-71.519722'/>
        <num name='LAT' value='-33.008055'/>
@@ -604,7 +604,7 @@ to be re-claimed.
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='8'>
-   <disowned xmlns='urn:ieee:iot:disco:1.0'/>
+   <disowned xmlns='urn:nf:iot:disco:1.0'/>
 </iq>
 ```
 
@@ -621,7 +621,7 @@ An owner of a thing can also update the meta-data of a thing it has claimed. To 
     from='owner@example.org/1234'
     to='discovery.example.org'
     id='8'>
-   <update xmlns='urn:ieee:iot:disco:1.0' jid='thing@example.org'>
+   <update xmlns='urn:nf:iot:disco:1.0' jid='thing@example.org'>
        <str name='ROOM' value='...'/>
        <str name='APT' value='...'/>
        <str name='BLD' value='...'/>
@@ -643,7 +643,7 @@ as follows:
     from='owner@example.org/1234'
     to='discovery.example.org'
     id='8'>
-   <update xmlns='urn:ieee:iot:disco:1.0' jid='rack@example.org' id='plc1' src='MeteringTopology'>
+   <update xmlns='urn:nf:iot:disco:1.0' jid='rack@example.org' id='plc1' src='MeteringTopology'>
        <str name='ROOM' value='...'/>
        <str name='APT' value='...'/>
        <str name='BLD' value='...'/>
@@ -693,7 +693,7 @@ an un-registration request to the registry as follows.
     from='thing@example.org/resource'
     to='discovery.example.org'
     id='10'>
-   <unregister xmlns='urn:ieee:iot:disco:1.0'/>
+   <unregister xmlns='urn:nf:iot:disco:1.0'/>
 </iq>
 ```
 
@@ -704,7 +704,7 @@ If the Thing resides behind a concentrator, the request must contain those of th
     from='rack@example.org/plcs'
     to='discovery.example.org'
     id='10'>
-   <unregister xmlns='urn:ieee:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
+   <unregister xmlns='urn:nf:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -726,7 +726,7 @@ The owner of a Thing can disown the Thing, returning it to a state without owner
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='11'>
-   <disown xmlns='urn:ieee:iot:disco:1.0' jid='thing@example.org'/>
+   <disown xmlns='urn:nf:iot:disco:1.0' jid='thing@example.org'/>
 </iq>
 ```
 
@@ -737,7 +737,7 @@ If the Thing resides behind a concentrator, the request must contain those of th
     from='owner@example.org/phone'
     to='discovery.example.org'
     id='11'>
-   <disown xmlns='urn:ieee:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
+   <disown xmlns='urn:nf:iot:disco:1.0' jid='rack@example.org/plcs' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -776,7 +776,7 @@ It does this, so the Thing can remove the friendship to the owner and perform a 
     from='discovery.example.org'
     to='thing@example.org/resource'
     id='12'>
-   <disowned xmlns='urn:ieee:iot:disco:1.0'/>
+   <disowned xmlns='urn:nf:iot:disco:1.0'/>
 </iq>
 ```
 
@@ -787,7 +787,7 @@ If the Thing lies behind a concentrator, the disowned request would look as foll
     from='discovery.example.org'
     to='rack@example.org/plcs'
     id='12'>
-   <disowned xmlns='urn:ieee:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
+   <disowned xmlns='urn:nf:iot:disco:1.0' id='plc1' src='MeteringTopology'/>
 </iq>
 ```
 
@@ -861,7 +861,7 @@ degrees south and between longitude 70 and 72 west.
     from='curious@example.org/client'
     to='discovery.example.org'
     id='9'>
-   <search xmlns='urn:ieee:iot:disco:1.0' offset='0' maxCount='20'>
+   <search xmlns='urn:nf:iot:disco:1.0' offset='0' maxCount='20'>
        <strEq name='MAN' value='www.example.org'/>
        <strEq name='MODEL' value='Device'/>
        <strMask name='SN' value='9873*' wildcard='*'/>
@@ -887,7 +887,7 @@ The registry returns any things found in a response similar to the following:
     from='discovery.example.org'
     to='curious@example.org/client'
     id='9'>
-   <found xmlns='urn:ieee:iot:disco:1.0' more='false'>
+   <found xmlns='urn:nf:iot:disco:1.0' more='false'>
        <thing jid='thing@example.org'>
           <str name='SN' value='98734238472634'/>
           <str name='MAN' value='www.example.org'/>
@@ -909,7 +909,7 @@ If a Thing resides behind a concentrator, the response must contain those of the
     from='discovery.example.org'
     to='curious@example.org/client'
     id='9'>
-   <found xmlns='urn:ieee:iot:disco:1.0' more='false'>
+   <found xmlns='urn:nf:iot:disco:1.0' more='false'>
        <thing jid='rack@example.org' id='plc1' src='MeteringTopology'>
           <str name='SN' value='98734238472634'/>
           <str name='MAN' value='www.example.org'/>

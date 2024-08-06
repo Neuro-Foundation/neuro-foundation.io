@@ -1,12 +1,11 @@
 Sensor Data
 ==================
 
-This document outlines the XML representation of sensor data, as defined by the IEEE XMPP IoT Working Group. The XML representation is modelled using
-an annotated XML Schema:
+This document outlines the XML representation of sensor data. The XML representation is modelled using an annotated XML Schema:
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:ieee:iot:sd:1.0                      |
+| Namespace:  | urn:nf:iot:sd:1.0                        |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Motivation and design goal
@@ -24,7 +23,7 @@ Human-to-Machine (H2M) interfaces automatically.
 Conceptual model
 ------------------------
 
-The XML representation of Sensor Data used by the IEEE XMPP IoT interfaces is based on a three or four level abstraction:
+The XML representation of Sensor Data used by the Neuro-Foundation IoT interfaces is based on a three or four level abstraction:
 
 ```uml:Conceptual model
 @startuml
@@ -262,7 +261,7 @@ Legacy
 The following data model is based on work done in the [XMPP Standards Foundation (XSF)](https://xmpp.org/about/xmpp-standards-foundation.html),
 [XEP-0323: Internet of Things - Sensor Data](https://xmpp.org/extensions/xep-0323.html). Following is a list of notable differences:
 
-* An IEEE namespace is used.
+* A Neuro-Foundation namespace is used.
 * Names of elements and attributes have been shortened.
 * A separation of XML representation and communication pattern has been done.
 * The schema is now annotated.
@@ -282,7 +281,7 @@ Examples
 A simple example containing sensor data from a temperature sensor.
 
 ```xml
-<ts v="2017-09-22T15:22:33Z" xmlns="urn:ieee:iot:sd:1.0">
+<ts v="2017-09-22T15:22:33Z" xmlns="urn:nf:iot:sd:1.0">
   <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
   <s n="SN" v="12345678" i="true" ar="true"/>
 </ts>
@@ -291,7 +290,7 @@ A simple example containing sensor data from a temperature sensor.
 If this temperature sensor would be a node inside a concentrator, the same data would be represented as:
 
 ```xml
-<nd id="Node1" xmlns="urn:ieee:iot:sd:1.0">
+<nd id="Node1" xmlns="urn:nf:iot:sd:1.0">
   <ts v="2017-09-22T15:22:33Z">
     <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
     <s n="SN" v="12345678" i="true" ar="true"/>

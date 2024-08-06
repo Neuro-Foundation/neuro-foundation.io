@@ -10,7 +10,7 @@ aspects in a smart city, such as provisioning for instance.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:leg:sc:1.0                                  |
+| Namespace:  | urn:nf:iot:leg:sc:1.0                                  |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
 
 
@@ -1118,21 +1118,21 @@ interested parties can download it, and verify that the signatures from the manu
 trust the validity and integrity of the report, as long as signatures are valid.
 
 ```xml
-<contract xmlns="urn:ieee:iot:leg:sc:1.0"
+<contract xmlns="urn:nf:iot:leg:sc:1.0"
           archiveOpt="P1Y"
           archiveReq="P2Y"
           canActAsTemplate="false"
           duration="P5Y"
           id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
           visibility="Public">
-  <nd id="Device" xmlns="urn:ieee:iot:sd:1.0">
+  <nd id="Device" xmlns="urn:nf:iot:sd:1.0">
     <ts v="2019-07-19T10:19:23Z">
       <s n="Overall Rating" v="B" m="true"/>
       <q n="Certificate" v="100" u="%" m="true"/>
       <q n="Protocol Support" v="95" u="%" m="true"/>
       <q n="Key Exchange" v="70" u="%" m="true"/>
       <q n="Cipher Strength" v="90" u="%"/>
-      <s n="X.509, Subject" v="*.ieee.org" s="true"/>
+      <s n="X.509, Subject" v="*.neuro-foundation.org" s="true"/>
       <!-- More X.509 fields -->
       <b n="SSL 2" v="false" s="true"/>
       <b n="SSL 3" v="false" s="true"/>

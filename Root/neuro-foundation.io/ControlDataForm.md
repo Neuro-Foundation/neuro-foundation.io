@@ -45,7 +45,7 @@ Getting a control form from a spotlight:
 
 ```xml
 <iq type='get' from='client@example.org/1234' to='device@example.org/abcd' id='R0001'>
-  <getForm xmlns='urn:ieee:iot:ctr:1.0'/>
+  <getForm xmlns='urn:nf:iot:ctr:1.0'/>
 </iq>
 ```
 
@@ -81,7 +81,7 @@ Data form response:
         <xdv:range min='-180' max='180'/>
       </xdv:validate>
       <xdd:notSame/>
-      <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+      <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
     </field>
     <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
      <desc>Elevation angle of the spotlight.</desc>
@@ -90,7 +90,7 @@ Data form response:
        <xdv:range min='-90' max='90'/>
      </xdv:validate>
      <xdd:notSame/>
-     <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+     <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
     </field>
   </x>
 </iq>
@@ -101,7 +101,7 @@ Setting parameters using a data form. In this case, note that only the field val
 
 ```xml
 <iq type='set' from='client@example.org/1234' to='device@example.org/abcd' id='R0002'>
-  <set xmlns='urn:ieee:iot:ctr:1.0'>
+  <set xmlns='urn:nf:iot:ctr:1.0'>
     <x type='submit' xmlns='jabber:x:data'>
       <field var='xdd session' type='hidden'>
         <value>83CAA4BC-6D3A-40E6-90DC-5C3CAA030AE1</value>
@@ -124,7 +124,7 @@ Example response:
 
 ```xml
 <iq type='result' from='device@example.org/abcd' to='client@example.org/1234' id='R0002'>
-  <resp xmlns='urn:ieee:iot:ctr:1.0'>
+  <resp xmlns='urn:nf:iot:ctr:1.0'>
     <p n="MainSwitch"/>
     <p n="HorizontalAngle"/>
     <p n="ElevationAngle"/>

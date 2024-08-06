@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='UTF-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:ieee:iot:leg:id:1.0'
-    xmlns='urn:ieee:iot:leg:id:1.0'
-    xmlns:e2='urn:ieee:iot:e2e:1.0'
+    targetNamespace='urn:nf:iot:leg:id:1.0'
+    xmlns='urn:nf:iot:leg:id:1.0'
+    xmlns:e2='urn:nf:iot:e2e:1.0'
     elementFormDefault='qualified'>
 
-	<xs:import namespace='urn:ieee:iot:e2e:1.0'/>
+	<xs:import namespace='urn:nf:iot:e2e:1.0'/>
 
 	<xs:element name='getPublicKey'>
 		<xs:annotation>
@@ -561,7 +561,7 @@
 			<xs:attribute name='url' type='xs:anyURI' use='required'>
 				<xs:annotation>
 					<xs:documentation>An URL to download the attachment.</xs:documentation>
-					<xs:documentation>Attachments must be protected using the IEEE1451.99.Sign WWW-authentication mechanism to make sure only authorized clients can access the attachment.</xs:documentation>
+					<xs:documentation>Attachments must be protected using the Neuro.Foundation.Sign WWW-authentication mechanism to make sure only authorized clients can access the attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

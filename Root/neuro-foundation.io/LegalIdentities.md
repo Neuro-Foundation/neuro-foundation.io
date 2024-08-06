@@ -7,7 +7,7 @@ decision support and provisioning.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:leg:id:1.0                                  |
+| Namespace:  | urn:nf:iot:leg:id:1.0                                  |
 | Schema:     | [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)       |
 
 
@@ -40,7 +40,7 @@ Example:
 
 ```xml
 <iq type='get' id='3' to='legal.example.org'>
-   <getPublicKey xmlns="urn:ieee:iot:leg:id:1.0"/>
+   <getPublicKey xmlns="urn:nf:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -51,8 +51,8 @@ Example:
 
 ```xml
 <iq id='3' type='result' to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
-   <publicKey xmlns='urn:ieee:iot:leg:id:1.0'>
-      <ed448 pub='24XPfS5oQ2nljCLpJGHn9O9sSiJ0K5/yymfiHssXGizeV+TS9dLWxQHKXXRYHjKptWieSD+OZdeA' xmlns='urn:ieee:iot:e2e:1.0'/>
+   <publicKey xmlns='urn:nf:iot:leg:id:1.0'>
+      <ed448 pub='24XPfS5oQ2nljCLpJGHn9O9sSiJ0K5/yymfiHssXGizeV+TS9dLWxQHKXXRYHjKptWieSD+OZdeA' xmlns='urn:nf:iot:e2e:1.0'/>
    </publicKey>
 </iq>
 ```
@@ -146,10 +146,10 @@ Example:
 
 ```xml
 <iq type='set' id='4' to='legal.example.org'>
-   <apply xmlns="urn:ieee:iot:leg:id:1.0">
+   <apply xmlns="urn:nf:iot:leg:id:1.0">
       <identity>
          <clientPublicKey>
-            <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+            <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
          </clientPublicKey>
          <property name="FIRST" value="Jon"/>
          <property name="LAST" value="Doe"/>
@@ -208,9 +208,9 @@ Example:
 
 ```xml
 <iq id='4' type='result' to='client@example.org/eb91cd17167933bcdb6860fbf095a98d' from='legal.example.org'>
-   <identity id="24902199-6e17-46be-fc55-bae978c1fe10@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="24902199-6e17-46be-fc55-bae978c1fe10@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>
@@ -240,9 +240,9 @@ Example:
 
 ```xml
 <message to='client@example.org/8a7c35a7d545bfc83c6928f48e5fcb86' from='legal.example.org'>
-   <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>
@@ -278,7 +278,7 @@ Example:
 
 ```xml
 <iq type='get' id='5' to='legal.example.org'>
-   <getLegalIdentity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0"/>
+   <getLegalIdentity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -289,9 +289,9 @@ Example:
 
 ```xml
 <iq id='5' type='result' to='client@example.org/3179ba14cb1bbd5aa7d68003fc8aec48' from='legal.example.org'>
-   <identity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>
@@ -325,7 +325,7 @@ Example:
       data="UJCr/5nIuJdrijSdGpeQzW7XgPGKXXNVTwvN32zmW6aCeG2DttdeOGUbKx1..."
 	  id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org"
 	  s="urdAv/mtnKxG6I9WnStDNpAytiqW3/zN4KQefhFKBLV1tK9SC/JGd6QugxTC+f..."
-	  xmlns="urn:ieee:iot:leg:id:1.0"/>
+	  xmlns="urn:nf:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -343,9 +343,9 @@ Example:
 
 ```xml
 <iq id='5' type='result' to='client@example.org/3954d7dc9705417fcc09527bb4d98465' from='legal.example.org'>
-   <identity id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>
@@ -375,7 +375,7 @@ Example:
 
 ```xml
 <iq type='set' id='5' to='legal.example.org'>
-   <obsoleteLegalIdentity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0"/>
+   <obsoleteLegalIdentity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -392,9 +392,9 @@ Example:
 
 ```xml
 <iq id='5' type='result' to='client@example.org/8a7c35a7d545bfc83c6928f48e5fcb86' from='legal.example.org'>
-   <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>
@@ -425,7 +425,7 @@ Example:
 
 ```xml
 <iq type='set' id='5' to='legal.example.org'>
-   <compromisedLegalIdentity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0"/>
+   <compromisedLegalIdentity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -442,9 +442,9 @@ Example:
 
 ```xml
 <iq id='5' type='result' to='client@example.org/032e50a69ad719e1e347661394fb6a45' from='legal.example.org'>
-   <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:ieee:iot:leg:id:1.0">
+   <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nf:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:ieee:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="Jon"/>
       <property name="LAST" value="Doe"/>

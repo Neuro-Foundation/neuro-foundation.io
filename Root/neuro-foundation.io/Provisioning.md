@@ -1,16 +1,15 @@
 ﻿Provisioning
 ==================
 
-This document outlines the XML representation of the provisioning service provided to owners of devices, as defined by the IEEE XMPP IoT Working Group. 
-When new operations occur to devices, they ask the provisioning service for advice on what to do. If the provisioning service does not know, it responds
-with a negative by default, and then asks the corresponding owners what to do. The responses provided by the owners are used when evaluating future
-responses by the provisioning service. While waiting for the owner to respond to provisioning questions, the provisioning service denies
-all requests it cannot answer by default. 
-The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of the provisioning service provided to owners of devices. When new operations occur to devices, they 
+ask the provisioning service for advice on what to do. If the provisioning service does not know, it responds with a negative by default, and then 
+asks the corresponding owners what to do. The responses provided by the owners are used when evaluating future responses by the provisioning service. 
+While waiting for the owner to respond to provisioning questions, the provisioning service denies all requests it cannot answer by default. The XML 
+representation is modelled using an annotated XML Schema:
 
-| Provisioning                                                          ||
-| ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:prov:o:1.0                                  |
+| Provisioning                                                        ||
+| ------------|--------------------------------------------------------|
+| Namespace:  | urn:nf:iot:prov:o:1.0                                  |
 | Schema:     | [ProvisioningOwner.xsd](Schemas/ProvisioningOwner.xsd) |
 
 See also:

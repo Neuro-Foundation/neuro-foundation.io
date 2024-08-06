@@ -1,18 +1,18 @@
 ﻿Decision Support
 ==================
 
-This document outlines the XML representation of the decision support service provided to devices, as defined by the IEEE XMPP IoT Working Group. 
-When new operations occur, and the device needs to make new security decisions, it can ask the provisioning server for help with making the decision.
-The provisioning server maintains information about who owns the device, and what the owner wants with regards to the question the device poses.
-If not, the provisioning server automatically denies the request, but informs the owner that a new situation has occurred, to which the owner can respond.
-The interface to the owner is described in [provisioning for owners](Provisioning.md). When an entity receives a response from the provisioning server,
-it caches the response locally, so that if the same operation occurs again, it knows the answer. The provisioning server can inform entities to clear their
-cache when new rules exist for them, effectively making sure the entities adapt to the new rules by asking the relevant decision support questions again.
-The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of the decision support service provided to devices. When new operations occur, and the device needs 
+to make new security decisions, it can ask the provisioning server for help with making the decision. The provisioning server maintains information 
+about who owns the device, and what the owner wants with regards to the question the device poses. If not, the provisioning server automatically 
+denies the request, but informs the owner that a new situation has occurred, to which the owner can respond. The interface to the owner is described 
+in [provisioning for owners](Provisioning.md). When an entity receives a response from the provisioning server, it caches the response locally, so 
+that if the same operation occurs again, it knows the answer. The provisioning server can inform entities to clear their cache when new rules exist 
+for them, effectively making sure the entities adapt to the new rules by asking the relevant decision support questions again. The XML representation 
+is modelled using an annotated XML Schema:
 
 | Decision Support                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:prov:d:1.0                                  |
+| Namespace:  | urn:nf:iot:prov:d:1.0                                    |
 | Schema:     | [ProvisioningDevice.xsd](Schemas/ProvisioningDevice.xsd) |
 
 

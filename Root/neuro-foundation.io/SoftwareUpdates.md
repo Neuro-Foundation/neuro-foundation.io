@@ -1,13 +1,11 @@
 Software Updates
 ==================
 
-This document outlines the XML representation of the software updates service, as defined by the IEEE XMPP IoT Working Group.
- 
-The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of the software updates service. The XML representation is modelled using an annotated XML Schema:
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:ieee:iot:swu:1.0                                     |
+| Namespace:  | urn:nf:iot:swu:1.0                                       |
 | Schema:     | [Discovery.xsd](Schemas/SoftwareUpdates.xsd)             |
 
 Motivation and design goal
@@ -56,7 +54,7 @@ Example:
              created='2019-07-11T14:23:31.479Z' 
              url='https://example.org/Packages/Software.package?s=GkFUpT+...?p=2019-08-06T17:35:26.667Z' 
              bytes='80459904' 
-             xmlns='urn:ieee:iot:swu:1.0'/>
+             xmlns='urn:nf:iot:swu:1.0'/>
 ```
 
 ### Downloading software packages
@@ -153,7 +151,7 @@ Example:
     from='client@example.org/resource'
     to='software.example.org'
     id='1'>
-   <getPackageInfo xmlns='urn:ieee:iot:swu:1.0' fileName='Software.package'/>
+   <getPackageInfo xmlns='urn:nf:iot:swu:1.0' fileName='Software.package'/>
 </iq>
 
 <iq type='result'
@@ -167,7 +165,7 @@ Example:
                 created='2019-07-11T14:23:31.479Z' 
                 url='https://example.org/Packages/Software.package?s=GkFUpT+...?p=2019-08-06T17:35:26.667Z' 
                 bytes='80459904' 
-                xmlns='urn:ieee:iot:swu:1.0'/>
+                xmlns='urn:nf:iot:swu:1.0'/>
 </iq>
 ```
 
@@ -183,14 +181,14 @@ elements, each one containing information about a software package available to 
     from='client@example.org/resource'
     to='software.example.org'
     id='2'>
-   <getPackageInfo xmlns='urn:ieee:iot:swu:1.0' fileName='Software.package'/>
+   <getPackageInfo xmlns='urn:nf:iot:swu:1.0' fileName='Software.package'/>
 </iq>
 
 <iq type='result'
     from='software.example.org'
     to='client@example.org/resource'
     id='2'>
-   <packages xmlns='urn:ieee:iot:swu:1.0'>
+   <packages xmlns='urn:nf:iot:swu:1.0'>
       <packageInfo fileName='Software.package' 
                    signature='GkFUpT+sCzDck5HcV6M8ueGz3B...' 
                    published='2019-08-06T17:35:26.667Z' 
@@ -218,7 +216,7 @@ generate error responses.
     from='client@example.org/resource'
     to='software.example.org'
     id='3'>
-   <subscribe xmlns='urn:ieee:iot:swu:1.0' fileName='Software.package'/>
+   <subscribe xmlns='urn:nf:iot:swu:1.0' fileName='Software.package'/>
 </iq>
 
 <iq type='result'
@@ -251,7 +249,7 @@ Example:
                 created='2019-07-11T14:23:31.479Z' 
                 url='https://example.org/Packages/Software.package?s=GkFUpT+...?p=2019-08-06T17:35:26.667Z' 
                 bytes='80459904' 
-                xmlns='urn:ieee:iot:swu:1.0'/>
+                xmlns='urn:nf:iot:swu:1.0'/>
    <delay xmlns='urn:xmpp:delay' from='example.org' stamp='2019-08-06T21:00:24.231'>Offline Storage</delay>
 </message> 
 ```
@@ -268,7 +266,7 @@ even if a matching subscription does not exist. If the filename is `*`, all subs
     from='client@example.org/resource'
     to='software.example.org'
     id='4'>
-   <unsubscribe xmlns='urn:ieee:iot:swu:1.0' fileName='Software.package'/>
+   <unsubscribe xmlns='urn:nf:iot:swu:1.0' fileName='Software.package'/>
 </iq>
 
 <iq type='result'
@@ -289,14 +287,14 @@ empty) of `<subscription/>` elements, each one containing a software package fil
     from='client@example.org/resource'
     to='software.example.org'
     id='5'>
-   <getSubscriptions xmlns='urn:ieee:iot:swu:1.0'/>
+   <getSubscriptions xmlns='urn:nf:iot:swu:1.0'/>
 </iq>
 
 <iq type='result'
     from='software.example.org'
     to='client@example.org/resource'
     id='5'>
-   <subscriptions xmlns='urn:ieee:iot:swu:1.0'>
+   <subscriptions xmlns='urn:nf:iot:swu:1.0'>
       <subscription>Software.package</subscription>
       ...
    </subscriptions>

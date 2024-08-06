@@ -25,7 +25,7 @@ communication patterns.
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:ieee:iot:sd:1.0                      |
+| Namespace:  | urn:nf:iot:sd:1.0                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Examples
@@ -72,9 +72,9 @@ PEP is fully described in [XEP-0163](https://xmpp.org/extensions/xep-0163.html).
 ```xml
 <iq from='client@example.org/1234' type='set' id='pub1'>
   <pubsub xmlns='http://jabber.org/protocol/pubsub'>
-    <publish node='urn:ieee:iot:sd:1.0'>
+    <publish node='urn:nf:iot:sd:1.0'>
       <item>
-        <resp xmlns="urn:ieee:iot:sd:1.0" id="00000001">
+        <resp xmlns="urn:nf:iot:sd:1.0" id="00000001">
           <ts v="2017-09-22T15:22:33Z">
             <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
             <s n="SN" v="12345678" i="true" ar="true"/>
@@ -95,7 +95,7 @@ A contact implicitly subscribes to sensor data if it does the following:
 
 1.  Supports [XEP-0030: Service Discovery](https://xmpp.org/extensions/xep-0030.html). (Most XMPP clients do.)
 2.  Supports [XEP-0115: Entity Capabilities](https://xmpp.org/extensions/xep-0115.html). (Most XMPP clients do.)
-3.  Publishes support for the feature `urn:ieee:iot:sd:1.0+notify`.
+3.  Publishes support for the feature `urn:nf:iot:sd:1.0+notify`.
 4.  Subscribes to the presence of the sensor.
 
 The Publish/Subscribe service managed by PEP, checks all contacts of the sensor for the sensor data feature, and forwards published data to them.
@@ -112,9 +112,9 @@ the subscriber to differentiate between multiple connections using the same acco
          type='normal'
          id='event1'>
   <event xmlns='http://jabber.org/protocol/pubsub#event'>
-    <items node='urn:ieee:iot:sd:1.0'>
+    <items node='urn:nf:iot:sd:1.0'>
       <item id='22e25a6a-ce75-251a-880b-a4ac42e4101b' publisher='device@example.org'>
-        <resp id="00000001" xmlns="urn:ieee:iot:sd:1.0">
+        <resp id="00000001" xmlns="urn:nf:iot:sd:1.0">
           <ts v="2017-09-22T15:22:33Z">
             <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
             <s n="SN" v="12345678" i="true" ar="true"/>

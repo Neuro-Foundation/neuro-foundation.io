@@ -1,13 +1,13 @@
 ﻿Concentrator ("Thing of Things")
 ==================================
 
-This document outlines the XML representation of interacting with concentrators and their underlying nodes, as defined by the IEEE XMPP IoT Working Group. 
-A concentrator "concentrates" a set of underlying physical or virtual devices, called *nodes*, into one unit using one XMPP address (network identity).
-The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of interacting with concentrators and their underlying nodes. A concentrator "concentrates" a set 
+of underlying physical or virtual devices, called *nodes*, into one unit using one XMPP address (network identity). The XML representation is 
+modelled using an annotated XML Schema:
 
 | Concentrator                                              ||
 | ------------|----------------------------------------------|
-| Namespace:  | urn:ieee:iot:concentrator:1.0                |
+| Namespace:  | urn:nf:iot:concentrator:1.0                  |
 | Schema:     | [Concentrator.xsd](Schemas/Concentrator.xsd) |
 
 

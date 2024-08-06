@@ -1,12 +1,11 @@
 Control Parameters
 ========================
 
-This document outlines the XML representation of control parameters, as defined by the IEEE XMPP IoT Working Group. The XML representation is modelled using
-an annotated XML Schema:
+This document outlines the XML representation of control parameters. The XML representation is modelled using an annotated XML Schema:
 
 | Control                                         ||
 | ------------|------------------------------------|
-| Namespace:  | urn:ieee:iot:ctr:1.0               |
+| Namespace:  | urn:nf:iot:ctr:1.0                 |
 | Schema:     | [Control.xsd](Schemas/Control.xsd) |
 
 Motivation and design goal
@@ -162,7 +161,7 @@ Legacy
 The following data model is based on work done in the [XMPP Standards Foundation (XSF)](https://xmpp.org/about/xmpp-standards-foundation.html),
 [XEP-0325: Internet of Things - Control](https://xmpp.org/extensions/xep-0325.html). Following is a list of notable differences:
 
-* An IEEE namespace is used.
+* A Neuro-Foundation namespace is used.
 * Names of elements and attributes have been shortened.
 * A separation of XML representation and communication pattern has been done.
 * The schema is now annotated.
@@ -210,7 +209,7 @@ Same set of parameters, represented in a Data Form, using the validation, layout
       <xdv:range min='-180' max='180'/>
     </xdv:validate>
     <xdd:notSame/>
-    <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+    <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
   </field>
   <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
    <desc>Elevation angle of the spotlight.</desc>
@@ -219,7 +218,7 @@ Same set of parameters, represented in a Data Form, using the validation, layout
      <xdv:range min='-90' max='90'/>
    </xdv:validate>
    <xdd:notSame/>
-   <pGroup xmlns='urn:ieee:iot:ctr:1.0' name='direction'/>
+   <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
   </field>
 </x>
 ```
