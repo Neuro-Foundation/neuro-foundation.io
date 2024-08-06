@@ -16,11 +16,11 @@ is connected to main Neuron(R) network, you can install the package using the fo
 
 | Package information                                                                                                              ||
 |:-----------------|:---------------------------------------------------------------------------------------------------------------|
-| Package          | `TAG.neuro-foundation.io.package`                                                                              |
+| Package          | `NeuroFoundation.Io.package`                                                                                   |
 | Installation key | `qEGFGzBySpZiPHlYzHR8rZ0Zvf4V6Wkaf0l/tELGJaP7L0iDFBNUoZvcJm4RCA30pUZhacnAKMIAab809caa002e579f3496fe8aa8e8007b` |
 
 To install package on a TAG Neuron(R), execute the following command in a chat admin interface:
 
 ```
-install nobackup TAG.neuro-foundation.io.package qEGFGzBySpZiPHlYzHR8rZ0Zvf4V6Wkaf0l/tELGJaP7L0iDFBNUoZvcJm4RCA30pUZhacnAKMIAab809caa002e579f3496fe8aa8e8007b
+install nobackup NeuroFoundation.Io.package qEGFGzBySpZiPHlYzHR8rZ0Zvf4V6Wkaf0l/tELGJaP7L0iDFBNUoZvcJm4RCA30pUZhacnAKMIAab809caa002e579f3496fe8aa8e8007b
 ```
