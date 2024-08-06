@@ -2,9 +2,58 @@
 <Module xmlns="http://waher.se/Schema/ModuleManifest.xsd">
 	<Folder name="Root">
 		<Folder name="neuro-foundation.io">
+			<Content fileName="Authentication.md"/>
+			<Content fileName="Authorization.md"/>
+			<Content fileName="Binding.md"/>
+			<Content fileName="ClockSynchronization.md"/>
+			<Content fileName="Concentrator.md"/>
+			<Content fileName="ControlDataForm.md"/>
+			<Content fileName="ControlParameters.md"/>
+			<Content fileName="ControlSimpleActions.md"/>
+			<Content fileName="DecisionSupport.md"/>
+			<Content fileName="Discovery.md"/>
+			<Content fileName="E2E.md"/>
+			<Content fileName="Federation.md"/>
+			<Content fileName="Identities.md"/>
 			<Content fileName="Index.md"/>
+			<Content fileName="LegalIdentities.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="NeuroFoundationStyles.cssx"/>
+			<Content fileName="P2P.md"/>
+			<Content fileName="Provisioning.md"/>
+			<Content fileName="SensorData.md"/>
+			<Content fileName="SensorDataEventSubscription.md"/>
+			<Content fileName="SensorDataPublishSubscribe.md"/>
+			<Content fileName="SensorDataRequestResponse.md"/>
+			<Content fileName="SmartContracts.md"/>
+			<Content fileName="SoftwareUpdates.md"/>
+			<Content fileName="Tokens.md"/>
+			<Content fileName="TransportEncryption.md"/>
+			<Folder name="Examples">
+				<Content fileName="ControlParametersDataForm.xml"/>
+				<Content fileName="ControlParametersSimple.xml"/>
+				<Content fileName="LegalIdentity.xml"/>
+				<Content fileName="SensorData1.xml"/>
+				<Content fileName="SimpleSensorDataRequest.xml"/>
+				<Content fileName="SimpleSensorDataResponse.xml"/>
+				<Content fileName="TlsSecurity.xml"/>
+			</Folder>
+			<Folder name="Schemas">
+				<Content fileName="Concentrator.xsd"/>
+				<Content fileName="Control.xsd"/>
+				<Content fileName="Discovery.xsd"/>
+				<Content fileName="E2E.xsd"/>
+				<Content fileName="EventSubscription.xsd"/>
+				<Content fileName="LegalIdentities.xsd"/>
+				<Content fileName="P2P.xsd"/>
+				<Content fileName="ProvisioningDevice.xsd"/>
+				<Content fileName="ProvisioningOwner.xsd"/>
+				<Content fileName="ProvisioningTokens.xsd"/>
+				<Content fileName="SensorData.xsd"/>
+				<Content fileName="SmartContracts.xsd"/>
+				<Content fileName="SoftwareUpdates.xsd"/>
+				<Content fileName="Synchronization.xsd"/>
+			</Folder>
 		</Folder>
 	</Folder>
 </Module>
