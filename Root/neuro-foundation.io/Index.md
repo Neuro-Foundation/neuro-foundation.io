@@ -10,8 +10,8 @@ CSS: NeuroFoundationStyles.cssx
 Neuro-Foundation Harmonized IoT Interfaces
 =============================================
 
-This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies. All information in this repository
-is (c) Neuro-Foundation and can be used in accordance with the provided [license agreement](Copyright.md).
+This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies. For usage of the contents on this site,
+see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md).
 
 Representation
 -----------------
@@ -50,6 +50,7 @@ Data Protection, Security and Privacy
 
 Operation
 -------------------
+
 * [Concentrators ("Things of Things")](Concentrator.md)
 * [Discovery](Discovery.md)
 * [Clock & Event Synchronization](ClockSynchronization.md)
@@ -58,6 +59,7 @@ Operation
 
 Marketplace
 ------------------
+
 * [Legal Identities](LegalIdentities.md)
 * [Smart Contracts](/SmartContracts.md)
 * Automatic provisioning using smart contracts
