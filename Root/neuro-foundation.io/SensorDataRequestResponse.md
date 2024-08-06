@@ -15,7 +15,7 @@ document outlines the XML representation of sensor data. The XML representation 
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:nf:iot:sd:1.0                        |
+| Namespace:  | `urn:nf:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Motivation and design goal

@@ -26,7 +26,7 @@ XMPP supports three Publish/Subscribe communication patterns:
 privacy. Only use the Publish/Subscribe pattern from devices that actually have many subscribers, and in cases where data does not need to be tailored for
 individual receivers, such as is the case if using provisioning on a field level. The Publish/Subscribe pattern also leaves little room for subscribers to tailor
 under what circumstances they want to be updated. Note also that the data is processed and persisted on the broker (to some extent). End-to-end encryption is
-not supported. If privacy, flexibility or customization are concerns, the [Request/Response](SensoDataRequestResponse.md) or
+not supported. If privacy, flexibility or customization are concerns, the [Request/Response](SensorDataRequestResponse.md) or
 [Event Subscription](SensorDataEventSubscription.md) patterns might be more suitable. They also place less load on the broker if there are few subscribers.
 
 In all three cases, [sensor data](SensorData.md) is represented using the same XML representation as used in the other sensor data related 
@@ -34,7 +34,7 @@ communication patterns.
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:nf:iot:sd:1.0                        |
+| Namespace:  | `urn:nf:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Examples

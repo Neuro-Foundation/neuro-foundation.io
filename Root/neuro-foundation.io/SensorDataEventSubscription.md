@@ -16,7 +16,7 @@ representation of sensor data. The XML representation is modelled using an annot
 
 | Event subscription                                                  ||
 | ------------|--------------------------------------------------------|
-| Namespace:  | urn:nf:iot:events:1.0                                  |
+| Namespace:  | `urn:nf:iot:events:1.0`                                |
 | Schema:     | [EventSubscription.xsd](Schemas/EventSubscription.xsd) |
 
 It also relies on the [Sensor Data Request/Response pattern](SensorDataRequestResponse.md) and the [Sensor Data Representation](SensorData.md).

@@ -14,7 +14,7 @@ This document outlines the XML representation of clock and event synchronization
 
 | Clock Synchronization                                           ||
 | ------------|----------------------------------------------------|
-| Namespace:  | urn:nf:iot:synchronization:1.0                     |
+| Namespace:  | `urn:nf:iot:synchronization:1.0`                   |
 | Schema:     | [Synchronization.xsd](Schemas/Synchronization.xsd) |
 
 

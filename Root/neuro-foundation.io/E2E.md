@@ -14,7 +14,7 @@ This document outlines the XML representation of end-to-end encryption. The XML 
 
 | End-to-End encryption                   ||
 | ------------|----------------------------|
-| Namespace:  | urn:nf:iot:e2e:1.0         |
+| Namespace:  | `urn:nf:iot:e2e:1.0`       |
 | Schema:     | [E2E.xsd](Schemas/E2E.xsd) |
 
 

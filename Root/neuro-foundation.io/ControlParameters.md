@@ -14,7 +14,7 @@ This document outlines the XML representation of control parameters. The XML rep
 
 | Control                                         ||
 | ------------|------------------------------------|
-| Namespace:  | urn:nf:iot:ctr:1.0                 |
+| Namespace:  | `urn:nf:iot:ctr:1.0`               |
 | Schema:     | [Control.xsd](Schemas/Control.xsd) |
 
 Motivation and design goal

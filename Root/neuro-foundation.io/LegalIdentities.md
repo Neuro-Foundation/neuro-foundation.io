@@ -16,7 +16,7 @@ decision support and provisioning.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:nf:iot:leg:id:1.0                                  |
+| Namespace:  | `urn:nf:iot:leg:id:1.0`                                  |
 | Schema:     | [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)       |
 
 
@@ -114,9 +114,9 @@ concatenations of multiple parameters:
 
 | Property            | Description                                             |
 |:--------------------|:--------------------------------------------------------|
-| `FULLNAME`          | Full name  (FIRST [ " " MIDDLE] LAST)                   |
-| `FULLADDR`          | Full address (ADDR [ ", " ADDR2])                       |
-| `FULLORGADDR`       | Full organization address (ORGADDR [| ", " | ORGADDR2]) |
+| `FULLNAME`          | Full name  (`FIRST [ " " MIDDLE] LAST`)                 |
+| `FULLADDR`          | Full address (`ADDR [ ", " ADDR2]`)                     |
+| `FULLORGADDR`       | Full organization address (`ORGADDR [ ", " ORGADDR2]`)  |
 | `SIGNATURE`         | Digital signature reference.                            |
 | `SIGNATUREDATE`     | Date of digital signature.                              |
 | `SIGNATURETIME`     | Time of digital signature.                              |

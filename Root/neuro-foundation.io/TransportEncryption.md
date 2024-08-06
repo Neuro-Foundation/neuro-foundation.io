@@ -22,4 +22,4 @@ certificates, and clients using appropriate SASL mechanisms.
 [XEP-0220](https://xmpp.org/extensions/xep-0220.html).
 
 Note however, that transport encryption only protects against eavesdropping. Encrypted stanzas are decrypted at each node. To make sure the contents
-of stanzas are not compromised at the nodes, use [End-to-End encryption](E2eEncryption.md).
+of stanzas are not compromised at the nodes, use [End-to-End encryption](E2E.md).

@@ -16,7 +16,7 @@ modelled using an annotated XML Schema:
 
 | Concentrator                                              ||
 | ------------|----------------------------------------------|
-| Namespace:  | urn:nf:iot:concentrator:1.0                  |
+| Namespace:  | `urn:nf:iot:concentrator:1.0`                |
 | Schema:     | [Concentrator.xsd](Schemas/Concentrator.xsd) |
 
 

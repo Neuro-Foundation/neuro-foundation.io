@@ -18,7 +18,7 @@ representation is modelled using an annotated XML Schema:
 
 | Provisioning                                                        ||
 | ------------|--------------------------------------------------------|
-| Namespace:  | urn:nf:iot:prov:o:1.0                                  |
+| Namespace:  | `urn:nf:iot:prov:o:1.0`                                |
 | Schema:     | [ProvisioningOwner.xsd](Schemas/ProvisioningOwner.xsd) |
 
 See also:

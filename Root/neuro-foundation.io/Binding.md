@@ -23,4 +23,4 @@ There are also experimental ways to bind to the XMPP network:
 
 * [XEP-0322](https://xmpp.org/extensions/xep-0322.html) provides a way to bind to the XMPP network using efficiently compressed XML using EXI.
 
-* Using the [IoT Broker](https://waher.se/Broker.md), you can bind to the network using UDP and DTLS.
+* Using the [TAG Neuron(R)](https://lab.tagroot.io/Documentation/Index.md), you can bind to the network using UDP and DTLS.

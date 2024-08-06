@@ -14,7 +14,7 @@ This document outlines the XML representation of sensor data. The XML representa
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:nf:iot:sd:1.0                        |
+| Namespace:  | `urn:nf:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Motivation and design goal
@@ -249,7 +249,7 @@ In the following examples, assume `lns="NS"`:
 
 | ID    | `Stat`      |
 |-------|-------------|
-| 1     | Avg(%0%)    |
+| 1     | Avg(\%0\%)  |
 
 **Note**: Providing localized strings, ordered by namespace and language, would be the only components required to be updated in software supporting
 the architecture described in this document. But such strings constitute data, and not code, so no actual software updates are required. Furthermore,

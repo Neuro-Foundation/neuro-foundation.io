@@ -19,7 +19,7 @@ aspects in a smart city, such as provisioning for instance.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:nf:iot:leg:sc:1.0                                    |
+| Namespace:  | `urn:nf:iot:leg:sc:1.0`                                  |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
 
 

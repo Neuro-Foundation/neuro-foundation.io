@@ -22,7 +22,7 @@ The XML representation is modelled using an annotated XML Schema:
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:nf:iot:disco:1.0                                     |
+| Namespace:  | `urn:nf:iot:disco:1.0`                                   |
 | Schema:     | [Discovery.xsd](Schemas/Discovery.xsd)                   |
 
 Motivation and design goal
