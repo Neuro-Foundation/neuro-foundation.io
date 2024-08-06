@@ -45,12 +45,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neur
 		Root\neuro-foundation.io\TransportEncryption.md = Root\neuro-foundation.io\TransportEncryption.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schemas", "Schemas", "{13CDB96E-BF6F-429A-AF5C-3ED20C23D256}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Schemas\Concentrator.xsd = Root\neuro-foundation.io\Schemas\Concentrator.xsd
+		Root\neuro-foundation.io\Schemas\Control.xsd = Root\neuro-foundation.io\Schemas\Control.xsd
+		Root\neuro-foundation.io\Schemas\Discovery.xsd = Root\neuro-foundation.io\Schemas\Discovery.xsd
+		Root\neuro-foundation.io\Schemas\E2E.xsd = Root\neuro-foundation.io\Schemas\E2E.xsd
+		Root\neuro-foundation.io\Schemas\EventSubscription.xsd = Root\neuro-foundation.io\Schemas\EventSubscription.xsd
+		Root\neuro-foundation.io\Schemas\LegalIdentities.xsd = Root\neuro-foundation.io\Schemas\LegalIdentities.xsd
+		Root\neuro-foundation.io\Schemas\P2P.xsd = Root\neuro-foundation.io\Schemas\P2P.xsd
+		Root\neuro-foundation.io\Schemas\ProvisioningDevice.xsd = Root\neuro-foundation.io\Schemas\ProvisioningDevice.xsd
+		Root\neuro-foundation.io\Schemas\ProvisioningOwner.xsd = Root\neuro-foundation.io\Schemas\ProvisioningOwner.xsd
+		Root\neuro-foundation.io\Schemas\ProvisioningTokens.xsd = Root\neuro-foundation.io\Schemas\ProvisioningTokens.xsd
+		Root\neuro-foundation.io\Schemas\SensorData.xsd = Root\neuro-foundation.io\Schemas\SensorData.xsd
+		Root\neuro-foundation.io\Schemas\SmartContracts.xsd = Root\neuro-foundation.io\Schemas\SmartContracts.xsd
+		Root\neuro-foundation.io\Schemas\SoftwareUpdates.xsd = Root\neuro-foundation.io\Schemas\SoftwareUpdates.xsd
+		Root\neuro-foundation.io\Schemas\Synchronization.xsd = Root\neuro-foundation.io\Schemas\Synchronization.xsd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E9287ECC-30EC-4819-AAAE-F28FC7E8FC56}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Examples\ControlParametersDataForm.xml = Root\neuro-foundation.io\Examples\ControlParametersDataForm.xml
+		Root\neuro-foundation.io\Examples\ControlParametersSimple.xml = Root\neuro-foundation.io\Examples\ControlParametersSimple.xml
+		Root\neuro-foundation.io\Examples\LegalIdentity.xml = Root\neuro-foundation.io\Examples\LegalIdentity.xml
+		Root\neuro-foundation.io\Examples\SensorData1.xml = Root\neuro-foundation.io\Examples\SensorData1.xml
+		Root\neuro-foundation.io\Examples\SimpleSensorDataRequest.xml = Root\neuro-foundation.io\Examples\SimpleSensorDataRequest.xml
+		Root\neuro-foundation.io\Examples\SimpleSensorDataResponse.xml = Root\neuro-foundation.io\Examples\SimpleSensorDataResponse.xml
+		Root\neuro-foundation.io\Examples\TlsSecurity.xml = Root\neuro-foundation.io\Examples\TlsSecurity.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FE17EE9B-9567-430E-8317-6B411D781F78} = {B864C64F-AB7C-49C3-A403-DDE2D96D6ED3}
+		{13CDB96E-BF6F-429A-AF5C-3ED20C23D256} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{E9287ECC-30EC-4819-AAAE-F28FC7E8FC56} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}
