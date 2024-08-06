@@ -7,7 +7,8 @@ This repository contains the content of [neuro-foundation.io](https://neuro-foun
 ## Installable Package
 
 The contents of this repository has been made into a package that can be downloaded and installed on any 
-[TAG Neuron](https://lab.tagroot.io/Documentation/Index.md). The repository has been created using the
+[TAG Neuron](https://lab.tagroot.io/Documentation/Index.md). THe [Markdown engine](/Markdown.md) on the Neuron(R) permits embedding of
+graphs into Markdown files, while makes presentation of communication interfaces easier to manage. The repository has been created using the
 [TemplateContentOnlyPackage](https://github.com/Trust-Anchor-Group/TemplateContentOnlyPackage) template. This template contains instructions
 on how to work with and edit the contents of the solution, as well as test and debug it, generate package files, and publish it. If your Neuron(R) 
 is connected to main Neuron(R) network, you can install the package using the following information:
