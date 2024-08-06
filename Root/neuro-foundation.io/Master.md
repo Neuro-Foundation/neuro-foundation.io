@@ -1,7 +1,6 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
-Javascript: /Events.js
 Icon: /favicon.ico
 
 <header id="header">

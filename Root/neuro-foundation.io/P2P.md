@@ -1,3 +1,12 @@
+Title: Peer-to-Peer Communication
+Description: Peer-to-Peer Communication page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
 Peer-to-Peer communication
 ===============================
 

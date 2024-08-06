@@ -10,7 +10,8 @@ CSS: NeuroFoundationStyles.cssx
 Neuro-Foundation Harmonized IoT Interfaces
 =============================================
 
-This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies.
+This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies. All information in this repository
+is (c) Neuro-Foundation and can be used in accordance with the provided [license agreement](Copyright.md).
 
 Representation
 -----------------

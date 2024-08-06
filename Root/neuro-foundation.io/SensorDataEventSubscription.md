@@ -1,3 +1,12 @@
+Title: Event Subscription
+Description: Sensor Data Event Subscription page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
 Sensor Data Event Subscription communication pattern
 ========================================================
 

@@ -1,4 +1,13 @@
-﻿Concentrator ("Thing of Things")
+﻿Title: Concentrator
+Description: Concentrator page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
+Concentrator ("Thing of Things")
 ==================================
 
 This document outlines the XML representation of interacting with concentrators and their underlying nodes. A concentrator "concentrates" a set 

@@ -1,4 +1,13 @@
-﻿Tokens
+﻿Title: Tokens
+Description: Tokens page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
+Tokens
 =============
 
 This document outlines the XML representation of token management. Using tokens is an optional method services, users or devices can use to identify 

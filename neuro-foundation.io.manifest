@@ -10,6 +10,7 @@
 			<Content fileName="ControlDataForm.md"/>
 			<Content fileName="ControlParameters.md"/>
 			<Content fileName="ControlSimpleActions.md"/>
+			<Content fileName="Copyright.md"/>
 			<Content fileName="DecisionSupport.md"/>
 			<Content fileName="Discovery.md"/>
 			<Content fileName="E2E.md"/>

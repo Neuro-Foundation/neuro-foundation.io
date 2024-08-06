@@ -3,7 +3,7 @@ neuro-foundation.io
 
 This repository contains the content of [neuro-foundation.io](https://neuro-foundation.io). The starting page is found in
 [Root/neuro-foundation.io/Index.md](Root/neuro-foundation.io/Index.md). Contents of this repository is (C) Neuro-Foundation. You can
-use the information in this repository pursuant to the acceptance of the included [license agreement](LICENSE.md).
+use the information in this repository if you agree to and accept the [license agreement](LICENSE.md) included in the repository.
 
 ## Installable Package
 

@@ -1,4 +1,13 @@
-﻿Provisioning
+﻿Title: Provisioning
+Description: Provisioning page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
+Provisioning
 ==================
 
 This document outlines the XML representation of the provisioning service provided to owners of devices. When new operations occur to devices, they 

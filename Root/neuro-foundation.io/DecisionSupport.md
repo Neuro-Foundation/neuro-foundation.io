@@ -1,4 +1,13 @@
-﻿Decision Support
+﻿Title: Decision Support
+Description: Decision Support page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
+Decision Support
 ==================
 
 This document outlines the XML representation of the decision support service provided to devices. When new operations occur, and the device needs 

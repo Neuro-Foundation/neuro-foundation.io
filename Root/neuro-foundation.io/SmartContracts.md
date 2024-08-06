@@ -1,3 +1,12 @@
+Title: Smart Contracts
+Description: Smart Contracts page of neuro-foundation.io
+Date: 2024-08-06
+Author: Peter Waher
+Master: Master.md
+CSS: NeuroFoundationStyles.cssx
+
+=============================================
+
 Smart Contracts
 =====================
 
