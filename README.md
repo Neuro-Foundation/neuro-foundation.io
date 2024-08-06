@@ -1,15 +1,16 @@
 neuro-foundation.io
 ======================
 
-This repository contains the content of the [neuro-foundation.io](https://neuro-foundation.io) service. It is created using the
-[TemplateContentOnlyPackage](https://github.com/Trust-Anchor-Group/TemplateContentOnlyPackage) template. This template contains instructions
-on how to work with and edit the contents of the solution, as well as test and debug it, generate package files, and publish it.
+This repository contains the content of [neuro-foundation.io](https://neuro-foundation.io). The starting page is found in
+[Root/neuro-foundation.io/Index.md](Root/neuro-foundation.io/Index.md).
 
 ## Installable Package
 
-The neuro-foundation.io service has been made into a package that can be downloaded and installed on any 
-[TAG Neuron](https://lab.tagroot.io/Documentation/Index.md). If your Neuron is connected to this network, you can install the
-package using the following information:
+The contents of this repository has been made into a package that can be downloaded and installed on any 
+[TAG Neuron](https://lab.tagroot.io/Documentation/Index.md). The repository has been created using the
+[TemplateContentOnlyPackage](https://github.com/Trust-Anchor-Group/TemplateContentOnlyPackage) template. This template contains instructions
+on how to work with and edit the contents of the solution, as well as test and debug it, generate package files, and publish it. If your Neuron(R) 
+is connected to main Neuron(R) network, you can install the package using the following information:
 
 | Package information                                                                                                              ||
 |:-----------------|:---------------------------------------------------------------------------------------------------------------|
