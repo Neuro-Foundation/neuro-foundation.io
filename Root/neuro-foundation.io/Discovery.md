@@ -1,4 +1,4 @@
-Title: Discovery
+﻿Title: Discovery
 Description: Discovery page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher

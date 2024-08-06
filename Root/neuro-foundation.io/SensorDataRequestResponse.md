@@ -1,4 +1,4 @@
-Title: Request/Response
+﻿Title: Request/Response
 Description: Sensor Data Request/Response page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher
@@ -377,7 +377,7 @@ Request:
 
 ```xml
 <iq type='get' from='client@example.org/1234' to='device@example.org/abcd' id='R0001'>
-� <req xmlns="urn:nf:iot:sd:1.0" id="00000001" all="true"/>
+  <req xmlns="urn:nf:iot:sd:1.0" id="00000001" all="true"/>
 </iq>
 ```
 

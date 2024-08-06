@@ -1,4 +1,4 @@
-Title: End-to-End Encryption
+﻿Title: End-to-End Encryption
 Description: End-to-End Encryption page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher

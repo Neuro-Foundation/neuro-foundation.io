@@ -1,4 +1,4 @@
-Title: Sensor Data
+﻿Title: Sensor Data
 Description: Sensor Data page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher

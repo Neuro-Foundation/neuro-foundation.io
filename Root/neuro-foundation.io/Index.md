@@ -83,7 +83,7 @@ XML Schemas in alphabetical order:
 * [SensorData.xsd](Schemas/SensorData.xsd)
 * [SmartContracts.xsd](Schemas/SmartContracts.xsd)
 * [SoftwareUpdates.xsd](Schemas/SoftwareUpdates.xsd)
-* [Syncrhonization.xsd](Schemas/Syncrhonization.xsd)
+* [Synchronization.xsd](Schemas/Synchronization.xsd)
 
 
 Implementations

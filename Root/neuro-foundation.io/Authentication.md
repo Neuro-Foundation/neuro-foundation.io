@@ -1,4 +1,4 @@
-Title: Authentication
+﻿Title: Authentication
 Description: Authentication page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher

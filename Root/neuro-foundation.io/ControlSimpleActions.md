@@ -1,4 +1,4 @@
-Title: Simple Actions
+﻿Title: Simple Actions
 Description: Control Simple Actions page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher

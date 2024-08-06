@@ -1,4 +1,4 @@
-Title: Publish/Subscribe
+﻿Title: Publish/Subscribe
 Description: Sensor Data Publish/Subscribe page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher
@@ -34,7 +34,7 @@ communication patterns.
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | urn:nf:iot:sd:1.0                      |
+| Namespace:  | urn:nf:iot:sd:1.0                        |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 Examples

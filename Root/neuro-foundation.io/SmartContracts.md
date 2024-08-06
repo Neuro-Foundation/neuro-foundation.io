@@ -1,4 +1,4 @@
-Title: Smart Contracts
+﻿Title: Smart Contracts
 Description: Smart Contracts page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher
@@ -19,7 +19,7 @@ aspects in a smart city, such as provisioning for instance.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | urn:nf:iot:leg:sc:1.0                                  |
+| Namespace:  | urn:nf:iot:leg:sc:1.0                                    |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
 
 

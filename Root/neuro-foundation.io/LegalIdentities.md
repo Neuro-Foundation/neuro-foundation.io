@@ -1,4 +1,4 @@
-Title: Legal Identities
+﻿Title: Legal Identities
 Description: Legal Identities page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher
@@ -114,8 +114,8 @@ concatenations of multiple parameters:
 
 | Property            | Description                                             |
 |:--------------------|:--------------------------------------------------------|
-| `FULLNAME`          | Full name  (FIRST [| " " MIDDLE] LAST)                  |
-| `FULLADDR`          | Full address (ADDR [| ", " | ADDR2])                    |
+| `FULLNAME`          | Full name  (FIRST [ " " MIDDLE] LAST)                   |
+| `FULLADDR`          | Full address (ADDR [ ", " ADDR2])                       |
 | `FULLORGADDR`       | Full organization address (ORGADDR [| ", " | ORGADDR2]) |
 | `SIGNATURE`         | Digital signature reference.                            |
 | `SIGNATUREDATE`     | Date of digital signature.                              |

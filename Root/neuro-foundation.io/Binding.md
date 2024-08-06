@@ -1,4 +1,4 @@
-Title: Binding
+﻿Title: Binding
 Description: Binding page of neuro-foundation.io
 Date: 2024-08-06
 Author: Peter Waher
