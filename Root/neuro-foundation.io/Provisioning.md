@@ -26,6 +26,7 @@ See also:
 * The interface for devices is described in the chapter about [decision support](DecisionSupport.md).
 * The pairing of things with their owners is described in the chapter about [discovery](Discovery.md).
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

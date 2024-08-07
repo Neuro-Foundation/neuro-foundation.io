@@ -19,6 +19,7 @@ domain of the immediate sender, and any device, user or service tokens. The XML 
 | Namespace:  | `urn:nf:iot:prov:t:1.0`                                  |
 | Schema:     | [ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) |
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

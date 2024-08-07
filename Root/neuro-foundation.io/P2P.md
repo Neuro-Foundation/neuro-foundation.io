@@ -17,6 +17,7 @@ This document outlines the XML representation of peer-to-peer communication. The
 | Namespace:  | `urn:nf:iot:p2p:1.0`       |
 | Schema:     | [P2P.xsd](Schemas/P2P.xsd) |
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

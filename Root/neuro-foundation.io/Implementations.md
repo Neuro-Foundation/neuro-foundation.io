@@ -13,6 +13,8 @@ Software Implementations
 Below you find software implementing the interfaces published by the Neuro-Foundation. If you want to add links to your software, please feel free
 to send a request via our [feedback page](/Feedback.md).
 
+![Table of Contents](toc)
+
 Libraries
 ------------
 

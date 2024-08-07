@@ -19,6 +19,7 @@ decision support and provisioning.
 | Namespace:  | `urn:nf:iot:leg:id:1.0`                                  |
 | Schema:     | [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)       |
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

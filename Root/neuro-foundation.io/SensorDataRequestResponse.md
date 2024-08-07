@@ -18,6 +18,8 @@ document outlines the XML representation of sensor data. The XML representation 
 | Namespace:  | `urn:nf:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
+![Table of Contents](toc)
+
 Motivation and design goal
 ----------------------------
 
@@ -29,7 +31,6 @@ The request/response pattern for sensor data described in this document, is desi
 * Pattern should support both queueing and scheduling of requests.
 * Pattern should support secure distributed transactions.
 * Pattern should support limitation of requests.
-
 
 Building the request
 -------------------------

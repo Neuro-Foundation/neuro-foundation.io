@@ -10,13 +10,14 @@ CSS: NeuroFoundationStyles.cssx
 Clock & Event Synchronization
 ===================================
 
-This document outlines the XML representation of clock and event synchronization. The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of clock and event synchronization.The XML representation is modelled using an annotated XML Schema:
 
 | Clock Synchronization                                           ||
 | ------------|----------------------------------------------------|
 | Namespace:  | `urn:nf:iot:synchronization:1.0`                   |
 | Schema:     | [Synchronization.xsd](Schemas/Synchronization.xsd) |
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

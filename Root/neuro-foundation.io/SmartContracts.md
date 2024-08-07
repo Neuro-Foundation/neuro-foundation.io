@@ -22,6 +22,7 @@ aspects in a smart city, such as provisioning for instance.
 | Namespace:  | `urn:nf:iot:leg:sc:1.0`                                  |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
 
+![Table of Contents](toc)
 
 Motivation and design goal
 ----------------------------

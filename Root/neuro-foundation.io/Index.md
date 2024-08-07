@@ -13,6 +13,8 @@ Neuro-Foundation Harmonized IoT Interfaces
 This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies. For usage of the contents on this site,
 see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md).
 
+![Table of Contents](toc)
+
 Representation
 -----------------
 

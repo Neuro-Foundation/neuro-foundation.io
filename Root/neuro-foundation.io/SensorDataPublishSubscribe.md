@@ -37,6 +37,8 @@ communication patterns.
 | Namespace:  | `urn:nf:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
+![Table of Contents](toc)
+
 Examples
 -----------------
 

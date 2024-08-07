@@ -21,6 +21,8 @@ representation of sensor data. The XML representation is modelled using an annot
 
 It also relies on the [Sensor Data Request/Response pattern](SensorDataRequestResponse.md) and the [Sensor Data Representation](SensorData.md).
 
+![Table of Contents](toc)
+
 Motivation and design goal
 ----------------------------
 
