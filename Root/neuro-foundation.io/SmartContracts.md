@@ -284,7 +284,7 @@ String-valued parameters are defined using the `<stringParameter/>` element.
 | `name`        | `NonEmptyString`        | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:string`             | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`             | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`             | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`             | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `regEx`       | `xs:string`             | Optional | Optional regular expression to validate the value of the string parameter. |
 | `min`         | `xs:string`             | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`            | Optional | If the `min` value is part of the valid range or not.                      |
@@ -303,7 +303,7 @@ Numerical parameters are defined using the `<numericalParameter/>` element.
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:decimal`     | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `min`         | `xs:decimal`     | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
 | `max`         | `xs:decimal`     | Optional | Optional maximum value of the parameter.                                   |
@@ -314,13 +314,13 @@ Numerical parameters are defined using the `<numericalParameter/>` element.
 
 Boolean parameters are defined using the `<booleanParameter/>` element.
 
-| Attribute | Type             | Use      | Description                                                                |
-|:----------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`    | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`   | `xs:boolean`     | Optional | The value of the parameter.                                                |
-| `guide`   | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`     | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute   | Type             | Use      | Description                                                                |
+|:------------|:-----------------|:---------|----------------------------------------------------------------------------|
+| `name`      | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
+| `value`     | `xs:boolean`     | Optional | The value of the parameter.                                                |
+| `guide`     | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`       | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `transient` | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
 
 ##### Date parameters
 
@@ -331,7 +331,7 @@ Date parameters are defined using the `<dateParameter/>` element.
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:date`        | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `min`         | `xs:date`        | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
 | `max`         | `xs:date`        | Optional | Optional maximum value of the parameter.                                   |
@@ -347,7 +347,7 @@ Date & time parameters are defined using the `<dateTimeParameter/>` element.
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:dateTime`    | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `min`         | `xs:dateTime`    | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
 | `max`         | `xs:dateTime`    | Optional | Optional maximum value of the parameter.                                   |
@@ -363,7 +363,7 @@ Duration parameters are defined using the `<durationParameter/>` element.
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:duration`    | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `min`         | `xs:duration`    | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
 | `max`         | `xs:duration`    | Optional | Optional maximum value of the parameter.                                   |
@@ -379,7 +379,7 @@ Date parameters are defined using the `<timeParameter/>` element.
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `value`       | `xs:time`        | Optional | The value of the parameter.                                                |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple script expression validating the parameter.                       |
+| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `min`         | `xs:time`        | Optional | Optional minimum value of the parameter.                                   |
 | `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
 | `max`         | `xs:time`        | Optional | Optional maximum value of the parameter.                                   |
@@ -422,7 +422,7 @@ size limits are imposed. By omitting one, no limit in the corresponding directio
 ##### Regular Expression validation
 
 String parameters can be validated using regular expressions. Named groups can be used to extract parts of the value, and referencing them
-from mathematical expression validation rules.
+from [mathematical expression](/Script.md) validation rules.
 
 **Note**: Due to lack of standards for regular expressions, evaluation of expressions is done mainly on the server side, and is considered
 implementation specific. A client or a peer that understands the syntax of a regular expression, can use it to guide users in user interfaces
@@ -432,17 +432,17 @@ expressions understandable across clients and technology boundaries.
 
 ##### Mathematical Expression validation
 
-Parameters, as a set, can be validated using mathematical script expressions. Such expressions may refer to parameter values using their
-parameter names, and use common arithmetic and comparison operators to impose rules on valid values, referencing multiple parameters in
-a single expression. Expressions may also reference intrinsic contract properties. The following table lists such contract properties:
+Parameters, as a set, can be validated using [mathematical script expressions](/Script.md). Such expressions may refer to parameter values 
+using their parameter names, and use common arithmetic and comparison operators to impose rules on valid values, referencing multiple parameters 
+in a single expression. Expressions may also reference intrinsic contract properties. The following table lists such contract properties:
 
 | Property   | Type          | Description                    |
 |:-----------|:--------------|:-------------------------------|
 | `Duration` | `xs:duration` | The duration of the contract . |
 
-**Note**: Evaluation of mathematical expressions is done mainly on the server side, and is considered implementation specific. A client or 
-a peer that understands the syntax of an expression, can use it to guide users in user interfaces during the creation of a contract. But 
-when retrieving a created contract, it is assumed servers have already validated parameter values before allowing the contract to be created.
+**Note**: Evaluation of [mathematical expressions](/Script.md) is done mainly on the server side, and is considered implementation specific. 
+A client or a peer that understands the syntax of an expression, can use it to guide users in user interfaces during the creation of a contract. 
+But when retrieving a created contract, it is assumed servers have already validated parameter values before allowing the contract to be created.
 Still, common operators (`+`, `-`, `*`, `/`, `<`, `>`, `=`, `!=`, `<=`, `>=`, `!`) are often understood by many expression evaluators, which 
 makes common expressions understandable across clients and technology boundaries.
 
