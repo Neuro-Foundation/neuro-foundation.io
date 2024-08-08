@@ -13,12 +13,12 @@ Identities
 To interoperate on the network, an entity, be it a thing, service or application, identifies itself using one or more identities. The following types of
 identities are available:
 
-* **Network identity**. The underlying XMPP protocol, used in IoT Harmonization, provides all connected entities with a global network identity. Each broker
-controls its own domain and set of accounts. The combination of account and domain, written in the form `account@domain`, is called a **bare JID**.
-(JID = Jabber ID, Jabber being the name of the original project where XMPP was developed.) In IoT Harmonization it is often also referred to as the 
-**network identity** of the entity, as it is assumed only the device controls the account of the device. Once connected, a random resource is assigned to the connection. 
-The **full JID**, written `account@domain/resource` is the network address of the entity. There may be multiple connections open using the same account at the same 
-time. There may therefore be multiple full JIDs available, for one bare JID.
+* **Network identity**. The underlying XMPP protocol, used in IoT Harmonization, provides all connected entities with a global network identity. Each 
+broker controls its own domain and set of accounts. The combination of account and domain, written in the form `account@domain`, is called a 
+**bare JID**. (JID = Jabber ID, Jabber being the name of the original project where [XMPP](https://xmpp.org/) was developed.) In IoT Harmonization 
+it is often also referred to as the **network identity** of the entity, as it is assumed only the device controls the account of the device. Once 
+connected, a random resource is assigned to the connection. The **full JID**, written `account@domain/resource` is the network address of the entity.
+There may be multiple connections open using the same account at the same time. There may therefore be multiple full JIDs available, for one bare JID.
 
 	The XMPP address format is defined in [RFC 7622](https://tools.ietf.org/html/rfc7622). The XMPP protocol is defined in
 	[RFC 6120](https://tools.ietf.org/html/rfc6120) and [RFC 6121](https://tools.ietf.org/html/rfc6121).

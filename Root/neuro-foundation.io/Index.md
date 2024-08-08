@@ -10,8 +10,12 @@ CSS: NeuroFoundationStyles.cssx
 Neuro-Foundation Harmonized IoT Interfaces
 =============================================
 
-This repository contains Neuro-Foundation XMPP interfaces for the Internet of Things and Smart Societies. For usage of the contents on this site,
-see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md).
+This repository contains Neuro-Foundation [XMPP](https://xmpp.org/) interfaces for the Internet of Things and Smart Societies. For usage of the 
+contents on this site, see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md)[^tagAgentApi].
+
+
+[^tagAgentApi]: A simplified HTTP-based API that maps to the Neuro-Foundation interfaces is also published and maintained through the 
+[TAG Agent API](https://lab.tagroot.io/Documentation/Neuron/Agent.md)
 
 ![Table of Contents](toc)
 
