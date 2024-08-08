@@ -21,6 +21,7 @@
 			<Content fileName="LegalIdentities.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="NeuroFoundationStyles.cssx"/>
+			<Content fileName="Overview.md"/>
 			<Content fileName="P2P.md"/>
 			<Content fileName="Provisioning.md"/>
 			<Content fileName="SensorData.md"/>
