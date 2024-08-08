@@ -59,7 +59,7 @@ Operation
 * [Software Updates](SoftwareUpdates.md)
 
 
-Marketplace
+Agreements
 ------------------
 
 * [Legal Identities](LegalIdentities.md)

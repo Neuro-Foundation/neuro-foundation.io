@@ -37,7 +37,7 @@ Icon: /favicon.ico
 		* [Discovery](Discovery.md)
 		* [Clock & Event Synchronization](ClockSynchronization.md)
 		* [Software Updates](SoftwareUpdates.md)
-	* [Marketplace](#)
+	* [Agreements](#)
 		* [Legal Identities](LegalIdentities.md)
 		* [Smart Contracts](/SmartContracts.md)
 		* <p>Automatic provisioning using smart contracts</p>
@@ -69,11 +69,13 @@ Icon: /favicon.ico
 	* [GitHub](https://github.com/Trust-Anchor-Group)
 	* [Quick Login](https://quicklog.in/)
 	* [Neuro-Exchange](https://neuro-exchange.com/)
+	* [Agent API](https://lab.tagroot.io/Documentation/Neuron/Agent.md)
 * [Help](#)
 	* [Documentation](https://lab.tagroot.io/Documentation/Index.md)
 	* [Community](https://lab.tagroot.io/Community/Index.md)
 	* [Markdown](/Markdown.md)
 	* [Script](/Script.md)
+	* [XMPP](https://xmpp.org/)
 	* [Contact](/Feedback.md)
 
 </nav>
