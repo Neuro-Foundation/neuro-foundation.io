@@ -57,12 +57,12 @@ Icon: /favicon.ico
 		* [SoftwareUpdates.xsd](Schemas/SoftwareUpdates.xsd)
 		* [Synchronization.xsd](Schemas/Synchronization.xsd)
 	* [Software](Implementations.md)
+* [%Title]
 * [Neuro-Foundation](#)
 	* [\.com](https://neuro-foundation.com/)
 	* [\.io](https://neuro-foundation.io/)
 	* [\.net](https://neuro-foundation.net/)
 	* [\.org](https://neuro-foundation.org/)
-* [%Title]
 * [Trust Anchor Group](#)
 	* [Home Page](https://trustanchorgroup.com/)
 	* [LinkedIn](https://www.linkedin.com/company/trust-anchor-group/)
