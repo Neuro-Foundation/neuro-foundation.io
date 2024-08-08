@@ -75,6 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E9
 		Root\neuro-foundation.io\Examples\TlsSecurity.xml = Root\neuro-foundation.io\Examples\TlsSecurity.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Papers", "Papers", "{43CF2F8E-28F8-4261-837D-B8483F70AABA}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +85,7 @@ Global
 		{FE17EE9B-9567-430E-8317-6B411D781F78} = {B864C64F-AB7C-49C3-A403-DDE2D96D6ED3}
 		{13CDB96E-BF6F-429A-AF5C-3ED20C23D256} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{E9287ECC-30EC-4819-AAAE-F28FC7E8FC56} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{43CF2F8E-28F8-4261-837D-B8483F70AABA} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

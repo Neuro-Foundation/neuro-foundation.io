@@ -40,6 +40,18 @@
 				<Content fileName="SimpleSensorDataResponse.xml"/>
 				<Content fileName="TlsSecurity.xml"/>
 			</Folder>
+			<Folder name="Papers">
+				<Content fileName="Biotic - Executive Summary.pdf"/>
+				<Content fileName="IoT Harmonization using XMPP.pdf"/>
+				<Content fileName="Identity Architecture for Smart Societies.pdf"/>
+				<Content fileName="Neuro-Ledger, Executive Summary.pdf"/>
+				<Content fileName="Neuro-Ledger and Sustainability.pdf"/>
+				<Content fileName="Neuro-Features, Executive Summary.pdf"/>
+				<Content fileName="Tokenization of sustainable real estate in Smart Cities.pdf"/>
+				<Content fileName="Smart Agriculture, Executive Summary.pdf"/>
+				<Content fileName="Neuro-Payment architecture.pdf"/>
+				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
+			</Folder>
 			<Folder name="Schemas">
 				<Content fileName="Concentrator.xsd"/>
 				<Content fileName="Control.xsd"/>
