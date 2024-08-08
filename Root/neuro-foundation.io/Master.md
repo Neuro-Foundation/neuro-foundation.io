@@ -40,7 +40,7 @@ Icon: /favicon.ico
 	* [Marketplace](#)
 		* [Legal Identities](LegalIdentities.md)
 		* [Smart Contracts](/SmartContracts.md)
-		* Automatic provisioning using smart contracts
+		* <p>Automatic provisioning using smart contracts</p>
 	* [Schemas](#)
 		* [Concentrator.xsd](Schemas/Concentrator.xsd)
 		* [Control.xsd](Schemas/Control.xsd)
