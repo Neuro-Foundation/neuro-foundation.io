@@ -1,9 +1,34 @@
 ﻿nav > ul > li:first-child
 {
     font-size: 2em;
-    color: white;
+    color: black;
     margin: 0.1em 0.5em 0.1em 0.5em;
     opacity: 1;
+    transform: none;
+    padding: 0.1em;
+}
+
+nav > ul > li 
+{
+    transform: scaleY(0);
+    transition: all 0.2s;
+}
+
+header:hover > nav > ul > li {
+    transform: none;
+}
+
+header:hover {
+    width: 1360px;
+    margin-inline: auto;
+    background-color: white;
+    box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.151);
+}
+
+header {
+    background-color: #FFFFFFBB;
+    box-shadow: none;
+    transition: all 0.1s;
 }
 
 nav > ul > li > a > img
