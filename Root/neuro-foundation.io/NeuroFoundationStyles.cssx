@@ -1,7 +1,6 @@
 ﻿nav > ul > li:first-child
 {
     font-size: 2em;
-    color: black;
     margin: 0.1em 0.5em 0.1em 0.5em;
     opacity: 1;
     transform: none;
@@ -19,14 +18,13 @@ header:hover > nav > ul > li {
 }
 
 header:hover {
-    width: 1360px;
     margin-inline: auto;
-    background-color: white;
+    opacity: 1;
     box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.151);
 }
 
 header {
-    background-color: #FFFFFFBB;
+    opacity: 0.2;
     box-shadow: none;
     transition: all 0.1s;
 }
