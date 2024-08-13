@@ -93,6 +93,7 @@ Icon: /favicon.ico
 		* [Learning Internet of Things](https://www.amazon.com/Learning-Internet-Things-Peter-Waher/dp/1783553537/)
 	* [Repositories](#)
 		* [IoT Gateway](https://github.com/Neuro-Foundation/IoTGateway)
+		* [Mastering Internet of Things](https://github.com/Neuro-Foundation/MIoT)
 		* [Neuro-Ledger](#)
 		* [Neuron (IoT Broker)](#)
 		* [Neuro-Access (Maui)](https://github.com/Trust-Anchor-Group/NeuroAccessMaui)
