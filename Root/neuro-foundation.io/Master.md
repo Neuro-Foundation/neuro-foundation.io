@@ -67,6 +67,7 @@ Icon: /favicon.ico
 * [Partners](#)
 	* [Trust Anchor Group](/Partners/TAG/Introduction.md)
 	* [Creturner](https://www.creturner.com/)
+	* [LynxNode](/Partners/LynxNode/Introduction.md)
 	* [ABC4.IO](https://abc4.io/)
 * [More Information](#)
 	* [Papers](#)

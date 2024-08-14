@@ -54,6 +54,9 @@
 				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
 			</Folder>
 			<Folder name="Partners">
+				<Folder name="LynxNode">
+					<Content fileName="Introduction.md"/>
+				</Folder>
 				<Folder name="TAG">
 					<Content fileName="Introduction.md"/>
 					<Content fileName="TAG Technologies.pdf"/>

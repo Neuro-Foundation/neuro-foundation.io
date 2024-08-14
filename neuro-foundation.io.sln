@@ -98,6 +98,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TAG", "TAG", "{36BA5660-93E
 		Root\neuro-foundation.io\Partners\TAG\TAG Technologies.pdf = Root\neuro-foundation.io\Partners\TAG\TAG Technologies.pdf
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LynxNode", "LynxNode", "{33F5CC95-9E18-4EA0-8DE9-6B5268E69D58}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Partners\LynxNode\Introduction.md = Root\neuro-foundation.io\Partners\LynxNode\Introduction.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +114,7 @@ Global
 		{43CF2F8E-28F8-4261-837D-B8483F70AABA} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{30F50243-AA2D-4032-A70A-8A9D07858FA7} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{36BA5660-93E2-4402-BD1A-6EAF2F70D48E} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
+		{33F5CC95-9E18-4EA0-8DE9-6B5268E69D58} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}
