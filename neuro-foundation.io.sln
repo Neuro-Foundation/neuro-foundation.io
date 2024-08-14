@@ -77,6 +77,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E9
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Papers", "Papers", "{43CF2F8E-28F8-4261-837D-B8483F70AABA}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Papers\Biotic - Executive Summary.pdf = Root\neuro-foundation.io\Papers\Biotic - Executive Summary.pdf
+		Root\neuro-foundation.io\Papers\Federated Clock Synchronization in IIoT.pdf = Root\neuro-foundation.io\Papers\Federated Clock Synchronization in IIoT.pdf
+		Root\neuro-foundation.io\Papers\Identity Architecture for Smart Societies.pdf = Root\neuro-foundation.io\Papers\Identity Architecture for Smart Societies.pdf
+		Root\neuro-foundation.io\Papers\IoT Harmonization using XMPP.pdf = Root\neuro-foundation.io\Papers\IoT Harmonization using XMPP.pdf
+		Root\neuro-foundation.io\Papers\Neuro-Features, Executive Summary.pdf = Root\neuro-foundation.io\Papers\Neuro-Features, Executive Summary.pdf
+		Root\neuro-foundation.io\Papers\Neuro-Ledger and Sustainability.pdf = Root\neuro-foundation.io\Papers\Neuro-Ledger and Sustainability.pdf
+		Root\neuro-foundation.io\Papers\Neuro-Ledger, Executive Summary.pdf = Root\neuro-foundation.io\Papers\Neuro-Ledger, Executive Summary.pdf
+		Root\neuro-foundation.io\Papers\Neuro-Payment architecture.pdf = Root\neuro-foundation.io\Papers\Neuro-Payment architecture.pdf
+		Root\neuro-foundation.io\Papers\Smart Agriculture, Executive Summary.pdf = Root\neuro-foundation.io\Papers\Smart Agriculture, Executive Summary.pdf
+		Root\neuro-foundation.io\Papers\Tokenization of sustainable real estate in Smart Cities.pdf = Root\neuro-foundation.io\Papers\Tokenization of sustainable real estate in Smart Cities.pdf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Partners", "Partners", "{30F50243-AA2D-4032-A70A-8A9D07858FA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TAG", "TAG", "{36BA5660-93E2-4402-BD1A-6EAF2F70D48E}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Partners\TAG\Introduction.md = Root\neuro-foundation.io\Partners\TAG\Introduction.md
+		Root\neuro-foundation.io\Partners\TAG\TAG Technologies.pdf = Root\neuro-foundation.io\Partners\TAG\TAG Technologies.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -87,6 +107,8 @@ Global
 		{13CDB96E-BF6F-429A-AF5C-3ED20C23D256} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{E9287ECC-30EC-4819-AAAE-F28FC7E8FC56} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{43CF2F8E-28F8-4261-837D-B8483F70AABA} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{30F50243-AA2D-4032-A70A-8A9D07858FA7} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{36BA5660-93E2-4402-BD1A-6EAF2F70D48E} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

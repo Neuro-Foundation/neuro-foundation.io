@@ -53,6 +53,12 @@
 				<Content fileName="Neuro-Payment architecture.pdf"/>
 				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
 			</Folder>
+			<Folder name="Partners">
+				<Folder name="TAG">
+					<Content fileName="Introduction.md"/>
+					<Content fileName="TAG Technologies.pdf"/>
+				</Folder>
+			</Folder>
 			<Folder name="Schemas">
 				<Content fileName="Concentrator.xsd"/>
 				<Content fileName="Control.xsd"/>
