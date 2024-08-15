@@ -23,7 +23,7 @@ technologies such as:
   interoperation over the Internet. It is the cornerstone of creating open, interoperable and yet 
   secure networks for smart societies over the Internet, where ownership of information is protected.
 
-* [eDaler(R)](Papers/Neuro-Payment%20architecture.pdf) forms the basis for *micro transactions* over 
+* [eDaler(R)](/Papers/Neuro-Payment%20architecture.pdf) forms the basis for *micro transactions* over 
   federated Neuron(R) networks.
 
 * [Neuro-Access^TM](https://github.com/Trust-Anchor-Group/NeuroAccessMaui) digital identity app.
