@@ -2,6 +2,7 @@
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
 Icon: /favicon.ico
+Viewport: width=device-width,initial-scale=1
 
 <header id="header">
 <nav>
