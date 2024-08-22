@@ -58,6 +58,7 @@ Viewport: width=device-width,initial-scale=1
 		* [SmartContracts.xsd](/Schemas/SmartContracts.xsd)
 		* [SoftwareUpdates.xsd](/Schemas/SoftwareUpdates.xsd)
 		* [Synchronization.xsd](/Schemas/Synchronization.xsd)
+	* [Agent API](/Documentation/Neuron/Agent.md)
 	* [Software](/Implementations.md)
 * [%Title]
 * [Neuro-Foundation](#)
