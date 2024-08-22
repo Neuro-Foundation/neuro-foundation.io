@@ -11,11 +11,7 @@ Neuro-Foundation Harmonized IoT Interfaces
 =============================================
 
 This repository contains Neuro-Foundation [XMPP](https://xmpp.org/) interfaces for the Internet of Things and Smart Societies. For usage of the 
-contents on this site, see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md)[^tagAgentApi].
-
-
-[^tagAgentApi]: A simplified HTTP-based API that maps to the Neuro-Foundation interfaces is also published and maintained through the 
-[TAG Agent API](https://lab.tagroot.io/Documentation/Neuron/Agent.md)
+contents on this site, see the [open source](https://github.com/Trust-Anchor-Group/neuro-foundation.io) [license agreement](Copyright.md).
 
 ![Table of Contents](toc)
 
@@ -107,6 +103,13 @@ XML Schemas in alphabetical order:
 * [SoftwareUpdates.xsd](Schemas/SoftwareUpdates.xsd)
 * [Synchronization.xsd](Schemas/Synchronization.xsd)
 
+
+Agent API
+-----------
+
+A simplified HTTP-based RESTful API called the [Agent API](/Documentation/Neuron/Agent.md) is also available. It maps HTTP requests to the 
+Neuro-Foundation interface operations. Due to limitations of the HTTP protocol, it does not have full support of features that do not conform to 
+the basic request-response pattern available in HTTP. 
 
 Software
 -----------
