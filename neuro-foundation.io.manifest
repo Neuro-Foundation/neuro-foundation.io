@@ -43,16 +43,17 @@
 			</Folder>
 			<Folder name="Papers">
 				<Content fileName="Biotic - Executive Summary.pdf"/>
-				<Content fileName="IoT Harmonization using XMPP.pdf"/>
+				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
 				<Content fileName="Identity Architecture for Smart Societies.pdf"/>
-				<Content fileName="Neuro-Ledger, Executive Summary.pdf"/>
-				<Content fileName="Neuro-Ledger and Sustainability.pdf"/>
+				<Content fileName="Interoperability of Medical Records on the Neuro-Ledger.pdf"/>
+				<Content fileName="IoT Harmonization using XMPP.pdf"/>
 				<Content fileName="Neuro-Features, Executive Summary.pdf"/>
-				<Content fileName="Tokenization of sustainable real estate in Smart Cities.pdf"/>
-				<Content fileName="Smart Agriculture, Executive Summary.pdf"/>
+				<Content fileName="Neuro-Ledger and Sustainability.pdf"/>
+				<Content fileName="Neuro-Ledger, Executive Summary.pdf"/>
 				<Content fileName="Neuro-Payment architecture.pdf"/>
 				<Content fileName="Open Threat Intelligence using Neuro-Ledger.pdf"/>
-				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
+				<Content fileName="Smart Agriculture, Executive Summary.pdf"/>
+				<Content fileName="Tokenization of sustainable real estate in Smart Cities.pdf"/>
 			</Folder>
 			<Folder name="Partners">
 				<Folder name="LynxNode">

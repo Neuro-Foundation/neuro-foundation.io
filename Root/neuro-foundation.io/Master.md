@@ -83,6 +83,7 @@ Viewport: width=device-width,initial-scale=1
 		* [Smart Agriculture, Executive Summary](/Papers/Smart%20Agriculture,%20Executive%20Summary.pdf)
 		* [Neuro-Payment architecture](/Papers/Neuro-Payment%20architecture.pdf)
 		* [Open Threat Intelligence using Neuro-Ledger](/Papers/Open%20Threat%20Intelligence%20using%20Neuro-Ledger.pdf)
+		* [Interoperability of Medical Records on the Neuro-Ledger](/Papers/Interoperability%20of%20Medical%20Records%20on%20the%20Neuro-Ledger.pdf)
 		* [Federated Clock Synchronization in IIoT](/Papers/Federated%20Clock%20Synchronization%20in%20IIoT.pdf)
 	* [Books](#)
 		* [Mastering Internet of Things](https://www.packtpub.com/en-us/product/mastering-internet-of-things-9781788397483)
