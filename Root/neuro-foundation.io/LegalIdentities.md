@@ -82,33 +82,34 @@ making the request. The corresponding private key will be used to sign the reque
 one encodes a `name`/`value` attribute pair. It is up to the client to decide the number of properties included, and which ones. Any names can be used.
 Some names are predefined however, as described in the following table:
 
-| Property      | Description                                     |
-|:--------------|:------------------------------------------------|
-| `FIRST`       | First name                                      |
-| `MIDDLE`      | Middle name                                     |
-| `LAST`        | Last name                                       |
-| `PNR`         | Personal number                                 |
-| `ADDR`        | Address                                         |
-| `ADDR2`       | Address, second line                            |
-| `ZIP`         | Zip or postal code                              |
-| `AREA`        | Area                                            |
-| `CITY`        | City                                            |
-| `REGION`      | Region, state                                   |
-| `COUNTRY`     | Country                                         |
-| `NATIONALITY` | Nationality                                     |
-| `GENDER`      | Gender (`M` or `F`)                             |
-| `PHONE`       | Phone number, international phone number format |
-| `ORGNAME`     | Name of organization                            |
-| `ORGNR`       | Organization number                             |
-| `ORGDEPT`     | Organization department, where person works.    |
-| `ORGROLE`     | Role of person in organization.                 |
-| `ORGADDR`     | Address of organization.                        |
-| `ORGADDR2`    | Address of organization, second line            |
-| `ORGZIP`      | Zip or postal code of organization              |
-| `ORGAREA`     | Area of organization.                           |
-| `ORGCITY`     | City of organization.                           |
-| `ORGREGION`   | Region or state of organization.                |
-| `ORGCOUNTRY`  | Country code of organization.                   |
+| Property      | Description                                                |
+|:--------------|:-----------------------------------------------------------|
+| `FIRST`       | First name                                                 |
+| `MIDDLE`      | Middle name                                                |
+| `LAST`        | Last name                                                  |
+| `PNR`         | Personal number                                            |
+| `ADDR`        | Address                                                    |
+| `ADDR2`       | Address, second line                                       |
+| `ZIP`         | Zip or postal code                                         |
+| `AREA`        | Area                                                       |
+| `CITY`        | City                                                       |
+| `REGION`      | Region, state                                              |
+| `COUNTRY`     | Country                                                    |
+| `NATIONALITY` | Nationality                                                |
+| `GENDER`      | Gender (`M` or `F`)                                        |
+| `PHONE`       | Phone number, international phone number format.           |
+| `DOMAIN`      | If the ID represents the legal representative of a domain. |
+| `ORGNAME`     | Name of organization                                       |
+| `ORGNR`       | Organization number                                        |
+| `ORGDEPT`     | Organization department, where person works.               |
+| `ORGROLE`     | Role of person in organization.                            |
+| `ORGADDR`     | Address of organization.                                   |
+| `ORGADDR2`    | Address of organization, second line                       |
+| `ORGZIP`      | Zip or postal code of organization                         |
+| `ORGAREA`     | Area of organization.                                      |
+| `ORGCITY`     | City of organization.                                      |
+| `ORGREGION`   | Region or state of organization.                           |
+| `ORGCOUNTRY`  | Country code of organization.                              |
 
 Some property names are reserved as they can be used in role reference parameters to refer to
 concatenations of multiple parameters:
