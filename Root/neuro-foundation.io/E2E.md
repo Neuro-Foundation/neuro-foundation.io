@@ -53,7 +53,7 @@ Publishing E2E Information
 -------------------------------
 
 When a device starts, it generates new public/private keys for the asymmetric ciphers it supports. Every time it gets connected it 
-should publish its public key(s) using `<presence/>`, so that everyone with a presence subscription is aware of the current public key(s). 
+should publish its public key\(s\) using `<presence/>`, so that everyone with a presence subscription is aware of the current public key\(s\). 
 Every time new public/private keys are generated the public keys should also be published in a new `<presence/>`. Apart from the most 
 recent public/private key pair, the previous pair should also be kept in memory. There might be a delay in propagating new keys. Keeping
 the previous key as well allows the recipient to receive and decrypt stanzas that have been encrypted using the previous key.
@@ -152,7 +152,7 @@ content, and verify that signatures are valid. The encrypted content is placed i
 
 The 16-byte Initiation Vector (IV) is calculated as follows: The first 12 bytes consists of the first 12 bytes of the
 SHA-256 hash of the UTF-8 encoded concatenation of the `id`, `type`, `from` and `to` attributes of the stanza element, in that order.
-The last 4 bytes consist of a 32-bit counter, in little-endian order. The counter is reset when asymmetric key(s) are regenerated
+The last 4 bytes consist of a 32-bit counter, in little-endian order. The counter is reset when asymmetric key\(s\) are regenerated
 and incremented for each stanza encrypted. This guarantees a unique IV for every combination of key and stanza sent. The counter
 is transmitted in the stanza, to avoid synchronization problems.
 
@@ -175,7 +175,7 @@ a higher performance without compromising security.
 
 ChaCha20 requires a 12-byte nonce, or Initiation Vector (IV). It is calculated as follows: The first 8 bytes consists of the first 8 bytes 
 of the SHA-256 hash of the UTF-8 encoded concatenation of the `id`, `type`, `from` and `to` attributes of the stanza element, in that order.
-The last 4 bytes consist of a 32-bit counter, in little-endian order. The counter is reset when asymmetric key(s) are regenerated
+The last 4 bytes consist of a 32-bit counter, in little-endian order. The counter is reset when asymmetric key\(s\) are regenerated
 and incremented for each stanza encrypted. This guarantees a unique IV for every combination of key and stanza sent. The counter
 is transmitted in the stanza, to avoid synchronization problems.
 

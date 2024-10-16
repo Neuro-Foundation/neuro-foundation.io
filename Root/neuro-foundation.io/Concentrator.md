@@ -99,9 +99,9 @@ can also be annotated using tokens. There are three different types of tokens th
 
 | Attribute  | Type          | Description       | 
 |:-----------|:--------------|:------------------| 
-| `dt`       | `xs:string`   | Device token(s)   |
-| `st`       | `xs:string`   | Service token(s)  |
-| `ut`       | `xs:string`   | User token(s)     |
+| `dt`       | `xs:string`   | Device token\(s\)   |
+| `st`       | `xs:string`   | Service token\(s\)  |
+| `ut`       | `xs:string`   | User token\(s\)     |
 
 If multiple tokens of the same type are used, they are simply separated using the space character.
 
@@ -118,9 +118,9 @@ set of `<value/>` child elements, each one containing a name of an operation it 
 
 | Element           | Attribute  | Type          | Use      | Default  | Description               | 
 |:------------------|:-----------|:--------------|:---------|:---------|:--------------------------| 
-| `getCapabilities` | `dt`       | `xs:string`   | optional |          | Device token(s).          |
-|                   | `st`       | `xs:string`   | optional |          | Service token(s).         |
-|                   | `ut`       | `xs:string`   | optional |          | User token(s).            |
+| `getCapabilities` | `dt`       | `xs:string`   | optional |          | Device token\(s\).        |
+|                   | `st`       | `xs:string`   | optional |          | Service token\(s\).       |
+|                   | `ut`       | `xs:string`   | optional |          | User token\(s\).          |
 | `strings`         |            |               |          |          | Array of strings.         |
 | `value`           | (value)    | `xs:string`   |          |          | Represents a capability.  |
 
@@ -156,14 +156,14 @@ The following table lists defined operations. It also suggests what types of con
 | `subscribe`                        |                    |        x       |     x     | 
 | `unsubscribe`                      |                    |        x       |     x     | 
 | `getNodeCommands`                  |         x          |        x       |     x     | 
-| `getCommandParameters`             |        (x)         |        x       |     x     | 
+| `getCommandParameters`             |       \(x\)        |        x       |     x     | 
 | `executeNodeCommand`               |         x          |        x       |     x     | 
-| `executeNodeQuery`                 |        (x)         |        x       |     x     | 
+| `executeNodeQuery`                 |       \(x\)        |        x       |     x     | 
 | `getCommonNodeCommands`            |                    |                |     x     | 
 | `getCommonCommandParameters`       |                    |                |     x     | 
 | `executeCommonNodeCommand`         |                    |                |     x     | 
 | `executeCommonNodeQuery`           |                    |                |     x     | 
-| `abortNodeQuery`                   |        (x)         |        x       |     x     | 
+| `abortNodeQuery`                   |       \(x\)        |        x       |     x     | 
 | `abortCommonNodeQuery`             |                    |        x       |     x     | 
 | `registerSniffer`                  |                    |        x       |     x     | 
 | `unregisterSniffer`                |                    |        x       |     x     | 
@@ -204,13 +204,13 @@ A client can request a list of all data sources available on a concentrator serv
 
 | Element             | Attribute     | Type          | Use      | Default  | Description        | 
 |:--------------------|:--------------|:--------------|:---------|:---------|:-------------------| 
-| `getAllDataSources` | `dt`          | `xs:string`   | optional |          | Device token(s).   |
-|                     | `st`          | `xs:string`   | optional |          | Service token(s).  |
-|                     | `ut`          | `xs:string`   | optional |          | User token(s).     |
+| `getAllDataSources` | `dt`          | `xs:string`   | optional |          | Device token\(s\). |
+|                     | `st`          | `xs:string`   | optional |          | Service token\(s\).|
+|                     | `ut`          | `xs:string`   | optional |          | User token\(s\).   |
 | `dataSources`       |               |               |          |          | List of data sources available (to the caller).                                                                                          |
 | `dataSource`        | `src`         | `xs:string`   | required |          | Machine-readable identity of the data source. This identity is used in all references to the data source.                                |
 |                     | `name`        | `xs:string`   | required |          | Human-readable, localized name of the data source.                                                                                       |
-|                     | `hasChildren` | `xs:boolean`  | optional | `false`  | Data sources can be organized in tree structures. This attribute lets the caller know if the data source has child data sources or not. |
+|                     | `hasChildren` | `xs:boolean`  | optional | `false`  | Data sources can be organized in tree structures. This attribute lets the caller know if the data source has child data sources or not.  |
 |                     | `lastChanged` | `xs:dateTime` | optional |          | Variable data sources use this attribute to report when the last change in the source took place. Used for synchronization.              |
 
 ### getRootDataSources
@@ -221,9 +221,9 @@ an `<iq type="get"/>` to the concentrator. The concentrator returns a `<dataSour
 
 | Element              | Attribute     | Type          | Use      | Default  | Description        | 
 |:---------------------|:--------------|:--------------|:---------|:---------|:-------------------| 
-| `getRootDataSources` | `dt`          | `xs:string`   | optional |          | Device token(s).   |
-|                      | `st`          | `xs:string`   | optional |          | Service token(s).  |
-|                      | `ut`          | `xs:string`   | optional |          | User token(s).     |
+| `getRootDataSources` | `dt`          | `xs:string`   | optional |          | Device token\(s\). |
+|                      | `st`          | `xs:string`   | optional |          | Service token\(s\).|
+|                      | `ut`          | `xs:string`   | optional |          | User token\(s\).   |
 | `dataSources`        |               |               |          |          | List of data sources available (to the caller).                                                                                          |
 | `dataSource`         | `src`         | `xs:string`   | required |          | Machine-readable identity of the data source. This identity is used in all references to the data source.                                |
 |                      | `name`        | `xs:string`   | required |          | Human-readable, localized name of the data source.                                                                                       |
@@ -239,9 +239,9 @@ element in the response, consisting of a set of `<dataSource/>` elements, each d
 | Element               | Attribute     | Type          | Use      | Default  | Description        | 
 |:----------------------|:--------------|:--------------|:---------|:---------|:-------------------| 
 | `getChildDataSources` | `src`         | `xs:string`   | required |          | Machine-readable identity of the data source. |
-|                       | `dt`          | `xs:string`   | optional |          | Device token(s).                              |
-|                       | `st`          | `xs:string`   | optional |          | Service token(s).                             |
-|                       | `ut`          | `xs:string`   | optional |          | User token(s).                                |
+|                       | `dt`          | `xs:string`   | optional |          | Device token\(s\).                            |
+|                       | `st`          | `xs:string`   | optional |          | Service token\(s\).                           |
+|                       | `ut`          | `xs:string`   | optional |          | User token\(s\).                              |
 | `dataSources`         |               |               |          |          | List of data sources available (to the caller).                                                                                          |
 | `dataSource`          | `src`         | `xs:string`   | required |          | Machine-readable identity of the data source. This identity is used in all references to the data source.                                |
 |                       | `name`        | `xs:string`   | required |          | Human-readable, localized name of the data source.                                                                                       |
@@ -265,9 +265,9 @@ Checks if a node exists (and visible to the caller). It is sent in an `<iq type=
 | `containsNode` | `id`       | `xs:string`   | required |          | Node identity.           |
 |                | `src`      | `xs:string`   | optional |          | Source identity.         |
 |                | `pt`       | `xs:string`   | optional |          | Partition.               |
-|                | `dt`       | `xs:string`   | optional |          | Device token(s).         |
-|                | `st`       | `xs:string`   | optional |          | Service token(s).        |
-|                | `ut`       | `xs:string`   | optional |          | User token(s).           |
+|                | `dt`       | `xs:string`   | optional |          | Device token\(s\).       |
+|                | `st`       | `xs:string`   | optional |          | Service token\(s\).      |
+|                | `ut`       | `xs:string`   | optional |          | User token\(s\).         |
 | `bool`         | (value)    | `xs:boolean`  |          |          | Boolean-valued response. |
 
 ### containsNodes
@@ -279,9 +279,9 @@ request.
 
 | Element         | Attribute  | Type          | Use      | Default  | Description                                 | 
 |:----------------|:-----------|:--------------|:---------|:---------|:--------------------------------------------| 
-| `containsNodes` | `dt`       | `xs:string`   | optional |          | Device token(s).                            |
-|                 | `st`       | `xs:string`   | optional |          | Service token(s).                           |
-|                 | `ut`       | `xs:string`   | optional |          | User token(s).                              |
+| `containsNodes` | `dt`       | `xs:string`   | optional |          | Device token\(s\).                          |
+|                 | `st`       | `xs:string`   | optional |          | Service token\(s\).                         |
+|                 | `ut`       | `xs:string`   | optional |          | User token\(s\).                            |
 | `nd`            | `id`       | `xs:string`   | required |          | Node identity.                              |
 |                 | `src`      | `xs:string`   | optional |          | Source identity.                            |
 |                 | `pt`       | `xs:string`   | optional |          | Partition.                                  |
@@ -301,9 +301,9 @@ their corresponding data type, and messages, if the request asked for such infor
 |                | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
 |                | `parameters`      | `xs:boolean`  | optional | `false`  | If node parameters are included in the request.                                                                     |
 |                | `messages`        | `xs:boolean`  | optional | `false`  | If node messages are included in the request.                                                                       |
-|                | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nodeInfo`     | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -314,9 +314,9 @@ their corresponding data type, and messages, if the request asked for such infor
 |                | `state`           | `NodeState`   | required |          | Current state of node.                                                                                              |
 |                | `hasChildren`     | `xs:boolean`  | required |          | If the node has child-nodes.                                                                                        |
 |                | `childrenOrdered` | `xs:boolean`  | optional | `false`  | If the order of the child nodes is important in the context.                                                        |
-|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                 |
-|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                          |
-|                | `hasCommands`     | `xs:boolean`  | optional | `false`  | If the node has any commands the client can access.                                                                     |
+|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                  |
+|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                           |
+|                | `hasCommands`     | `xs:boolean`  | optional | `false`  | If the node has any commands the client can access.                                                                 |
 |                | `sniffable`       | `xs:boolean`  | optional | `false`  | If the node supports sniffing, i.e. can allow the client to attach a sniffer to it, to troubleshoot communication.  |
 |                | `parentId`        | `xs:string`   | optional |          | The identity of the parent node, if any. Root nodes do not have parent nodes.                                       |
 |                | `parentPartition` | `xs:string`   | optional |          | The parent node partition, if available.                                                                            |
@@ -383,9 +383,9 @@ for such information.
 |:---------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
 | `getNodes`     | `parameters`      | `xs:boolean`  | optional | `false`  | If node parameters are included in the request.                                                                     |
 |                | `messages`        | `xs:boolean`  | optional | `false`  | If node messages are included in the request.                                                                       |
-|                | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`           | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -419,9 +419,9 @@ which responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
 | `getAllNodes`       | `parameters`      | `xs:boolean`  | optional | `false`  | If node parameters are included in the request.                                                                     |
 |                     | `messages`        | `xs:boolean`  | optional | `false`  | If node messages are included in the request.                                                                       |
-|                     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                     | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                     | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                     | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                     | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 | `onlyIfDerivedFrom` | (value)           | `xs:string`   | required |          | If specified, only return nodes that derive from one of these node types.                                           |
 | `nodeInfos`         |                   |               |          |          | Contains a set of `nodeInfo` elements.                                                                              |
@@ -454,11 +454,11 @@ Gets the type/class inheritances of a node in a concentrator. It is sent in an `
 | `getNodeInheritance` | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                      | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                      | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                      | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                      | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                      | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                      | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                      | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                      | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `inheritance`        |                   |               |          |          | Response element.                                                                                                   |
-| `baseClasses`        |                   |               |          |          | Contains base classes, each one in a separate `value` child element.                                                 |
+| `baseClasses`        |                   |               |          |          | Contains base classes, each one in a separate `value` child element.                                                |
 | `interfaces`         |                   |               |          |          | Contains implemented interfaces, if any, each one in a separate `value` child element.                              |
 | `value`              | (value)           | `xs:string`   |          |          | Contains a base class or interface name.                                                                            |
 
@@ -471,9 +471,9 @@ responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` el
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
 | `getRootNodes`      | `parameters`      | `xs:boolean`  | optional | `false`  | If node parameters are included in the request.                                                                     |
 |                     | `messages`        | `xs:boolean`  | optional | `false`  | If node messages are included in the request.                                                                       |
-|                     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                     | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                     | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                     | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                     | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 | `nodeInfos`         |                   |               |          |          | Contains a set of `nodeInfo` elements.                                                                              |
 | `nodeInfo`          | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
@@ -506,9 +506,9 @@ responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` el
 |                     | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                     | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                     | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                     | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                     | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                     | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nodeInfos`         |                   |               |          |          | Contains a set of `nodeInfo` elements.                                                                              |
 | `nodeInfo`          | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
@@ -541,9 +541,9 @@ elements, each corresponding to a node in sequence.
 |                     | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                     | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                     | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                     | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                     | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                     | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nodeInfos`         |                   |               |          |          | Contains a set of `nodeInfo` elements.                                                                              |
 | `nodeInfo`          | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                     | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
@@ -580,9 +580,9 @@ which returns a data form containing the editable node parameters.
 | `getNodeParametersForEdit` | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `x:x`                      |                   |               |          |          | Contains a data form with editable node parameters.                                                                 |
 
 Some useful extensions related to data forms in XMPP:
@@ -606,9 +606,9 @@ could not be completed.
 | `setNodeParametersForEdit` | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `x:x`                      |                   |               |          |          | Contains a data form with edited node parameters.                                                                   |
 
 **Note**: The form might be partial, i.e. only contain a subset of the parameters available on the node. Parameters not referenced, should keep their
@@ -624,9 +624,9 @@ in [XEP-0336](https://xmpp.org/extensions/xep-0336.html#sect-idm45589980289936).
 
 | Element                          | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `getCommonNodeParametersForEdit` | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                                  | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                                  | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `getCommonNodeParametersForEdit` | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                                  | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                                  | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`                             | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                                  | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                                  | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -642,9 +642,9 @@ if the operation could not be completed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `setNodeParametersForEdit` | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `setNodeParametersForEdit` | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -664,9 +664,9 @@ elements, each one describing a node type.
 | `getAddableNodeTypes` | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                       | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                       | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                       | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                       | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                       | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                       | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                       | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                       | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nodeTypes`           |                   |               |          |          | Array of node type.                                                                                                 |
 | `nodeType`            | `type`            | `xs:string`   | required |          | Machine-readable, and concentrator specific, node type.                                                             |
 |                       | `name`            | `xs:string`   | required |          | Human-readable, localized, name of node type.                                                                       |
@@ -682,9 +682,9 @@ receive the new created node as a child.
 | `getParametersForNewNode`  | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `type`            | `xs:string`   | required |          | Machine-readable, and concentrator specific, node type.                                                             |
 | `x:x`                      |                   |               |          |          | Contains a data form with editable node parameters.                                                                 |
 
@@ -700,9 +700,9 @@ referenced in the request, is the node that will receive the new created node as
 | `createNewNode`            | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `type`            | `xs:string`   | required |          | Machine-readable, and concentrator specific, node type.                                                             |
 | `x:x`                      |                   |               |          |          | Contains a data form with edited node parameters.                                                                   |
 
@@ -716,9 +716,9 @@ Destroys a new node. The `<destroyNode/>` element is sent in an `<iq type="set"/
 | `destroyNode`              | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 
 ### moveNodeUp
 
@@ -730,9 +730,9 @@ returns an empty response (in an `<iq type="result"/>`) if the operation was per
 | `moveNodeUp`               | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 
 ### moveNodeDown
 
@@ -744,9 +744,9 @@ returns an empty response (in an `<iq type="result"/>`) if the operation was per
 | `moveNodeDown`             | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 
 ### moveNodesUp
 
@@ -756,9 +756,9 @@ operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `moveNodesUp`              | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `moveNodesUp`              | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -771,9 +771,9 @@ operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `moveNodesDown`            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `moveNodesDown`            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -795,9 +795,9 @@ describing a command.
 | `getNodeCommands`          | `id`                 | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`                | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`                 | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`                 | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`                 | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`                 | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`                 | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`                 | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`                 | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `commands`                 |                      |               |          |          | Contains a sequence of `command` elements.                                                                          |
 | `command`                  | `command`            | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 |                            | `name`               | `xs:string`   | required |          | Human-readable, localized name of command.                                                                          |
@@ -812,7 +812,7 @@ The following types of commands are available (defined by the `CommandType` enum
 
 | Value             | Description                                                                                                                                                |
 |:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Simple`          | Simple commands do not need parametrization and run invisibly.                                                                                            |
+| `Simple`          | Simple commands do not need parametrization and run invisibly.                                                                                             |
 | `Parameterized`   | Parametrized commands allow the user to fill in a form of command parameters that can be used to configure the command. The command is then run invisibly. |
 | `Query`           | Allows the user to parametrize the command. During execution of the command, feedback can be sent back to the user asynchronously.                         |
 
@@ -826,9 +826,9 @@ concentrator, which returns a data form containing the parameters of the paramet
 | `getCommandParameters`     | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 | `x:x`                      |                   |               |          |          | Contains a data form with command parameters.                                                                       |
 
@@ -844,9 +844,9 @@ parameters and any error messages, if the command could not be executed or start
 | `executeNodeCommand`       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 | `x:x`                      |                   |               |          |          | Contains a data form with command parameters.                                                                       |
 
@@ -863,9 +863,9 @@ this identifier, so that it does not collide with other queries being executed o
 | `executeNodeQuery`         | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 |                            | `queryId`         | `xs:string`   | required |          | Machine-readable identity of the query instance being executed.                                                     |
 | `x:x`                      |                   |               |          |          | Contains a data form with command parameters.                                                                       |
@@ -878,9 +878,9 @@ successful, listing commands that are available on all referenced nodes in separ
 
 | Element                    | Attribute            | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:---------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `getCommonNodeCommands`    | `dt`                 | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`                 | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`                 | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `getCommonNodeCommands`    | `dt`                 | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`                 | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`                 | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `nd`                       | `id`                 | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`                | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`                 | `xs:string`   | optional |          | Partition.                                                                                                          |
@@ -905,9 +905,9 @@ node, and then mark the field with the `<xdd:notSame/>` element, as defined in
 
 | Element                          | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `getCommonCommandParameters`     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                                  | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                                  | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `getCommonCommandParameters`     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                                  | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                                  | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                                  | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 | `nd`                             | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                                  | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
@@ -927,9 +927,9 @@ command was executed (or started) on the corresponding node. If not, the `error`
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `executeCommonNodeCommand` | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `executeCommonNodeCommand` | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
@@ -952,9 +952,9 @@ should be given this identifier, so that it does not collide with other queries 
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `executeCommonNodeQuery`   | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `executeCommonNodeQuery`   | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 |                            | `queryId`         | `xs:string`   | required |          | Machine-readable identity of the query instance being executed.                                                     |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
@@ -975,9 +975,9 @@ concentrator, which returns an empty response (in an `<iq type="result"/>`) if t
 | `abortNodeQuery`           | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
 |                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
-|                            | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+|                            | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 |                            | `queryId`         | `xs:string`   | required |          | Machine-readable identity of the query instance being executed.                                                     |
 
@@ -989,9 +989,9 @@ references in `<nd/>` child elements, is sent in an `<iq type="set"/>` to the co
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
-| `abortCommonNodeQuery`     | `dt`              | `xs:string`   | optional |          | Device token(s).                                                                                                    |
-|                            | `st`              | `xs:string`   | optional |          | Service token(s).                                                                                                   |
-|                            | `ut`              | `xs:string`   | optional |          | User token(s).                                                                                                      |
+| `abortCommonNodeQuery`     | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 |                            | `command`         | `xs:string`   | required |          | Machine-readable identity of the command.                                                                           |
 |                            | `queryId`         | `xs:string`   | required |          | Machine-readable identity of the query instance being executed.                                                     |
 | `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
@@ -1014,7 +1014,7 @@ used to build a report on the results of the query.
 | `<queryStarted/>`          |                   |                         |          |          | Query progress element, showing query execution has started.                                                                                                                  |
 | `<queryDone/>`             |                   |                         |          |          | Query progress element, showing query execution has completed.                                                                                                                |
 | `<queryAborted/>`          |                   |                         |          |          | Query progress element, showing query execution has been aborted.                                                                                                             |
-| `<newTable/>`              |                   |                         |          |          | Query progress element that reports the creation of a new table, at the current position in the response. Contains a set of `<column/>` child elements.                          |
+| `<newTable/>`              |                   |                         |          |          | Query progress element that reports the creation of a new table, at the current position in the response. Contains a set of `<column/>` child elements.                       |
 |                            | `tableId`         | `xs:string`             | required |          | Identity of the table. Will be used in progress updates adding records to the table.                                                                                          |
 |                            | `tableName`       | `xs:string`             | required |          | Human-readable, localized name of the table.                                                                                                                                  |
 | `<column/>`                | `columnId`        | `xs:string`             | required |          | Identity of the column.                                                                                                                                                       |
@@ -1025,7 +1025,7 @@ used to build a report on the results of the query.
 |                            | `bgColor`         | `Color`                 | optional |          | Background color of column.                                                                                                                                                   |
 |                            | `alignment`       | `Alignment`             | optional |          | Alignment of column.                                                                                                                                                          |
 |                            | `nrDecimals`      | `xs:nonNegativeInteger` | optional |          | Number of deciamals of values in the column.                                                                                                                                  |
-| `<newRecords/>`            |                   |                         |          |          | Query progress element that reports new records which have been added to a table. Contains a set of `<record/>` child elements.                                                  |
+| `<newRecords/>`            |                   |                         |          |          | Query progress element that reports new records which have been added to a table. Contains a set of `<record/>` child elements.                                               |
 |                            | `tableId`         | `xs:string`             | required |          | Identity of the table.                                                                                                                                                        |
 | `<record/>`                |                   |                         |          |          | Contains the cells of one row as individual child elements, based on the underlying type of data presented.                                                                   |
 | `<boolean/>`               | (value)           | `xs:boolean`            |          |          | A Boolean-valued cell.                                                                                                                                                        |
@@ -1100,9 +1100,9 @@ types are added. (No existing event types are removed.)
 
 | Element                    | Attribute           | Type                 | Use      | Default  | Description                                                                                                                                         | 
 |:---------------------------|:--------------------|:---------------------|:---------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------| 
-| `subscribe`                | `dt`                | `xs:string`          | optional |          | Device token(s).                                                                                                                                    |
-|                            | `st`                | `xs:string`          | optional |          | Service token(s).                                                                                                                                   |
-|                            | `ut`                | `xs:string`          | optional |          | User token(s).                                                                                                                                      |
+| `subscribe`                | `dt`                | `xs:string`          | optional |          | Device token\(s\).                                                                                                                                  |
+|                            | `st`                | `xs:string`          | optional |          | Service token\(s\).                                                                                                                                 |
+|                            | `ut`                | `xs:string`          | optional |          | User token\(s\).                                                                                                                                    |
 |                            | `src`               | `xs:string`          | required |          | Source identity.                                                                                                                                    |
 |                            | `ttl`               | `xs:positiveInteger` | required |          | How long the subscription will be active, in seconds. Subscription should be renewed before the subscription expires, to maintain receiving events. |
 |                            | `getEventsSince`    | `xs:dateTime`        | optional |          | If provided, all events from this point in time (inclusive) are replayed as events sent to the subscriber.                                          |
@@ -1123,9 +1123,9 @@ to the concentrator, which returns an empty response is successful.
 
 | Element                    | Attribute           | Type                 | Use      | Default  | Description                                                                                                                                         | 
 |:---------------------------|:--------------------|:---------------------|:---------|:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------| 
-| `unsubscribe`              | `dt`                | `xs:string`          | optional |          | Device token(s).                                                                                                                                    |
-|                            | `st`                | `xs:string`          | optional |          | Service token(s).                                                                                                                                   |
-|                            | `ut`                | `xs:string`          | optional |          | User token(s).                                                                                                                                      |
+| `unsubscribe`              | `dt`                | `xs:string`          | optional |          | Device token\(s\).                                                                                                                                  |
+|                            | `st`                | `xs:string`          | optional |          | Service token\(s\).                                                                                                                                 |
+|                            | `ut`                | `xs:string`          | optional |          | User token\(s\).                                                                                                                                    |
 |                            | `src`               | `xs:string`          | required |          | Source identity.                                                                                                                                    |
 |                            | `nodeAdded`         | `xs:boolean`         | optional | `true`   | If `<nodeAdded/>` events should be excluded from the subscription.                                                                                  |
 |                            | `nodeUpdated`       | `xs:boolean`         | optional | `true`   | If `<nodeUpdated/>` events should be excluded from the subscription.                                                                                |
@@ -1151,8 +1151,8 @@ subscription request, the `<nodeAdded/>` element will also contain the set of av
 |                | `state`           | `NodeState`   | required |          | Current state of node.                                                                                              |
 |                | `hasChildren`     | `xs:boolean`  | required |          | If the node has child-nodes.                                                                                        |
 |                | `childrenOrdered` | `xs:boolean`  | optional | `false`  | If the order of the child nodes is important in the context.                                                        |
-|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                 |
-|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                          |
+|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                  |
+|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                           |
 |                | `hasCommands`     | `xs:boolean`  | optional | `false`  | If the node has commands the client can access.                                                                     |
 |                | `sniffable`       | `xs:boolean`  | optional | `false`  | If the node supports sniffing, i.e. can allow the client to attach a sniffer to it, to troubleshoot communication.  |
 |                | `parentId`        | `xs:string`   | optional |          | The identity of the parent node, if any. Root nodes do not have parent nodes.                                       |
@@ -1179,8 +1179,8 @@ subscription request, the `<nodeUpdated/>` element will also contain the updated
 |                | `state`           | `NodeState`   | required |          | Current state of node.                                                                                              |
 |                | `hasChildren`     | `xs:boolean`  | required |          | If the node has child-nodes.                                                                                        |
 |                | `childrenOrdered` | `xs:boolean`  | optional | `false`  | If the order of the child nodes is important in the context.                                                        |
-|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                 |
-|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                          |
+|                | `isReadable`      | `xs:boolean`  | optional | `false`  | If the node is readable and can deliver sensor data to the client.                                                  |
+|                | `isControllable`  | `xs:boolean`  | optional | `false`  | If the node is controllable and publish control parameters to the client.                                           |
 |                | `hasCommands`     | `xs:boolean`  | optional | `false`  | If the node has commands the client can access.                                                                     |
 |                | `sniffable`       | `xs:boolean`  | optional | `false`  | If the node supports sniffing, i.e. can allow the client to attach a sniffer to it, to troubleshoot communication.  |
 |                | `parentId`        | `xs:string`   | optional |          | The identity of the parent node, if any. Root nodes do not have parent nodes.                                       |
