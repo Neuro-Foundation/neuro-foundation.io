@@ -1,11 +1,22 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
+JavaScript: /Nav.js
 Icon: /favicon.ico
 Viewport: width=device-width,initial-scale=1
 
-<header id="header">
+<header id="native-header">
 <nav>
+<div>
+<button id="toggle-nav" onClick="nativeHeader.ToggleNav()">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+</svg>
+</button>
+<p id="small-pagpage-name">
+**[%Title]**
+</p>
+</div>
 
 * &#9776;
 * [Home](/Index.md)
@@ -60,7 +71,8 @@ Viewport: width=device-width,initial-scale=1
 		* [Synchronization.xsd](/Schemas/Synchronization.xsd)
 	* [Agent API](/Documentation/Neuron/Agent.md)
 	* [Software](/Implementations.md)
-* [%Title]
+*
+* <p id="large-pagpage-name">[%Title]</p>
 * [Neuro-Foundation](#)
 	* [\.com](https://neuro-foundation.com/)
 	* [\.io](https://neuro-foundation.io/)
