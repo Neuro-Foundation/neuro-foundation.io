@@ -293,7 +293,7 @@ A simple example containing sensor data from a temperature sensor.
 
 ```xml
 <ts v="2017-09-22T15:22:33Z" xmlns="urn:nf:iot:sd:1.0">
-  <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
+  <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
   <s n="SN" v="12345678" i="true" ar="true"/>
 </ts>
 ```
@@ -303,7 +303,7 @@ If this temperature sensor would be a node inside a concentrator, the same data 
 ```xml
 <nd id="Node1" xmlns="urn:nf:iot:sd:1.0">
   <ts v="2017-09-22T15:22:33Z">
-    <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
+    <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
     <s n="SN" v="12345678" i="true" ar="true"/>
   </ts>
 </nd>

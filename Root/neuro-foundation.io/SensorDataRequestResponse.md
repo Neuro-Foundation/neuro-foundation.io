@@ -388,7 +388,7 @@ Simple response:
 <iq type='result' from='device@example.org/abcd' to='client@example.org/1234' id='R0001'>
   <resp xmlns="urn:nf:iot:sd:1.0" id="00000001">
     <ts v="2017-09-22T15:22:33Z">
-      <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
+      <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
       <s n="SN" v="12345678" i="true" ar="true"/>
     </ts>
   </resp>
