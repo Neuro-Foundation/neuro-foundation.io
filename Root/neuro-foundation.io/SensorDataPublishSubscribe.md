@@ -87,7 +87,7 @@ PEP is fully described in [XEP-0163](https://xmpp.org/extensions/xep-0163.html).
       <item>
         <resp xmlns="urn:nf:iot:sd:1.0" id="00000001">
           <ts v="2017-09-22T15:22:33Z">
-            <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
+            <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
             <s n="SN" v="12345678" i="true" ar="true"/>
           </ts>
         </resp>
@@ -127,7 +127,7 @@ the subscriber to differentiate between multiple connections using the same acco
       <item id='22e25a6a-ce75-251a-880b-a4ac42e4101b' publisher='device@example.org'>
         <resp id="00000001" xmlns="urn:nf:iot:sd:1.0">
           <ts v="2017-09-22T15:22:33Z">
-            <q n="Temperature" v="12.3" u="C" m="true" ar="true"/>
+            <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
             <s n="SN" v="12345678" i="true" ar="true"/>
           </ts>
         </resp>
