@@ -9,7 +9,7 @@
     {
         display: list-item;
         font-size: 2em;
-        margin-inline: 0.5em;
+        padding-inline: 0.5em;
         opacity: 1;
         transform: none;
     }
