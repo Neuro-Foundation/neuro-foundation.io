@@ -842,25 +842,25 @@ searches have to be performed.
 
 The following table lists available search operators, their element names and meanings:
 
-| Element        | Type    | Operator                     | Description |
-|:---------------|:--------|:-----------------------------|:------------|
-| `<strEq/>`     | String  | tag = c                      | Searches for string values tags with values equal to a provided constant value. |
-| `<strNEq/>`    | String  | tag <> c                     | Searches for string values tags with values not equal to a provided constant value. |
-| `<strGt/>`     | String  | tag > c                      | Searches for string values tags with values greater than a provided constant value. |
-| `<strGtEq/>`   | String  | tag >= c                     | Searches for string values tags with values greater than or equal to a provided constant value. |
-| `<strLt/>`     | String  | tag < c                      | Searches for string values tags with values lesser than a provided constant value. |
-| `<strLtEq/>`   | String  | tag <= c                     | Searches for string values tags with values lesser than or equal to a provided constant value. |
-| `<strRange/>`  | String  | min <(=) tag <(=) max        | Searches for string values tags with values within a specified range of values. The endpoints can be included or excluded in the search. |
-| `<strNRange/>` | String  | tag <(=) min OR tag >(=) max | Searches for string values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
-| `<strMask/>`   | String  | tag LIKE c                   | Searches for string values tags with values similar to a provided constant value including wildcards. |
-| `<numEq/>`     | Numeric | tag = c                      | Searches for numerical values tags with values equal to a provided constant value. |
-| `<numNEq/>`    | Numeric | tag <> c                     | Searches for numerical values tags with values not equal to a provided constant value. |
-| `<numGt/>`     | Numeric | tag > c                      | Searches for numerical values tags with values greater than a provided constant value. |
-| `<numGtEq/>`   | Numeric | tag >= c                     | Searches for numerical values tags with values greater than or equal to a provided constant value. |
-| `<numLt/>`     | Numeric | tag < c                      | Searches for numerical values tags with values lesser than a provided constant value. |
-| `<numLtEq/>`   | Numeric | tag <= c                     | Searches for numerical values tags with values lesser than or equal to a provided constant value. |
-| `<numRange/>`  | Numeric | min <(=) tag <(=) max        | Searches for numerical values tags with values within a specified range of values. The endpoints can be included or excluded in the search. |
-| `<numNRange/>` | Numeric | tag <(=) min OR tag >(=) max | Searches for numerical values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
+| Element        | Type    | Operator                         | Description |
+|:---------------|:--------|:---------------------------------|:------------|
+| `<strEq/>`     | String  | tag = c                          | Searches for string values tags with values equal to a provided constant value. |
+| `<strNEq/>`    | String  | tag <> c                         | Searches for string values tags with values not equal to a provided constant value. |
+| `<strGt/>`     | String  | tag > c                          | Searches for string values tags with values greater than a provided constant value. |
+| `<strGtEq/>`   | String  | tag >= c                         | Searches for string values tags with values greater than or equal to a provided constant value. |
+| `<strLt/>`     | String  | tag < c                          | Searches for string values tags with values lesser than a provided constant value. |
+| `<strLtEq/>`   | String  | tag <= c                         | Searches for string values tags with values lesser than or equal to a provided constant value. |
+| `<strRange/>`  | String  | min <\(=\) tag <\(=\) max        | Searches for string values tags with values within a specified range of values. The endpoints can be included or excluded in the search. |
+| `<strNRange/>` | String  | tag <\(=\) min OR tag >\(=\) max | Searches for string values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
+| `<strMask/>`   | String  | tag LIKE c                       | Searches for string values tags with values similar to a provided constant value including wildcards. |
+| `<numEq/>`     | Numeric | tag = c                          | Searches for numerical values tags with values equal to a provided constant value. |
+| `<numNEq/>`    | Numeric | tag <> c                         | Searches for numerical values tags with values not equal to a provided constant value. |
+| `<numGt/>`     | Numeric | tag > c                          | Searches for numerical values tags with values greater than a provided constant value. |
+| `<numGtEq/>`   | Numeric | tag >= c                         | Searches for numerical values tags with values greater than or equal to a provided constant value. |
+| `<numLt/>`     | Numeric | tag < c                          | Searches for numerical values tags with values lesser than a provided constant value. |
+| `<numLtEq/>`   | Numeric | tag <= c                         | Searches for numerical values tags with values lesser than or equal to a provided constant value. |
+| `<numRange/>`  | Numeric | min <\(=\) tag <\(=\) max        | Searches for numerical values tags with values within a specified range of values. The endpoints can be included or excluded in the search. |
+| `<numNRange/>` | Numeric | tag <\(=\) min OR tag >\(=\) max | Searches for numerical values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
 [Search operators]
 
 The following example shows how a search for specific devices within a specific geographic area can be found. More precisely, it searches for a certain kind of PLC
