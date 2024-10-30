@@ -1,7 +1,7 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
-JavaScript: /Nav.js
+JavaScript: /Master.js
 Icon: /favicon.ico
 Viewport: width=device-width,initial-scale=1
 
