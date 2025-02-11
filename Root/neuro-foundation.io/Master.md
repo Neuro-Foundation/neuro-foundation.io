@@ -1,7 +1,10 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
-JavaScript: /Master.js
+Javascript: /AlertPopup.md.js
+Javascript: /ConfirmPopup.md.js
+Javascript: /PromptPopup.md.js
+Javascript: /Master.js
 Icon: /favicon.ico
 Viewport: width=device-width,initial-scale=1
 
@@ -127,3 +130,5 @@ Viewport: width=device-width,initial-scale=1
 [%Details]
 
 </main>
+
+<dialoge id ="native-popup-container"></dialoge>
