@@ -131,4 +131,4 @@ Viewport: width=device-width,initial-scale=1
 
 </main>
 
-<dialoge id ="native-popup-container"></dialoge>
+<dialog id ="native-popup-container"></dialog>
