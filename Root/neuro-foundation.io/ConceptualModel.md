@@ -217,8 +217,43 @@ Discovery
 	pairing things with their owners. Secondly, once claimed is the process of finding connected entities on the network, and establishing
 	communication with them. 
 
+Owner
+
+:	An owner of a thing is an entity that is authorized (in the context of the federated network)
+	to decide what operations can be performed on the thing, what other entities are allowed
+	to access it, and what information the thing is allowed to divulge. There can only be one
+	owner of a thing at a time. The ownership can be transferred. And authority can be 
+	delegated to other entities, but always with the approval of the owner.
+
+Claim
+
+:	A claim of a thing is a request made by an entity to become the owner of a thing. The claim
+	is made to the Thing Registry acting as a broker, holding the sensitive information published
+	by the Thing. If the claim matches the information provided by the thing, the entity making
+	the claim becomes the thing's owner.
+
+Decommissioning
+
+:	An owner can decommission a thing. By doing so, the owner reliquishes the ownership of the
+	thing, and the thing is put in an ownerless state, from where it can be disconnected from
+	the network, or register itself in a thing registry, to be claimed by a new owner.
+
 Provisioning
 
+:	Provisioning is the process of helping things make good security decisions. When a thing
+	encounters a new operation from a new entity, and does not know how to proceed, it can
+	request help from the Provisioning service of its broker. The Provisioning service provides
+	a response to the thing, while at the same time, informing the owner of the thing about any
+	new operations being performed that the owner has not already responded to. The provisioning
+	service provides a bridge by the real-time operation requirements of an automatic system,
+	and the human-time operation requirements of human owners being able to make informed
+	decisions.
 
-Ownership
-Claim
+Thing Registry
+
+:	A thing registry has a twofold purpose: First, it allows things to register public 
+	information about themselves, in the form of meta-data. This information can be used by
+	other entities in order to discover things on the network for different purposes and
+	requirements. Secondly, the thing registry acts as a broker of things without owners,
+	and their future owners. They allow owners to find the network identity of their things,
+	as well as informing the theirs the network identities of their owners.
