@@ -31,6 +31,14 @@ Neuro-Foundation presents communication infrastructure for a globally scalable, 
 For a brief introduction to the Neuro-Foundation infrastructure, and how it works, see the [Overview](Overview.md). If you want to test
 integration services, brokers or devices, [cybercity.online](https://cybercity.online/) is available for this purpose.
 
+Architectural Overview
+--------------------------
+
+* [Conceptual Model](ConceptualModel.md)
+* [Operational Model](OperationalModel.md)
+* [Communication Model](CommunicationModel.md)
+
+
 Representation
 -----------------
 

@@ -7,6 +7,7 @@
 			<Content fileName="Binding.md"/>
 			<Content fileName="ClockSynchronization.md"/>
 			<Content fileName="Concentrator.md"/>
+			<Content fileName="ConceptualModel.md"/>
 			<Content fileName="ControlDataForm.md"/>
 			<Content fileName="ControlParameters.md"/>
 			<Content fileName="ControlSimpleActions.md"/>
@@ -21,6 +22,7 @@
 			<Content fileName="LegalIdentities.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="NeuroFoundationStyles.cssx"/>
+			<Content fileName="OperationalModel.md"/>
 			<Content fileName="Overview.md"/>
 			<Content fileName="P2P.md"/>
 			<Content fileName="Provisioning.md"/>
