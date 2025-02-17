@@ -257,3 +257,35 @@ Thing Registry
 	requirements. Secondly, the thing registry acts as a broker of things without owners,
 	and their future owners. They allow owners to find the network identity of their things,
 	as well as informing the theirs the network identities of their owners.
+
+
+Trust
+
+:	In an open network, participants can initially be anyone. For security reasons, each
+	participant should be distrusted. Trust is a measure of how much a participant can
+	trust another. It can be increased by different means, such as use of identities,
+	digital signatures, third party validations of claims, etc. The more trust there is
+	between participants, the more secure the network becomes, and the more important operations
+	and agreements can be performed between them.
+
+Trust Provider
+
+:	A trust provider is an entity that provides trust to other participants in a federated 
+	network. It can help validate claims and digital signatures, including corroboration of
+	the association between conceptual, network and cryptographic identities, for example. 
+	It can help broker communication between participants, authenticate and authorize requests, 
+	help make security decisions, etc.
+
+Parent Trust Provider
+
+:	A trust provider may need another trust provider to authenticate its identity in a larger
+	context. Such a trust provider is called a trust parent provider.
+
+Tree of Trust
+
+:	A tree of trust is a hierarchical structure of trust providers, where each trust provider,
+	except the topmost, is connected to a parent trust provider above it in the hierarchy. 
+
+Trust Root
+
+:	The trust provider at the top of the hierarchy is called the trust root.
