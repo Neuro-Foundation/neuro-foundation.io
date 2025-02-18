@@ -72,6 +72,7 @@ Data Protection, Security and Privacy
 * [Provisioning for owners](Provisioning.md)
 * [Peer-to-Peer communication](P2P.md)
 * [End-to-End encryption](E2E.md)
+* [Opaque Unique Identifiers](OpaqueUniqueIdentifiers.md)]
 
 
 Operation
@@ -89,7 +90,6 @@ Agreements
 * [Legal Identities](LegalIdentities.md)
 * [Smart Contracts](/SmartContracts.md)
 * Automatic provisioning using smart contracts
-
 
 Schemas
 -------------
