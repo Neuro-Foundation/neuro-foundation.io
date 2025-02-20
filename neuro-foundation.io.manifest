@@ -75,6 +75,7 @@
 				<Content fileName="E2E.xsd"/>
 				<Content fileName="EventSubscription.xsd"/>
 				<Content fileName="LegalIdentities.xsd"/>
+				<Content fileName="OpaqueUuid.xsd"/>
 				<Content fileName="P2P.xsd"/>
 				<Content fileName="ProvisioningDevice.xsd"/>
 				<Content fileName="ProvisioningOwner.xsd"/>

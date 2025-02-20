@@ -59,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schemas", "Schemas", "{13CD
 		Root\neuro-foundation.io\Schemas\E2E.xsd = Root\neuro-foundation.io\Schemas\E2E.xsd
 		Root\neuro-foundation.io\Schemas\EventSubscription.xsd = Root\neuro-foundation.io\Schemas\EventSubscription.xsd
 		Root\neuro-foundation.io\Schemas\LegalIdentities.xsd = Root\neuro-foundation.io\Schemas\LegalIdentities.xsd
+		Root\neuro-foundation.io\Schemas\OpaqueUuid.xsd = Root\neuro-foundation.io\Schemas\OpaqueUuid.xsd
 		Root\neuro-foundation.io\Schemas\P2P.xsd = Root\neuro-foundation.io\Schemas\P2P.xsd
 		Root\neuro-foundation.io\Schemas\ProvisioningDevice.xsd = Root\neuro-foundation.io\Schemas\ProvisioningDevice.xsd
 		Root\neuro-foundation.io\Schemas\ProvisioningOwner.xsd = Root\neuro-foundation.io\Schemas\ProvisioningOwner.xsd

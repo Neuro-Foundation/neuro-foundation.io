@@ -72,7 +72,7 @@ Data Protection, Security and Privacy
 * [Provisioning for owners](Provisioning.md)
 * [Peer-to-Peer communication](P2P.md)
 * [End-to-End encryption](E2E.md)
-* [Opaque Unique Identifiers](OpaqueUniqueIdentifiers.md)]
+* [Opaque Unique Identifiers](OpaqueUniqueIdentifiers.md)
 
 
 Operation
@@ -102,6 +102,7 @@ XML Schemas in alphabetical order:
 * [E2E.xsd](Schemas/E2E.xsd)
 * [EventSubscription.xsd](Schemas/EventSubscription.xsd)
 * [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)
+* [OpaqueUuid.xsd](Schemas/OpaqueUuid.xsd)
 * [P2P.xsd](Schemas/P2P.xsd)
 * [ProvisioningDevice.xsd](Schemas/ProvisioningDevice.xsd)
 * [ProvisioningOwner.xsd](Schemas/ProvisioningOwner.xsd)

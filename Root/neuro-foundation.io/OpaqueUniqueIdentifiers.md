@@ -10,6 +10,7 @@ CSS: NeuroFoundationStyles.cssx
 Opaque Unique Identifiers
 ============================
 
+This document outlines the XML representation of the Opaque Unique Identifiers service provided to devices in the federated network.
 While each connected entity has a unique global identity on the XMPP network called the JID, and each entity connected to the XMPP network via
 a [*concentrator*](Concentrator.md) has a unique global identity in the *quadruple* (`JID`, `NodeId`, `SourceId`, `Partition`), there is
 sometimes also a need for an opaque unique identifier, that is not directly related to any communication protocol. Typically, applications use
@@ -17,6 +18,25 @@ sometimes also a need for an opaque unique identifier, that is not directly rela
 the Neuro-Foundation infrastructure provides a way to generate *opaque unique identifiers*, similar to `GUID`s or `UUID`s, that can be used as 
 identifiers in other systems, but that can also be resolved to a `JID` in the connected case, or a *quadruple* (`JID`, `NodeId`, `SourceId`, 
 `Partition`) in the general case.
+
+| Provisioning                                                        ||
+| ------------|--------------------------------------------------------|
+| Namespace:  | `urn:nf:iot:uuid:1.0`                                |
+| Schema:     | [OpaqueUuid.xsd](Schemas/OpaqueUuid.xsd) |
+
+![Table of Contents](toc)
+
+Motivation and design goal
+----------------------------
+
+The method of generating UUIDs described here, is designed with the following goals in mind:
+
+* Provide Globally Unique IDs having the same format as traditional UUIDs and GUIDs, for storage and processing in external systems.
+
+* The Globally Unique IDs should be opaque, i.e. not reveal any information about the device, its owner, or its location, by itself.
+
+* A method should exist whereby authorized parties are allowed to resolve a Globally Unique ID to a `JID` in the federated network, or a 
+  *quadruple* (`JID`, `NodeId`, `SourceId`, `Partition`) in the general concentrator case.
 
 IEEE 1451.0 UUID
 -------------------
@@ -48,18 +68,63 @@ Domain as Manufacturer
 In a federated network, the concept of a domain is crucial. The Neuro-Foundation infrastructure is based on brokers (Trust Providers),
 providing services to entities in the domain that make it possible to interoperate in an open and yet secure manner. The broker on the domain
 is a key player for tying the network together. It therefore makes sense, that the broker itself, becomes a manufacturer of UUIDs, and that its
-main domain is tied together to a unique Manufacturer ID issued to it. A registry of registered domains and their Manufacturer IDs can be kept
-to ensure that at most one domain corresponds to a Manufacturer ID. Reversely, given a Manufacturer ID, the domain can be resolved, as access
-to the registry is public. Furthermore, the broker on that domain, is an authority and Trust Provider on that domain. The broker is furthermore
-tasked to recognize the UUIDs it has created, and to what connected entity (`JID`) it belongs. Each connected entity (`JID`) can request UUIDs,
-and in doing so, gets a unique identity (since domains are separated by the registry), and each broker can register which UUIDs have been
-generated for which connected entities (`JID`). In the case of concentrators, a request can then be made to the resolved `JID`, to get the
-additional (`NodeId`, `SourceId` and `Partition`) associated with the UUID.
+main domain is tied together witg a unique Manufacturer ID issued to it.
+
+A registry of registered domains and their Manufacturer IDs can be kept to ensure that at most one domain corresponds to a Manufacturer ID. 
+Reversely, given a Manufacturer ID, the domain can be resolved, as access to the registry is public and downloadable. Each broker can have a 
+copy of registered Manufacturer IDs and their corresponding domain names, to avoid creating a bottle-neck. Furthermore, a broker on a domain, 
+is an authority and Trust Provider on that domain. The broker is furthermore tasked to recognize the UUIDs it has created, and to what connected 
+entity (`JID`) each UUID belongs. Each connected entity (`JID`) can request UUIDs, and in doing so, gets a unique identity (since domains are 
+separated by the registry), and each broker can register which UUIDs have been generated for which connected entities (`JID`). In the case of 
+concentrators, a request can then be made to the resolved `JID`, to get the additional (`NodeId`, `SourceId` and `Partition`) associated with 
+the UUID.
+
+### Getting Manufacturer ID
+
+A broker can get its Manufacturer ID from the *authoratative trust anchor* by sending a `<getManufacturerId/>` request without attributes to the 
+trust anchor broker, which for this specification is `neuro-foundation.io`. Only brokers are allowed to send this request. All other senders 
+will receive a `forbidden` error as a response.
+
+The authorotative trust anchor checks if the sender (i.e. the domain of the sending broker) has a Manufacturer ID registered. If so, that one
+is returned. If not, a new Manufacturer ID is generated and return.
+
+In the following example, the broker at `broker.example.com` requests its Manufacturer ID from `neuro-foundation.io`, which responds with
+the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third is `ab`, in hecadecimal notation:
+
+```xml
+<iq type='get' from='broker.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
+  <getManufacturerId/>
+</iq>
+
+<iq type='result' from='neuro-foundation.io' to='broker.example.com'>
+  <manufacturerId xmlns='urn:nf:iot:uuid:1.0'>0012ab</manufacturerId>
+</iq>
+```
+
+### Resolving Manufacturer ID
+
+A broker can resolve a Manufacturer ID to a domain by sending a `<resolveManufacturerId/>` request with the Manufacturer ID as an attribute to
+the authoritative trust anchor. Only brokers are allowed to send this request. All other senders will receive a `forbidden` error as a response.
+This is not the primary way to resolve a Manufacturer ID, as the registry is public and downloadable, and should be distributed among the brokers
+on other ways. Using the registry is preferred, as it avoids creating a bottle-neck and single point of failure. The `<resolveManufacturerId/>`
+exists as a reference. It takes one attribute:
+
+| Attribute        | Type             | Description                     |
+|:-----------------|:-----------------|:--------------------------------|
+| `manufacturerId` | `ManufacturerID` | The Manufacturer ID to look up. |
+
 
 
 Manufacturer ID Registry
 ---------------------------
 
+The authorotative broker responsible for a Manufacturer ID knows the UUIDs itself has created. But the manufacturer operating the broker can
+generate UUIDs out-of-band, for instance, in a production environment where devices are given UUIDs but not yet have JIDs, as they are not
+installed yet. In this case, the broker cannot create a UUID for the device, as a request cannot be made on the federated network, from the 
+device or its corresponding binding/concentrator. In such cases, the broker learns of the UUID when the device comes online and registers itself
+with the Thing Registry on the broker. This registration can be temporary and private, in the case of ownership pairing, or a public registration
+later during its life-cycle. The broker receiving the Thing Registry registration, detects the UUID and the manufacturer ID in it, and if it
+matches the broker's own Manufacturer ID, it can register the UUID as belonging to the connected entity (`JID`) that registered the device.
 
 
 
@@ -68,3 +133,12 @@ Resolving a UUID
 
 UUID -> Domain -> JID -> Quadruple
 
+Removal Registry
+Using UUIDs in communication over XMPP
+UUID move domain
+UUID with PSK
+PSK as UUID
+Moving account with PSK
+
+Public ip in response man id
+Geoloc IP uuid
