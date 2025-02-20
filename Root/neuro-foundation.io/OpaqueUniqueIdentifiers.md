@@ -87,8 +87,9 @@ will receive a `forbidden` error as a response.
 
 The authorotative trust anchor checks if the sender (i.e. the domain of the sending broker) has a Manufacturer ID registered. If so, that one
 is returned. If not, a new Manufacturer ID is generated and return. Together with the Manufacturer ID, the IP Endpoint of the request is returned.
-This IP Endpoint can be used by the broker to resolve the geolocalization of the public IP the broker is using. All the broker needs to do to
-create new UUIDs is to append the year and time components.
+The response may also contain the latitude and longitude of the endpoint, if the trust anchor has access to this information. If not, the IP 
+Endpoint can be used by the broker to resolve the geolocalization of the public IP the broker is using. All that is left for the broker to do to
+in order to create new UUIDs, is to append the year and time components.
 
 In the following example, the broker at `broker.example.com` requests its Manufacturer ID from `neuro-foundation.io`, which responds with
 the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third is `ab`, in hecadecimal notation:
@@ -99,7 +100,7 @@ the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third 
 </iq>
 
 <iq type='result' id='0001' from='neuro-foundation.io' to='broker.example.com'>
-  <manufacturerId xmlns='urn:nf:iot:uuid:1.0' ep='1.2.3.4:56789'>0012ab</manufacturerId>
+  <manufacturerId xmlns='urn:nf:iot:uuid:1.0' ep='1.2.3.4:56789' lat='12.345678' long='23.456789'>0012ab</manufacturerId>
 </iq>
 ```
 

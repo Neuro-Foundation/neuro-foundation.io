@@ -38,6 +38,8 @@
 			<xs:simpleContent>
 				<xs:extension base='ManufacturerID'>
 					<xs:attribute name='ep' type='xs:string' use='required'/>
+					<xs:attribute name='lat' type='xs:string' use='optional'/>
+					<xs:attribute name='long' type='xs:string' use='optional'/>
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
