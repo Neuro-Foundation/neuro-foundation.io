@@ -31,6 +31,14 @@ Neuro-Foundation presents communication infrastructure for a globally scalable, 
 For a brief introduction to the Neuro-Foundation infrastructure, and how it works, see the [Overview](Overview.md). If you want to test
 integration services, brokers or devices, [cybercity.online](https://cybercity.online/) is available for this purpose.
 
+Architectural Overview
+--------------------------
+
+* [Conceptual Model](ConceptualModel.md)
+* [Operational Model](OperationalModel.md)
+* [Communication Model](CommunicationModel.md)
+
+
 Representation
 -----------------
 
@@ -64,6 +72,7 @@ Data Protection, Security and Privacy
 * [Provisioning for owners](Provisioning.md)
 * [Peer-to-Peer communication](P2P.md)
 * [End-to-End encryption](E2E.md)
+* [Opaque Unique Identifiers](OpaqueUniqueIdentifiers.md)]
 
 
 Operation
@@ -81,7 +90,6 @@ Agreements
 * [Legal Identities](LegalIdentities.md)
 * [Smart Contracts](/SmartContracts.md)
 * Automatic provisioning using smart contracts
-
 
 Schemas
 -------------
