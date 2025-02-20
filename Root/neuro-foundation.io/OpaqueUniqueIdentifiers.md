@@ -18,9 +18,9 @@ the Neuro-Foundation infrastructure provides a way to generate *opaque unique id
 identifiers in other systems, but that can also be resolved to a `JID` in the connected case, or a *quadruple* (`JID`, `NodeId`, `SourceId`, 
 `Partition`) in the general case.
 
-| Provisioning                                                        ||
-| ------------|--------------------------------------------------------|
-| Namespace:  | `urn:nf:iot:uuid:1.0`                                |
+| Provisioning                                          ||
+| ------------|------------------------------------------|
+| Namespace:  | `urn:nf:iot:uuid:1.0`                    |
 | Schema:     | [OpaqueUuid.xsd](Schemas/OpaqueUuid.xsd) |
 
 ![Table of Contents](toc)
@@ -192,7 +192,7 @@ Example:
 </manufacturers>
 ```
 
-**Note:** The registry is public and can be downloaded by anyone. To avoid bottle-necks and single points of failure, the registry should be
+**Note**: The registry is public and can be downloaded by anyone. To avoid bottle-necks and single points of failure, the registry should be
 distributed by alternative means, such as via parent brokers to chile brokers, as described in the chapter on [Software Updates](/SoftwareUpdates.md).
 A broker detecting a new Manufacturer ID (or an unknown Manufacturer ID) can choose to download the registry and make it available to its
 child brokers. A root broker, or the trust anchor itself, can also regularly download or publish its registry to its children, for instance, once a 
@@ -244,9 +244,14 @@ corresponding node, if the UUID is found.
 (`<item-not-found/>`).
 
 
+Client resolution of a UUID
+------------------------------
 
+A connected client (either standalone client, or a concentrator, such as a bridge), can also resolve a UUID, by requesting the broker to resolve
+it for the client
 
-client request
+TBD
+
 
 Removal Registry
 
