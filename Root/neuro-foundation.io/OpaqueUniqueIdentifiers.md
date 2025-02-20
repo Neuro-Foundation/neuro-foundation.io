@@ -209,12 +209,44 @@ with the Thing Registry on the broker. This registration can be temporary and pr
 later during its life-cycle. The broker receiving the Thing Registry registration, detects the UUID and the manufacturer ID in it, and if it
 matches the broker's own Manufacturer ID, it can register the UUID as belonging to the connected entity (`JID`) that registered the device.
 
+Broker resolution of a UUID
+------------------------------
+
+The process of resolving a UUID to a `JID` in the federated network, or a *quadruple* (`JID`, `NodeId`, `SourceId`, `Partition`) in the general
+case, can now be performed by a broker, by following these steps:
+
+1.  First, the Manufacturer ID is extracted from the UUID.
+
+2.  The domain associated with the Manufacturer ID is retrieved.
+
+    * If the Manufacturer ID is known, from the most recently downloaded Registry, or from previous call using `<resolveManufacturerId/>`, 
+use that domain.
+    
+    * If Manufacturer ID is not known, either trigger a new download of the registry, or use `<resolveManufacturerId/>` to resolve the
+domain.
+
+3.  The broker then sends a `<resolveUuid/>` request to the broker on the domain belonging to the Manufacturer ID.
+
+    * The response may indicate only a `JID` in the federated network, or a *quadruple* (`JID`, `NodeId`, `SourceId`, `Partition`) in the general
+case. If a *quadruple* is returned, the resolution is complete.
+
+4.  If only a `JID` is returned, the broker can then send a `<resolveUuid/>` request to the corresponding Full JID of the associated `JID`.
+
+    * If the device is not connected (and a Full JID is not available), further resolution is not possible, and a partial result is returned.
+
+    * If the device is connected, a Full JID is available. If the device is a standalone device connected to the network it will return the
+same `JID` as the one returned in step 3 (the Bare JID).
+
+    * If the device is a concentrator on the other hand, it will return a *quadruple* (`JID`, `NodeId`, `SourceId`, `Partition`) to the
+corresponding node, if the UUID is found.
+
+5.  If in any of the steps above, the Manufacturer ID or UUID is not found, an error is returned, indicating the item was not found
+(`<item-not-found/>`).
 
 
-Resolving a UUID
--------------------
 
-UUID -> Domain -> JID -> Quadruple
+
+client request
 
 Removal Registry
 
