@@ -11,7 +11,7 @@ Viewport: width=device-width,initial-scale=1
 <header id="native-header">
 <nav>
 <div>
-<button id="toggle-nav" onClick="nativeHeader.ToggleNav()">
+<button id="toggle-nav" onClick="NativeHeader.ToggleNav()">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
 </svg>
@@ -131,4 +131,4 @@ Viewport: width=device-width,initial-scale=1
 
 </main>
 
-<dialog id ="native-popup-container"></dialog>
+<div id ="native-popup-container"></div>
