@@ -82,13 +82,20 @@ the UUID.
 
 A broker can get its Manufacturer ID from the *authoratative trust anchor* by sending a `<getManufacturerId/>` request without attributes to the 
 trust anchor broker, which for this specification is `neuro-foundation.io`. Only brokers are allowed to send this request. All other senders 
-will receive a `forbidden` error as a response.
+will receive a `<forbidden/>` error as a response.
 
 The authorotative trust anchor checks if the sender (i.e. the domain of the sending broker) has a Manufacturer ID registered. If so, that one
 is returned. If not, a new Manufacturer ID is generated and return. Together with the Manufacturer ID, the IP Endpoint of the request is returned.
 The response may also contain the latitude and longitude of the endpoint, if the trust anchor has access to this information. If not, the IP 
 Endpoint can be used by the broker to resolve the geolocalization of the public IP the broker is using. All that is left for the broker to do to
-in order to create new UUIDs, is to append the year and time components.
+in order to create new UUIDs, is to append the year and time components. The response is returned using a `<manufacturerId/>` element in an 
+`iq result` stanza. Attributes include:
+
+| Attribute | Type        | Description                                                             |
+|:----------|:------------|:------------------------------------------------------------------------|
+| `ep`      | `xs:string` | Endpoint of the broker making the request, as seen by the trust anchor. |
+| `lat`     | `xs:double` | Optional Latitude of the endpoint.                                      |
+| `long`    | `xs:double` | Optional Longitude of the endpoint.                                     |
 
 In the following example, the broker at `broker.example.com` requests its Manufacturer ID from `neuro-foundation.io`, which responds with
 the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third is `ab`, in hecadecimal notation:
@@ -106,16 +113,18 @@ the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third 
 ### Resolving Manufacturer ID
 
 A broker can resolve a Manufacturer ID to a domain by sending a `<resolveManufacturerId/>` request with the Manufacturer ID as an attribute to
-the authoritative trust anchor. Only brokers are allowed to send this request. All other senders will receive a `forbidden` error as a response.
+the authoritative trust anchor. Only brokers are allowed to send this request. All other senders will receive a `<forbidden/>` error as a response.
 This is not the primary way to resolve a Manufacturer ID, as the registry is public and downloadable, and should be distributed among the brokers
 on other ways. Using the registry is preferred, as it avoids creating a bottle-neck and single point of failure. The `<resolveManufacturerId/>`
 exists as a reference, and can be used, for instance, in cases where the Manufacturer ID is not available in the registry as the broker knows it.
-The Manufacturer ID might, for example, be new. The trust anchor broker returns the domain, if found, using the `<domain/>` element. If no domain
-is found, an error with a <item-not-found/> element is returned. The request takes one attribute:
+The Manufacturer ID might, for example, be new. The request takes one attribute:
 
 | Attribute        | Type             | Description                     |
 |:-----------------|:-----------------|:--------------------------------|
 | `manufacturerId` | `ManufacturerID` | The Manufacturer ID to look up. |
+
+The trust anchor broker returns the domain, if found, using the `<domain/>` element. The response has no additional attributes. If no domain
+is found, an error with a `<item-not-found/>` element is returned. 
 
 In the following example, the broker at `broker2.example.com` resolves the Manufacturer ID `0012ab` to the domain `broker.example.com`:
 
@@ -143,9 +152,54 @@ In the following example, the broker at `broker2.example.com` resolves tries to 
 </iq>
 ```
 
+### Downloading Manufacturer Registry
 
-Manufacturer ID Registry
----------------------------
+A broker can download the Manufacturer Registry from the authoritative trust anchor by first getting an URL for the registry. This URL is
+retrieved by sending a `<getManufacturerRegistry/>` request in an `iq get` stanza to the trust anchor broker. Only brokers are allowed to
+send this request. All other senders will receive a `<forbidden/>` error as a response. The request has no attributes. The trust anchor
+responds with a URL to the registry, using the `<manufacturersUrl/>` element that will contain the URL inside.
+
+Example:
+
+```xml
+<iq type='get' id='0004' from='broker.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
+  <getManufacturerRegistry/>
+</iq>
+
+<iq type='result' id='0004' from='neuro-foundation.io' to='broker.example.com'>
+  <manufacturersUrl xmlns='urn:nf:iot:uuid:1.0'>https://neuro-foundation.io/registry/manufacturer</registryUrl>
+</iq>
+```
+
+Once the URL has been retrieved, it can be used to download the registry. The registry is a simple XML file, containing the Manufacturer IDs
+registered, and the domains associated with them. The registry contains a root element named `<manufacturers/>`, containing zero or more
+`<man/>` elements (short for manufacturer). Each `<man/>` element contains the following attributes:
+
+| Attribute | Type             | Description                                                                                 |
+|:----------|:-----------------|:--------------------------------------------------------------------------------------------|
+| `id`      | `ManufacturerID` | A Manufacturer ID.                                                                          |
+| `n`       | `xs:string`      | The associated domain name.                                                                 |
+| `t`       | `xs:dateTime`    | The date and time of registration of the manufacturer ID and the corresponding domain name. |
+
+Example:
+
+```xml
+<manufacturers xmlns='urn:nf:iot:uuid'>
+    <man id='000000' n='example.com' t='2023-10-07T12:31:55Z'/>
+    ...
+    <man id='0012ab' n='broker.example.com' t='2025-02-20T18:14:12Z'/>
+    ...
+</manufacturers>
+```
+
+**Note:** The registry is public and can be downloaded by anyone. To avoid bottle-necks and single points of failure, the registry should be
+distributed by alternative means, such as via parent brokers to chile brokers, as described in the chapter on [Software Updates](/SoftwareUpdates.md).
+A broker detecting a new Manufacturer ID (or an unknown Manufacturer ID) can choose to download the registry and make it available to its
+child brokers. A root broker, or the trust anchor itself, can also regularly download or publish its registry to its children, for instance, once a 
+month, to make sure the registry id disseminated to all brokers in the network, without placing undue load on single components.
+
+Manufacturer ID via Thing Registry
+-------------------------------------
 
 The authorotative broker responsible for a Manufacturer ID knows the UUIDs itself has created. But the manufacturer operating the broker can
 generate UUIDs out-of-band, for instance, in a production environment where devices are given UUIDs but not yet have JIDs, as they are not
@@ -163,8 +217,13 @@ Resolving a UUID
 UUID -> Domain -> JID -> Quadruple
 
 Removal Registry
+
 Using UUIDs in communication over XMPP
+
 UUID move domain
+
 UUID with PSK
+
 PSK as UUID
+
 Moving account with PSK
