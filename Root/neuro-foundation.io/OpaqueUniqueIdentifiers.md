@@ -86,18 +86,20 @@ trust anchor broker, which for this specification is `neuro-foundation.io`. Only
 will receive a `forbidden` error as a response.
 
 The authorotative trust anchor checks if the sender (i.e. the domain of the sending broker) has a Manufacturer ID registered. If so, that one
-is returned. If not, a new Manufacturer ID is generated and return.
+is returned. If not, a new Manufacturer ID is generated and return. Together with the Manufacturer ID, the IP Endpoint of the request is returned.
+This IP Endpoint can be used by the broker to resolve the geolocalization of the public IP the broker is using. All the broker needs to do to
+create new UUIDs is to append the year and time components.
 
 In the following example, the broker at `broker.example.com` requests its Manufacturer ID from `neuro-foundation.io`, which responds with
 the manufacturer ID `0012ab`, i.e. first byte is `00`, second is `12` and third is `ab`, in hecadecimal notation:
 
 ```xml
-<iq type='get' from='broker.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
+<iq type='get' id='0001' from='broker.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
   <getManufacturerId/>
 </iq>
 
-<iq type='result' from='neuro-foundation.io' to='broker.example.com'>
-  <manufacturerId xmlns='urn:nf:iot:uuid:1.0'>0012ab</manufacturerId>
+<iq type='result' id='0001' from='neuro-foundation.io' to='broker.example.com'>
+  <manufacturerId xmlns='urn:nf:iot:uuid:1.0' ep='1.2.3.4:56789'>0012ab</manufacturerId>
 </iq>
 ```
 
@@ -107,12 +109,39 @@ A broker can resolve a Manufacturer ID to a domain by sending a `<resolveManufac
 the authoritative trust anchor. Only brokers are allowed to send this request. All other senders will receive a `forbidden` error as a response.
 This is not the primary way to resolve a Manufacturer ID, as the registry is public and downloadable, and should be distributed among the brokers
 on other ways. Using the registry is preferred, as it avoids creating a bottle-neck and single point of failure. The `<resolveManufacturerId/>`
-exists as a reference. It takes one attribute:
+exists as a reference, and can be used, for instance, in cases where the Manufacturer ID is not available in the registry as the broker knows it.
+The Manufacturer ID might, for example, be new. The trust anchor broker returns the domain, if found, using the `<domain/>` element. If no domain
+is found, an error with a <item-not-found/> element is returned. The request takes one attribute:
 
 | Attribute        | Type             | Description                     |
 |:-----------------|:-----------------|:--------------------------------|
 | `manufacturerId` | `ManufacturerID` | The Manufacturer ID to look up. |
 
+In the following example, the broker at `broker2.example.com` resolves the Manufacturer ID `0012ab` to the domain `broker.example.com`:
+
+```xml
+<iq type='get' id='0002' from='broker2.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
+  <resolveManufacturerId manufacturerId='0012ab'/>
+</iq>
+
+<iq type='result' id='0002' from='neuro-foundation.io' to='broker2.example.com'>
+  <domain xmlns='urn:nf:iot:uuid:1.0'>broker.example.com</domain>
+</iq>
+```
+
+In the following example, the broker at `broker2.example.com` resolves tries to resolve the non-existent Manufacturer ID `fe12ac`:
+
+```xml
+<iq type='get' id='0003' from='broker2.example.com' to='neuro-foundation.io' xmlns='urn:nf:iot:uuid:1.0'>
+  <resolveManufacturerId manufacturerId='fe12ab'/>
+</iq>
+
+<iq type='error' id='0003' from='neuro-foundation.io' to='broker2.example.com'>
+  <error type='cancel'>
+    <item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
+  </error>
+</iq>
+```
 
 
 Manufacturer ID Registry

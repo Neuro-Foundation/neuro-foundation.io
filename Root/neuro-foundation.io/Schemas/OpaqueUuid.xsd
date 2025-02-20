@@ -30,10 +30,17 @@
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name='manufacturerId' type='ManufacturerID'>
+	<xs:element name='manufacturerId'>
 		<xs:annotation>
 			<xs:documentation>Sent as an IQ response stanza, in response to Manufacturer ID requests.</xs:documentation>
 		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base='ManufacturerID'>
+					<xs:attribute name='ep' type='xs:string' use='required'/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
 	</xs:element>
 
 	<xs:simpleType name="ManufacturerID">
