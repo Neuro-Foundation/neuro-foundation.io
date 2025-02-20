@@ -3,7 +3,6 @@ Description: Main page of neuro-foundation.io
 Date: 2024-08-02
 Author: Peter Waher
 Master: Master.md
-CSS: NeuroFoundationStyles.cssx
 
 =============================================
 

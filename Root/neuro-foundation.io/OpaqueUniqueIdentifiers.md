@@ -3,7 +3,6 @@ Description: Opaque Unique Identifiers page of neuro-foundation.io
 Date: 2025-02-18
 Author: Peter Waher
 Master: Master.md
-CSS: NeuroFoundationStyles.cssx
 
 =============================================
 
@@ -169,6 +168,3 @@ UUID move domain
 UUID with PSK
 PSK as UUID
 Moving account with PSK
-
-Public ip in response man id
-Geoloc IP uuid

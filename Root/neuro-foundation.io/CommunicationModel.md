@@ -3,7 +3,6 @@ Description: Describes the communication model of the Neuro-Foundation interface
 Date: 2025-02-03
 Author: Peter Waher
 Master: Master.md
-CSS: NeuroFoundationStyles.cssx
 
 =============================================
 
