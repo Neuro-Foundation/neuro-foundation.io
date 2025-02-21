@@ -175,19 +175,26 @@ Once the URL has been retrieved, it can be used to download the registry. The re
 registered, and the domains associated with them. The registry contains a root element named `<manufacturers/>`, containing zero or more
 `<man/>` elements (short for manufacturer). Each `<man/>` element contains the following attributes:
 
-| Attribute | Type             | Description                                                                                 |
-|:----------|:-----------------|:--------------------------------------------------------------------------------------------|
-| `id`      | `ManufacturerID` | A Manufacturer ID.                                                                          |
-| `n`       | `xs:string`      | The associated domain name.                                                                 |
-| `t`       | `xs:dateTime`    | The date and time of registration of the manufacturer ID and the corresponding domain name. |
+| Attribute | Type                    | Description                                                                                 |
+|:----------|:------------------------|:--------------------------------------------------------------------------------------------|
+| `id`      | `ManufacturerID`        | A Manufacturer ID.                                                                          |
+| `n`       | `xs:string`             | The associated domain name.                                                                 |
+| `t`       | `xs:dateTime`           | The date and time of registration of the manufacturer ID and the corresponding domain name. |
+| `v`       | `xs:nonNegativeInteger` | A version number used, representing the namespace used to create the Manufacturer ID.       |
+
+The registry recognizes the following versions:
+
+| Version | Namespace             |
+|--------:|:----------------------|
+|	    0 | `urn:nf:iot:uuid:1.0` |
 
 Example:
 
 ```xml
 <manufacturers xmlns='urn:nf:iot:uuid'>
-    <man id='000000' n='example.com' t='2023-10-07T12:31:55Z'/>
+    <man id='000000' n='example.com' t='2023-10-07T12:31:55Z' v='0'/>
     ...
-    <man id='0012ab' n='broker.example.com' t='2025-02-20T18:14:12Z'/>
+    <man id='0012ab' n='broker.example.com' t='2025-02-20T18:14:12Z' v='0'/>
     ...
 </manufacturers>
 ```
@@ -252,7 +259,6 @@ it for the client
 
 TBD
 
-
 Removal Registry
 
 Using UUIDs in communication over XMPP
@@ -264,3 +270,9 @@ UUID with PSK
 PSK as UUID
 
 Moving account with PSK
+
+Registry XSLT
+
+XML Registry in repository
+
+Reserve highest bit in Manufacturer ID to allow for more bytes in the future.

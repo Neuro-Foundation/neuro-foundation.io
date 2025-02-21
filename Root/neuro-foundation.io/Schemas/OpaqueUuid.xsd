@@ -86,6 +86,11 @@
 								<xs:documentation>The date and time of registration of the manufacturer ID and the corresponding domain name.</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
+						<xs:attribute name="v" type="xs:nonNegativeInteger" use="required">
+							<xs:annotation>
+								<xs:documentation>A version number used, representing the namespace used to create the Manufacturer ID.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
