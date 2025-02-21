@@ -288,3 +288,10 @@ Tree of Trust
 Trust Root
 
 :	The trust provider at the top of the hierarchy is called the trust root.
+
+Harmonization
+
+:	Harmonization is the process of making things work together seamlessly, even though they are
+	different in underlying layers. In the context of the Neuro-Foundation interfaces, harmonization 
+	is the process of making things work together, even though they use different technologies, protocols,
+	data formats, security mechanisms, etc.
