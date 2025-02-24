@@ -199,11 +199,21 @@ Example:
 </manufacturers>
 ```
 
-**Note**: The registry is public and can be downloaded by anyone. To avoid bottle-necks and single points of failure, the registry should be
-distributed by alternative means, such as via parent brokers to chile brokers, as described in the chapter on [Software Updates](/SoftwareUpdates.md).
-A broker detecting a new Manufacturer ID (or an unknown Manufacturer ID) can choose to download the registry and make it available to its
-child brokers. A root broker, or the trust anchor itself, can also regularly download or publish its registry to its children, for instance, once a 
-month, to make sure the registry id disseminated to all brokers in the network, without placing undue load on single components.
+**Note**: The URL may be temporary, and contain sufficient entropy to avoid guessing. The URL may 
+also be signed, to ensure the integrity of the URL. For this reason, the URL should not be used for 
+any other purpose than downloading the registry, and it should only be used to download the registry
+once. The URL should also not be published. The next time the registry is needed, a new URL should be
+requested from the trust anchor.
+
+**Note 2**: To avoid bottle-necks and single points of failure, the registry should be distributed by 
+alternative means, such as via parent brokers to child brokers, as described in the chapter on 
+[Software Updates](/SoftwareUpdates.md). A broker detecting a new Manufacturer ID (or an unknown 
+Manufacturer ID) can choose to download the registry and make it available to its child brokers
+by publishing it as a software package. This way, child brokers will not need to download the registry
+from the trust anchor, but can download it directly from its immediate parent broker. A root broker, 
+or the trust anchor itself, can also regularly download or publish its registry to its children, for 
+instance, once a month, to make sure the registry is disseminated to all brokers in the network, 
+without placing undue load on single components.
 
 Manufacturer ID via Thing Registry
 -------------------------------------
