@@ -1,9 +1,6 @@
 ﻿Copyright: /Copyright.md
 CSS: {{Theme.CSSX}}
 CSS: /NeuroFoundationStyles.cssx
-Javascript: /AlertPopup.md.js
-Javascript: /ConfirmPopup.md.js
-Javascript: /PromptPopup.md.js
 Javascript: /Master.js
 Icon: /favicon.ico
 Viewport: width=device-width,initial-scale=1
