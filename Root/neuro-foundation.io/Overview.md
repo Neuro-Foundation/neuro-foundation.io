@@ -243,7 +243,7 @@ The conceptual identity, known at the time of production, is transferred out-of-
 *claim* to the same *Thing Registry*. The registry matches registrations and claims, and if they match, pairs the thing with its owner, and informs
 each one about the *network identity* of the other.
 
-![`iotdisco` URI encoded as a QR code](/QR/iotdisco%3ACLASS%3DController%3BType%3DMIoT%2520Controller%3BMAN%3Dwaher.se%3BMODEL%3DMIoT%2520ControllerXmpp%3BPURL%3Dhttps%253A%252F%252Fgithub.com%252FPeterWaher%252FMIoT%3BSN%3Debfe45db82884676bdaf1adcb93c70d3%3B%23V%3D1.0%3BKEY%3D9b3c08a2a246468aaaa6dd00a258cdc5)
+![`iotdisco` URI encoded as a QR code](/QR/iotdisco%3ACLASS%3DController%3BType%3DMIoT%2520Controller%3BMAN%3Dwaher.se%3BMODEL%3DMIoT%2520ControllerXmpp%3BPURL%3Dhttps%253A%252F%252Fgithub.com%252FPeterWaher%252FMIoT%3BSN%3Debfe45db82884676bdaf1adcb93c70d3%3B%23V%3D1.0%3BKEY%3D9b3c08a2a246468aaaa6dd00a258cdc5?w=400&h=400&q=2 400 400)
 
 Once claimed, the owner can decide if the thing should remain in the registry or not, and if it should be publicly searchable. The thing, as well as 
 the owner, can annotate the thing with tags. This makes it easier to find relevant things. As the thing knows its owner, it also knows who is 

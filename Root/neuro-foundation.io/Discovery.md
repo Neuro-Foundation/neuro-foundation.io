@@ -301,7 +301,7 @@ can be transferred from the device to the owner, out-of-band.
 
 Using UTF-8 encoding when generating the QR-code, this string returns the following QR-code:
 
-![`iotdisco` URI encoded as QR-code](/QR/iotdisco%3ASN%3D98734238472634%3BMAN%3Dwww.example.org%3BMODEL%3DDevice%3B%23V%3D1.0%3BKEY%3D3453485763440213840928%3BR%3Ddiscovery.example.org)
+![`iotdisco` URI encoded as QR-code](/QR/iotdisco%3ASN%3D98734238472634%3BMAN%3Dwww.example.org%3BMODEL%3DDevice%3B%23V%3D1.0%3BKEY%3D3453485763440213840928%3BR%3Ddiscovery.example.org?w=400&h=400&q=2 400 400)
 
 ### Claiming Ownership of a Thing
 
