@@ -2233,6 +2233,13 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base='PetitionRequest'>
+					<xs:sequence>
+						<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+							<xs:annotation>
+								<xs:documentation>Optional element that can provide machine-readable context for petition.</xs:documentation>
+							</xs:annotation>
+						</xs:any>
+					</xs:sequence>
 					<xs:attribute name='id' type='xs:string' use='required'>
 						<xs:annotation>
 							<xs:documentation>Identifier of the smart contract hosted by the Trust Provider, to which the caller requests access.</xs:documentation>
@@ -2273,11 +2280,6 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
-			<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
-				<xs:annotation>
-					<xs:documentation>Optional element that can provide machine-readable context for petition.</xs:documentation>
-				</xs:annotation>
-			</xs:any>
 		</xs:sequence>
 		<xs:attribute name='pid' type='xs:string' use='required'>
 			<xs:annotation>
@@ -2321,6 +2323,11 @@
 							<xs:documentation>This information can be used by the recipient of the message to make an informed decision on wether to accept, deny or ignore the request.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+						<xs:annotation>
+							<xs:documentation>Optional element that can provide machine-readable context for petition.</xs:documentation>
+						</xs:annotation>
+					</xs:any>
 				</xs:sequence>
 				<xs:attribute name='from' type='xs:string' use='required'>
 					<xs:annotation>
