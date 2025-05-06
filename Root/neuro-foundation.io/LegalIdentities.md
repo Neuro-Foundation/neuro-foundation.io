@@ -81,41 +81,52 @@ making the request. The corresponding private key will be used to sign the reque
 one encodes a `name`/`value` attribute pair. It is up to the client to decide the number of properties included, and which ones. Any names can be used.
 Some names are predefined however, as described in the following table:
 
-| Property      | Description                                                |
-|:--------------|:-----------------------------------------------------------|
-| `FIRST`       | First name                                                 |
-| `MIDDLE`      | Middle name                                                |
-| `LAST`        | Last name                                                  |
-| `PNR`         | Personal number                                            |
-| `ADDR`        | Address                                                    |
-| `ADDR2`       | Address, second line                                       |
-| `ZIP`         | Zip or postal code                                         |
-| `AREA`        | Area                                                       |
-| `CITY`        | City                                                       |
-| `REGION`      | Region, state                                              |
-| `COUNTRY`     | Country                                                    |
-| `NATIONALITY` | Nationality                                                |
-| `GENDER`      | Gender (`M` or `F`)                                        |
-| `PHONE`       | Phone number, international phone number format.           |
-| `DOMAIN`      | If the ID represents the legal representative of a domain. |
-| `ORGNAME`     | Name of organization                                       |
-| `ORGNR`       | Organization number                                        |
-| `ORGDEPT`     | Organization department, where person works.               |
-| `ORGROLE`     | Role of person in organization.                            |
-| `ORGADDR`     | Address of organization.                                   |
-| `ORGADDR2`    | Address of organization, second line                       |
-| `ORGZIP`      | Zip or postal code of organization                         |
-| `ORGAREA`     | Area of organization.                                      |
-| `ORGCITY`     | City of organization.                                      |
-| `ORGREGION`   | Region or state of organization.                           |
-| `ORGCOUNTRY`  | Country code of organization.                              |
+| Property      | Description                                                     |
+|:--------------|:----------------------------------------------------------------|
+| `FIRST`       | First name                                                      |
+| `MIDDLE`      | Middle name                                                     |
+| `LAST`        | Last name                                                       |
+| `FULLNAME`    | Full name. Can be used instead of `FIRST`, `MIDDLE` and `LAST`. |
+| `PNR`         | Personal number                                                 |
+| `ADDR`        | Address                                                         |
+| `ADDR2`       | Address, second line                                            |
+| `ZIP`         | Zip or postal code                                              |
+| `AREA`        | Area                                                            |
+| `CITY`        | City                                                            |
+| `REGION`      | Region, state                                                   |
+| `COUNTRY`     | Country                                                         |
+| `NATIONALITY` | Nationality                                                     |
+| `GENDER`      | Gender (`M` or `F`)                                             |
+| `PHONE`       | Phone number, international phone number format.                |
+| `DOMAIN`      | If the ID represents the legal representative of a domain.      |
+| `ORGNAME`     | Name of organization                                            |
+| `ORGNR`       | Organization number                                             |
+| `ORGDEPT`     | Organization department, where person works.                    |
+| `ORGROLE`     | Role of person in organization.                                 |
+| `ORGADDR`     | Address of organization.                                        |
+| `ORGADDR2`    | Address of organization, second line                            |
+| `ORGZIP`      | Zip or postal code of organization                              |
+| `ORGAREA`     | Area of organization.                                           |
+| `ORGCITY`     | City of organization.                                           |
+| `ORGREGION`   | Region or state of organization.                                |
+| `ORGCOUNTRY`  | Country code of organization.                                   |
 
-Some property names are reserved as they can be used in role reference parameters to refer to
+Names in legal identities can be defined, either using the properties `FIRST`, `MIDDLE` and
+`LAST`, or by using the property `FULLNAME`. Both cannot be used at the same time, to avoid
+confusion. If `FIRST`, `MIDDLE` and `LAST` are used, and `FULLNAME` is referenced, for instance,
+in a contract, the value must be constructed by concatenating the `FIRST`, `MIDDLE` and `LAST` 
+values, delimiting the names with a single space character: `FIRST [ " " MIDDLE] " " LAST`.
+If `FULLNAME` is used, the `FIRST`, `MIDDLE` and `LAST` properties must be extracted from the
+`FULLNAME` in the canonical manner: The name before the first space is `FIRST`. If no space is
+availale, the entire name is `FIRST`, and `MIDDLE` and `LAST` are empty. The name after the 
+last space is `LAST` if available, or empty if no last space. After removing the `FIRST` and
+`LAST` names from `FULLNAME`, trimming any beginning or ending spaces, is `MIDDLE`.
+
+Other property names are reserved as they can be used in role reference parameters to refer to
 concatenations of multiple parameters:
 
 | Property            | Description                                             |
 |:--------------------|:--------------------------------------------------------|
-| `FULLNAME`          | Full name  (`FIRST [ " " MIDDLE] LAST`)                 |
 | `FULLADDR`          | Full address (`ADDR [ ", " ADDR2]`)                     |
 | `FULLORGADDR`       | Full organization address (`ORGADDR [ ", " ORGADDR2]`)  |
 | `SIGNATURE`         | Digital signature reference.                            |
