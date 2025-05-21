@@ -36,7 +36,8 @@ major differences:
     * Clients can subscribe to and unsubscribe from geo-spatial information using bounding boxes 
     using the Mercator projection.
 
-    * Subscriptions limited to connections. When disconnected, subscriptions are removed.
+    * Subscriptions limited to connections or time. When disconnected, or elapsed, subscriptions 
+    are removed.
 
 * Information can be transient or persistent, with an optional life-time defined.
 
@@ -131,6 +132,11 @@ subscription has been terminated:
     <unsubscribed xmlns='geo.example.com' id='7b102c7f-84ce-489b-998d-346bbb322997'/>
 </message>
 ```
+
+**Note**: If a subscription is removed due to the client's connection being closed, no message
+is sent to the client, as this would only generate an offline message that will be sent next
+time the client reconnects. Instead, it is assumed that the client looses all subscriptions when
+the connection closes.
 
 Unsubscribing from geo-spatial events
 ----------------------------------------

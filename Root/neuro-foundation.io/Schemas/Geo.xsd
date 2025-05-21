@@ -75,9 +75,15 @@
 
 	<xs:element name="unsubscribe">
 		<xs:annotation>
-			<xs:documentation></xs:documentation>
+			<xs:documentation>Sent in an iq set stanza to unsubscribe an existing subscription.</xs:documentation>
+			<xs:documentation>An error will be returned if attempting to unsubscribe a non-existing subscription, or a subscription created by another client.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
