@@ -23,7 +23,6 @@
 			<Content fileName="LegalIdentities.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="NeuroFoundationStyles.cssx"/>
-			<Content fileName="OpaqueUniqueIdentifiers.md"/>
 			<Content fileName="OperationalModel.md"/>
 			<Content fileName="Overview.md"/>
 			<Content fileName="P2P.md"/>
@@ -75,7 +74,6 @@
 				<Content fileName="E2E.xsd"/>
 				<Content fileName="EventSubscription.xsd"/>
 				<Content fileName="LegalIdentities.xsd"/>
-				<Content fileName="OpaqueUuid.xsd"/>
 				<Content fileName="P2P.xsd"/>
 				<Content fileName="ProvisioningDevice.xsd"/>
 				<Content fileName="ProvisioningOwner.xsd"/>
