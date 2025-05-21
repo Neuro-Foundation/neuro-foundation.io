@@ -1,0 +1,122 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<xs:schema
+    xmlns:xs='http://www.w3.org/2001/XMLSchema'
+    targetNamespace='urn:nf:iot:geo:1.0'
+    xmlns='urn:nf:iot:geo:1.0'
+    elementFormDefault='qualified'>
+
+	<xs:element name="subscribe">
+		<xs:annotation>
+			<xs:documentation>Subscribes to geo-spatial information, or updates an existing subscription.</xs:documentation>
+			<xs:documentation>The client subscribes to geo-spatial information using a bounding box. The bounding box is defined using to coordinates using the Mercator projection, which is a cylindrical map projection.</xs:documentation>
+			<xs:documentation>If the minLon is greater than the `maxLon` value, the bounding box is assumed to wrap around the antimeridian, or the +- 180 degree longitude meridian.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription, if updating a subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="minLat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The minimum latitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxLat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The maximum latitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="minLon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The minimum longitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxLon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The maximum longitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="minAlt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The minimum altitude of the bounding box, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxAlt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The maximum altitude of the bounding box, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Number of seconds before the subscription gets unsubscribed, if not updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="subscribed">
+		<xs:annotation>
+			<xs:documentation>Contains the identifier of a geo-spatial subscription.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ttl" type="xs:positiveInteger" use="required">
+				<xs:annotation>
+					<xs:documentation>Number of seconds before the subscription gets unsubscribed, if not updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="unsubscribe">
+		<xs:annotation>
+			<xs:documentation></xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="unsubscribed">
+		<xs:annotation>
+			<xs:documentation>Contains the identifier of a geo-spatial subscription that was terminated.</xs:documentation>
+			<xs:documentation>Can be returned as a response to the unsubscribe query, or in a message if a subscription elapses.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="publish">
+		<xs:annotation>
+			<xs:documentation></xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="delete">
+		<xs:annotation>
+			<xs:documentation></xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="search">
+		<xs:annotation>
+			<xs:documentation></xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

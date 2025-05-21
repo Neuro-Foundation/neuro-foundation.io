@@ -80,6 +80,7 @@ Operation
 * [Discovery](Discovery.md)
 * [Clock & Event Synchronization](ClockSynchronization.md)
 * [Software Updates](SoftwareUpdates.md)
+* [Real-time Geo-spatial information](Geo.md)
 
 
 Agreements
