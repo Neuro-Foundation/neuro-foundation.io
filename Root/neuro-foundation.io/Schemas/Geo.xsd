@@ -49,7 +49,7 @@
 			</xs:attribute>
 			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
 				<xs:annotation>
-					<xs:documentation>Number of seconds before the subscription gets unsubscribed, if not updated.</xs:documentation>
+					<xs:documentation>Number of seconds before the subscription gets unsubscribed.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -57,7 +57,7 @@
 
 	<xs:element name="subscribed">
 		<xs:annotation>
-			<xs:documentation>Contains the identifier of a geo-spatial subscription.</xs:documentation>
+			<xs:documentation>Acknowledges the subscription.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="id" type="xs:string" use="optional">
@@ -67,7 +67,7 @@
 			</xs:attribute>
 			<xs:attribute name="ttl" type="xs:positiveInteger" use="required">
 				<xs:annotation>
-					<xs:documentation>Number of seconds before the subscription gets unsubscribed, if not updated.</xs:documentation>
+					<xs:documentation>Number of seconds before the subscription gets unsubscribed.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -103,9 +103,58 @@
 
 	<xs:element name="publish">
 		<xs:annotation>
-			<xs:documentation></xs:documentation>
+			<xs:documentation>Sent in an iq set stanza to publish a new geo-spatial object reference, or update an existing geo-spatial object reference.</xs:documentation>
+			<xs:documentation>The client publishes geo-spatial information using a point of reference.</xs:documentation>
+			<xs:documentation>The publication may include custom XML content.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:sequence>
+				<xs:any minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the geo-spatial object reference, if updating an existing reference.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="lat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The latitude of the reference point, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="lon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The latitude of the reference point, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="alt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The altitude of the reference point, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Number of seconds the reference should be persisted.</xs:documentation>
+					<xs:documentation>A reference without a ttl value is considered ephemeral, and will not be persisted.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>		
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="published">
+		<xs:annotation>
+			<xs:documentation>Acknowledges the publication.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the publication, if not provided in the request.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Number of seconds before the publication gets removed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

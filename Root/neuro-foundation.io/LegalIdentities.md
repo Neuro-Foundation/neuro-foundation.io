@@ -172,7 +172,7 @@ Example:
          <clientPublicKey>
             <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
          </clientPublicKey>
-         <property name="FIRST" value="Jon"/>
+         <property name="FIRST" value="John"/>
          <property name="LAST" value="Doe"/>
          <property name="PNR" value="123456789-0"/>
          <property name="ADDR" value="Street 1A"/>
@@ -233,7 +233,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
@@ -265,7 +265,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
@@ -314,7 +314,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
@@ -368,7 +368,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
@@ -417,7 +417,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
@@ -467,7 +467,7 @@ Example:
       <clientPublicKey>
          <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nf:iot:e2e:1.0"/>
       </clientPublicKey>
-      <property name="FIRST" value="Jon"/>
+      <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
       <property name="PNR" value="123456789-0"/>
       <property name="ADDR" value="Street 1A"/>
