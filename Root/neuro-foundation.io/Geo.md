@@ -248,6 +248,29 @@ if the client has exceeded its service level.
 Deleting geo-spatial information
 -----------------------------------
 
+A client can delete geo-spatial information the client itself has previously published, by 
+sending an `iq set` stanza with a `delete` element to the geo-spatial component on the broker.
+The `delete` element contains a required `id` attribute containing the identifier of the item
+to be deleted.
+
+Example:
+
+```xml
+<iq type='set' id='8' from='client@example.com/resource' to='geo.example.com'>
+    <delete xmlns='urn:nf:iot:geo:1.0'
+            id='bbd54a92-24fd-4263-85a2-5e5c17454ddf'/>
+</iq>
+```
+
+The broker acknowledges the deletion as follows:
+
+```xml
+<iq id='8' type='result' to='client@example.com/resource' from='geo.example.com'>
+    <deleted xmlns='urn:nf:iot:geo:1.0'/>
+</iq>
+```
+
+
 Searching for geo-spatial information
 ----------------------------------------
 

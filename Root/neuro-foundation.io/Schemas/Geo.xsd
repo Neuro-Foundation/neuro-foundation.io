@@ -160,10 +160,23 @@
 
 	<xs:element name="delete">
 		<xs:annotation>
-			<xs:documentation></xs:documentation>
+			<xs:documentation>Deletes a publication made by the client.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:attribute name="id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Identifier of the publication to delete.</xs:documentation>
+					<xs:documentation>If the publication was not created by the client, an error must be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleted">
+		<xs:annotation>
+			<xs:documentation>Acknowledges the deletion of a geo-spatial item..</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
 	</xs:element>
 
 	<xs:element name="search">
