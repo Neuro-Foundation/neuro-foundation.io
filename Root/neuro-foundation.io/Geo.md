@@ -274,5 +274,94 @@ The broker acknowledges the deletion as follows:
 Searching for geo-spatial information
 ----------------------------------------
 
+A client can search for geo-spatial information by sending an `iq get` stanza with a `search`
+element to the geo-spatial component on the broker. The `search` element must contain a bounding
+box with optional altitude restrictions. It can also include a regular expression to filter
+object references to return, based on their geo-spatial identifiers. Pagination can be achieved
+by using an offset and page size. The broker is free to reduce the maximum number of items
+returned. 
+
+Attributes available for the `search` element:
+
+| Search attributes                                                                               |||
+|:-----------|:--------:|:---------------------------------------------------------------------------|
+| `minLat`   | Required | The minimum latitude of the bounding box, in degrees.                      |
+| `maxLat`   | Required | The maximum latitude of the bounding box, in degrees.                      |
+| `minLon`   | Required | The minimum longitude of the bounding box, in degrees.                     |
+| `maxLon`   | Required | The maximum longitude of the bounding box, in degrees.                     |
+| `minAlt`   | Optional | The minimum altitude of the bounding box, in meters.                       |
+| `maxAlt`   | Optional | The maximum altitude of the bounding box, in meters.                       |
+| `pattern`  | Optional | Regular expression that will be applied to geo-spatial object identifiers. |
+| `offset`   | Optional | Offset of first item to return.                                            |
+| `maxCount` | Optional | Maximum number of items to return.                                         |
+
+Example of a simple search request:
+
+```xml
+<iq type='get' id='9' from='client@example.com/resource' to='geo.example.com'>
+    <search xmlns='urn:nf:iot:geo:1.0'
+            minLat='60.123' maxLat='60.456'
+            minLong='10.789' maxLon='11.012'/>
+</iq>
+```
+
+Example of a paginated search request for positioned smart contracts:
+
+```xml
+<iq type='get' id='10' from='client@example.com/resource' to='geo.example.com'>
+    <search xmlns='urn:nf:iot:geo:1.0'
+            minLat='60.123' maxLat='60.456'
+            minLong='10.789' maxLon='11.012'
+            pattern='iotsc:.*'
+            offset='0' maxCount='100'/>
+</iq>
+```
+
+A search response contains a `references` element, that contains a list of `ref` element
+(possibly empty), each one containing a reference to a geo-spatial object matching the
+search criteria. The `references` element also contains a `maxCount` attribute, indicating 
+the real cap on items used in the search. If that number of elements is returned, there might
+be more elements available. Each `ref` element contains, apart from the custom XML published
+with the reference, also the following attributes:
+
+| Publish attributes                                                                    |||
+|:---------|:--------:|:------------------------------------------------------------------|
+| `id`     | Required | Identifier for the item, defined or generated during publication. |
+| `lat`    | Required | Latitude of the geo-spatial point of reference, in degrees.       |
+| `lon`    | Required | Longitude of the geo-spatial point of reference, in degrees.      |
+| `alt`    | Optional | Altitude of the geo-spatial point of reference, in meters.        |
+| `ttl`    | Optional | Number of seconds until the object expires, unless updated.       |
+
+A search response with may look as follows (here the `...` indicates multiple `ref` elements
+may be available):
+
+```xml
+<iq type='result' id='10' from='client@example.com/resource' to='geo.example.com'>
+    <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
+        <ref id='iotsc:9af22dac-01f4-410b-b334-389959254331@legal.example.com'
+             lat='60.253' long='10.923' ttl='63115200'/>
+        ...
+    </references>
+</iq>
+```
+
+A search result containing object references with custom XML might look as follows:
+
+```xml
+<iq type='result' id='11' from='client@example.com/resource' to='geo.example.com'>
+    <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
+        <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             lat='60.253' long='10.923'>
+            <display xmlns='http://example.com/Custom.xsd'
+                     friendlyName='John Doe'
+                     ref='iotid:cf8a82a3-1b28-4a34-80d6-a497080b57b3@legal.example.com'
+                     icon="https://example.com/Images/JohnDoe.jpg"
+                     iconWidth='64' iconHeight='64'/>
+        </ref>
+        ...
+    </references>
+</iq>
+```
+
 
 TODO: object reference added, updated, removed event notifications
