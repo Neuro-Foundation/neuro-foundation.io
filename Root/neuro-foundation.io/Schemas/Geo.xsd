@@ -181,9 +181,118 @@
 
 	<xs:element name="search">
 		<xs:annotation>
-			<xs:documentation></xs:documentation>
+			<xs:documentation>Performs a search for geo-spatial objects.</xs:documentation>
+			<xs:documentation>The search is performed using a bounding box. The bounding box is defined using to coordinates using the Mercator projection, which is a cylindrical map projection.</xs:documentation>
+			<xs:documentation>The search can be restricted to references with geo-spatial identifiers matching a given regular expression.</xs:documentation>
+			<xs:documentation>The search can also be paginated, ny providing an offset and maximum count.</xs:documentation>
+			<xs:documentation>The broker is free to cap the maximum number of items returned.</xs:documentation>
+			<xs:documentation>The broker is also free to restrict the number and rate of searches a client can perform.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:attribute name="minLat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The minimum latitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxLat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The maximum latitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="minLon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The minimum longitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxLon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The maximum longitude of the bounding box, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="minAlt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The minimum altitude of the bounding box, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxAlt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The maximum altitude of the bounding box, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="pattern" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Regular expression that will be applied to geo-spatial object identifiers.</xs:documentation>
+					<xs:documentation>Only references to objects matching this pattern will be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="offset" type="xs:nonNegativeInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Offset of first item to return.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="maxCount" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Maximum number of items to return.</xs:documentation>
+					<xs:documentation>The broker is free to lower this value.</xs:documentation>
+					<xs:documentation>The value used by the broker will be available in the result.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="references">
+		<xs:annotation>
+			<xs:documentation>Contains a set of object references.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ref" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Contains information about one geo-spatial object reference.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="maxCount" type="xs:positiveInteger" use="required">
+				<xs:annotation>
+					<xs:documentation>Maximum number of references to return in result.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ref">
+		<xs:annotation>
+			<xs:documentation>Contains information about one geo-spatial object reference.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>Geo-spatial object reference identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="lat" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The latitude of the object reference, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="lon" type="xs:double" use="required">
+				<xs:annotation>
+					<xs:documentation>The latitude of the object reference, in degrees.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="alt" type="xs:double" use="optional">
+				<xs:annotation>
+					<xs:documentation>The altitude of the object reference, in meters.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
+				<xs:annotation>
+					<xs:documentation>Number of seconds until the object expires, unless updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
