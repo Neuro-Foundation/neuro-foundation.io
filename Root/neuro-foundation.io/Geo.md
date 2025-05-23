@@ -190,6 +190,8 @@ sent with a `publish` element, containing the following attributes:
 | `lon`    | Required | Longitude of the geo-spatial point of reference, in degrees.                      |
 | `alt`    | Optional | Altitude of the geo-spatial point of reference, in meters.                        |
 | `ttl`    | Optional | Number of seconds before the information gets deleted.                            |
+| `from`   | Optional | Timestamp indicating from what point in time publication is valid (must use UTC). |
+| `to`     | Optional | Timestamp indicating to what point in time publication is valid (must use UTC).   |
 
 The following example publishes new ephemeral information (i.e. not persisted) about the 
 location of a legal identity:
@@ -362,13 +364,17 @@ the real cap on items used in the search. If that number of elements is returned
 be more elements available. Each `ref` element contains, apart from the custom XML published
 with the reference, also the following attributes:
 
-| Publish attributes                                                                    |||
-|:---------|:--------:|:------------------------------------------------------------------|
-| `id`     | Required | Identifier for the item, defined or generated during publication. |
-| `lat`    | Required | Latitude of the geo-spatial point of reference, in degrees.       |
-| `lon`    | Required | Longitude of the geo-spatial point of reference, in degrees.      |
-| `alt`    | Optional | Altitude of the geo-spatial point of reference, in meters.        |
-| `ttl`    | Optional | Number of seconds until the object expires, unless updated.       |
+| Publish attributes                                                                      |||
+|:----------|:--------:|:-------------------------------------------------------------------|
+| `id`      | Required | Identifier for the item, defined or generated during publication.  |
+| `lat`     | Required | Latitude of the geo-spatial point of reference, in degrees.        |
+| `lon`     | Required | Longitude of the geo-spatial point of reference, in degrees.       |
+| `alt`     | Optional | Altitude of the geo-spatial point of reference, in meters.         |
+| `ttl`     | Optional | Number of seconds until the object expires, unless updated.        |
+| `created` | Required | When information was created.                                      |
+| `updated` | Optional | When information was last updated (if updated).                    |
+| `from`    | Optional | Timestamp indicating from what point in time publication is valid. |
+| `to`      | Optional | Timestamp indicating to what point in time publication is valid.   |
 
 A search response with may look as follows (here the `...` indicates multiple `ref` elements
 may be available):

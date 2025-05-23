@@ -136,7 +136,21 @@
 					<xs:documentation>Number of seconds the reference should be persisted.</xs:documentation>
 					<xs:documentation>A reference without a ttl value is considered ephemeral, and will not be persisted.</xs:documentation>
 				</xs:annotation>
-			</xs:attribute>		
+			</xs:attribute>
+			<xs:attribute name="from" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>Timestamp indicating from what point in time publication is valid.</xs:documentation>
+					<xs:documentation>Can be used to publish a future location object reference.</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="to" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>Timestamp indicating to what point in time publication is valid.</xs:documentation>
+					<xs:documentation>Can be used to publish an expected expiration timestamp for a location object reference.</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
@@ -316,6 +330,32 @@
 			<xs:attribute name="ttl" type="xs:positiveInteger" use="optional">
 				<xs:annotation>
 					<xs:documentation>Number of seconds until the object expires, unless updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="created" type="xs:dateTime" use="required">
+				<xs:annotation>
+					<xs:documentation>When information was created.</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="updated" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>When information was last updated (if updated).</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="from" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>Timestamp indicating from what point in time publication is valid.</xs:documentation>
+					<xs:documentation>Can be used to publish a future location object reference.</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="to" type="xs:dateTime" use="optional">
+				<xs:annotation>
+					<xs:documentation>Timestamp indicating to what point in time publication is valid.</xs:documentation>
+					<xs:documentation>Can be used to publish an expected expiration timestamp for a location object reference.</xs:documentation>
+					<xs:documentation>Timestamps should use UTC.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
