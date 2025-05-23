@@ -520,3 +520,26 @@ An example removal notification of an object reference in the area of a subscrip
     </removed>
 </iq>
 ```
+
+Security Considerations
+--------------------------
+
+Following are some security considerations to consider:
+
+### `iotdisco` URI scheme
+
+Publication of `iotdisco` URIs should be limited to registrations via the Thing Registry, as
+these are protected, permitting updates only to the things themselves, or their owners. If a
+client attempts to publish a geo-spatial object reference using an identifier that starts with
+`iotdisco:`, an error must be returned. Also, only things registered as public will have their
+geo-spatial information published.
+
+### Rate limits
+
+The geo-spatial component should implement rate limits to protect against abuse. These rate
+limits may vary depending on service-level provided to the client. The following operations
+should have rate limits:
+
+* Publications per Bare JID.
+* Active number of subscriptions per Bare JID.
+* Concurrent searches, per Bare JID.

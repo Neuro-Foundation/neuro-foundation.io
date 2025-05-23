@@ -691,7 +691,6 @@ But if the owner is not the sender of the current message (i.e. owner is somebod
 </iq>
 ```
 
-
 ### Unregistering Thing from Registry
 
 
@@ -956,7 +955,6 @@ The search example provided earlier would be encoded as follows, as a `iotdisco`
 iotdisco:MAN=www.example.org;MODEL=Device;SN~*9873*;#V>=1.0;#V<2;#LON>=-72;#LON<=-70;#LAT>=-34;#LAT<=-33
 ```
 
-
 Meta Tags
 ------------
 
@@ -999,6 +997,19 @@ It is up to the Thing Registry to choose which tags it persists and which tags i
 imposed on what tags are supported. As a minimum, a Thing Registry must support all predefined tags, as listed above.
 
 **Note**: Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+
+
+Geo-spatial object references to things
+------------------------------------------
+
+If the Meta-data tags of a Thing contain geo-spatial information, such as `LAT` and `LON`, and
+the optional `ALT`, and the object is registered as public, an implicit geo-spatial object 
+reference to the Thing is created. Likewise, if the meta-data is updated or removed, the 
+corresponding geo-spatial object reference will be updated or removed. This object registration 
+is done implicitly by the Thing Registry, and does not need to be done by the Thing or Owner 
+itself. By mirroring this geo-spatial object reference information, it is possible to discover 
+devices based on proximity to a given location. See the chapter on 
+[Geo-spatial information](Geo.md) for more information.
 
 
 Security Considerations
