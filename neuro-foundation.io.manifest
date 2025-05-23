@@ -17,6 +17,7 @@
 			<Content fileName="Discovery.md"/>
 			<Content fileName="E2E.md"/>
 			<Content fileName="Federation.md"/>
+			<Content fileName="Geo.md"/>
 			<Content fileName="Identities.md"/>
 			<Content fileName="Implementations.md"/>
 			<Content fileName="Index.md"/>

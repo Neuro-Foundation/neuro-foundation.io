@@ -53,8 +53,10 @@ or maximum sizes of bounding boxes.
 * The geo-spatial edge service is provided by a component on the broker, and identifies using
 Service-Discovery.
 
-Subscribing to geo-spatial events
-------------------------------------
+Subscriptions
+----------------
+
+### Subscribing to geo-spatial events
 
 The client subscribes to geo-spatial information using a bounding box. The bounding box is
 defined using to coordinates using the Mercator projection, which is a cylindrical map 
@@ -139,8 +141,7 @@ is sent to the client, as this would only generate an offline message that will 
 time the client reconnects. Instead, it is assumed that the client looses all subscriptions when
 the connection closes.
 
-Unsubscribing from geo-spatial events
-----------------------------------------
+### Unsubscribing from geo-spatial events
 
 The client unsubscribes from geo-spatial information using the identifier of the subscription
 created when subscribing to geo-spatial information.
@@ -170,8 +171,10 @@ The component must return an error if a client attempts to unsubscribe a subscri
 not exist, or that was created by another client (evidenced by the Bare JID of the caller).
 
 
-Publishing geo-spatial information
--------------------------------------
+Publications
+---------------
+
+### Publishing geo-spatial information
 
 The client publishes geo-spatial information associating it with a geo-spatial point of
 reference. Active subscriptions are used to determine which clients should receive notification
@@ -336,7 +339,7 @@ A search response with may look as follows (here the `...` indicates multiple `r
 may be available):
 
 ```xml
-<iq type='result' id='10' from='client@example.com/resource' to='geo.example.com'>
+<iq type='result' id='10' to='client@example.com/resource' from='geo.example.com'>
     <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
         <ref id='iotsc:9af22dac-01f4-410b-b334-389959254331@legal.example.com'
              lat='60.253' long='10.923' ttl='63115200'/>
@@ -348,7 +351,7 @@ may be available):
 A search result containing object references with custom XML might look as follows:
 
 ```xml
-<iq type='result' id='11' from='client@example.com/resource' to='geo.example.com'>
+<iq type='result' id='11' to='client@example.com/resource' from='geo.example.com'>
     <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              lat='60.253' long='10.923'>
@@ -364,4 +367,105 @@ A search result containing object references with custom XML might look as follo
 ```
 
 
-TODO: object reference added, updated, removed event notifications
+Event notifications
+----------------------
+
+### Object reference added
+
+When an object reference appears within the bounding box defined of a subscription, an
+`added` element is sent in a `message` stanza to the client associated with the subscription.
+The element contains an `id` attribute identifying the subscription. The contents of the
+element will contain a `ref` element containing information about the object reference,
+including the custom XML associated with the reference.
+
+Reasons for raising the event may include:
+
+* A new object is created within the area defined by the subscription.
+* An existing object that has been moved into the area defined by the subscription. 
+* The bounding box of the subscription may have been moved or been resized to cover new objects.
+
+An example notification of a new object reference being added to the area of a subscription:
+
+```xml
+<message id='12' to='client@example.com/resource' from='geo.example.com'>
+    <added xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+        <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             lat='60.253' long='10.923'>
+            <display xmlns='http://example.com/Custom.xsd'
+                     friendlyName='John Doe'
+                     ref='iotid:cf8a82a3-1b28-4a34-80d6-a497080b57b3@legal.example.com'
+                     icon="https://example.com/Images/JohnDoe.jpg"
+                     iconWidth='64' iconHeight='64'/>
+        </ref>
+    </added>
+</iq>
+```
+
+### Object reference updated
+
+When an object reference has been updated within the bounding box defined of a subscription, an
+`updated` element is sent in a `message` stanza to the client associated with the subscription.
+The element contains an `id` attribute identifying the subscription. The contents of the
+element will contain a `ref` element containing information about the object reference,
+including the custom XML associated with the reference.
+
+Reasons for raising the event may include:
+
+* An existing object has been updated in the area defined by the subscription.
+* An existing object has been moved in the area defined by the subscription. 
+
+**Note**: If the client has a subscription, but lacks a reference to the mentioned object,
+the client should handle the event as if the object was added, considering a message might
+have been lost.
+
+An example update notification of an object reference in the area of a subscription:
+
+```xml
+<message id='13' to='client@example.com/resource' from='geo.example.com'>
+    <updated xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+        <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             lat='60.253' long='10.923'>
+            <display xmlns='http://example.com/Custom.xsd'
+                     friendlyName='John Doe'
+                     ref='iotid:cf8a82a3-1b28-4a34-80d6-a497080b57b3@legal.example.com'
+                     icon="https://example.com/Images/JohnDoe.jpg"
+                     iconWidth='64' iconHeight='64'/>
+        </ref>
+    </updated>
+</iq>
+```
+
+### Object reference removed
+
+When an object reference has been removed from the area defined by the bounding box of a 
+subscription, a `removed` element is sent in a `message` stanza to the client associated with 
+the subscription. The element contains an `id` attribute identifying the subscription. The 
+contents of the element will contain a `ref` element containing information about the object 
+reference, including the custom XML associated with the reference.
+
+Reasons for raising the event may include:
+
+* An existing object has been removed.
+* An existing object has been moved out of the area defined by the subscription. 
+* The bounding box of the subscription may have been moved or been resized and lost cover of
+the object.
+
+**Note**: If the client has a subscription, but lacks a reference to the mentioned object,
+the client should ignore the message.
+
+An example removal notification of an object reference in the area of a subscription:
+
+```xml
+<message id='14' to='client@example.com/resource' from='geo.example.com'>
+    <removed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+        <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             lat='60.253' long='10.923'>
+            <display xmlns='http://example.com/Custom.xsd'
+                     friendlyName='John Doe'
+                     ref='iotid:cf8a82a3-1b28-4a34-80d6-a497080b57b3@legal.example.com'
+                     icon="https://example.com/Images/JohnDoe.jpg"
+                     iconWidth='64' iconHeight='64'/>
+        </ref>
+    </removed>
+</iq>
+```
