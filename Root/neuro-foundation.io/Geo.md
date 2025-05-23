@@ -529,10 +529,11 @@ Following are some security considerations to consider:
 ### `iotdisco` URI scheme
 
 Publication of `iotdisco` URIs should be limited to registrations via the 
-[Thing Registry](Discovery.md), as these are protected, permitting updates only to the things 
-themselves, or their owners. If a client attempts to publish a geo-spatial object reference 
-using an identifier that starts with `iotdisco:`, an error must be returned. Also, only things 
-registered as public will have their geo-spatial information published.
+[Thing Registry](Discovery.md#geoSpatialObjectReferencesToThings), as these are protected, 
+permitting updates only to the things themselves, or their owners. If a client attempts to 
+publish a geo-spatial object reference using an identifier that starts with `iotdisco:`, an 
+error must be returned. Also, only things registered as public will have their geo-spatial 
+information published.
 
 ### `iotid` URI scheme
 
