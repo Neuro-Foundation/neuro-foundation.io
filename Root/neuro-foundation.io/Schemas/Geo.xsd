@@ -296,4 +296,64 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name="added">
+		<xs:annotation>
+			<xs:documentation>Is sent in a message stanza to a subscriber when an object reference has been added in the region of a subscription.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ref"	minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Reference to object that was added.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription to which the object was added.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="updated">
+		<xs:annotation>
+			<xs:documentation>Is sent in a message stanza to a subscriber when an object reference has been updated in the region of a subscription.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ref"	minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Reference to object that was updated.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription in which the object was updated.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="removed">
+		<xs:annotation>
+			<xs:documentation>Is sent in a message stanza to a subscriber when an object reference has been removed from the region of a subscription.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ref"	minOccurs="1" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Reference to object that was removed.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Identifier of the subscription from which the object was removed.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
