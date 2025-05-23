@@ -286,17 +286,18 @@ returned.
 
 Attributes available for the `search` element:
 
-| Search attributes                                                                               |||
-|:-----------|:--------:|:---------------------------------------------------------------------------|
-| `minLat`   | Required | The minimum latitude of the bounding box, in degrees.                      |
-| `maxLat`   | Required | The maximum latitude of the bounding box, in degrees.                      |
-| `minLon`   | Required | The minimum longitude of the bounding box, in degrees.                     |
-| `maxLon`   | Required | The maximum longitude of the bounding box, in degrees.                     |
-| `minAlt`   | Optional | The minimum altitude of the bounding box, in meters.                       |
-| `maxAlt`   | Optional | The maximum altitude of the bounding box, in meters.                       |
-| `pattern`  | Optional | Regular expression that will be applied to geo-spatial object identifiers. |
-| `offset`   | Optional | Offset of first item to return.                                            |
-| `maxCount` | Optional | Maximum number of items to return.                                         |
+| Search attributes                                                                                                    |||
+|:-----------|:--------:|:-----------------------------------------------------------------------------------------------|
+| `minLat`   | Required | The minimum latitude of the bounding box, in degrees.                                          |
+| `maxLat`   | Required | The maximum latitude of the bounding box, in degrees.                                          |
+| `minLon`   | Required | The minimum longitude of the bounding box, in degrees.                                         |
+| `maxLon`   | Required | The maximum longitude of the bounding box, in degrees.                                         |
+| `minAlt`   | Optional | The minimum altitude of the bounding box, in meters.                                           |
+| `maxAlt`   | Optional | The maximum altitude of the bounding box, in meters.                                           |
+| `pattern`  | Optional | Regular expression that will be applied to geo-spatial object identifiers.                     |
+| `path`     | Optional | XPATH expression that will be applied to custom content XML in geo-spatial object identifiers. |
+| `offset`   | Optional | Offset of first item to return.                                                                |
+| `maxCount` | Optional | Maximum number of items to return.                                                             |
 
 Example of a simple search request:
 
@@ -323,7 +324,7 @@ Example of a paginated search request for positioned smart contracts:
 Example of a paginated search request for sensors in the area:
 
 ```xml
-<iq type='get' id='10' from='client@example.com/resource' to='geo.example.com'>
+<iq type='get' id='11' from='client@example.com/resource' to='geo.example.com'>
     <search xmlns='urn:nf:iot:geo:1.0'
             minLat='60.123' maxLat='60.456'
             minLong='10.789' maxLon='11.012'
@@ -333,6 +334,26 @@ Example of a paginated search request for sensors in the area:
 ```
 
 **Note**: Regular expressions are treated as single-line, culture-invariant and case-insensitive.
+
+Example of a paginated search request for displayable custom content in the area:
+
+```xml
+<iq type='get' id='12' from='client@example.com/resource' to='geo.example.com'>
+    <search xmlns='urn:nf:iot:geo:1.0'
+            minLat='60.123' maxLat='60.456'
+            minLong='10.789' maxLon='11.012'
+            path='/custom:display[@friendlyName=&apos;John Doe&apos;]'
+            offset='0' maxCount='100'>
+        <namespace prefix='custom' value='http://example.com/Custom.xsd'/>
+    </search>
+</iq>
+```
+
+**Note**: Since XML and XPATH operate on Fully Qualified Names, it is important to define
+the namespaces used in the search. In this comparison, prefixes are not used to identify
+the custom matches, only to associate a short-hand prefix to the actual namespace being matched.
+You may define any number of prefixes to use in the search, each one defined by a separate
+`namespace` element.
 
 A search response contains a `references` element, that contains a list of `ref` element
 (possibly empty), each one containing a reference to a geo-spatial object matching the
@@ -365,7 +386,7 @@ may be available):
 A search result containing object references with custom XML might look as follows:
 
 ```xml
-<iq type='result' id='11' to='client@example.com/resource' from='geo.example.com'>
+<iq type='result' id='12' to='client@example.com/resource' from='geo.example.com'>
     <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              lat='60.253' long='10.923'>
@@ -401,7 +422,7 @@ Reasons for raising the event may include:
 An example notification of a new object reference being added to the area of a subscription:
 
 ```xml
-<message id='12' to='client@example.com/resource' from='geo.example.com'>
+<message id='13' to='client@example.com/resource' from='geo.example.com'>
     <added xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              lat='60.253' long='10.923'>
@@ -435,7 +456,7 @@ have been lost.
 An example update notification of an object reference in the area of a subscription:
 
 ```xml
-<message id='13' to='client@example.com/resource' from='geo.example.com'>
+<message id='14' to='client@example.com/resource' from='geo.example.com'>
     <updated xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              lat='60.253' long='10.923'>
@@ -470,7 +491,7 @@ the client should ignore the message.
 An example removal notification of an object reference in the area of a subscription:
 
 ```xml
-<message id='14' to='client@example.com/resource' from='geo.example.com'>
+<message id='15' to='client@example.com/resource' from='geo.example.com'>
     <removed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              lat='60.253' long='10.923'>

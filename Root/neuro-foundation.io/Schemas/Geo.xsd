@@ -189,6 +189,25 @@
 			<xs:documentation>The broker is also free to restrict the number and rate of searches a client can perform.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="namespace" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Defines a prefix and associated namespace used in XPATH searches.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="prefix" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>Name of the prefix to use.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="value" type="xs:string" use="required">
+							<xs:annotation>
+								<xs:documentation>Namespace associated with the prefix.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
 			<xs:attribute name="minLat" type="xs:double" use="required">
 				<xs:annotation>
 					<xs:documentation>The minimum latitude of the bounding box, in degrees.</xs:documentation>
@@ -223,6 +242,12 @@
 				<xs:annotation>
 					<xs:documentation>Regular expression that will be applied to geo-spatial object identifiers.</xs:documentation>
 					<xs:documentation>Only references to objects matching this pattern will be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="path" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>XPATH expression that will be applied to custom content XML in geo-spatial object identifiers.</xs:documentation>
+					<xs:documentation>Only references to objects containing custom XML that matches this path will be returned.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name="offset" type="xs:nonNegativeInteger" use="optional">
