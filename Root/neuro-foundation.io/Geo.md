@@ -534,6 +534,12 @@ client attempts to publish a geo-spatial object reference using an identifier th
 `iotdisco:`, an error must be returned. Also, only things registered as public will have their
 geo-spatial information published.
 
+### `iotid` URI scheme
+
+Publication of `iotid` URIs should be limited to registrations of digital identities belonging 
+to the account of the client making the publication. Any attemp to publish a digital identity 
+of someone else should result in an error being returned.
+
 ### Rate limits
 
 The geo-spatial component should implement rate limits to protect against abuse. These rate
