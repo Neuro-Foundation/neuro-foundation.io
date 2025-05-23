@@ -74,6 +74,7 @@
 				<Content fileName="Discovery.xsd"/>
 				<Content fileName="E2E.xsd"/>
 				<Content fileName="EventSubscription.xsd"/>
+				<Content fileName="Geo.xsd"/>
 				<Content fileName="LegalIdentities.xsd"/>
 				<Content fileName="P2P.xsd"/>
 				<Content fileName="ProvisioningDevice.xsd"/>
