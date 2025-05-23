@@ -320,6 +320,18 @@ Example of a paginated search request for positioned smart contracts:
 </iq>
 ```
 
+Example of a paginated search request for sensors in the area:
+
+```xml
+<iq type='get' id='10' from='client@example.com/resource' to='geo.example.com'>
+    <search xmlns='urn:nf:iot:geo:1.0'
+            minLat='60.123' maxLat='60.456'
+            minLong='10.789' maxLon='11.012'
+            pattern='iotdisco:.*CLASS=Sensor.*'
+            offset='0' maxCount='100'/>
+</iq>
+```
+
 **Note**: Regular expressions are treated as single-line, culture-invariant and case-insensitive.
 
 A search response contains a `references` element, that contains a list of `ref` element
