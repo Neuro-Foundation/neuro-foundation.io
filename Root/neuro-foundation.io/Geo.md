@@ -367,6 +367,7 @@ with the reference, also the following attributes:
 | Publish attributes                                                                      |||
 |:----------|:--------:|:-------------------------------------------------------------------|
 | `id`      | Required | Identifier for the item, defined or generated during publication.  |
+| `creator` | Optional | Bare JID of creator, if available.                                 |
 | `lat`     | Required | Latitude of the geo-spatial point of reference, in degrees.        |
 | `lon`     | Required | Longitude of the geo-spatial point of reference, in degrees.       |
 | `alt`     | Optional | Altitude of the geo-spatial point of reference, in meters.         |
@@ -376,6 +377,10 @@ with the reference, also the following attributes:
 | `from`    | Optional | Timestamp indicating from what point in time publication is valid. |
 | `to`      | Optional | Timestamp indicating to what point in time publication is valid.   |
 
+**Note**: Publications resulting from internal processing, such as geo-localization of contracts, 
+or device registrations, will lack a creator registration, and therefore lack a `creator`
+attribute.
+
 A search response with may look as follows (here the `...` indicates multiple `ref` elements
 may be available):
 
@@ -383,6 +388,7 @@ may be available):
 <iq type='result' id='10' to='client@example.com/resource' from='geo.example.com'>
     <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
         <ref id='iotsc:9af22dac-01f4-410b-b334-389959254331@legal.example.com'
+             creator='client@example.com'
              lat='60.253' long='10.923' ttl='63115200'/>
         ...
     </references>
@@ -395,6 +401,7 @@ A search result containing object references with custom XML might look as follo
 <iq type='result' id='12' to='client@example.com/resource' from='geo.example.com'>
     <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             creator='client@example.com'
              lat='60.253' long='10.923'>
             <display xmlns='http://example.com/Custom.xsd'
                      friendlyName='John Doe'
@@ -431,6 +438,7 @@ An example notification of a new object reference being added to the area of a s
 <message id='13' to='client@example.com/resource' from='geo.example.com'>
     <added xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             creator='client@example.com'
              lat='60.253' long='10.923'>
             <display xmlns='http://example.com/Custom.xsd'
                      friendlyName='John Doe'
@@ -465,6 +473,7 @@ An example update notification of an object reference in the area of a subscript
 <message id='14' to='client@example.com/resource' from='geo.example.com'>
     <updated xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             creator='client@example.com'
              lat='60.253' long='10.923'>
             <display xmlns='http://example.com/Custom.xsd'
                      friendlyName='John Doe'
@@ -500,6 +509,7 @@ An example removal notification of an object reference in the area of a subscrip
 <message id='15' to='client@example.com/resource' from='geo.example.com'>
     <removed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
+             creator='client@example.com'
              lat='60.253' long='10.923'>
             <display xmlns='http://example.com/Custom.xsd'
                      friendlyName='John Doe'

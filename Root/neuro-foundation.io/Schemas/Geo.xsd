@@ -312,6 +312,12 @@
 					<xs:documentation>Geo-spatial object reference identifier.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name="creator" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation>Bare JID of creator, if available.</xs:documentation>
+					<xs:documentation>Publications resulting from internal processing, such as geo-localization of contracts, or device registrations, will lack a creator registration.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:attribute name="lat" type="xs:double" use="required">
 				<xs:annotation>
 					<xs:documentation>The latitude of the object reference, in degrees.</xs:documentation>
