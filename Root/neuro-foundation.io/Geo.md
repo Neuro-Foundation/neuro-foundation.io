@@ -320,6 +320,8 @@ Example of a paginated search request for positioned smart contracts:
 </iq>
 ```
 
+**Note**: Regular expressions are treated as single-line, culture-invariant and case-insensitive.
+
 A search response contains a `references` element, that contains a list of `ref` element
 (possibly empty), each one containing a reference to a geo-spatial object matching the
 search criteria. The `references` element also contains a `maxCount` attribute, indicating 
