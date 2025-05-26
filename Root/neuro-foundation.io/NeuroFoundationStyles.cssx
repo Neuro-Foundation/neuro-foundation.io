@@ -14,11 +14,6 @@
         transform: none;
     }
 
-    nav > ul > li 
-    {
-        transform: scaleY(0);
-        transition: all 0.2s;
-    }
 
     header:hover > nav > ul > li {
         transform: none;
