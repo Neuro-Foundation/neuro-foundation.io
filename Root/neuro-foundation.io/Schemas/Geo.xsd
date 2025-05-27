@@ -67,7 +67,7 @@
 			</xs:attribute>
 			<xs:attribute name="ttl" type="xs:positiveInteger" use="required">
 				<xs:annotation>
-					<xs:documentation>Number of seconds before the subscription gets unsubscribed.</xs:documentation>
+					<xs:documentation>Number of seconds before the subscription gets automatically unsubscribed, unless updated.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
