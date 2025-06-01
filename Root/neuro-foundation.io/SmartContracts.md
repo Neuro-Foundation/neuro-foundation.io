@@ -445,6 +445,10 @@ But when retrieving a created contract, it is assumed servers have already valid
 Still, common operators (`+`, `-`, `*`, `/`, `<`, `>`, `=`, `!=`, `<=`, `>=`, `!`) are often understood by many expression evaluators, which 
 makes common expressions understandable across clients and technology boundaries.
 
+**Note 2**: If the script engine understands variables or constants (such as `Now` or `NoteUtc`) that return the current date and time, using 
+some time coordinate, such references must return the time point of the first contract signature, once the contract has received its first 
+signature.
+
 ##### Transient parameters
 
 Transient parameters are parameters whose values are only available *in transit*, i.e. they are not persisted together with the contract.
