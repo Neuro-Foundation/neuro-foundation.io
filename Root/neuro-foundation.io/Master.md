@@ -90,6 +90,7 @@ Viewport: width=device-width,initial-scale=1
 		* [Tokenization of sustainable real estate in Smart Cities](/Papers/Tokenization%20of%20sustainable%20real%20estate%20in%20Smart%20Cities.pdf)
 		* [Smart Agriculture, Executive Summary](/Papers/Smart%20Agriculture,%20Executive%20Summary.pdf)
 		* [Neuro-Payment architecture](/Papers/Neuro-Payment%20architecture.pdf)
+		* [Notarius Electronicus](/Papers/Notarius%20Electronicus.pdf)
 		* [Open Threat Intelligence using Neuro-Ledger](/Papers/Open%20Threat%20Intelligence%20using%20Neuro-Ledger.pdf)
 		* [Interoperability of Medical Records on the Neuro-Ledger](/Papers/Interoperability%20of%20Medical%20Records%20on%20the%20Neuro-Ledger.pdf)
 		* [Federated Clock Synchronization in IIoT](/Papers/Federated%20Clock%20Synchronization%20in%20IIoT.pdf)
