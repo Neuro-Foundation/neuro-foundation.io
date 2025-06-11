@@ -83,6 +83,11 @@ endpoints can read the information exchanged. This is useful for protecting very
 
 ### Mixed interfaces
 
+Mixed interfaces are such that require a client-side and a broker-side implementation. Broker-side implementations are typically edge services
+hosted by XMPP components. Each component identifies the services it supports using a set of features, which are namespaces supported. During
+discovery, each entity analyzes available components, and their features, to detect which component supports which service. Components can be
+integrated into the broker itself, or run as a separate process connecting to the broker via the [Component protocol](https://xmpp.org/extensions/xep-0114.html).
+
 * Thing Registry & Discovery
 * Provisioning & Decision Support
 * Digital Identities
