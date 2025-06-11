@@ -47,7 +47,7 @@ Other brokers may contain other custom binding methods, such as via UDP/DTLS. Ch
 
 Some brokers may provide a REST API for connecting to the XMPP network. This is not a standard XMPP binding, but it can be useful for web
 applications, as it is easier to implement for simple interactions. Bidirectional communication is trickier to implement using a REST interface
-however. As an example, check the [Agent API](/Documentation/Neuron/Agent.md) available on the TAG Neuron(R).
+however. As an example, check the [Agent API](/Documentation/Neuron/Agent.md) available on the TAG Neuron(R), used to host this site.
 
 ### Client-side Interfaces
 
