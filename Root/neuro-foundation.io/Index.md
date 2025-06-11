@@ -122,3 +122,4 @@ Software
 -----------
 
 A list of software available implementing the interfaces defined on this site, is available in the [Implementations page](Implementations.md).
+You can also review the [Implementation Guide](ImplementationGuide.md) if you plan on implementing the interfaces yourself.

@@ -19,6 +19,7 @@
 			<Content fileName="Federation.md"/>
 			<Content fileName="Geo.md"/>
 			<Content fileName="Identities.md"/>
+			<Content fileName="ImplementationGuide.md"/>
 			<Content fileName="Implementations.md"/>
 			<Content fileName="Index.md"/>
 			<Content fileName="LegalIdentities.md"/>
