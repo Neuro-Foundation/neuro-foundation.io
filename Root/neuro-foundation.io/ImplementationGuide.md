@@ -154,3 +154,9 @@ ComSim
 ### Load Generation
 
 ### Performance measurement
+
+Example projects
+------------------
+
+Example projects can be found in the [Implementations page](Implementations.md#exampleApplications). These projects are intended to demonstrate 
+how to implement various types of applications using the harmonization interfaces.
