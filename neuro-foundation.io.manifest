@@ -37,6 +37,10 @@
 			<Content fileName="SoftwareUpdates.md"/>
 			<Content fileName="Tokens.md"/>
 			<Content fileName="TransportEncryption.md"/>
+			<Content fileName="Units.md"/>
+			<Folder name="Definitions">
+				<Content fileName="Units.xml"/>
+			</Folder>
 			<Folder name="Examples">
 				<Content fileName="ControlParametersDataForm.xml"/>
 				<Content fileName="ControlParametersSimple.xml"/>
@@ -86,6 +90,7 @@
 				<Content fileName="SmartContracts.xsd"/>
 				<Content fileName="SoftwareUpdates.xsd"/>
 				<Content fileName="Synchronization.xsd"/>
+				<Content fileName="Units.xsd"/>
 			</Folder>
 		</Folder>
 	</Folder>

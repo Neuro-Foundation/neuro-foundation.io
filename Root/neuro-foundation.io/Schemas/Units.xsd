@@ -1,0 +1,64 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+					 targetNamespace='urn:nf:iot:u:1.0'
+					 xmlns='urn:nf:iot:u:1.0'
+					 elementFormDefault='qualified'>
+
+	<xs:element name='Units'>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='Category' type='Category' minOccurs='1' maxOccurs='unbounded'/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='Category'>
+		<xs:sequence>
+			<xs:element name='Unit' type='Unit' minOccurs='1' maxOccurs='unbounded'/>
+		</xs:sequence>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+		<xs:attribute name='reference' type='xs:string' use='required'/>
+	</xs:complexType>
+
+	<xs:complexType name='Unit'>
+		<xs:choice minOccurs='0' maxOccurs='unbounded'>
+			<xs:group ref='Operation'/>
+		</xs:choice>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+	</xs:complexType>
+
+	<xs:group name='Operation'>
+		<xs:choice>
+			<xs:element name='Number' type='xs:double'/>
+			<xs:element name='Pi' type='Constant'/>
+			<xs:element name='Add' type='BinaryOperand'/>
+			<xs:element name='Sub' type='BinaryOperand'/>
+			<xs:element name='Mul' type='BinaryOperand'/>
+			<xs:element name='Div' type='BinaryOperand'/>
+			<xs:element name='Pow' type='UnaryOperand'/>
+			<xs:element name='Neg' type='UnaryOperand'/>
+			<xs:element name='Inv' type='UnaryOperand'/>
+			<xs:element name='Lg2' type='UnaryOperand'/>
+			<xs:element name='Pow2' type='UnaryOperand'/>
+			<xs:element name='Sqrt' type='UnaryOperand'/>
+			<xs:element name='Lg' type='UnaryOperand'/>
+			<xs:element name='Pow10' type='UnaryOperand'/>
+			<xs:element name='Ln' type='UnaryOperand'/>
+			<xs:element name='Exp' type='UnaryOperand'/>
+			<xs:element name='LgB' type='UnaryOperandBase'/>
+			<xs:element name='PowB' type='UnaryOperandBase'/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name='Constant'/>
+	<xs:complexType name='UnaryOperand'/>
+	<xs:complexType name='UnaryOperandBase'>
+		<xs:complexContent>
+			<xs:extension base='UnaryOperand'>
+				<xs:attribute name='base' type='xs:positiveInteger' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name='BinaryOperand'/>
+
+</xs:schema>

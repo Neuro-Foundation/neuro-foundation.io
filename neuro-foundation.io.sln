@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neur
 		Root\neuro-foundation.io\SoftwareUpdates.md = Root\neuro-foundation.io\SoftwareUpdates.md
 		Root\neuro-foundation.io\Tokens.md = Root\neuro-foundation.io\Tokens.md
 		Root\neuro-foundation.io\TransportEncryption.md = Root\neuro-foundation.io\TransportEncryption.md
+		Root\neuro-foundation.io\Units.md = Root\neuro-foundation.io\Units.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schemas", "Schemas", "{13CDB96E-BF6F-429A-AF5C-3ED20C23D256}"
@@ -69,6 +70,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schemas", "Schemas", "{13CD
 		Root\neuro-foundation.io\Schemas\SmartContracts.xsd = Root\neuro-foundation.io\Schemas\SmartContracts.xsd
 		Root\neuro-foundation.io\Schemas\SoftwareUpdates.xsd = Root\neuro-foundation.io\Schemas\SoftwareUpdates.xsd
 		Root\neuro-foundation.io\Schemas\Synchronization.xsd = Root\neuro-foundation.io\Schemas\Synchronization.xsd
+		Root\neuro-foundation.io\Schemas\Units.xsd = Root\neuro-foundation.io\Schemas\Units.xsd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{E9287ECC-30EC-4819-AAAE-F28FC7E8FC56}"
@@ -112,6 +114,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LynxNode", "LynxNode", "{33
 		Root\neuro-foundation.io\Partners\LynxNode\Introduction.md = Root\neuro-foundation.io\Partners\LynxNode\Introduction.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Definitions\Units.xml = Root\neuro-foundation.io\Definitions\Units.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +131,7 @@ Global
 		{30F50243-AA2D-4032-A70A-8A9D07858FA7} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{36BA5660-93E2-4402-BD1A-6EAF2F70D48E} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 		{33F5CC95-9E18-4EA0-8DE9-6B5268E69D58} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

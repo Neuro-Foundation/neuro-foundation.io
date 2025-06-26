@@ -1,0 +1,168 @@
+﻿<Units xmlns="urn:nf:iot:u:1.0">
+	<Category name="Current" reference="A">
+		<Unit name="A"/>
+	</Category>
+	<Category name="Dimensionless" reference="1">
+		<Unit name="1"/>
+		<Unit name="pcs"/>
+		<Unit name="dz">
+			<Number>12</Number>
+			<Div/>
+		</Unit>
+		<Unit name="dozen">
+			<Number>12</Number>
+			<Div/>
+		</Unit>
+		<Unit name="gr">
+			<Number>144</Number>
+			<Div/>
+		</Unit>
+		<Unit name="gross">
+			<Number>144</Number>
+			<Div/>
+		</Unit>
+		<Unit name="%">
+			<Number>100</Number>
+			<Div/>
+		</Unit>
+		<Unit name="‰">
+			<Number>1000</Number>
+			<Div/>
+		</Unit>
+		<Unit name="‱">
+			<Number>10000</Number>
+			<Div/>
+		</Unit>
+		<Unit name="%0">
+			<Number>1000</Number>
+			<Div/>
+		</Unit>
+		<Unit name="%00">
+			<Number>10000</Number>
+			<Div/>
+		</Unit>
+		<Unit name="°">
+			<Number>2</Number>
+			<Pi/>
+			<Mul/>
+			<Mul/>
+			<Number>180</Number>
+			<Div/>
+		</Unit>
+		<Unit name="rad"/>
+		<Unit name="deg">
+			<Number>2</Number>
+			<Pi/>
+			<Mul/>
+			<Mul/>
+			<Number>180</Number>
+			<Div/>
+		</Unit>
+	</Category>
+	<Category name="Length" reference="m">
+		<Unit name="m"/>
+		<Unit name="Å">
+			<Number>1e-10</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="in">
+			<Number>0.0254</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="inch">
+			<Number>0.0254</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="ft">
+			<Number>0.3048</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="foot">
+			<Number>0.3048</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="yd">
+			<Number>0.9144</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="yard">
+			<Number>0.9144</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="SM">
+			<Number>1609.344</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="NM">
+			<Number>1852</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="px">
+			<Number>0.0254</Number>
+			<Number>96</Number>
+			<Div/>
+			<Mul/>
+		</Unit>
+		<Unit name="pt">
+			<Number>0.0254</Number>
+			<Number>72</Number>
+			<Div/>
+			<Mul/>
+		</Unit>
+		<Unit name="pc">
+			<Number>0.0254</Number>
+			<Number>6</Number>
+			<Div/>
+			<Mul/>
+		</Unit>
+	</Category>
+	<Category name="Mass" reference="g">
+		<Unit name="g"/>
+		<Unit name="t">
+			<Number>1e6</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="u">
+			<Number>1.66e-24</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="lb">
+			<Number>450</Number>
+			<Mul/>
+		</Unit>
+	</Category>
+	<Category name="Temperature" reference="K">
+		<Unit name="K"/>
+		<Unit name="°C">
+			<Number>273.15</Number>
+			<Add/>
+		</Unit>
+		<Unit name="°F">
+			<Number>32</Number>
+			<Sub/>
+			<Number>1.8</Number>
+			<Div/>
+			<Number>273.15</Number>
+			<Add/>
+		</Unit>
+	</Category>
+	<Category name="Time" reference="s">
+		<Unit name="s"/>
+		<Unit name="min">
+			<Number>60</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="h">
+			<Number>3600</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="d">
+			<Number>86400</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="w">
+			<Number>604800</Number>
+			<Mul/>
+		</Unit>
+	</Category>
+</Units>
