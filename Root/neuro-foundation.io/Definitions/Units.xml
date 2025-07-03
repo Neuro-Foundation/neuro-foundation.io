@@ -1,9 +1,9 @@
 ﻿<Units xmlns="urn:nf:iot:u:1.0">
-	<Category name="Current" reference="A">
-		<Unit name="A"/>
+	<Category name="Current">
+		<ReferenceUnit name="A"/>
 	</Category>
-	<Category name="Dimensionless" reference="1">
-		<Unit name="1"/>
+	<Category name="Dimensionless">
+		<ReferenceUnit name="1"/>
 		<Unit name="pcs"/>
 		<Unit name="dz">
 			<Number>12</Number>
@@ -58,9 +58,13 @@
 			<Number>180</Number>
 			<Div/>
 		</Unit>
+		<Unit name="mol">
+			<Number>6.02214076e23</Number>
+			<Mul/>
+		</Unit>
 	</Category>
-	<Category name="Length" reference="m">
-		<Unit name="m"/>
+	<Category name="Length">
+		<ReferenceUnit name="m"/>
 		<Unit name="Å">
 			<Number>1e-10</Number>
 			<Mul/>
@@ -116,8 +120,8 @@
 			<Mul/>
 		</Unit>
 	</Category>
-	<Category name="Mass" reference="g">
-		<Unit name="g"/>
+	<Category name="Mass">
+		<ReferenceUnit name="g"/>
 		<Unit name="t">
 			<Number>1e6</Number>
 			<Mul/>
@@ -131,8 +135,8 @@
 			<Mul/>
 		</Unit>
 	</Category>
-	<Category name="Temperature" reference="K">
-		<Unit name="K"/>
+	<Category name="Temperature">
+		<ReferenceUnit name="K"/>
 		<Unit name="°C">
 			<Number>273.15</Number>
 			<Add/>
@@ -146,8 +150,8 @@
 			<Add/>
 		</Unit>
 	</Category>
-	<Category name="Time" reference="s">
-		<Unit name="s"/>
+	<Category name="Time">
+		<ReferenceUnit name="s"/>
 		<Unit name="min">
 			<Number>60</Number>
 			<Mul/>
@@ -163,6 +167,175 @@
 		<Unit name="w">
 			<Number>604800</Number>
 			<Mul/>
+		</Unit>
+	</Category>
+	<Category name="Capacitance">
+		<ReferenceUnit name="F">
+			<Derivation factor="1e-3">
+				<UnitFactor unit="m" exponent="-2"/>
+				<UnitFactor unit="g" exponent="-1"/>
+				<UnitFactor unit="s" exponent="4"/>
+				<UnitFactor unit="A" exponent="2"/>
+			</Derivation>
+		</ReferenceUnit>
+	</Category>
+	<Category name="Charge">
+		<ReferenceUnit name="C">
+			<Derivation>
+				<UnitFactor unit="s"/>
+				<UnitFactor unit="A"/>
+			</Derivation>
+		</ReferenceUnit>
+	</Category>
+	<Category name="Energy">
+		<ReferenceUnit name="J">
+			<Derivation factor="1000">
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="m" exponent="2"/>
+				<UnitFactor unit="s" exponent="-2"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="BTU">
+			<Number>1055.055853</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="eV">
+			<Number>1.60218e-19</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="cal">
+			<Number>4.184</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="erg">
+			<Number>1e-7</Number>
+			<Mul/>
+		</Unit>
+		<CompoundUnit name="Ws">
+			<UnitFactor unit="W"/>
+			<UnitFactor unit="s"/>
+		</CompoundUnit>
+		<CompoundUnit name="Wh">
+			<UnitFactor unit="W"/>
+			<UnitFactor unit="h"/>
+		</CompoundUnit>
+	</Category>
+	<Category name="Force">
+		<ReferenceUnit name="N">
+			<Derivation factor="1000">
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="m"/>
+				<UnitFactor unit="s" exponent="-2"/>
+			</Derivation>
+		</ReferenceUnit>
+	</Category>
+	<Category name="Frequency">
+		<ReferenceUnit name="Hz">
+			<Derivation>
+				<UnitFactor unit="s" exponent="-1"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="cps"/>
+		<Unit name="rpm">
+			<Number>60</Number>
+			<Div/>
+		</Unit>
+	</Category>
+	<Category name="Power">
+		<ReferenceUnit name="W">
+			<Derivation factor="1000">
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="m" exponent="2"/>
+				<UnitFactor unit="s" exponent="-3"/>
+			</Derivation>
+		</ReferenceUnit>
+	</Category>
+	<Category name="Pressure">
+		<ReferenceUnit name="Pa">
+			<Derivation factor="1000">
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="m" exponent="-1"/>
+				<UnitFactor unit="s" exponent="-2"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="bar">
+			<Number>1e5</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="psi">
+			<Number>6894.757</Number>
+			<Mul/>
+		</Unit>
+		<Unit name="atm">
+			<Number>101325</Number>
+			<Mul/>
+		</Unit>
+	</Category>
+	<Category name="Resistance">
+		<ReferenceUnit name="Ω">
+			<Derivation factor="1000">
+				<UnitFactor unit="m" exponent="2"/>
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="s" exponent="-3"/>
+				<UnitFactor unit="A" exponent="-2"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="Ohm"/>
+		<Unit name="ohm"/>
+	</Category>
+	<Category name="Speed">
+		<ReferenceUnit name="mps">
+			<Derivation>
+				<UnitFactor unit="m"/>
+				<UnitFactor unit="s" exponent="-1"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="knot">
+			<Number>0.514444</Number>
+		</Unit>
+		<Unit name="kn">
+			<Number>0.514444</Number>
+		</Unit>
+		<Unit name="kt">
+			<Number>0.514444</Number>
+		</Unit>
+		<CompoundUnit name="mph">
+			<UnitFactor unit="SM"/>
+			<UnitFactor unit="h" exponent="-1"/>
+		</CompoundUnit>
+		<CompoundUnit name="fps">
+			<UnitFactor unit="ft"/>
+			<UnitFactor unit="s" exponent="-1"/>
+		</CompoundUnit>
+		<CompoundUnit name="kph" factor="1000">
+			<UnitFactor unit="m"/>
+			<UnitFactor unit="h" exponent="-1"/>
+		</CompoundUnit>
+		<CompoundUnit name="kmph" factor="1000">
+			<UnitFactor unit="m"/>
+			<UnitFactor unit="h" exponent="-1"/>
+		</CompoundUnit>
+	</Category>
+	<Category name="Voltage">
+		<ReferenceUnit name="V">
+			<Derivation factor="1000">
+				<UnitFactor unit="g"/>
+				<UnitFactor unit="m" exponent="2"/>
+				<UnitFactor unit="s" exponent="-3"/>
+				<UnitFactor unit="A" exponent="-1"/>
+			</Derivation>
+		</ReferenceUnit>
+	</Category>
+	<Category name="Volume">
+		<ReferenceUnit name="m³">
+			<Derivation>
+				<UnitFactor unit="m" exponent="3"/>
+			</Derivation>
+		</ReferenceUnit>
+		<Unit name="m3"/>
+		<Unit name="l">
+			<Number>1000</Number>
+			<Div/>
 		</Unit>
 	</Category>
 </Units>

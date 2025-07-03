@@ -14,17 +14,45 @@
 
 	<xs:complexType name='Category'>
 		<xs:sequence>
-			<xs:element name='Unit' type='Unit' minOccurs='1' maxOccurs='unbounded'/>
+			<xs:element name='ReferenceUnit' type='ReferenceUnit'/>
+			<xs:element name='Unit' type='Unit' minOccurs='0' maxOccurs='unbounded'/>
+			<xs:element name='CompoundUnit' type='CompoundUnit' minOccurs='0' maxOccurs='unbounded'/>
 		</xs:sequence>
 		<xs:attribute name='name' type='xs:string' use='required'/>
-		<xs:attribute name='reference' type='xs:string' use='required'/>
+	</xs:complexType>
+
+	<xs:complexType name='ReferenceUnit'>
+		<xs:sequence>
+			<xs:element name='Derivation' type='UnitFactors' minOccurs='0'/>
+		</xs:sequence>
+		<xs:attribute name='name' type='xs:string' use='required'/>
+	</xs:complexType>
+	
+	<xs:complexType name='UnitFactors'>
+		<xs:sequence>
+			<xs:element name='UnitFactor' maxOccurs='unbounded'>
+				<xs:complexType>
+					<xs:attribute name='unit' type='xs:string' use='required'/>
+					<xs:attribute name='exponent' type='xs:integer' use='optional' default='1'/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name='factor' type='xs:double' use='optional' default='1.0'/>
 	</xs:complexType>
 
 	<xs:complexType name='Unit'>
-		<xs:choice minOccurs='0' maxOccurs='unbounded'>
-			<xs:group ref='Operation'/>
-		</xs:choice>
+		<xs:sequence>
+			<xs:group ref='Operation' minOccurs='0' maxOccurs='unbounded'/>
+		</xs:sequence>
 		<xs:attribute name='name' type='xs:string' use='required'/>
+	</xs:complexType>
+
+	<xs:complexType name='CompoundUnit'>
+		<xs:complexContent>
+			<xs:extension base='UnitFactors'>
+				<xs:attribute name='name' type='xs:string' use='required'/>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 	<xs:group name='Operation'>
