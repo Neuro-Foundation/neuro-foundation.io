@@ -33,7 +33,7 @@
 			<xs:element name='UnitFactor' maxOccurs='unbounded'>
 				<xs:complexType>
 					<xs:attribute name='unit' type='xs:string' use='required'/>
-					<xs:attribute name='exponent' type='xs:integer' use='optional' default='1'/>
+					<xs:attribute name='exponent' type='xs:double' use='optional' default='1'/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
