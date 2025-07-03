@@ -52,15 +52,38 @@ is based on the following abstraction:
 ```uml:Conceptual model
 @startuml
 left to right direction
-"Unit Category" "1" *-- "*" Unit
-"Unit Category" : name : string
 "Unit Category" "1" *-- "1" "Reference Unit"
+"Unit Category" "1" *-- "*" Unit
+"Unit Category" "1" *-- "*" "Compound Unit"
+"Unit Category" : name : string
 
 Unit : name : string
 "Reference Unit" : name : string
+"Reference Unit" "1" *-- "1" "Derivation"
+note on link
+	Derivation shows how
+	the reference unit is
+	derived from base (SI)
+	units.
+end note
+
+
+"Derivation" "1" *-- "*" "Unit Factor"
+
+"Unit Factor" : factor : double
+"Unit Factor" : unit : string
+"Unit Factor" : exponent : double
+
+"Compound Unit" "1" *-- "*" "Unit Factor"
+note on link
+	Defines the the compund
+	unit as a product of a
+	factor, and a set of
+	units with corresponding
+	exponents.
+end note
 
 Unit "0" *-- "*" "RPN Operation"
-"Reference Unit" .. "RPN Operation"
 note on link
 	Operations performed 
 	sequentially, top-down,
