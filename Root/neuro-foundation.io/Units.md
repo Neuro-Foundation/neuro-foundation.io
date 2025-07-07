@@ -228,9 +228,9 @@ Consider the unit category definition for `Temperature`:
 	<Unit name="°F">
 		<Number>32</Number>
 		<Sub/>
-		<Number>9</Number>
-		<Mul/>
 		<Number>5</Number>
+		<Mul/>
+		<Number>9</Number>
 		<Div/>
 		<Number>273.15</Number>
 		<Add/>
@@ -241,27 +241,27 @@ Consider the unit category definition for `Temperature`:
 We want to convert 50° F to °C. We follow the operations defined for the °F unit to convert the
 value to the reference unit, which is K:
 
-| Operation                 | Stack[0] | Stack[-1] |
-|:--------------------------|---------:|----------:|
-|                           |       50 |           |
-| `<Number>32</Number>`     |       32 |        50 |
-| `<Sub/>`                  |       18 |           |
-| `<Number>9</Number>`      |        5 |        18 |
-| `<Mul/>`                  |       90 |           |
-| `<Number>5</Number>`      |        9 |        90 |
-| `<Div/>`                  |       10 |           |
-| `<Number>273.15</Number>` |   273.15 |        10 |
-| `<Add/>`                  |   283.15 |           |
+| Operation                 | *S*[-1] | *S*[-2] |
+|:--------------------------|--------:|--------:|
+| Converting from           |      50 |         |
+| `<Number>32</Number>`     |      32 |      50 |
+| `<Sub/>`                  |      18 |         |
+| `<Number>5</Number>`      |       5 |      18 |
+| `<Mul/>`                  |      90 |         |
+| `<Number>9</Number>`      |       9 |      90 |
+| `<Div/>`                  |      10 |         |
+| `<Number>273.15</Number>` |  273.15 |      10 |
+| `<Add/>`                  |  283.15 |         |
 
 So, we have calculated that 50° F = 283.15 K. Now we need to do the reverse operation to convert
 the Kelvin value to °C, remembering that binary operations have their inverted operation pushed 
 to the stack and numbers pop the
 operations.
 
-| Operation                 | Stack[0] | Stack[-1] |
-|:--------------------------|---------:|----------:|
-|                           |   283.15 |           |
-| `<Add/>`                  |       18 |           |
-| `<Number>32</Number>`     |       32 |        50 |
+| Operation                 | *S*[-1] | *S*[-2] |
+|:--------------------------|--------:|--------:|
+| Converting from           |  283.15 |         |
+| `<Add/>`                  |      18 |         |
+| `<Number>32</Number>`     |      32 |      50 |
 
 
