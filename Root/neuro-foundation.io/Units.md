@@ -182,6 +182,37 @@ needs to be applied before conversion, and a suitable prefix selected after conv
 similar consideration needs to be taken into account for the number of significant digits in
 the value, if expressed as a human-readable string.
 
+Operations
+-------------
+
+The following operations are defined in the XML schema, and can be used in the unit conversions.
+The description describes the operator when executed from top to bottom. The elements on the 
+stack are referred to as S[-1] as the topmost element (before the execution of an operator),
+and S[-2] as the element below the topmost element (before the execution of an operator).
+
+
+| Operation | Type                | Description |
+|:----------|:--------------------|:------------|
+| `Number`  | `xs:double`         | Pushes a number onto the stack. |
+| `Pi`      | `Constant`          | Pushes *π* onto the stack. |
+| `Add`     | `BinaryOperator`    | Pops the two topmost elements from the stack, adds them *S*[-2] + *S*[-1], and pushes the result onto the stack. |
+| `Sub`     | `BinaryOperator`    | Pops the two topmost elements from the stack, subtracts them *S*[-2] - *S*[-1], and pushes the result onto the stack. |
+| `Mul`     | `BinaryOperator`    | Pops the two topmost elements from the stack, multiplies them *S*[-2] * *S*[-1], and pushes the result onto the stack. |
+| `Div`     | `BinaryOperator`    | Pops the two topmost elements from the stack, divides them  *S*[-2] / *S*[-1], and pushes the result onto the stack. |
+| `Pow`     | `UnaryOperator`     | Pops the two topmost elements from the stack, Raises one to the other *S*[-2]^(*S*[-1]), and pushes the result onto the stack. |
+| `Neg`     | `UnaryOperator`     | Pops the topmost element from the stack, negates it, and pushes the result onto the stack. |
+| `Inv`     | `UnaryOperator`     | Pops the topmost element from the stack, inverts it, and pushes the result onto the stack. |
+| `Lg2`     | `UnaryOperator`     | Pops the topmost element from the stack, calculates the base-2 logarithm of it *log*[2]\(*S*[-1]), and pushes the result onto the stack. |
+| `Pow2`    | `UnaryOperator`     | Pops the topmost element from the stack, raises 2 to the power of it 2^(*S*[-1]), and pushes the result onto the stack. |
+| `Sqrt`    | `UnaryOperator`     | Pops the topmost element from the stack, computes the square root of it *sqrt*(*S*[-1]), and pushes the result onto the stack. |
+| `Lg`      | `UnaryOperator`     | Pops the topmost element from the stack, calculates the base-10 logarithm of it *log*[10]\(*S*[-1]), and pushes the result onto the stack. |
+| `Pow10`   | `UnaryOperator`     | Pops the topmost element from the stack, raises 10 to the power of it 10^(*S*[-1]) it, and pushes the result onto the stack. |
+| `Ln`      | `UnaryOperator`     | Pops the topmost element from the stack, calculates the natural logarithm of it *ln*(*S*[-1]), and pushes the result onto the stack. |
+| `Exp`     | `UnaryOperator`     | Pops the topmost element from the stack, calculates the natural exponent of it *exp*(*S*[-1]), and pushes the result onto the stack. |
+| `LgB`     | `UnaryOperatorBase` | Pops the topmost element from the stack, calculates the base-B logarithm of it *log*[B]\(*S*[-1]), and pushes the result onto the stack, where *B*s is a positive integer. |
+| `PowB`    | `UnaryOperatorBase` | Pops the topmost element from the stack, raises *B* to the power of it *B*^(*S*[-1]) it, and pushes the result onto the stack, where *B* is a positive integer. |
+
+
 Example
 -----------
 

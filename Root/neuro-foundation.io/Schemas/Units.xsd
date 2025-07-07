@@ -59,34 +59,34 @@
 		<xs:choice>
 			<xs:element name='Number' type='xs:double'/>
 			<xs:element name='Pi' type='Constant'/>
-			<xs:element name='Add' type='BinaryOperand'/>
-			<xs:element name='Sub' type='BinaryOperand'/>
-			<xs:element name='Mul' type='BinaryOperand'/>
-			<xs:element name='Div' type='BinaryOperand'/>
-			<xs:element name='Pow' type='UnaryOperand'/>
-			<xs:element name='Neg' type='UnaryOperand'/>
-			<xs:element name='Inv' type='UnaryOperand'/>
-			<xs:element name='Lg2' type='UnaryOperand'/>
-			<xs:element name='Pow2' type='UnaryOperand'/>
-			<xs:element name='Sqrt' type='UnaryOperand'/>
-			<xs:element name='Lg' type='UnaryOperand'/>
-			<xs:element name='Pow10' type='UnaryOperand'/>
-			<xs:element name='Ln' type='UnaryOperand'/>
-			<xs:element name='Exp' type='UnaryOperand'/>
-			<xs:element name='LgB' type='UnaryOperandBase'/>
-			<xs:element name='PowB' type='UnaryOperandBase'/>
+			<xs:element name='Add' type='BinaryOperator'/>
+			<xs:element name='Sub' type='BinaryOperator'/>
+			<xs:element name='Mul' type='BinaryOperator'/>
+			<xs:element name='Div' type='BinaryOperator'/>
+			<xs:element name='Pow' type='BinaryOperator'/>
+			<xs:element name='Neg' type='UnaryOperator'/>
+			<xs:element name='Inv' type='UnaryOperator'/>
+			<xs:element name='Lg2' type='UnaryOperator'/>
+			<xs:element name='Pow2' type='UnaryOperator'/>
+			<xs:element name='Sqrt' type='UnaryOperator'/>
+			<xs:element name='Lg' type='UnaryOperator'/>
+			<xs:element name='Pow10' type='UnaryOperator'/>
+			<xs:element name='Ln' type='UnaryOperator'/>
+			<xs:element name='Exp' type='UnaryOperator'/>
+			<xs:element name='LgB' type='UnaryOperatorBase'/>
+			<xs:element name='PowB' type='UnaryOperatorBase'/>
 		</xs:choice>
 	</xs:group>
 
 	<xs:complexType name='Constant'/>
-	<xs:complexType name='UnaryOperand'/>
-	<xs:complexType name='UnaryOperandBase'>
+	<xs:complexType name='UnaryOperator'/>
+	<xs:complexType name='UnaryOperatorBase'>
 		<xs:complexContent>
-			<xs:extension base='UnaryOperand'>
+			<xs:extension base='UnaryOperator'>
 				<xs:attribute name='base' type='xs:positiveInteger' use='required'/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name='BinaryOperand'/>
+	<xs:complexType name='BinaryOperator'/>
 
 </xs:schema>
