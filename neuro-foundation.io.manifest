@@ -39,6 +39,7 @@
 			<Content fileName="TransportEncryption.md"/>
 			<Content fileName="Units.md"/>
 			<Folder name="Definitions">
+				<Content fileName="Units.md"/>
 				<Content fileName="Units.xml"/>
 			</Folder>
 			<Folder name="Examples">
@@ -91,6 +92,9 @@
 				<Content fileName="SoftwareUpdates.xsd"/>
 				<Content fileName="Synchronization.xsd"/>
 				<Content fileName="Units.xsd"/>
+			</Folder>
+			<Folder name="Transforms">
+				<Content fileName="UnitsToMarkdown.xslt"/>
 			</Folder>
 		</Folder>
 	</Folder>

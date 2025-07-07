@@ -324,3 +324,31 @@ this value to Fahrenheit:
 | `<Number>32</Number>`     |      50  |         |
 
 And the result is 50° F.
+
+Base Units
+--------------
+
+Base units are the fundamental units of measurement in the International System of Units (SI).
+
+Derived Units
+----------------
+
+Units that can be derived from base units will have their reference unit expressed as a product
+of powers of base units. For example, Voltage (V) can be expressed as 1000⋅*g*⋅*m*^(2)⋅*s*^(-3)⋅*A*^(-1).
+Unit artithmetic can be performed on such base units, if all units involved are first reduced to
+expressions using the base units.
+
+Compound Units
+-----------------
+
+Compund units are expressed as a products of their components. A `Wh` is the product `W`⋅`h` for example.
+A compound unit can be reduced to the product of its components, each of which can be reduced to the
+corresponding base units, for unit artithmetics.
+
+Unit Definitions
+-------------------
+
+The units definition file [`Units.xml`](Definitions/Units.xml) contains the following unit 
+definitions.
+
+![Unit Definitions](Definitions/Units.md)

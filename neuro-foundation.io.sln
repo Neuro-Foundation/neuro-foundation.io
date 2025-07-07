@@ -116,7 +116,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LynxNode", "LynxNode", "{33
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Definitions\Units.md = Root\neuro-foundation.io\Definitions\Units.md
 		Root\neuro-foundation.io\Definitions\Units.xml = Root\neuro-foundation.io\Definitions\Units.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transforms", "Transforms", "{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt = Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt
 	EndProjectSection
 EndProject
 Global
@@ -132,6 +138,7 @@ Global
 		{36BA5660-93E2-4402-BD1A-6EAF2F70D48E} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 		{33F5CC95-9E18-4EA0-8DE9-6B5268E69D58} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}
