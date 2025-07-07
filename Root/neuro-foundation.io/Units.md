@@ -59,7 +59,7 @@ left to right direction
 
 Unit : name : string
 "Reference Unit" : name : string
-"Reference Unit" "1" *-- "1" "Derivation"
+"Reference Unit" "1" *-- "0..1" "Derivation"
 note on link
 	Derivation shows how
 	the reference unit is
@@ -127,18 +127,20 @@ Constant <|-- Pi
 ```
 
 A **Unit Category** represents a set of units that are *compatible* in the sense they can be
-used to represent the same physical quantity. Each Unit Category defines exactly one 
-**Reference Unit**. This should be the SI unit, if applicable, or similar well-known unit if
-SI units are not available for the corresponding physical quantity. The name of a unit category
-should be a human-readable string that describes the physical quantity represented by the units.
-It is not used in unit conversion or communication, and is available only for documentation 
-purposes.
+used to represent the same physical quantity and can be converted between each other. Each Unit 
+Category defines exactly one **Reference Unit**. This should be the SI unit, if applicable, or 
+contain a **derivation** from SI units, or similar well-known unit if SI units are not available 
+for the corresponding physical quantity. If a derivation does not exist, it is assumed that the
+reference unit is a **base unit**. The name of a unit category should be a human-readable string 
+that describes the physical quantity represented by the units. It is not used in unit conversion, 
+communication, or user interfaces. It is available only for documentation purposes.
 
-Each **Unit** is represented by a unique Unit object associated with its Unit Category. The
-unit is defined by its name, which should correspond to the short-hand form used when expressing
-physical quantities, for example `m` for meters, `g` for grams, `s` for seconds, etc.
+After the reference unit, the Unit Category can define any number of additional Units. There are 
+two types: The regular **Unit** and the **Compound Unit**. Each unit is referenced to by its 
+name, which should correspond to the short-hand form used when expressing physical quantities, 
+for example `m` for meters, `g` for grams, `s` for seconds, etc.
 
-Each Unit defines a set of [Reverse Polish Notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation)
+Normal Unit objects define a set of [Reverse Polish Notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation)
 **Operations** that converts a value expressed using the unit, to the corresponding value
 expressed using the reference unit associated with the unit category. The Reverse Polish 
 Notation used in the conversion definition allows us to define the conversion without having
@@ -146,9 +148,15 @@ to implement a specific expression parser. It also permits easy-to-implement alg
 converting a unit to the reference unit, but also the reverse, convert a reference unit to the
 specific unit.
 
-**Note**: Each category should include the reference unit as a unit definition. The reference
-unit definition however, must not have any operations defined. And any unit definition without
-operations defined, is assumed to be equivalent to the reference unit for that unit category.
+**Note**: Any unit definition lacking operations defined, is assumed to be equivalent to the 
+reference unit for that unit category.
+
+Compund units on the other hand, define only a set of implicit **Unit Factors**. Each unit 
+factor defines a unit, an exponent, and a factor. The compound unit is the product of the
+factor and the referenced units raised to the corresponding exponent. Unit conversion is 
+performed by converting the individual factors. By looking up each of the unit factors, each
+compound unit can be reduced to a product of a factor and a set of base units, raised to a
+corresponding exponent.
 
 Conversion Operation
 -----------------------
@@ -174,7 +182,55 @@ needs to be applied before conversion, and a suitable prefix selected after conv
 similar consideration needs to be taken into account for the number of significant digits in
 the value, if expressed as a human-readable string.
 
-Examples
+Example
 -----------
 
-TBD
+Consider the unit category definition for `Temperature`:
+
+```xml
+<Category name="Temperature">
+	<ReferenceUnit name="K"/>
+	<Unit name="°C">
+		<Number>273.15</Number>
+		<Add/>
+	</Unit>
+	<Unit name="°F">
+		<Number>32</Number>
+		<Sub/>
+		<Number>9</Number>
+		<Mul/>
+		<Number>5</Number>
+		<Div/>
+		<Number>273.15</Number>
+		<Add/>
+	</Unit>
+</Category>
+```
+
+We want to convert 50° F to °C. We follow the operations defined for the °F unit to convert the
+value to the reference unit, which is K:
+
+| Operation                 | Stack[0] | Stack[-1] |
+|:--------------------------|---------:|----------:|
+|                           |       50 |           |
+| `<Number>32</Number>`     |       32 |        50 |
+| `<Sub/>`                  |       18 |           |
+| `<Number>9</Number>`      |        5 |        18 |
+| `<Mul/>`                  |       90 |           |
+| `<Number>5</Number>`      |        9 |        90 |
+| `<Div/>`                  |       10 |           |
+| `<Number>273.15</Number>` |   273.15 |        10 |
+| `<Add/>`                  |   283.15 |           |
+
+So, we have calculated that 50° F = 283.15 K. Now we need to do the reverse operation to convert
+the Kelvin value to °C, remembering that binary operations have their inverted operation pushed 
+to the stack and numbers pop the
+operations.
+
+| Operation                 | Stack[0] | Stack[-1] |
+|:--------------------------|---------:|----------:|
+|                           |   283.15 |           |
+| `<Add/>`                  |       18 |           |
+| `<Number>32</Number>`     |       32 |        50 |
+
+
