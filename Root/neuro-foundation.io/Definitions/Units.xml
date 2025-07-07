@@ -144,7 +144,9 @@
 		<Unit name="°F">
 			<Number>32</Number>
 			<Sub/>
-			<Number>1.8</Number>
+			<Number>9</Number>
+			<Mul/>
+			<Number>5</Number>
 			<Div/>
 			<Number>273.15</Number>
 			<Add/>
