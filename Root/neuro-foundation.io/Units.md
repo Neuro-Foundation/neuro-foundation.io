@@ -199,7 +199,8 @@ and S[-2] as the element below the topmost element (before the execution of an o
 | `Sub`     | `BinaryOperator`    | Pops the two topmost elements from the stack, subtracts them *S*[-2] - *S*[-1], and pushes the result onto the stack. |
 | `Mul`     | `BinaryOperator`    | Pops the two topmost elements from the stack, multiplies them *S*[-2] * *S*[-1], and pushes the result onto the stack. |
 | `Div`     | `BinaryOperator`    | Pops the two topmost elements from the stack, divides them  *S*[-2] / *S*[-1], and pushes the result onto the stack. |
-| `Pow`     | `UnaryOperator`     | Pops the two topmost elements from the stack, Raises one to the other *S*[-2]^(*S*[-1]), and pushes the result onto the stack. |
+| `Pow`     | `BinaryOperator`    | Pops the two topmost elements from the stack, Raises one to the other *S*[-2]^(*S*[-1]), and pushes the result onto the stack. |
+| `Log`     | `BinaryOperator`    | Pops the two topmost elements from the stack, computes the logarithm *log*[*S*[-2]]\(*S*[-1]), and pushes the result onto the stack. |
 | `Neg`     | `UnaryOperator`     | Pops the topmost element from the stack, negates it, and pushes the result onto the stack. |
 | `Inv`     | `UnaryOperator`     | Pops the topmost element from the stack, inverts it, and pushes the result onto the stack. |
 | `Lg2`     | `UnaryOperator`     | Pops the topmost element from the stack, calculates the base-2 logarithm of it *log*[2]\(*S*[-1]), and pushes the result onto the stack. |
@@ -212,6 +213,40 @@ and S[-2] as the element below the topmost element (before the execution of an o
 | `LgB`     | `UnaryOperatorBase` | Pops the topmost element from the stack, calculates the base-B logarithm of it *log*[B]\(*S*[-1]), and pushes the result onto the stack, where *B*s is a positive integer. |
 | `PowB`    | `UnaryOperatorBase` | Pops the topmost element from the stack, raises *B* to the power of it *B*^(*S*[-1]) it, and pushes the result onto the stack, where *B* is a positive integer. |
 
+
+Inverted Operations
+----------------------
+
+The inverted operations are the inverse of the above operations, and are used to convert a value
+from the reference unit to the specific unit. The inverted operations are evaluated bottom-up,
+and are evaluated as follows. Note that binary operations push their inverted operation on the
+stack. A number checks the topmost element on the stack. If it is a binary operator is on the
+stack, that operator is popped and executed on 
+are pushed on the stack, while numbers
+pop the operations from the stack and execute them. Unary operations are executed directly.
+
+| Operation | Inversion |
+|:----------|:----------|
+| `Number`  | `Number`  |
+| `Pi`      | `Pi`      |
+| `Add`     | `Sub`     |
+| `Sub`     | `Add`     |
+| `Mul`     | `Div`     |
+| `Div`     | `Mul`     |
+| `Pow`     | `Log`     |
+| `Log`     | `Pow`     |
+| `Neg`     | `Neg`     |
+| `Inv`     | `Inv`     |
+| `Lg2`     | `Pow2`    |
+| `Pow2`    | `Lg2`     |
+| `Sqr`     | `Sqrt`    |
+| `Sqrt`    | `Sqr`     |
+| `Lg`      | `Pow10`   |
+| `Pow10`   | `Lg`      |
+| `Ln`      | `Exp`     |
+| `Exp`     | `Ln`      |
+| `LgB`     | `PowB`    |
+| `PowB`    | `LgB`     |
 
 Example
 -----------
@@ -258,10 +293,34 @@ the Kelvin value to °C, remembering that binary operations have their inverted 
 to the stack and numbers pop the
 operations.
 
+| Operation                 | *S*[-1]  | *S*[-2] |
+|:--------------------------|---------:|--------:|
+| Converting from           |  283.15  |         |
+| `<Add/>`                  | `<Sub/>` |  283.15 |
+| `<Number>273.15</Number>` |      10  |         |
+
+The result is 10° C. If we attempt to convert 10° C back to °F, we use the operations defined
+for the Celcius unit:
+
 | Operation                 | *S*[-1] | *S*[-2] |
 |:--------------------------|--------:|--------:|
-| Converting from           |  283.15 |         |
-| `<Add/>`                  |      18 |         |
-| `<Number>32</Number>`     |      32 |      50 |
+| Converting from           |      10 |         |
+| `<Number>32</Number>`     |  273.15 |      10 |
+| `<Add/>`                  |  283.15 |         |
 
+So, 10° C = 283.15 K. We do the inverse calculation defined for the Fahrenheit unit, to convert
+this value to Fahrenheit:
 
+| Operation                 | *S*[-1]  | *S*[-2] |
+|:--------------------------|---------:|--------:|
+| Converting from           |  283.15  |         |
+| `<Add/>`                  | `<Sub/>` |  283.15 |
+| `<Number>273.15</Number>` |      10  |         |
+| `<Div/>`                  | `<Mul/>` |      10 |
+| `<Number>9</Number>`      |      90  |         |
+| `<Mul/>`                  | `<Div/>` |      90 |
+| `<Number>5</Number>`      |      18  |         |
+| `<Sub/>`                  | `<Add/>` |      18 |
+| `<Number>32</Number>`     |      50  |         |
+
+And the result is 50° F.

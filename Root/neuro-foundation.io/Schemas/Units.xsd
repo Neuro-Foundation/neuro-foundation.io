@@ -64,10 +64,12 @@
 			<xs:element name='Mul' type='BinaryOperator'/>
 			<xs:element name='Div' type='BinaryOperator'/>
 			<xs:element name='Pow' type='BinaryOperator'/>
+			<xs:element name='Log' type='BinaryOperator'/>
 			<xs:element name='Neg' type='UnaryOperator'/>
 			<xs:element name='Inv' type='UnaryOperator'/>
 			<xs:element name='Lg2' type='UnaryOperator'/>
 			<xs:element name='Pow2' type='UnaryOperator'/>
+			<xs:element name='Sqr' type='UnaryOperator'/>
 			<xs:element name='Sqrt' type='UnaryOperator'/>
 			<xs:element name='Lg' type='UnaryOperator'/>
 			<xs:element name='Pow10' type='UnaryOperator'/>
