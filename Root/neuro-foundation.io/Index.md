@@ -17,7 +17,9 @@ contents on this site, see the [open source](https://github.com/Trust-Anchor-Gro
 Introduction
 ----------------
 
-Neuro-Foundation presents communication infrastructure for a globally scalable, distributed infrastructure for smart societies, supporting:
+Neuro-Foundation presents communication infrastructure for a globally scalable, distributed infrastructure for smart societies.
+By harmonizing technologies (bridging technology boundaries), it allows different technologies to
+interact and interoperate. The interfaces support:
 
 * Local governance
 * Definition of ownership
