@@ -94,22 +94,22 @@ Agreements
 Schemas
 -------------
 
-XML Schemas in alphabetical order:
+XML Schemas by namespace:
 
-* [Concentrator.xsd](Schemas/Concentrator.xsd)
-* [Control.xsd](Schemas/Control.xsd)
-* [Discovery.xsd](Schemas/Discovery.xsd)
-* [E2E.xsd](Schemas/E2E.xsd)
-* [EventSubscription.xsd](Schemas/EventSubscription.xsd)
-* [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)
-* [P2P.xsd](Schemas/P2P.xsd)
-* [ProvisioningDevice.xsd](Schemas/ProvisioningDevice.xsd)
-* [ProvisioningOwner.xsd](Schemas/ProvisioningOwner.xsd)
-* [ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd)
-* [SensorData.xsd](Schemas/SensorData.xsd)
-* [SmartContracts.xsd](Schemas/SmartContracts.xsd)
-* [SoftwareUpdates.xsd](Schemas/SoftwareUpdates.xsd)
-* [Synchronization.xsd](Schemas/Synchronization.xsd)
+* [`urn:nf:iot:concentrator:1.0`](Schemas/Concentrator.xsd) - Concentrators
+* [`urn:nf:iot:ctr:1.0`](Schemas/Control.xsd) - Actuator Control
+* [`urn:nf:iot:disco:1.0`](Schemas/Discovery.xsd) - Discovery
+* [`urn:nf:iot:e2e:1.0`](Schemas/E2E.xsd) - End-to-End Encryption
+* [`urn:nf:iot:events:1.0`](Schemas/EventSubscription.xsd) - Event subscription
+* [`urn:nf:iot:leg:id:1.0`](Schemas/LegalIdentities.xsd) - Legal identities
+* [`urn:nf:iot:leg:sc:1.0`](Schemas/SmartContracts.xsd) - Smart Contracts
+* [`urn:nf:iot:p2p:1.0`](Schemas/P2P.xsd) - Peer-to-Peer Connectivity
+* [`urn:nf:iot:prov:d:1.0`](Schemas/ProvisioningDevice.xsd) - Provisioning for Devices
+* [`urn:nf:iot:prov:o:1.0`](Schemas/ProvisioningOwner.xsd) - Provisioning for Owners
+* [`urn:nf:iot:prov:t:1.0`](Schemas/ProvisioningTokens.xsd) - Provisioning Tokens
+* [`urn:nf:iot:sd:1.0`](Schemas/SensorData.xsd) - Sensor Data
+* [`urn:nf:iot:swu:1.0`](Schemas/SoftwareUpdates.xsd) - Software Updates
+* [`urn:nf:iot:synchronization:1.0`](Schemas/Synchronization.xsd) - Synchronization
 
 
 Agent API
