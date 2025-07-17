@@ -26,6 +26,10 @@ Neuro-Foundation presents communication infrastructure for a globally scalable, 
 * High level of cybersecurity
 * Cross-domain interoperability
 * Cross-technology interoperability
+* Self-sovereign digital identities
+* Legally binding cross-domain agreements
+* Distributed discovery and decision support
+* Monetization and support for micro-transactions
 
 For a brief introduction to the Neuro-Foundation infrastructure, and how it works, see the [Overview](Overview.md). If you want to test
 integration services, brokers or devices, [cybercity.online](https://cybercity.online/) is available for this purpose.
