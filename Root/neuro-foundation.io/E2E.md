@@ -97,16 +97,16 @@ Support for Elliptic Curve encryption endpoints is shown by including the curve 
 The list of supported curves may change over time.
 
 | Curve Name             | Element   | Security Level | RSA equivalent | Signatures                     | Safe[^Safe] |
-|:-----------------------|:----------|:--------------:|:--------------:|:-------------------------------|:-----------:|
-| Curve25519[^RFC7748]   | `x25519`  | 128            |  3072          | N/A[^CurveNote]                | Yes         |
-| Curve448[^RFC7748]     | `x448`    | 224            |  7680          | N/A[^CurveNote]                | Yes         |
-| Edwards25519[^RFC8032] | `ed25519` | 128            |  3072          | EdDSA, SHA-512                 | Yes         |
-| Edwards448[^RFC8032]   | `ed448`   | 224            |  7680          | EdDSA, SHAKE256[114][^FIPS202] | Yes         |
-| NIST P-192[^FIPS1864]  | `p192`    |  96            |  1024          | ECDSA, SHA-256                 | No          |
-| NIST P-224[^FIPS1864]  | `p224`    | 112            |  2048          | ECDSA, SHA-256                 | No          |
-| NIST P-256[^FIPS1864]  | `p256`    | 128            |  3072          | ECDSA, SHA-256                 | No          |
-| NIST P-384[^FIPS1864]  | `p384`    | 192            |  7680          | ECDSA, SHA-512                 | No          |
-| NIST P-521[^FIPS1864]  | `p521`    | 256            | 15360          | ECDSA, SHA-512                 | No          |
+|:-----------------------|:----------|---------------:|---------------:|:-------------------------------|:-----------:|
+| Curve25519[^RFC7748]   | `x25519`  |            128 |           3072 | N/A[^CurveNote]                | Yes         |
+| Curve448[^RFC7748]     | `x448`    |            224 |           7680 | N/A[^CurveNote]                | Yes         |
+| Edwards25519[^RFC8032] | `ed25519` |            128 |           3072 | EdDSA, SHA-512                 | Yes         |
+| Edwards448[^RFC8032]   | `ed448`   |            224 |           7680 | EdDSA, SHAKE256[114][^FIPS202] | Yes         |
+| NIST P-192[^FIPS1864]  | `p192`    |             96 |           1024 | ECDSA, SHA-256                 | No          |
+| NIST P-224[^FIPS1864]  | `p224`    |            112 |           2048 | ECDSA, SHA-256                 | No          |
+| NIST P-256[^FIPS1864]  | `p256`    |            128 |           3072 | ECDSA, SHA-256                 | No          |
+| NIST P-384[^FIPS1864]  | `p384`    |            192 |           7680 | ECDSA, SHA-512                 | No          |
+| NIST P-521[^FIPS1864]  | `p521`    |            256 |          15360 | ECDSA, SHA-512                 | No          |
 
 [^RFC7748]: Curve25519 and Curve448 are described in [RFC 7748](https://tools.ietf.org/html/rfc7748). This includes binary representations
 of public keys and signatures.
@@ -122,6 +122,27 @@ end-to-end encrypted message requires knowledge about the private key of the sen
 Since no signature is provided by default when using Curve25519 or Curve448, the AEAD-ChaCha20-Poly1305 symmetric cipher can be used to 
 add an extra layer of authentication of the sender and integrity protection of the message, if desired.
 
+### Post-Quantum Cryptography (PQC)
+
+Post-Quantum Cryptography (PQC) is an area of cryptography that aims to develop secure cryptographic algorithms against the potential 
+threats posed by quantum computers. The algorithms available are based on module lattice-based cryptography, mainly the `ML-KEM`[^FIPS2023]
+algorithm for key exchange, and `ML-DSA`[^FIPS204] for digital signatures. A single algorithm cannot do both, so, and End-to-End encryption
+endpoint need to instantiate both algorithms, and keep keys for both algorithms, in order to both negotiate shares secrets for symmetric
+encryption, and sign messages. The public key of the endpoint, is simply the public keys concatenated together, with the key exchange
+encapsulation key first followed by the signature public key. When using the ML-DSA algorithm, messages are furthermore *pre-hashed* using 
+`SHAKE-256`.
+
+The following Module-Lattice-based endpoints are currently supported for End-to-End Encryption using PQC:
+
+| Key Exchange  | Signatures  | Pre-Hash    | Element | Security Level |
+|:--------------|:------------|:------------|:--------|---------------:|
+| `ML_KEM_512`  | `ML_DSA_44` | `SHAKE-256` | `ml128` |            128 | 
+| `ML_KEM_768`  | `ML_DSA_65` | `SHAKE-256` | `ml192` |            192 | 
+| `ML_KEM_1024` | `ML_DSA_87` | `SHAKE-256` | `ml256` |            256 | 
+
+[^FIPS203]: [NIST FIPS 203](https://csrc.nist.gov/pubs/fips/203/final), Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM).
+[^FIPS204]: [NIST FIPS 204](https://csrc.nist.gov/pubs/fips/204/final), Module-Lattice-Based Digital Signature Standard (ML-DSA).
+
 Symmetric ciphers
 -----------------------
 
@@ -129,10 +150,10 @@ The following subsections list symmetric ciphers that can be used for End-to-End
 by the element that encapsulates the encrypted data. Available elements include:
 
 | Algorithm              | Element | Security Level |
-|------------------------|---------|----------------|
-| AEAD-ChaCha20-Poly1305 | `acp`   | 256            |
-| AES-256                | `aes`   | 256            |
-| ChaCha20               | `cha`   | 256            |
+|:-----------------------|:--------|---------------:|
+| AEAD-ChaCha20-Poly1305 | `acp`   |            256 |
+| AES-256                | `aes`   |            256 |
+| ChaCha20               | `cha`   |            256 |
 
 Symmetric cipher elements share the following attributes:
 
