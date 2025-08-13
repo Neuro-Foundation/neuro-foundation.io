@@ -1,8 +1,8 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:nf:iot:swu:1.0'
-    xmlns='urn:nf:iot:swu:1.0'
+    targetNamespace='urn:nfi:iot:swu:1.0'
+    xmlns='urn:nfi:iot:swu:1.0'
     elementFormDefault='qualified'>
 
 	<xs:element name='getPackageInfo'>

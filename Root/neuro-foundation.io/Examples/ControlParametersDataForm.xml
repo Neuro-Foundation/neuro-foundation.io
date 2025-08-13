@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<set xmlns="urn:nf:iot:ctr:1.0">
+<set xmlns="urn:nfi:iot:ctr:1.0">
   <x type='form'
       xmlns='jabber:x:data'
       xmlns:xdv='http://jabber.org/protocol/xdata-validate'
@@ -28,7 +28,7 @@
         <xdv:range min='-180' max='180'/>
       </xdv:validate>
       <xdd:notSame/>
-      <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
+      <pGroup xmlns='urn:nfi:iot:ctr:1.0' name='direction'/>
     </field>
     <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
      <desc>Elevation angle of the spotlight.</desc>
@@ -37,7 +37,7 @@
        <xdv:range min='-90' max='90'/>
      </xdv:validate>
      <xdd:notSame/>
-     <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
+     <pGroup xmlns='urn:nfi:iot:ctr:1.0' name='direction'/>
     </field>
   </x>
 </set>

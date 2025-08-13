@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<set xmlns="urn:nf:iot:ctr:1.0">
+<set xmlns="urn:nfi:iot:ctr:1.0">
   <b n="MainSwitch" v="true"/>
   <db n="HorizontalAngle" v="0"/>
   <db n="ElevationAngle" v="0"/>

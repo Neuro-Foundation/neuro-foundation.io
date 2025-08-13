@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:nf:iot:prov:o:1.0'
-    xmlns='urn:nf:iot:prov:o:1.0'
-    xmlns:sd='urn:nf:iot:sd:1.0'
+    targetNamespace='urn:nfi:iot:prov:o:1.0'
+    xmlns='urn:nfi:iot:prov:o:1.0'
+    xmlns:sd='urn:nfi:iot:sd:1.0'
     elementFormDefault='qualified'>
 
-	<xs:import namespace='urn:nf:iot:sd:1.0'/>
+	<xs:import namespace='urn:nfi:iot:sd:1.0'/>
 
 	<xs:element name='isFriend'>
 		<xs:annotation>

@@ -15,7 +15,7 @@ representation of sensor data. The XML representation is modelled using an annot
 
 | Event subscription                                                  ||
 | ------------|--------------------------------------------------------|
-| Namespace:  | `urn:nf:iot:events:1.0`                                |
+| Namespace:  | `urn:nfi:iot:events:1.0`                                |
 | Schema:     | [EventSubscription.xsd](Schemas/EventSubscription.xsd) |
 
 It also relies on the [Sensor Data Request/Response pattern](SensorDataRequestResponse.md) and the [Sensor Data Representation](SensorData.md).
@@ -226,7 +226,7 @@ Subscription request:
 
 ```xml
 <iq type='get' id='28' from='client@example.org/1234' to='device@example.org/abcd'>
-  <subscribe xmlns='urn:nf:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8' m='true' minInt='PT1S' maxInt='PT1M'>
+  <subscribe xmlns='urn:nfi:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8' m='true' minInt='PT1S' maxInt='PT1M'>
     <f n='Light' v='25.72' by='1'/>
     <f n='Motion' v='0' by='1'/>
   </subscribe>
@@ -237,7 +237,7 @@ Subscription response:
 
 ```xml
 <iq id='28' type='result' to='client@example.org/1234' from='device@example.org/abcd'>
-  <accepted xmlns='urn:nf:iot:sd:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
+  <accepted xmlns='urn:nfi:iot:sd:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
 </iq>
 ```
 
@@ -245,7 +245,7 @@ Event:
 
 ```xml
 <message to='client@example.org/1234' from='device@example.org/abcd'>
-  <resp id="d4fe61155cb14e649e302092d3b406a8" xmlns="urn:nf:iot:sd:1.0">
+  <resp id="d4fe61155cb14e649e302092d3b406a8" xmlns="urn:nfi:iot:sd:1.0">
     <ts v="2018-07-18T15:19:57.732">
       <q n="Light" m="true" ar="true" v="26.11" u="%" />
       <b n="Motion" m="true" ar="true" v="true" />
@@ -258,7 +258,7 @@ Unsubscription request:
 
 ```xml
 <iq type='get' id='29' from='client@example.org/1234' to='device@example.org/abcd'>
-  <unsubscribe xmlns='urn:nf:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
+  <unsubscribe xmlns='urn:nfi:iot:events:1.0' id='d4fe61155cb14e649e302092d3b406a8'/>
 </iq>
 ```
 

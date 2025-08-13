@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0"
 								xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 								xmlns:msxsl="urn:schemas-microsoft-com:xslt"
-								xmlns:units="urn:nf:iot:u:1.0"
+								xmlns:units="urn:nfi:iot:u:1.0"
 								exclude-result-prefixes="msxsl units xsl">
 
 	<xsl:output method="text" indent="no"/>

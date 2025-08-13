@@ -14,7 +14,7 @@ information. The XML representation is modelled using an annotated XML Schema:
 
 | Peer-to-Peer communication              ||
 | ------------|----------------------------|
-| Namespace:  | `urn:nf:iot:geo:1.0`       |
+| Namespace:  | `urn:nfi:iot:geo:1.0`       |
 | Schema:     | [Geo.xsd](Schemas/Geo.xsd) |
 
 ![Table of Contents](toc)
@@ -89,7 +89,7 @@ The client subscribes to geo-spatial information sending an `iq set` stanza as f
 
 ```xml
 <iq type='set' id='1' from='client@example.com/resource' to='geo.example.com'>
-    <subscribe xmlns='urn:nf:iot:geo:1.0'
+    <subscribe xmlns='urn:nfi:iot:geo:1.0'
                minLat='60.123' maxLat='60.456'
                minLong='10.789' maxLon='11.012'/>
 </iq>
@@ -100,7 +100,7 @@ the subscription will be automatically unsubscribed:
 
 ```xml
 <iq id='1' type='result' to='client@example.com/resource' from='geo.example.com'>
-    <subscribed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997' ttl='60'/>
+    <subscribed xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997' ttl='60'/>
 </iq>
 ```
 
@@ -109,7 +109,7 @@ identifier in a new subscription call:
 
 ```xml
 <iq type='set' id='2' from='client@example.com/resource' to='geo.example.com'>
-    <subscribe xmlns='urn:nf:iot:geo:1.0'
+    <subscribe xmlns='urn:nfi:iot:geo:1.0'
                id='7b102c7f-84ce-489b-998d-346bbb322997'
                minLat='60.123' maxLat='60.456'
                minLong='10.789' maxLon='11.012'/>
@@ -123,7 +123,7 @@ again:
 
 ```xml
 <iq id='2' type='result' to='client@example.com/resource' from='geo.example.com'>
-    <subscribed xmlns='urn:nf:iot:geo:1.0' ttl='60'/>
+    <subscribed xmlns='urn:nfi:iot:geo:1.0' ttl='60'/>
 </iq>
 ```
 
@@ -132,7 +132,7 @@ subscription has been terminated:
 
 ```xml
 <message id='3' to='client@example.com/resource' from='geo.example.com'>
-    <unsubscribed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'/>
+    <unsubscribed xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'/>
 </message>
 ```
 
@@ -154,7 +154,7 @@ The client unsubscribes a geo-spatial subscription sending an `iq set` stanza as
 
 ```xml
 <iq type='set' id='4' from='client@example.com/resource' to='geo.example.com'>
-    <unsubscribe xmlns='urn:nf:iot:geo:1.0'
+    <unsubscribe xmlns='urn:nfi:iot:geo:1.0'
                  id='7b102c7f-84ce-489b-998d-346bbb322997'/>
 </iq>
 ```
@@ -163,7 +163,7 @@ The component responds with an acknowledgement of the unsubscription:
 
 ```xml
 <iq id='4' type='result' to='client@example.com/resource' from='geo.example.com'>
-    <unsubscribed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'/>
+    <unsubscribed xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'/>
 </iq>
 ```
 
@@ -198,7 +198,7 @@ location of a legal identity:
 
 ```xml
 <iq type='set' id='5' from='client@example.com/resource' to='geo.example.com'>
-    <publish xmlns='urn:nf:iot:geo:1.0'
+    <publish xmlns='urn:nfi:iot:geo:1.0'
              id='iotid:cf8a82a3-1b28-4a34-80d6-a497080b57b3@legal.example.com'
              lat='60.253' long='10.923'/>
 </iq>
@@ -209,7 +209,7 @@ a location, available for 2 years:
 
 ```xml
 <iq type='set' id='6' from='client@example.com/resource' to='geo.example.com'>
-    <publish xmlns='urn:nf:iot:geo:1.0'
+    <publish xmlns='urn:nfi:iot:geo:1.0'
              id='iotsc:9af22dac-01f4-410b-b334-389959254331@legal.example.com'
              lat='60.253' long='10.923' ttl='63115200'/>
 </iq>
@@ -220,7 +220,7 @@ associated with a legal identity, for communication purposes:
 
 ```xml
 <iq type='set' id='7' from='client@example.com/resource' to='geo.example.com'>
-    <publish xmlns='urn:nf:iot:geo:1.0'
+    <publish xmlns='urn:nfi:iot:geo:1.0'
              lat='60.253' long='10.923'>
         <display xmlns='http://example.com/Custom.xsd'
                  friendlyName='John Doe'
@@ -241,7 +241,7 @@ persisted:
 
 ```xml
 <iq id='7' type='result' to='client@example.com/resource' from='geo.example.com'>
-    <published xmlns='urn:nf:iot:geo:1.0' id='bbd54a92-24fd-4263-85a2-5e5c17454ddf'/>
+    <published xmlns='urn:nfi:iot:geo:1.0' id='bbd54a92-24fd-4263-85a2-5e5c17454ddf'/>
 </iq>
 ```
 
@@ -262,7 +262,7 @@ Example:
 
 ```xml
 <iq type='set' id='8' from='client@example.com/resource' to='geo.example.com'>
-    <delete xmlns='urn:nf:iot:geo:1.0'
+    <delete xmlns='urn:nfi:iot:geo:1.0'
             id='bbd54a92-24fd-4263-85a2-5e5c17454ddf'/>
 </iq>
 ```
@@ -271,7 +271,7 @@ The broker acknowledges the deletion as follows:
 
 ```xml
 <iq id='8' type='result' to='client@example.com/resource' from='geo.example.com'>
-    <deleted xmlns='urn:nf:iot:geo:1.0'/>
+    <deleted xmlns='urn:nfi:iot:geo:1.0'/>
 </iq>
 ```
 
@@ -305,7 +305,7 @@ Example of a simple search request:
 
 ```xml
 <iq type='get' id='9' from='client@example.com/resource' to='geo.example.com'>
-    <search xmlns='urn:nf:iot:geo:1.0'
+    <search xmlns='urn:nfi:iot:geo:1.0'
             minLat='60.123' maxLat='60.456'
             minLong='10.789' maxLon='11.012'/>
 </iq>
@@ -315,7 +315,7 @@ Example of a paginated search request for positioned smart contracts:
 
 ```xml
 <iq type='get' id='10' from='client@example.com/resource' to='geo.example.com'>
-    <search xmlns='urn:nf:iot:geo:1.0'
+    <search xmlns='urn:nfi:iot:geo:1.0'
             minLat='60.123' maxLat='60.456'
             minLong='10.789' maxLon='11.012'
             pattern='iotsc:.*'
@@ -327,7 +327,7 @@ Example of a paginated search request for sensors in the area:
 
 ```xml
 <iq type='get' id='11' from='client@example.com/resource' to='geo.example.com'>
-    <search xmlns='urn:nf:iot:geo:1.0'
+    <search xmlns='urn:nfi:iot:geo:1.0'
             minLat='60.123' maxLat='60.456'
             minLong='10.789' maxLon='11.012'
             pattern='iotdisco:.*CLASS=Sensor.*'
@@ -341,7 +341,7 @@ Example of a paginated search request for displayable custom content in the area
 
 ```xml
 <iq type='get' id='12' from='client@example.com/resource' to='geo.example.com'>
-    <search xmlns='urn:nf:iot:geo:1.0'
+    <search xmlns='urn:nfi:iot:geo:1.0'
             minLat='60.123' maxLat='60.456'
             minLong='10.789' maxLon='11.012'
             path='/custom:display[@friendlyName=&apos;John Doe&apos;]'
@@ -386,7 +386,7 @@ may be available):
 
 ```xml
 <iq type='result' id='10' to='client@example.com/resource' from='geo.example.com'>
-    <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
+    <references xmlns='urn:nfi:iot:geo:1.0' maxCount='10'>
         <ref id='iotsc:9af22dac-01f4-410b-b334-389959254331@legal.example.com'
              creator='client@example.com'
              lat='60.253' long='10.923' ttl='63115200'/>
@@ -399,7 +399,7 @@ A search result containing object references with custom XML might look as follo
 
 ```xml
 <iq type='result' id='12' to='client@example.com/resource' from='geo.example.com'>
-    <references xmlns='urn:nf:iot:geo:1.0' maxCount='10'>
+    <references xmlns='urn:nfi:iot:geo:1.0' maxCount='10'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              creator='client@example.com'
              lat='60.253' long='10.923'>
@@ -436,7 +436,7 @@ An example notification of a new object reference being added to the area of a s
 
 ```xml
 <message id='13' to='client@example.com/resource' from='geo.example.com'>
-    <added xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+    <added xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              creator='client@example.com'
              lat='60.253' long='10.923'>
@@ -471,7 +471,7 @@ An example update notification of an object reference in the area of a subscript
 
 ```xml
 <message id='14' to='client@example.com/resource' from='geo.example.com'>
-    <updated xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+    <updated xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              creator='client@example.com'
              lat='60.253' long='10.923'>
@@ -507,7 +507,7 @@ An example removal notification of an object reference in the area of a subscrip
 
 ```xml
 <message id='15' to='client@example.com/resource' from='geo.example.com'>
-    <removed xmlns='urn:nf:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
+    <removed xmlns='urn:nfi:iot:geo:1.0' id='7b102c7f-84ce-489b-998d-346bbb322997'>
         <ref id='ed5d8cf1-bd01-4861-bf0a-6a26a7eed78d'
              creator='client@example.com'
              lat='60.253' long='10.923'>

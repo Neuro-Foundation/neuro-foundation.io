@@ -13,7 +13,7 @@ This document outlines the XML representation of peer-to-peer communication. The
 
 | Peer-to-Peer communication              ||
 | ------------|----------------------------|
-| Namespace:  | `urn:nf:iot:p2p:1.0`       |
+| Namespace:  | `urn:nfi:iot:p2p:1.0`       |
 | Schema:     | [P2P.xsd](Schemas/P2P.xsd) |
 
 ![Table of Contents](toc)
@@ -84,7 +84,7 @@ Following is an example of a device publishing its Peer-to-Peer and End-to-End e
 ```
 <presence>
     <show>chat</show>
-    <e2e xmlns="urn:nf:iot:e2e:1.0">
+    <e2e xmlns="urn:nfi:iot:e2e:1.0">
         <x25519 pub="giAy8BZRKUjsyQgha387ftNCfodSB..." />
         <x448 pub="k48EIdyM35m4y/+fKfjfhsofi6Q/dtV..." />
         <ed25519 pub="QsPrTABTXqQudCO3TVZTzEbVPc5k..." />
@@ -96,7 +96,7 @@ Following is an example of a device publishing its Peer-to-Peer and End-to-End e
         <p521 pub="7P0RVNIGeMVvZZ2+Lrc4WbW5fCSrUDx..." />
         <rsa pub="AAzJMMn/cK5hqiaWvc3i3aS3e2NosJdm..." />
     </e2e>
-    <p2p xmlns="urn:nf:iot:p2p:1.0" extIp="81.229..." extPort="64152" locIp="192.168.1.219" locPort="64152" />
+    <p2p xmlns="urn:nfi:iot:p2p:1.0" extIp="81.229..." extPort="64152" locIp="192.168.1.219" locPort="64152" />
     <c xmlns="http://jabber.org/protocol/caps" hash="sha-256" node="..." ver="..." />
 </presence>
 ```

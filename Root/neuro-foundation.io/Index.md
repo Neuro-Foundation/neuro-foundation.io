@@ -100,22 +100,25 @@ Agreements
 Schemas
 -------------
 
-XML Schemas by namespace:
+All Neuro-Foundation namespaces are identified using the 
+[URN Namespace Identifier `nfi`](https://www.iana.org/assignments/urn-formal/nfi). Each
+interface namespace is defined in an XML Schema. You can access these schemas, by namespace
+below:
 
-* [`urn:nf:iot:concentrator:1.0`](Schemas/Concentrator.xsd) - Concentrators
-* [`urn:nf:iot:ctr:1.0`](Schemas/Control.xsd) - Actuator Control
-* [`urn:nf:iot:disco:1.0`](Schemas/Discovery.xsd) - Discovery
-* [`urn:nf:iot:e2e:1.0`](Schemas/E2E.xsd) - End-to-End Encryption
-* [`urn:nf:iot:events:1.0`](Schemas/EventSubscription.xsd) - Event subscription
-* [`urn:nf:iot:leg:id:1.0`](Schemas/LegalIdentities.xsd) - Legal identities
-* [`urn:nf:iot:leg:sc:1.0`](Schemas/SmartContracts.xsd) - Smart Contracts
-* [`urn:nf:iot:p2p:1.0`](Schemas/P2P.xsd) - Peer-to-Peer Connectivity
-* [`urn:nf:iot:prov:d:1.0`](Schemas/ProvisioningDevice.xsd) - Provisioning for Devices
-* [`urn:nf:iot:prov:o:1.0`](Schemas/ProvisioningOwner.xsd) - Provisioning for Owners
-* [`urn:nf:iot:prov:t:1.0`](Schemas/ProvisioningTokens.xsd) - Provisioning Tokens
-* [`urn:nf:iot:sd:1.0`](Schemas/SensorData.xsd) - Sensor Data
-* [`urn:nf:iot:swu:1.0`](Schemas/SoftwareUpdates.xsd) - Software Updates
-* [`urn:nf:iot:synchronization:1.0`](Schemas/Synchronization.xsd) - Synchronization
+* [`urn:nfi:iot:concentrator:1.0`](Schemas/Concentrator.xsd) - Concentrators
+* [`urn:nfi:iot:ctr:1.0`](Schemas/Control.xsd) - Actuator Control
+* [`urn:nfi:iot:disco:1.0`](Schemas/Discovery.xsd) - Discovery
+* [`urn:nfi:iot:e2e:1.0`](Schemas/E2E.xsd) - End-to-End Encryption
+* [`urn:nfi:iot:events:1.0`](Schemas/EventSubscription.xsd) - Event subscription
+* [`urn:nfi:iot:leg:id:1.0`](Schemas/LegalIdentities.xsd) - Legal identities
+* [`urn:nfi:iot:leg:sc:1.0`](Schemas/SmartContracts.xsd) - Smart Contracts
+* [`urn:nfi:iot:p2p:1.0`](Schemas/P2P.xsd) - Peer-to-Peer Connectivity
+* [`urn:nfi:iot:prov:d:1.0`](Schemas/ProvisioningDevice.xsd) - Provisioning for Devices
+* [`urn:nfi:iot:prov:o:1.0`](Schemas/ProvisioningOwner.xsd) - Provisioning for Owners
+* [`urn:nfi:iot:prov:t:1.0`](Schemas/ProvisioningTokens.xsd) - Provisioning Tokens
+* [`urn:nfi:iot:sd:1.0`](Schemas/SensorData.xsd) - Sensor Data
+* [`urn:nfi:iot:swu:1.0`](Schemas/SoftwareUpdates.xsd) - Software Updates
+* [`urn:nfi:iot:synchronization:1.0`](Schemas/Synchronization.xsd) - Synchronization
 
 
 Agent API

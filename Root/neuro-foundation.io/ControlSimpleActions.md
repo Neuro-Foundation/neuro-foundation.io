@@ -39,7 +39,7 @@ Simple example, setting of parameters in a spotlight:
 
 ```xml
 <iq type='set' from='client@example.org/1234' to='device@example.org/abcd' id='R0001'>
-  <set xmlns='urn:nf:iot:ctr:1.0'>
+  <set xmlns='urn:nfi:iot:ctr:1.0'>
     <b n="MainSwitch" v="true"/>
     <db n="HorizontalAngle" v="0"/>
     <db n="ElevationAngle" v="0"/>
@@ -51,7 +51,7 @@ Example response:
 
 ```xml
 <iq type='result' from='device@example.org/abcd' to='client@example.org/1234' id='R0001'>
-  <resp xmlns='urn:nf:iot:ctr:1.0'>
+  <resp xmlns='urn:nfi:iot:ctr:1.0'>
     <p n="MainSwitch"/>
     <p n="HorizontalAngle"/>
     <p n="ElevationAngle"/>

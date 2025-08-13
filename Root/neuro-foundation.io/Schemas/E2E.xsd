@@ -1,12 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:nf:iot:e2e:1.0'
-    xmlns='urn:nf:iot:e2e:1.0'
+    targetNamespace='urn:nfi:iot:e2e:1.0'
+    xmlns='urn:nfi:iot:e2e:1.0'
     elementFormDefault='qualified'
-		xmlns:p2="urn:nf:iot:p2p:1.0">
+		xmlns:p2="urn:nfi:iot:p2p:1.0">
 
-	<xs:import namespace="urn:nf:iot:p2p:1.0"/>
+	<xs:import namespace="urn:nfi:iot:p2p:1.0"/>
 
 	<xs:element name="e2e">
 		<xs:annotation>

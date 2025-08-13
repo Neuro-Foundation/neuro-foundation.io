@@ -1,9 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:nf:iot:ctr:1.0'
-    xmlns='urn:nf:iot:ctr:1.0'
-    xmlns:sd='urn:nf:iot:sd:1.0'
+    targetNamespace='urn:nfi:iot:ctr:1.0'
+    xmlns='urn:nfi:iot:ctr:1.0'
+    xmlns:sd='urn:nfi:iot:sd:1.0'
     xmlns:xd="jabber:x:data"
     elementFormDefault='qualified'>
 

@@ -13,7 +13,7 @@ This document outlines the XML representation of clock and event synchronization
 
 | Clock Synchronization                                           ||
 | ------------|----------------------------------------------------|
-| Namespace:  | `urn:nf:iot:synchronization:1.0`                   |
+| Namespace:  | `urn:nfi:iot:synchronization:1.0`                   |
 | Schema:     | [Synchronization.xsd](Schemas/Synchronization.xsd) |
 
 ![Table of Contents](toc)
@@ -104,7 +104,7 @@ A simple clock synchronization request can look as follows:
 
 ```xml
 <iq type='get' id='3' from='client@server1/resource' to='source@server2/resource'>
-    <req xmlns='urn:nf:iot:synchronization:1.0'/>
+    <req xmlns='urn:nfi:iot:synchronization:1.0'/>
 </iq>
 ```
 
@@ -112,7 +112,7 @@ The source responds:
 
 ```xml
 <iq id='3' type='result' to='client@server1/resource' from='source@server2/resource'>
-    <resp xmlns='urn:nf:iot:synchronization:1.0' hf='29774635776511' freq='2630640'>2018-07-02T09:47:38.5102314Z</resp>
+    <resp xmlns='urn:nfi:iot:synchronization:1.0' hf='29774635776511' freq='2630640'>2018-07-02T09:47:38.5102314Z</resp>
 </iq>
 ```
 
@@ -127,7 +127,7 @@ An entity can ask another entity what clock source it uses:
 
 ```xml
 <iq id='4' type='get' to='client@server1/resource' from='client@server2/resource'>
-    <sourceReq xmlns='urn:nf:iot:synchronization:1.0'/>
+    <sourceReq xmlns='urn:nfi:iot:synchronization:1.0'/>
 </iq>
 ```
 
@@ -135,6 +135,6 @@ If the entity is synchronizing its clock with an external clock source, it respo
 
 ```xml
 <iq type='result' id='4' to='client@sever2/resource' from='client@server1/resource'>
-    <sourceResp xmlns='urn:nf:iot:synchronization:1.0'>source@server2/resource</source>
+    <sourceResp xmlns='urn:nfi:iot:synchronization:1.0'>source@server2/resource</source>
 </iq>
 ```

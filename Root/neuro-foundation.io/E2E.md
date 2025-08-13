@@ -13,7 +13,7 @@ This document outlines the XML representation of end-to-end encryption. The XML 
 
 | End-to-End encryption                   ||
 | ------------|----------------------------|
-| Namespace:  | `urn:nf:iot:e2e:1.0`       |
+| Namespace:  | `urn:nfi:iot:e2e:1.0`       |
 | Schema:     | [E2E.xsd](Schemas/E2E.xsd) |
 
 ![Table of Contents](toc)
@@ -246,7 +246,7 @@ public keys for available asymmetric ciphers.
 ```
 <presence>
     <show>chat</show>
-    <e2e xmlns="urn:nf:iot:e2e:1.0">
+    <e2e xmlns="urn:nfi:iot:e2e:1.0">
         <x25519 pub="giAy8BZRKUjsyQgha387ftNCfodSB..." />
         <x448 pub="k48EIdyM35m4y/+fKfjfhsofi6Q/dtV..." />
         <ed25519 pub="QsPrTABTXqQudCO3TVZTzEbVPc5k..." />
@@ -258,7 +258,7 @@ public keys for available asymmetric ciphers.
         <p521 pub="7P0RVNIGeMVvZZ2+Lrc4WbW5fCSrUDx..." />
         <rsa pub="AAzJMMn/cK5hqiaWvc3i3aS3e2NosJdm..." />
     </e2e>
-    <p2p xmlns="urn:nf:iot:p2p:1.0" extIp="81.229..." extPort="64152" locIp="192.168.1.219" locPort="64152" />
+    <p2p xmlns="urn:nfi:iot:p2p:1.0" extIp="81.229..." extPort="64152" locIp="192.168.1.219" locPort="64152" />
     <c xmlns="http://jabber.org/protocol/caps" hash="sha-256" node="..." ver="..." />
 </presence>
 ```
@@ -273,7 +273,7 @@ shortened for readability.)
 
 ```
 <message id='1' to='...'>
-   <aes xmlns="urn:nf:iot:e2e:1.0" r="ed25519" c="1" 
+   <aes xmlns="urn:nfi:iot:e2e:1.0" r="ed25519" c="1" 
         s="V23wQRWkJ0/hVmVsMCXbfFNIpbpkqKr57+FjV7q...">
       IJR9OxAHQzltyAT+deEIN8Uj7ds6MXCeF/XL6G6ulbub...
    </aes>
@@ -294,7 +294,7 @@ readability.)
 
 ```
 <iq type='set' id='3' to='...'>
-   <acp xmlns="urn:nf:iot:e2e:1.0" r="x25519" c="1">
+   <acp xmlns="urn:nfi:iot:e2e:1.0" r="x25519" c="1">
       /oeKARaL/z77fGKxQpye5nkxf6qlcVCScsOWXWTHg/Le2...
    </acp>
 </iq>
@@ -307,7 +307,7 @@ Encrypted using the same algorithms as the original query.
 
 ```
 <iq id='3' type='result' to='...' from='...'>
-   <acp xmlns="urn:nf:iot:e2e:1.0" r="x25519" c="1">
+   <acp xmlns="urn:nfi:iot:e2e:1.0" r="x25519" c="1">
       U+5v69FIcU16ocbHt/EpSKWe/49Sj0SqfkCyqlXakKJD0...
    </acp>
 </iq>
@@ -323,7 +323,7 @@ Encrypted using different algorithms (RSA, with encrypted secret and ChaCha20):
 
 ```
 <iq id='3' type='error' to='...' from='...'>
-   <cha xmlns="urn:nf:iot:e2e:1.0" r="rsa" c="1"
+   <cha xmlns="urn:nfi:iot:e2e:1.0" r="rsa" c="1"
         k="lJZV4kdCXOUmYbV0p/Ohs0fmH8TgouTJ2Bu..."
         s="qAYGmemtF6nMRntlVaqGG8cz4ZJX96kO3b+...">
       DshwgJp0fg1RV3mQZKlzaI3akUOAg4LBKum/L390...

@@ -14,7 +14,7 @@ document outlines the XML representation of sensor data. The XML representation 
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | `urn:nf:iot:sd:1.0`                      |
+| Namespace:  | `urn:nfi:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 ![Table of Contents](toc)
@@ -364,7 +364,7 @@ list of notable differences:
 Determining Support
 -------------------------
 
-Devices supporting the protocol described in this document should advertise this fact, by including the `urn:nf:iot:sd:1.0` namespace in the features list in responses to
+Devices supporting the protocol described in this document should advertise this fact, by including the `urn:nfi:iot:sd:1.0` namespace in the features list in responses to
 [Service Discover](https://xmpp.org/extensions/xep-0030.html) requests.
 
 
@@ -377,7 +377,7 @@ Request:
 
 ```xml
 <iq type='get' from='client@example.org/1234' to='device@example.org/abcd' id='R0001'>
-  <req xmlns="urn:nf:iot:sd:1.0" id="00000001" all="true"/>
+  <req xmlns="urn:nfi:iot:sd:1.0" id="00000001" all="true"/>
 </iq>
 ```
 
@@ -385,7 +385,7 @@ Simple response:
 
 ```xml
 <iq type='result' from='device@example.org/abcd' to='client@example.org/1234' id='R0001'>
-  <resp xmlns="urn:nf:iot:sd:1.0" id="00000001">
+  <resp xmlns="urn:nfi:iot:sd:1.0" id="00000001">
     <ts v="2017-09-22T15:22:33Z">
       <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
       <s n="SN" v="12345678" i="true" ar="true"/>

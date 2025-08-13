@@ -20,7 +20,7 @@ is modelled using an annotated XML Schema:
 
 | Decision Support                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | `urn:nf:iot:prov:d:1.0`                                  |
+| Namespace:  | `urn:nfi:iot:prov:d:1.0`                                  |
 | Schema:     | [ProvisioningDevice.xsd](Schemas/ProvisioningDevice.xsd) |
 
 ![Table of Contents](toc)

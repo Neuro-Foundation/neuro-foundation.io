@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<identity xmlns="urn:nf:iot:leg:id:1.0"
+<identity xmlns="urn:nfi:iot:leg:id:1.0"
           id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org">
 	<clientPublicKey>
 		<ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4F..."
-		       xmlns="urn:nf:iot:e2e:1.0"/>
+		       xmlns="urn:nfi:iot:e2e:1.0"/>
 	</clientPublicKey>
 	<property name="FIRST" value="John"/>
 	<property name="LAST" value="Doe"/>

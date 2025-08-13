@@ -15,7 +15,7 @@ The XML representation is modelled using an annotated XML Schema:
 
 | Sensor Data                                      ||
 | -------------|------------------------------------|
-| Namespace:   | `urn:nf:iot:u:1.0`                 |
+| Namespace:   | `urn:nfi:iot:u:1.0`                 |
 | Schema:      | [Units.xsd](Schemas/Units.xsd)     |
 | Definitions: | [Units.xml](Definitions/Units.xml) |
 

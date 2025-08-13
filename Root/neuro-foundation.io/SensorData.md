@@ -13,7 +13,7 @@ This document outlines the XML representation of sensor data. The XML representa
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | `urn:nf:iot:sd:1.0`                      |
+| Namespace:  | `urn:nfi:iot:sd:1.0`                      |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 ![Table of Contents](toc)
@@ -291,7 +291,7 @@ Examples
 A simple example containing sensor data from a temperature sensor.
 
 ```xml
-<ts v="2017-09-22T15:22:33Z" xmlns="urn:nf:iot:sd:1.0">
+<ts v="2017-09-22T15:22:33Z" xmlns="urn:nfi:iot:sd:1.0">
   <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
   <s n="SN" v="12345678" i="true" ar="true"/>
 </ts>
@@ -300,7 +300,7 @@ A simple example containing sensor data from a temperature sensor.
 If this temperature sensor would be a node inside a concentrator, the same data would be represented as:
 
 ```xml
-<nd id="Node1" xmlns="urn:nf:iot:sd:1.0">
+<nd id="Node1" xmlns="urn:nfi:iot:sd:1.0">
   <ts v="2017-09-22T15:22:33Z">
     <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
     <s n="SN" v="12345678" i="true" ar="true"/>

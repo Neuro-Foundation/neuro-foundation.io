@@ -18,7 +18,7 @@ aspects in a smart city, such as provisioning for instance.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | `urn:nf:iot:leg:sc:1.0`                                  |
+| Namespace:  | `urn:nfi:iot:leg:sc:1.0`                                  |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
 
 ![Table of Contents](toc)
@@ -1131,14 +1131,14 @@ interested parties can download it, and verify that the signatures from the manu
 trust the validity and integrity of the report, as long as signatures are valid.
 
 ```xml
-<contract xmlns="urn:nf:iot:leg:sc:1.0"
+<contract xmlns="urn:nfi:iot:leg:sc:1.0"
           archiveOpt="P1Y"
           archiveReq="P2Y"
           canActAsTemplate="false"
           duration="P5Y"
           id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
           visibility="Public">
-  <nd id="Device" xmlns="urn:nf:iot:sd:1.0">
+  <nd id="Device" xmlns="urn:nfi:iot:sd:1.0">
     <ts v="2019-07-19T10:19:23Z">
       <s n="Overall Rating" v="B" m="true"/>
       <q n="Certificate" v="100" u="%" m="true"/>

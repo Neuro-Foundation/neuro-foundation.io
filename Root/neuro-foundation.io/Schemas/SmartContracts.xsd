@@ -1,15 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema
     xmlns:xs='http://www.w3.org/2001/XMLSchema'
-    targetNamespace='urn:nf:iot:leg:sc:1.0'
-    xmlns='urn:nf:iot:leg:sc:1.0'
-    xmlns:e2='urn:nf:iot:e2e:1.0'
-    xmlns:id='urn:nf:iot:leg:id:1.0'
+    targetNamespace='urn:nfi:iot:leg:sc:1.0'
+    xmlns='urn:nfi:iot:leg:sc:1.0'
+    xmlns:e2='urn:nfi:iot:e2e:1.0'
+    xmlns:id='urn:nfi:iot:leg:id:1.0'
     xmlns:xml='http://www.w3.org/XML/1998/namespace'
     elementFormDefault='qualified'>
 
-	<xs:import namespace='urn:nf:iot:e2e:1.0'/>
-	<xs:import namespace='urn:nf:iot:leg:id:1.0'/>
+	<xs:import namespace='urn:nfi:iot:e2e:1.0'/>
+	<xs:import namespace='urn:nfi:iot:leg:id:1.0'/>
 	<xs:import namespace='http://www.w3.org/XML/1998/namespace'/>
 
 	<xs:element name='createContract'>

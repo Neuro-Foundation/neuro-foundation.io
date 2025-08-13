@@ -13,7 +13,7 @@ This document outlines the XML representation of control parameters. The XML rep
 
 | Control                                         ||
 | ------------|------------------------------------|
-| Namespace:  | `urn:nf:iot:ctr:1.0`               |
+| Namespace:  | `urn:nfi:iot:ctr:1.0`               |
 | Schema:     | [Control.xsd](Schemas/Control.xsd) |
 
 ![Table of Contents](toc)
@@ -219,7 +219,7 @@ Same set of parameters, represented in a Data Form, using the validation, layout
       <xdv:range min='-180' max='180'/>
     </xdv:validate>
     <xdd:notSame/>
-    <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
+    <pGroup xmlns='urn:nfi:iot:ctr:1.0' name='direction'/>
   </field>
   <field var='ElevationAngle' type='text-single' label='Elevation angle:'>
    <desc>Elevation angle of the spotlight.</desc>
@@ -228,7 +228,7 @@ Same set of parameters, represented in a Data Form, using the validation, layout
      <xdv:range min='-90' max='90'/>
    </xdv:validate>
    <xdd:notSame/>
-   <pGroup xmlns='urn:nf:iot:ctr:1.0' name='direction'/>
+   <pGroup xmlns='urn:nfi:iot:ctr:1.0' name='direction'/>
   </field>
 </x>
 ```

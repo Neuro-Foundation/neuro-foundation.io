@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<nd id="Node1" xmlns="urn:nf:iot:sd:1.0">
+<nd id="Node1" xmlns="urn:nfi:iot:sd:1.0">
   <ts v="2017-09-22T15:22:33Z">
     <q n="Temperature" v="12.3" u="°C" m="true" ar="true"/>
     <s n="SN" v="12345678" i="true" ar="true"/>
