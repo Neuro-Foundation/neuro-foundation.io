@@ -18,6 +18,7 @@
 			<Content fileName="E2E.md"/>
 			<Content fileName="Federation.md"/>
 			<Content fileName="Geo.md"/>
+			<Content fileName="HarmonizedInterfaces.md"/>
 			<Content fileName="Identities.md"/>
 			<Content fileName="ImplementationGuide.md"/>
 			<Content fileName="Implementations.md"/>
@@ -82,6 +83,7 @@
 				<Content fileName="E2E.xsd"/>
 				<Content fileName="EventSubscription.xsd"/>
 				<Content fileName="Geo.xsd"/>
+				<Content fileName="HarmonizedInterfaces.xsd"/>
 				<Content fileName="LegalIdentities.xsd"/>
 				<Content fileName="P2P.xsd"/>
 				<Content fileName="ProvisioningDevice.xsd"/>
