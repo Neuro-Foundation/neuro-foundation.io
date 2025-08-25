@@ -39,6 +39,9 @@
 			<Content fileName="Tokens.md"/>
 			<Content fileName="TransportEncryption.md"/>
 			<Content fileName="Units.md"/>
+			<Folder name="Api">
+				<Content fileName="ExpandInterfaceFolder.ws"/>
+			</Folder>
 			<Folder name="Definitions">
 				<Content fileName="Units.md"/>
 				<Content fileName="Units.xml"/>
@@ -51,6 +54,126 @@
 				<Content fileName="SimpleSensorDataRequest.xml"/>
 				<Content fileName="SimpleSensorDataResponse.xml"/>
 				<Content fileName="TlsSecurity.xml"/>
+			</Folder>
+			<Folder name="HarmonizedInterfaces">
+				<Folder name="actuator">
+					<Content fileName="analogOutput-1.0.xml"/>
+					<Content fileName="analogOutputs-1.0.xml"/>
+					<Content fileName="blinds-1.0.xml"/>
+					<Content fileName="digitalOutput-1.0.xml"/>
+					<Content fileName="digitalOutputs-1.0.xml"/>
+					<Content fileName="dimmer-1.0.xml"/>
+					<Content fileName="doorBell-1.0.xml"/>
+					<Content fileName="fan-1.0.xml"/>
+					<Content fileName="lamp-1.0.xml"/>
+				</Folder>
+				<Folder name="controller">
+					<Content fileName="accessControl-1.0.xml"/>
+					<Content fileName="thermostat-1.0.xml"/>
+					<Content fileName="ventilation-1.0.xml"/>
+				</Folder>
+				<Folder name="identity">
+					<Content fileName="address-1.0.xml"/>
+					<Content fileName="application-1.0.xml"/>
+					<Content fileName="battery-1.0.xml"/>
+					<Content fileName="clock-1.0.xml"/>
+					<Content fileName="deviceId-1.0.xml"/>
+					<Content fileName="ethernet-1.0.xml"/>
+					<Content fileName="gsm-1.0.xml"/>
+					<Content fileName="ip-1.0.xml"/>
+					<Content fileName="ipv6-1.0.xml"/>
+					<Content fileName="language-1.0.xml"/>
+					<Content fileName="location-1.0.xml"/>
+					<Content fileName="manufacturer-1.0.xml"/>
+					<Content fileName="name-1.0.xml"/>
+					<Content fileName="nodeId-1.0.xml"/>
+					<Content fileName="rfid-1.0.xml"/>
+					<Content fileName="userId-1.0.xml"/>
+					<Content fileName="version-1.0.xml"/>
+					<Content fileName="wink-1.0.xml"/>
+					<Content fileName="zwave-1.0.xml"/>
+				</Folder>
+				<Folder name="logistics">
+					<Content fileName="contents-1.0.xml"/>
+					<Content fileName="route-1.0.xml"/>
+				</Folder>
+				<Folder name="media">
+					<Content fileName="camera-1.0.xml"/>
+					<Content fileName="directory-1.0.xml"/>
+					<Content fileName="display-1.0.xml"/>
+					<Content fileName="loudSpeakers-1.0.xml"/>
+					<Content fileName="microphone-1.0.xml"/>
+					<Content fileName="recorder-1.0.xml"/>
+					<Content fileName="textDisplay-1.0.xml"/>
+					<Folder name="directory">
+						<Content fileName="audioItem-1.0.xml"/>
+						<Content fileName="directoryItem-1.0.xml"/>
+						<Content fileName="dublinCore-1.0.xml"/>
+						<Content fileName="imageItem-1.0.xml"/>
+						<Content fileName="videoItem-1.0.xml"/>
+					</Folder>
+				</Folder>
+				<Folder name="meter">
+					<Content fileName="cooling-1.0.xml"/>
+					<Content fileName="electricity-1.0.xml"/>
+					<Content fileName="gas-1.0.xml"/>
+					<Content fileName="heat-1.0.xml"/>
+					<Content fileName="heatingCooling-1.0.xml"/>
+					<Content fileName="pulseCounter-1.0.xml"/>
+					<Content fileName="pulseCounters-1.0.xml"/>
+					<Content fileName="water-1.0.xml"/>
+				</Folder>
+				<Folder name="network">
+					<Content fileName="ethernet-1.0.xml"/>
+					<Content fileName="ip-1.0.xml"/>
+					<Content fileName="ipv6-1.0.xml"/>
+					<Content fileName="radio-1.0.xml"/>
+				</Folder>
+				<Folder name="security">
+					<Content fileName="alarm-1.0.xml"/>
+					<Content fileName="burglar-1.0.xml"/>
+					<Content fileName="clock-1.0.xml"/>
+					<Content fileName="co-1.0.xml"/>
+					<Content fileName="co2-1.0.xml"/>
+					<Content fileName="door-1.0.xml"/>
+					<Content fileName="emergency-1.0.xml"/>
+					<Content fileName="gas-1.0.xml"/>
+					<Content fileName="heat-1.0.xml"/>
+					<Content fileName="lock-1.0.xml"/>
+					<Content fileName="movement-1.0.xml"/>
+					<Content fileName="smoke-1.0.xml"/>
+					<Content fileName="water-1.0.xml"/>
+					<Content fileName="window-1.0.xml"/>
+				</Folder>
+				<Folder name="sensor">
+					<Content fileName="analogInput-1.0.xml"/>
+					<Content fileName="analogInputs-1.0.xml"/>
+					<Content fileName="current-1.0.xml"/>
+					<Content fileName="dewpoint-1.0.xml"/>
+					<Content fileName="digitalInput-1.0.xml"/>
+					<Content fileName="digitalInputs-1.0.xml"/>
+					<Content fileName="direction-1.0.xml"/>
+					<Content fileName="distance-1.0.xml"/>
+					<Content fileName="force-1.0.xml"/>
+					<Content fileName="frequency-1.0.xml"/>
+					<Content fileName="humidity-1.0.xml"/>
+					<Content fileName="illuminance-1.0.xml"/>
+					<Content fileName="mass-1.0.xml"/>
+					<Content fileName="massFlow-1.0.xml"/>
+					<Content fileName="pressure-1.0.xml"/>
+					<Content fileName="rain-1.0.xml"/>
+					<Content fileName="resistence-1.0.xml"/>
+					<Content fileName="solarRadiation-1.0.xml"/>
+					<Content fileName="speed-1.0.xml"/>
+					<Content fileName="temperature-1.0.xml"/>
+					<Content fileName="tideLevel-1.0.xml"/>
+					<Content fileName="velocity-1.0.xml"/>
+					<Content fileName="voltage-1.0.xml"/>
+					<Content fileName="volume-1.0.xml"/>
+					<Content fileName="weight-1.0.xml"/>
+					<Content fileName="windDirection-1.0.xml"/>
+					<Content fileName="windSpeed-1.0.xml"/>
+				</Folder>
 			</Folder>
 			<Folder name="Papers">
 				<Content fileName="Biotic - Executive Summary.pdf"/>

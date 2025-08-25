@@ -127,6 +127,151 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transforms", "Transforms", 
 		Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt = Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HarmonizedInterfaces", "HarmonizedInterfaces", "{0E6939C0-C2F0-4252-A713-509D1A1AD3E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sensor", "sensor", "{9D055F6F-1013-4389-803A-36C45696E389}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\analogInput-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\analogInput-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\analogInputs-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\analogInputs-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\current-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\current-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\dewpoint-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\dewpoint-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\digitalInput-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\digitalInput-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\digitalInputs-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\digitalInputs-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\direction-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\direction-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\distance-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\distance-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\force-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\force-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\frequency-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\frequency-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\humidity-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\humidity-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\illuminance-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\illuminance-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\mass-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\mass-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\massFlow-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\massFlow-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\pressure-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\pressure-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\rain-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\rain-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\resistence-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\resistence-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\solarRadiation-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\solarRadiation-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\speed-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\speed-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\temperature-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\temperature-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\tideLevel-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\tideLevel-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\velocity-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\velocity-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\voltage-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\voltage-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\volume-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\volume-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\weight-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\weight-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\windDirection-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\windDirection-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\sensor\windSpeed-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\sensor\windSpeed-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "meter", "meter", "{460A3434-186C-43F5-9961-6E4671494CC3}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\cooling-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\cooling-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\electricity-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\electricity-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\gas-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\gas-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\heat-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\heat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\heatingCooling-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\heatingCooling-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\pulseCounter-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\pulseCounter-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\pulseCounters-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\pulseCounters-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\meter\water-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\meter\water-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actuator", "actuator", "{45621768-5D3C-4A27-950A-C249B29987E6}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\analogOutput-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\analogOutput-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\analogOutputs-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\analogOutputs-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\blinds-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\blinds-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\digitalOutput-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\digitalOutput-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\digitalOutputs-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\digitalOutputs-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\dimmer-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\dimmer-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\doorBell-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\doorBell-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\fan-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\fan-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\actuator\lamp-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\actuator\lamp-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{27408002-DF53-4D4B-8225-F0FACAAB782A}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\address-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\address-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\application-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\application-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\battery-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\battery-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\clock-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\clock-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\deviceId-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\deviceId-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\ethernet-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\ethernet-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\gsm-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\gsm-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\ip-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\ip-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\ipv6-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\ipv6-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\language-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\language-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\location-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\location-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\manufacturer-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\manufacturer-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\name-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\name-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\nodeId-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\nodeId-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\rfid-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\rfid-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\userId-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\userId-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\version-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\version-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\wink-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\wink-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\identity\zwave-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\identity\zwave-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logistics", "logistics", "{726B7953-45A5-4177-852B-385D91F344F2}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\logistics\contents-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\logistics\contents-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\logistics\route-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\logistics\route-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security", "security", "{AB4274E1-8F11-4A59-8DC9-9352BDFBACD7}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\alarm-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\alarm-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\burglar-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\burglar-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\clock-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\clock-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\co-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\co-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\co2-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\co2-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\door-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\door-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\emergency-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\emergency-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\gas-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\gas-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\heat-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\heat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\lock-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\lock-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\movement-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\movement-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\smoke-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\smoke-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\water-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\water-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\security\window-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\window-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "controller", "controller", "{DD2888BB-8ECF-481B-AE42-2D31CDE01D44}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\controller\accessControl-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\controller\accessControl-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\controller\thermostat-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\controller\thermostat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\controller\ventilation-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\controller\ventilation-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{AD05D03D-638C-44E0-ADB5-2292F88BE2B5}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\camera-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\camera-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\display-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\display-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\loudSpeakers-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\loudSpeakers-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\microphone-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\microphone-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\recorder-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\recorder-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\textDisplay-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\textDisplay-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "network", "network", "{7409EF01-D16A-45E6-A733-FDC597F45C0E}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\network\ethernet-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\network\ethernet-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\network\ip-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\network\ip-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\network\ipv6-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\network\ipv6-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\network\radio-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\network\radio-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{1B3C851F-8355-4CE6-96C1-430F5773A950}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "directory", "directory", "{766B27A8-6F37-4B62-8A89-C6F27BC04241}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\audioItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\audioItem-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\directoryItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\directoryItem-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\dublinCore-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\dublinCore-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\imageItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\imageItem-1.0.xml
+		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\videoItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\videoItem-1.0.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +286,18 @@ Global
 		{33F5CC95-9E18-4EA0-8DE9-6B5268E69D58} = {30F50243-AA2D-4032-A70A-8A9D07858FA7}
 		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{0E6939C0-C2F0-4252-A713-509D1A1AD3E6} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{9D055F6F-1013-4389-803A-36C45696E389} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{460A3434-186C-43F5-9961-6E4671494CC3} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{45621768-5D3C-4A27-950A-C249B29987E6} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{27408002-DF53-4D4B-8225-F0FACAAB782A} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{726B7953-45A5-4177-852B-385D91F344F2} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{AB4274E1-8F11-4A59-8DC9-9352BDFBACD7} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{DD2888BB-8ECF-481B-AE42-2D31CDE01D44} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{AD05D03D-638C-44E0-ADB5-2292F88BE2B5} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{7409EF01-D16A-45E6-A733-FDC597F45C0E} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
+		{1B3C851F-8355-4CE6-96C1-430F5773A950} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{766B27A8-6F37-4B62-8A89-C6F27BC04241} = {AD05D03D-638C-44E0-ADB5-2292F88BE2B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

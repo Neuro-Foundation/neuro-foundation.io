@@ -3,6 +3,9 @@ Description: Page describing harmonized interfaces
 Date: 2025-08-25
 Author: Peter Waher
 Master: Master.md
+JavaScript: /Controls/SimpleTree.js
+JavaScript: /Events.js
+CSS: /Controls/SimpleTree.cssx
 
 =============================================
 
@@ -137,3 +140,32 @@ Response example:
 </iq>
 ```
 
+Published Harmonized Interfaces
+----------------------------------
+
+Following is a tree structure of published harmonized interfaces. Browse available interfaces
+by expanding the tree and clicking on the interface you want to learn more about.
+
+<ul class="HarmonizedInterfaceTree">
+{{
+FolderName:=null;
+Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedInterfaces",false,FolderName);
+InterfaceFolders:=System.IO.Directory.GetDirectories(FolderName);
+
+foreach InterfaceFolder in Sort(InterfaceFolders) do
+(
+    RelFolderName:=InterfaceFolder.Substring(len(FolderName));
+    InterfaceUri:="urn:nfi:iot:hi" + RelFolderName.Replace("\\",":");
+	
+    ]]<li class="Expandable" onclick="ExpandNode(event,this)"[[;
+    ]] data-id="((RelFolderName))"[[;
+    ]] data-expand="Api/ExpandInterfaceFolder.ws"[[;
+    ]] data-collapsedimg="((HtmlAttributeEncode(MarkdownToHtml(":file_folder:") ) ))"[[;
+    ]] data-expandedimg="((HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:") ) ))">[[;
+    ]]<span class="ItemImage">:file_folder:</span>[[;
+    ]]`((InterfaceUri))`[[;
+    ]]</li>
+[[
+)
+}}
+</ul>
