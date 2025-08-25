@@ -1,94 +1,52 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
-					 targetNamespace='urn:nfi:iot:u:1.0'
-					 xmlns='urn:nfi:iot:u:1.0'
+					 targetNamespace='urn:nfi:iot:hi:1.0'
+					 xmlns='urn:nfi:iot:hi:1.0'
 					 elementFormDefault='qualified'>
 
-	<xs:element name='Units'>
+	<xs:element name='getInterfaces'>
+		<xs:annotation>
+			<xs:documentation>Gets a list of harmonized interfaces from a device.</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name='Category' type='Category' minOccurs='1' maxOccurs='unbounded'/>
-			</xs:sequence>
+			<xs:attribute name='id' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Node identity. (Required)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='src' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Source identity. (Optional. Scopes the node identity.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='pt' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>Source partition. (Optional. Scopes the node identity, within a source.)</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
-	<xs:complexType name='Category'>
-		<xs:sequence>
-			<xs:element name='ReferenceUnit' type='ReferenceUnit'/>
-			<xs:element name='Unit' type='Unit' minOccurs='0' maxOccurs='unbounded'/>
-			<xs:element name='CompoundUnit' type='CompoundUnit' minOccurs='0' maxOccurs='unbounded'/>
-		</xs:sequence>
-		<xs:attribute name='name' type='xs:string' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='ReferenceUnit'>
-		<xs:sequence>
-			<xs:element name='Derivation' type='UnitFactors' minOccurs='0'/>
-		</xs:sequence>
-		<xs:attribute name='name' type='xs:string' use='required'/>
-	</xs:complexType>
-	
-	<xs:complexType name='UnitFactors'>
-		<xs:sequence>
-			<xs:element name='UnitFactor' maxOccurs='unbounded'>
-				<xs:complexType>
-					<xs:attribute name='unit' type='xs:string' use='required'/>
-					<xs:attribute name='exponent' type='xs:double' use='optional' default='1'/>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
-		<xs:attribute name='factor' type='xs:double' use='optional' default='1.0'/>
-	</xs:complexType>
-
-	<xs:complexType name='Unit'>
-		<xs:sequence>
-			<xs:group ref='Operation' minOccurs='0' maxOccurs='unbounded'/>
-		</xs:sequence>
-		<xs:attribute name='name' type='xs:string' use='required'/>
-	</xs:complexType>
-
-	<xs:complexType name='CompoundUnit'>
-		<xs:complexContent>
-			<xs:extension base='UnitFactors'>
-				<xs:attribute name='name' type='xs:string' use='required'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
-	<xs:group name='Operation'>
-		<xs:choice>
-			<xs:element name='Number' type='xs:double'/>
-			<xs:element name='Pi' type='Constant'/>
-			<xs:element name='Add' type='BinaryOperator'/>
-			<xs:element name='Sub' type='BinaryOperator'/>
-			<xs:element name='Mul' type='BinaryOperator'/>
-			<xs:element name='Div' type='BinaryOperator'/>
-			<xs:element name='Pow' type='BinaryOperator'/>
-			<xs:element name='Log' type='BinaryOperator'/>
-			<xs:element name='Neg' type='UnaryOperator'/>
-			<xs:element name='Inv' type='UnaryOperator'/>
-			<xs:element name='Lg2' type='UnaryOperator'/>
-			<xs:element name='Pow2' type='UnaryOperator'/>
-			<xs:element name='Sqr' type='UnaryOperator'/>
-			<xs:element name='Sqrt' type='UnaryOperator'/>
-			<xs:element name='Lg' type='UnaryOperator'/>
-			<xs:element name='Pow10' type='UnaryOperator'/>
-			<xs:element name='Ln' type='UnaryOperator'/>
-			<xs:element name='Exp' type='UnaryOperator'/>
-			<xs:element name='LgB' type='UnaryOperatorBase'/>
-			<xs:element name='PowB' type='UnaryOperatorBase'/>
-		</xs:choice>
-	</xs:group>
-
-	<xs:complexType name='Constant'/>
-	<xs:complexType name='UnaryOperator'/>
-	<xs:complexType name='UnaryOperatorBase'>
-		<xs:complexContent>
-			<xs:extension base='UnaryOperator'>
-				<xs:attribute name='base' type='xs:positiveInteger' use='required'/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name='BinaryOperator'/>
+	<xs:element name='interfaces'>
+		<xs:annotation>
+			<xs:documentation>Contains a list of harmonized interfaces.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='interface' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Represents one harmonized interface.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='ref' type='xs:anyURI' use='required'>
+							<xs:annotation>
+								<xs:documentation>The namespace of the corresponding harmonized interface.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 </xs:schema>

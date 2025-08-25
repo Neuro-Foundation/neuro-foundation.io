@@ -111,6 +111,7 @@ below:
 * [`urn:nfi:iot:disco:1.0`](Schemas/Discovery.xsd) - Discovery
 * [`urn:nfi:iot:e2e:1.0`](Schemas/E2E.xsd) - End-to-End Encryption
 * [`urn:nfi:iot:events:1.0`](Schemas/EventSubscription.xsd) - Event subscription
+* [`urn:nfi:iot:geo:1.0`](Schemas/Geo.xsd) - Geo-spatial information
 * [`urn:nfi:iot:hi:1.0`](Schemas/HarmonizedInterfaces.xsd) - Harmonized Interfaces
 * [`urn:nfi:iot:leg:id:1.0`](Schemas/LegalIdentities.xsd) - Legal identities
 * [`urn:nfi:iot:leg:sc:1.0`](Schemas/SmartContracts.xsd) - Smart Contracts

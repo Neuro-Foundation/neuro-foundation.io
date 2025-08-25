@@ -18,10 +18,10 @@ Developers are free to create their own interoperability interfaces, if a suitab
 Neuro-Foundation publishes a set of harmonized interfaces to simplify interoperability across 
 domains. This document shows available interfaces.
 
-| Harmonized Interfaces                                       ||
-| -------------|-----------------------------------------------|
-| Namespace:   | `urn:nfi:iot:hi:1.0`                          |
-| Schema:      | [Units.xsd](Schemas/HarmonizedInterfaces.xsd) |
+| Harmonized Interfaces                                                      ||
+| -------------|--------------------------------------------------------------|
+| Namespace:   | `urn:nfi:iot:hi:1.0`                                         |
+| Schema:      | [HarmonizedInterfaces.xsd](Schemas/HarmonizedInterfaces.xsd) |
 
 ![Table of Contents](toc)
 
@@ -36,12 +36,12 @@ promoting the use of harmonized interfaces for interoperability between devices:
 * Any actor with control of a domain is allowed to publish harmonized interfaces for
 interoperability, and share and publish the definition with others.
 
-* Any device, be it a standalone device, or embedded in a concentrator, can implement any number
-of harmionized interfaces.
+* Any device, be it a standalone device, or embedded in a [concentrator](/Concentrator.md), can 
+implement any number of harmionized interfaces.
 
-* Any other device, be it a standalone device, or embedded in a concentrator, with access
-permission to the first device, can retrieve the list of supported harmonized interfaces, in
-order to learn how it can interoperate with the device.
+* Any other device, be it a standalone device, or embedded in a [concentrator](/Concentrator.md), 
+with  permission to the first device, can retrieve the list of supported harmonized interfaces, 
+in order to learn how it can interoperate with the device.
 
 * Sensor data readout, and actuator control operations are performed using the operations
 defined for [Communication Patterns](/Index.md#communicationPatterns) using formats as defined
@@ -73,3 +73,67 @@ Important: Active participation is encouraged in defining new interfaces or enha
 interfaces within the Neuro-Foundation namespaces, all in an effort to create as large a 
 communicty as possible that can agree on a set of interoperable interfaces that can be used to 
 exchange information in harmonized networks.
+
+Getting supported interfaces
+-------------------------------
+
+To get the list of supported harmonized interfaces from a device, an `iq get` request is sent
+to the device using the `<getInterfaces>` element, with optional `id`, `src` and/or `pt` 
+attributes if the device is embedded in a [concentrator](/Concentrator.md). The device response 
+with an `iq result` stanza containing an `<interfaces>` element containing a list of supported 
+harmonized interfaces.
+
+Request example to a standalone device:
+
+```xml
+<iq type='get'
+    from='master@example.com/1234'
+    to='weatherstation@example.com/5678'
+    id='1'>
+  <getInterfaces xmlns='urn:nfi:iot:hi:1.0'/>
+</iq>
+```
+
+Request example to a device beind a concentrator:
+
+```xml
+<iq type='get'
+    from='master@example.com/1234'
+    to='weatherstation@example.com/5678'
+    id='1'>
+  <getInterfaces xmlns='urn:nfi:iot:hi:1.0' id='Station01' src='MeteringTopology'/>
+</iq>
+```
+
+Response example:
+
+```xml
+<iq type='result'
+    from='weatherstation@example.com/5678'
+    to='master@example.com/1234'
+    id='1'>
+  <interfaces xmlns='urn:nfi:iot:hi:1.0'>
+    <interface ref='urn:nfi:iot:hi:sensor.dewPoint:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.rainRate:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.windDirection:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.windSpeed:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.humidity:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.solarRadiation:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.temperature:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.dewPoint.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.rainRate.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.windDirection.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.windSpeed.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.humidity.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.solarRadiation.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor.temperature.history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity.clock:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity.location:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity.manufacturer:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity.name:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity.version:1.0'/>
+    <interface ref='urn:nfi:iot:hi:media.camera:1.0'/>
+  </interfaces>
+</iq>
+```
+
