@@ -143,6 +143,16 @@
 											<xs:documentation>If the parameter has an associated range, and how it is defined.</xs:documentation>
 										</xs:annotation>
 									</xs:attribute>
+									<xs:attribute name='min' type='xs:double' use='optional'>
+										<xs:annotation>
+											<xs:documentation>Smallest value in range.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='max' type='xs:double' use='optional'>
+										<xs:annotation>
+											<xs:documentation>Largest value in range.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
 									<xs:attribute name='description' type='MarkdownText' use='required'>
 										<xs:annotation>
 											<xs:documentation>A human-readable description of the parameter.</xs:documentation>

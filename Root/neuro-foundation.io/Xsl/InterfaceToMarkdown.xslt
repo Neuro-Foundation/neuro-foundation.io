@@ -179,10 +179,28 @@ Master: /Master.md
 				</xsl:choose>
 				<xsl:text> | </xsl:text>
 				<xsl:choose>
-					<xsl:when test="@range='RangeElement'">
-						<xsl:text disable-output-escaping="yes">`&lt;range&gt;` element.</xsl:text>
+					<xsl:when test="@min and @max">
+						<xsl:value-of select="@min"/>
+						<xsl:text>-</xsl:text>
+						<xsl:value-of select="@max"/>
+					</xsl:when>
+					<xsl:when test="@min">
+						<xsl:value-of select="@min"/>
+						<xsl:text>-</xsl:text>
+					</xsl:when>
+					<xsl:when test="@max">
+						<xsl:text>-</xsl:text>
+						<xsl:value-of select="@max"/>
 					</xsl:when>
 				</xsl:choose>
+				<xsl:if test="@range">
+					<xsl:text> </xsl:text>
+					<xsl:choose>
+						<xsl:when test="@range='RangeElement'">
+							<xsl:text disable-output-escaping="yes">`&lt;range&gt;` element.</xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:if>
 				<xsl:text> | </xsl:text>
 				<xsl:value-of select="@description"/>
 				<xsl:text> |

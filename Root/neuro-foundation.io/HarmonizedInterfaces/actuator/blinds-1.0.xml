@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:blinds:1.0">
+	<description>Actuator controlling window blinds (or similar equipment).</description>
+	<sensorData>
+		<field name="Blinds" use="Optional" m="true" type="q" description="Momentary position of blinds, in percent. Unit must be `%`."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Blinds" use="Mandatory" type="numeric" range="RangeElement" min="0" max="100" description="Desired state of the blinds. 0 = No blinds, 100 = Blinds covering entire window. The device must support control parameter requests of both double and int types."/>
+	</controlParameters>
+</interface>

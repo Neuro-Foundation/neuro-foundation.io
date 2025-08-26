@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:digitalOutput:1.0">
+	<description>Generical digital output.</description>
+	<sensorData>
+		<field name="Digital Output" use="Optional" m="true" type="b" description="Momentary output value."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Digital Output" use="Mandatory" type="b" description="Desired state of output."/>
+	</controlParameters>
+</interface>

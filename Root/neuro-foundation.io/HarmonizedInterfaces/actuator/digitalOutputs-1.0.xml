@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:digitalOutputs:1.0">
+	<description>Devices containing an array of digital outputs.</description>
+	<sensorData>
+		<field name="Digital Output %1%" use="Optional" m="true" type="b" description="Momentary output value for output number %1%."/>
+		<field name="Digital Output Count" use="Optional" s="true" type="i" description="Number of digital outputs available on the device."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Digital Output %1%" use="Mandatory" type="b" description="Desired state of output number %1%."/>
+	</controlParameters>
+</interface>
