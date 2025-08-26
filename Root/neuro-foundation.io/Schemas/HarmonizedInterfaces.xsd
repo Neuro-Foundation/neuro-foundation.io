@@ -2,7 +2,10 @@
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
 					 targetNamespace='urn:nfi:iot:hi:1.0'
 					 xmlns='urn:nfi:iot:hi:1.0'
+					 xmlns:sd='urn:nfi:iot:sd:1.0'
 					 elementFormDefault='qualified'>
+
+	<xs:import namespace='urn:nfi:iot:sd:1.0'/>
 
 	<xs:element name='getInterfaces'>
 		<xs:annotation>
@@ -48,5 +51,295 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:element name='interface'>
+		<xs:annotation>
+			<xs:documentation>Describes a harmonized interface.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='description' type='MarkdownText'>
+					<xs:annotation>
+						<xs:documentation>A human-readable description of the interface.</xs:documentation>
+						<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='sensorData' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Element that describes the sensor-data portion of the interface.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name='field' minOccurs='0' maxOccurs='unbounded'>
+								<xs:annotation>
+									<xs:documentation>represents a sensor-data field in the interface.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name='name' type='xs:string' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines the name of the field.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='use' type='Use' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines if the field is mandatory or optional.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='type' type='FieldType' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines if the type of the field.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attributeGroup ref='sd:category'>
+										<xs:annotation>
+											<xs:documentation>Defines the category of the field.</xs:documentation>
+										</xs:annotation>
+									</xs:attributeGroup>
+									<xs:attribute name='description' type='MarkdownText' use='required'>
+										<xs:annotation>
+											<xs:documentation>A human-readable description of the field.</xs:documentation>
+											<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name='comment' type='MarkdownText' minOccurs='0'>
+								<xs:annotation>
+									<xs:documentation>A human-readable comment associated with the sensor-data part of the interface.</xs:documentation>
+									<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='controlParameters' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Element that describes the actuator portion of the interface.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name='parameter' minOccurs='0' maxOccurs='unbounded'>
+								<xs:annotation>
+									<xs:documentation>represents a controllable actuator parameter in the interface.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:attribute name='name' type='xs:string' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines the name of the parameter.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='use' type='Use' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines if the parameter is mandatory or optional.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='type' type='ParameterType' use='required'>
+										<xs:annotation>
+											<xs:documentation>Defines if the type of the parameter.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='range' type='ParameterRange' use='optional'>
+										<xs:annotation>
+											<xs:documentation>If the parameter has an associated range, and how it is defined.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name='description' type='MarkdownText' use='required'>
+										<xs:annotation>
+											<xs:documentation>A human-readable description of the parameter.</xs:documentation>
+											<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name='comment' type='MarkdownText' minOccurs='0'>
+								<xs:annotation>
+									<xs:documentation>A human-readable comment associated with the sensor-data part of the interface.</xs:documentation>
+									<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:anyURI' use='required'>
+				<xs:annotation>
+					<xs:documentation>Defines the namespace of the harmonized interface.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name='MarkdownText'>
+		<xs:restriction base='xs:string'>
+			<xs:annotation>
+				<xs:documentation>String contains markdown-formatted text.</xs:documentation>
+			</xs:annotation>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='Use'>
+		<xs:restriction base='xs:string'>
+			<xs:annotation>
+				<xs:documentation>Defines if a property is mandatory or optional.</xs:documentation>
+			</xs:annotation>
+			<xs:enumeration value='Mandatory'/>
+			<xs:enumeration value='Optional'/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='FieldType'>
+		<xs:restriction base='xs:string'>
+			<xs:annotation>
+				<xs:documentation>Defines the type of a sensor-data field.</xs:documentation>
+			</xs:annotation>
+			<xs:enumeration value='q'>
+				<xs:annotation>
+					<xs:documentation>Represents a physical quantity.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='s'>
+				<xs:annotation>
+					<xs:documentation>Represents a string-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='b'>
+				<xs:annotation>
+					<xs:documentation>Represents a boolean-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='d'>
+				<xs:annotation>
+					<xs:documentation>Represents a date-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='dt'>
+				<xs:annotation>
+					<xs:documentation>Represents a date and time-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='dr'>
+				<xs:annotation>
+					<xs:documentation>Represents a duration-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='e'>
+				<xs:annotation>
+					<xs:documentation>Represents an enumeration field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='i'>
+				<xs:annotation>
+					<xs:documentation>Represents a 32-bit signed integer-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='l'>
+				<xs:annotation>
+					<xs:documentation>Represents a 64-bit signed integer-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='t'>
+				<xs:annotation>
+					<xs:documentation>Represents a time-valued field.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='numeric'>
+				<xs:annotation>
+					<xs:documentation>Represents a field using any of the numeric field types: q, i, l</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='integer'>
+				<xs:annotation>
+					<xs:documentation>Represents a field using any of the integer field types: i, l</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='ParameterType'>
+		<xs:restriction base='xs:string'>
+			<xs:annotation>
+				<xs:documentation>Defines the type of a controllable actuator parameter.</xs:documentation>
+			</xs:annotation>
+			<xs:enumeration value='b'>
+				<xs:annotation>
+					<xs:documentation>Represents a boolean-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='cl'>
+				<xs:annotation>
+					<xs:documentation>Represents a color-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='d'>
+				<xs:annotation>
+					<xs:documentation>Represents a date-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='dt'>
+				<xs:annotation>
+					<xs:documentation>Represents a date and time-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='db'>
+				<xs:annotation>
+					<xs:documentation>Represents a double-precision floating point parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='dr'>
+				<xs:annotation>
+					<xs:documentation>Represents a duration-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='e'>
+				<xs:annotation>
+					<xs:documentation>Represents an enumeration parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='i'>
+				<xs:annotation>
+					<xs:documentation>Represents a 32-bit signed integer-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='l'>
+				<xs:annotation>
+					<xs:documentation>Represents a 64-bit signed integer-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='s'>
+				<xs:annotation>
+					<xs:documentation>Represents a string-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='t'>
+				<xs:annotation>
+					<xs:documentation>Represents a time-valued parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='numeric'>
+				<xs:annotation>
+					<xs:documentation>Represents a parameter using any of the numeric parameter types: db, i, l</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='integer'>
+				<xs:annotation>
+					<xs:documentation>Represents a parameter using any of the integer parameter types: i, l</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name='ParameterRange'>
+		<xs:annotation>
+			<xs:documentation>How the range of the parameter is defined.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='RangeElement'>
+				<xs:annotation>
+					<xs:documentation>The range must be defined in the corresponding control form, using the range element.</xs:documentation>
+					<xs:documentation>Must have the same resolution and unit as the value in the field with the same name, if available.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 
 </xs:schema>

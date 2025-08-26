@@ -124,6 +124,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transforms", "Transforms", "{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6}"
 	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Transforms\InterfaceToMarkdown.xslt = Root\neuro-foundation.io\Transforms\InterfaceToMarkdown.xslt
 		Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt = Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt
 	EndProjectSection
 EndProject

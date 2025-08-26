@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/neuro-foundation.io/Transforms/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:analogOutput:1.0">
+	<description>Generical analog output.</description>
+	<sensorData>
+		<field name="Analog Output" use="Optional" m="true" type="q" description="Momentary output value."/>
+		<field name="Analog Output, Raw" use="Optional" m="true" type="integer" description="Momentary raw binary output value."/>
+		<field name="Analog Output, Bits" use="Optional" s="true" type="integer" description="Number of bits of precision of output value."/>
+		<field name="Analog Output, Range, Low" use="Optional" s="true" type="q" description="Lowest possible value."/>
+		<field name="Analog Output, Range, High" use="Optional" s="true" type="q" description="Highest possible value."/>
+		<comment><![CDATA[The output value must be reported using the correct precision and unit. Examples of units that could be used:
+
+* `%` - for instance 0-100 %
+* `mA` - for instance 4-20 mA
+* `V` - for instance 0-10 V]]></comment>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Analog Output" use="Mandatory" type="numeric" range="RangeElement" description="Desired state of output."/>
+		<parameter name="Analog Output, Raw" use="Optional" type="integer" range="RangeElement" description="Desired raw state of output. The int version must always be supported. If the range supports numbers larger than that supported by the int type, the device must also support the long version."/>
+	</controlParameters>
+</interface>

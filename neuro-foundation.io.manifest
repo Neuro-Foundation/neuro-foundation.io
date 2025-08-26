@@ -219,6 +219,7 @@
 				<Content fileName="Units.xsd"/>
 			</Folder>
 			<Folder name="Transforms">
+				<Content fileName="InterfaceToMarkdown.xslt"/>
 				<Content fileName="UnitsToMarkdown.xslt"/>
 			</Folder>
 		</Folder>
