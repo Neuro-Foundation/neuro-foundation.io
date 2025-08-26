@@ -9,13 +9,11 @@
 		<field name="Analog Output %1%, Range, Low" use="Optional" s="true" type="q" description="Lowest possible value for output number %1%."/>
 		<field name="Analog Output %1%, Range, High" use="Optional" s="true" type="q" description="Highest possible value for output number %1%."/>
 		<field name="Analog Output Count" use="Optional" s="true" type="i" description="Number of analog outputs available on the device."/>
-		<comment>
-			<![CDATA[The output value must be reported using the correct precision and unit. Examples of units that could be used:
+		<comment><![CDATA[The output value must be reported using the correct precision and unit. Examples of units that could be used:
 
 * `%` - for instance 0-100 %
 * `mA` - for instance 4-20 mA
-* `V` - for instance 0-10 V]]>
-		</comment>
+* `V` - for instance 0-10 V]]></comment>
 	</sensorData>
 	<controlParameters>
 		<parameter name="Analog Output %1%" use="Mandatory" type="numeric" range="RangeElement" description="Desired state of output number %1%."/>
