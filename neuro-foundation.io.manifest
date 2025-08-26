@@ -218,7 +218,7 @@
 				<Content fileName="Synchronization.xsd"/>
 				<Content fileName="Units.xsd"/>
 			</Folder>
-			<Folder name="Transforms">
+			<Folder name="Xsl">
 				<Content fileName="InterfaceToMarkdown.xslt"/>
 				<Content fileName="UnitsToMarkdown.xslt"/>
 			</Folder>

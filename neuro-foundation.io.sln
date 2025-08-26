@@ -122,10 +122,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 		Root\neuro-foundation.io\Definitions\Units.xml = Root\neuro-foundation.io\Definitions\Units.xml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transforms", "Transforms", "{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xsl", "Xsl", "{15D5E3AC-FA61-4F0D-8E25-8B2E4E5FA5C6}"
 	ProjectSection(SolutionItems) = preProject
-		Root\neuro-foundation.io\Transforms\InterfaceToMarkdown.xslt = Root\neuro-foundation.io\Transforms\InterfaceToMarkdown.xslt
-		Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt = Root\neuro-foundation.io\Transforms\UnitsToMarkdown.xslt
+		Root\neuro-foundation.io\Xsl\InterfaceToMarkdown.xslt = Root\neuro-foundation.io\Xsl\InterfaceToMarkdown.xslt
+		Root\neuro-foundation.io\Xsl\UnitsToMarkdown.xslt = Root\neuro-foundation.io\Xsl\UnitsToMarkdown.xslt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HarmonizedInterfaces", "HarmonizedInterfaces", "{0E6939C0-C2F0-4252-A713-509D1A1AD3E6}"
