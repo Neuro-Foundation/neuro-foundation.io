@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:logistics:contents:1.0">
+	<description>Interface for descibing contents.</description>
+	<sensorData>
+		<field name="Item %1%, Description" use="Mandatory" i="true" type="s" description="A description of contents item %1%."/>
+		<field name="Item %1%, Code" use="Optional" i="true" type="s" description="A code describing item %1%."/>
+		<field name="Item %1%, Count" use="Optional" i="true" type="i" description="Number of objects in Item %1%. If not provided, it is assumed Item %1% consists of only one object."/>
+		<field name="Item %1%, Value" use="Optional" i="true" type="numeric" description="An optional value given to each object in Item %1%. The unit must contain the currency of the value, according to ISO 4217."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Remove Item" use="Optional" type="i" range="RangeElement" min="1" description="Removes an item from the contents list."/>
+		<parameter name="Item Description" use="Optional" type="s" description="Sets a description for an item to create."/>
+		<parameter name="Item Code" use="Optional" type="s" description="Sets a code for an item to create."/>
+		<parameter name="Item Value" use="Optional" type="numeric" description="Sets a value for an item to create."/>
+		<parameter name="Item Currency" use="Optional" type="s" regex="^[A-Z]{3}$" description="Sets a currency for an item to create."/>
+		<parameter name="Item Count" use="Optional" type="i" min="1" description="Sets an item count for an item to create."/>
+		<parameter name="Add Item" use="Optional" type="b" description="If true, adds the current item to the contents list, if parameters have been set correctly. After adding the item to the list, all parameters for the current item are cleared."/>
+		<parameter name="Clear Items" use="Optional" type="b" description="If true, removes all items in the list."/>
+		<comment><![CDATA[The following control parameters must be grouped in control forms:
+
+* `Item Description`
+* `Item Code`
+* `Item Value`
+* `Item Currency`
+* `Item Count`
+* `Add Item`]]></comment>
+	</controlParameters>
+</interface>

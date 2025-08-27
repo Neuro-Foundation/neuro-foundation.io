@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:logistics:route:1.0">
+	<description>Interface for descibing routes.</description>
+	<sensorData>
+		<field name="Source, URL" use="Optional" i="true" type="s" description="An URL describing the source."/>
+		<field name="Source, Latitude" use="Optional" i="true" type="q" description="Latitude of the source, in degrees. Unit must be `°`."/>
+		<field name="Source, Longitude" use="Optional" i="true" type="q" description="Longitude of the source, in degrees. Unit must be `°`."/>
+		<field name="Source, Altitude" use="Optional" i="true" type="q" description="Altitude of the source."/>
+		<field name="Waypoint %1%, URL" use="Optional" i="true" type="s" description="An URL describing the Waypoint %1%."/>
+		<field name="Waypoint %1%, Latitude" use="Optional" i="true" type="q" description="Latitude of the Waypoint %1%, in degrees. Unit must be `°`."/>
+		<field name="Waypoint %1%, Longitude" use="Optional" i="true" type="q" description="Longitude of the Waypoint %1%, in degrees. Unit must be `°`."/>
+		<field name="Waypoint %1%, Altitude" use="Optional" i="true" type="q" description="Altitude of the Waypoint %1%."/>
+		<field name="Destination, URL" use="Optional" i="true" type="s" description="An URL describing the destination."/>
+		<field name="Destination, Latitude" use="Optional" i="true" type="q" description="Latitude of the destination, in degrees. Unit must be `°`."/>
+		<field name="Destination, Longitude" use="Optional" i="true" type="q" description="Longitude of the destination, in degrees. Unit must be `°`."/>
+		<field name="Destination, Altitude" use="Optional" i="true" type="q" description="Altitude of the destination."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Remove Waypoint" use="Optional" type="i" range="RangeElement" min="1" description="Removes a waypoint from the route."/>
+		<parameter name="Remove Source" use="Optional" type="b" description="If true, removes the source information from the route."/>
+		<parameter name="Remove Destination" use="Optional" type="b" description="If true, removes the destination information from the route."/>
+		<parameter name="Point URL" use="Optional" type="s" description="A URL describing the point."/>
+		<parameter name="Point Latitude" use="Optional" type="db" min="-90" max="90" description="Latitude of the point, in degrees."/>
+		<parameter name="Point Longitude" use="Optional" type="db" min="-180" max="180" description="Longitude of the point, in degrees."/>
+		<parameter name="Point Altitude" use="Optional" type="db" range="RangeElement" description="Altitude of the point, using the same unit as that provided by the altitude fields."/>
+		<parameter name="Add Point" use="Optional" type="s" range="ListElement" description="Adds the current point to the route, if parameters have been set correctly. After adding the point to the list, all parameters for the current item are cleared. Possible values are: `Source`, `Destination`, `Waypoint`."/>
+		<parameter name="Clear Points" use="Optional" type="b" description="If true, removes all waypoints as well as the source and the destination from the route."/>
+	</controlParameters>
+</interface>

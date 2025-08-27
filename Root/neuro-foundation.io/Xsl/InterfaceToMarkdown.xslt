@@ -179,6 +179,11 @@ Master: /Master.md
 				</xsl:choose>
 				<xsl:text> | </xsl:text>
 				<xsl:choose>
+					<xsl:when test="@regex">
+						<xsl:text>`</xsl:text>
+						<xsl:value-of select="@regex"/>
+						<xsl:text>`</xsl:text>
+					</xsl:when>
 					<xsl:when test="@min and @max">
 						<xsl:value-of select="@min"/>
 						<xsl:text>-</xsl:text>

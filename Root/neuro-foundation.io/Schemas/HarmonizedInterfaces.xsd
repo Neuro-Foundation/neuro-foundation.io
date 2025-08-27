@@ -153,6 +153,11 @@
 											<xs:documentation>Largest value in range.</xs:documentation>
 										</xs:annotation>
 									</xs:attribute>
+									<xs:attribute name='regex' type='xs:string' use='optional'>
+										<xs:annotation>
+											<xs:documentation>Regular expression used to validate input.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
 									<xs:attribute name='description' type='MarkdownText' use='required'>
 										<xs:annotation>
 											<xs:documentation>A human-readable description of the parameter.</xs:documentation>
