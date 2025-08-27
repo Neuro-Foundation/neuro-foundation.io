@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:ethernet:1.0">
+	<description>Interface containing Ehternet adapter identity information.</description>
+	<sensorData>
+		<field name="MAC" use="Mandatory" i="true" type="s" description="MAC address of the device. Regular expression for validation: `^[0-9a-fA-F]{2}([-:][0-9a-fA-F]{2}){5}$`"/>
+	</sensorData>
+</interface>

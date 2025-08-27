@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:gsm:1.0">
+	<description>Interface containing GSM adapter identity information.</description>
+	<sensorData>
+		<field name="GSM, MSISDN" use="Optional" i="true" type="s" description="Mobile Station ISDN number."/>
+		<field name="GSM, IMSI" use="Optional" i="true" type="s" description="International Mobile Subscriber Identity."/>
+		<field name="GSM, TMSI" use="Optional" i="true" type="s" description="Temporary Mobile Subscriber Identity."/>
+		<field name="GSM, IMEI" use="Optional" i="true" type="s" description="International Mobile Equipment Identity."/>
+		<field name="GSM, MSRN" use="Optional" i="true" type="s" description="Station Roaming Number."/>
+		<field name="GSM, LAI" use="Optional" i="true" type="s" description="Location Area Identity."/>
+		<field name="GSM, CGI" use="Optional" i="true" type="s" description="Cell Global Identity."/>
+		<field name="GSM, BSIC" use="Optional" i="true" type="s" description="Base Station Identity Code."/>
+		<field name="GSM, ICCID" use="Optional" i="true" type="s" description="Integrated Circuit Card Identifier."/>
+	</sensorData>
+</interface>

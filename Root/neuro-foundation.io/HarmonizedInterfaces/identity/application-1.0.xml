@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:application:1.0">
+	<description>Interface for application information in the device.</description>
+	<sensorData>
+		<field name="Application Version" use="Optional" i="true" type="s" description="Version of the application running in the device, in the format version.subversion[.release[.build]], where the release and build numbers are optional. Regular expression for validation: `^\d+[.]\d+([.]\d+([.]\d+)?)?$`"/>
+		<field name="Application Name" use="Optional" i="true" type="s" description="Name of the application running in the device."/>
+		<field name="Copyright" use="Optional" i="true" type="s" description="Copyright statement concerning the application in the device."/>
+	</sensorData>
+</interface>

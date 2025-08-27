@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:zwave:1.0">
+	<description>Interface for identity information of ZWave libraries used in the device.</description>
+	<sensorData>
+		<field name="ZWave, Library Type" use="Optional" i="true" type="integer" description="A number identifying the Library Type used."/>
+		<field name="ZWave, Protocol Version" use="Optional" i="true" type="s" description="Version number (version.subvesion) of the ZWave protocol used."/>
+		<field name="ZWave, Application Version" use="Optional" i="true" type="s" description="Version number (version.subvesion) of the ZWave application used."/>
+	</sensorData>
+</interface>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:ip:1.0">
+	<description>Interface containing IPv4 identity information.</description>
+	<sensorData>
+		<field name="IP, Address" use="Mandatory" i="true" type="s" description="Current IPv4 address."/>
+		<field name="IP, Subnet Mask" use="Optional"	i="true" type="s" description="Current IPv4 subnet mask."/>
+		<field name="IP, Default Gateway" use="Optional"	i="true" type="s" description="Current IPv4 default gateway."/>
+		<field name="IP, DHCP" use="Optional"	i="true" type="s" description="Current DHCP server."/>
+		<field name="IP, DNS %1%" use="Optional" i="true" type="s" description="Current IPv4 DNS %1% address."/>
+		<field name="IP, Dynamic Address" use="Optional" i="true" type="b" description="If the current IP Address is dynamic or not."/>
+		<field name="IP, Dynamic DNS" use="Optional" i="true" type="b" description="If the current DNS Address is dynamic or not."/>
+	</sensorData>
+</interface>

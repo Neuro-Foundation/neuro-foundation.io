@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:ipv6:1.0">
+	<description>Interface containing IPv6 identity information.</description>
+	<sensorData>
+		<field name="IPv6, Address" use="Mandatory" i="true" type="s" description="Current IPv6 address."/>
+		<field name="IPv6, Default Gateway" use="Optional"	i="true" type="s" description="Current IPv6 default gateway."/>
+		<field name="IPv6, DNS %1%" use="Optional" i="true" type="s" description="Current IPv6 DNS %1% address."/>
+	</sensorData>
+</interface>

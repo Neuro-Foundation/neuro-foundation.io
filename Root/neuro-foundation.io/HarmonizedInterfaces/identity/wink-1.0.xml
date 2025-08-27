@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:wink:1.0">
+	<description>Allows clients to send a wink command to devices for real-world identification.</description>
+	<controlParameters>
+		<parameter name="Wink" use="Mandatory" type="b" description="If set to true, the device will wink in some way, so a user nearby can identify the device."/>
+	</controlParameters>
+</interface>

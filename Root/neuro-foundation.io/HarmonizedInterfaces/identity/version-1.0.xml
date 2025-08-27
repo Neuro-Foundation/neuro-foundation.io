@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:version:1.0">
+	<description>Interface for version information in the device.</description>
+	<sensorData>
+		<field name="Firmware Version" use="Optional" i="true" type="s" description="Firmware version of the application running in the device."/>
+		<field name="Kernel Version" use="Optional" i="true" type="s" description="Kernel version of the application running in the device."/>
+		<field name="Operating System Version" use="Optional" i="true" type="s" description="Operating System version of the application running in the device."/>
+	</sensorData>
+</interface>

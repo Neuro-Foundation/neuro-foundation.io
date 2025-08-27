@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:name:1.0">
+	<description>Interface handling a conceptual name associated with the device.</description>
+	<sensorData>
+		<field name="Name" use="Mandatory" i="true" type="s" description="A name given to the device."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Name" use="Optional" type="s" description="A name that can be given to the device."/>
+	</controlParameters>
+</interface>

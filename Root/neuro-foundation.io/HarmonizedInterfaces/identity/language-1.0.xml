@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:language:1.0">
+	<description>Interface handling device language.</description>
+	<sensorData>
+		<field name="Language" use="Mandatory" s="true" type="s" description="IETF Language tag for the current language."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Language" use="Optional" type="s" range="ListElement" description="Desired language, using an IETF Language tag. The device is free to ignore language tags that it does not recognize."/>
+	</controlParameters>
+</interface>

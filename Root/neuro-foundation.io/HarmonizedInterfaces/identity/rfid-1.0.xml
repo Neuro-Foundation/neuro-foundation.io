@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:rfid:1.0">
+	<description>Interface handling RFID information read from the device.</description>
+	<sensorData>
+		<field name="RFID, Tag" use="Mandatory" i="true" type="s" description="ID provided by the RFID."/>
+		<field name="RFID, Reader ID" use="Optional" i="true" type="s" description="ID of the reader."/>
+	</sensorData>
+</interface>

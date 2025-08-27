@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:battery:1.0">
+	<description>Interface handling battery status.</description>
+	<sensorData>
+		<field name="Battery Charge" use="Optional" s="true" type="q" description="How much the battery is charged, in percent. The unit must be `%`."/>
+		<field name="Battery Life Time" use="Optional" s="true" type="q" description="Exepected life time of the battery based on current usage."/>
+		<field name="Wakeup Interval" use="Optional" s="true" type="q" description="Wakeup interval in seconds. Unit must be `s`."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Wakeup Interval" use="Optional" type="i" range="RangeElement" description="Wakeup interval of the device, in seconds."/>
+	</controlParameters>
+</interface>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:userId:1.0">
+	<description>Interface handling information related to a user. Can be used to identify the user during manual read-out.</description>
+	<sensorData>
+		<field name="User ID" use="Optional" i="true" type="s" description="User ID of the person."/>
+		<field name="User ID, Scheme" use="Optional" i="true" type="s" description="Identification scheme for the User ID."/>
+	</sensorData>
+</interface>

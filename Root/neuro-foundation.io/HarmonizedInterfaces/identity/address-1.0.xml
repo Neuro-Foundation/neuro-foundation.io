@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:address:1.0">
+	<description>Interface for address information in the device.</description>
+	<sensorData>
+		<field name="Country" use="Optional" i="true" type="s" description="Country where the device resides."/>
+		<field name="Region" use="Optional" i="true" type="s" description="Region where the device resides."/>
+		<field name="City" use="Optional" i="true" type="s" description="City where the device resides."/>
+		<field name="Area" use="Optional" i="true" type="s" description="Area where the device resides."/>
+		<field name="Street" use="Optional" i="true" type="s" description="Street where the device resides."/>
+		<field name="Street Number" use="Optional" i="true" type="s" description="Street Number where the device resides."/>
+		<field name="Postal Code" use="Optional" i="true" type="s" description="Postal Code where the device resides."/>
+		<field name="Building" use="Optional" i="true" type="s" description="Building where the device resides."/>
+		<field name="Apartment" use="Optional" i="true" type="s" description="Apartment where the device resides."/>
+	</sensorData>
+</interface>

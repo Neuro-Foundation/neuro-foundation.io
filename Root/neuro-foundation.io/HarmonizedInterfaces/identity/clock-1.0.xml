@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:clock:1.0">
+	<description>Interface handling an internal clock.</description>
+	<sensorData>
+		<field name="Clock" use="Mandatory" s="true" type="dt" description="Current date &amp; time, including time zone if available."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Clock" use="Optional" type="dt" description="Current date &amp; time, including time zone if available."/>
+		<parameter name="Adjust Clock" use="Optional" type="i" range="RangeElement" description="Adjusts the clock a specific number of seconds."/>
+	</controlParameters>
+</interface>

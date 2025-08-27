@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:manufacturer:1.0">
+	<description>Interface handling manufacturer information.</description>
+	<sensorData>
+		<field name="Manufacturer" use="Mandatory" i="true" type="s" description="Name of manufacturer."/>
+		<field name="Manufacturer, URL" use="Optional" i="true" type="s" description="URL to manufacturer-related information."/>
+	</sensorData>
+</interface>

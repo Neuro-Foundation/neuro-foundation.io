@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:deviceId:1.0">
+	<description>Interface handling a unique ID (according to some scheme) of the device.</description>
+	<sensorData>
+		<field name="Device ID" use="Mandatory" i="true" type="s" description="ID of the device."/>
+		<field name="Device ID, Scheme" use="Optional" i="true" type="s" description="Identification scheme for the Device ID."/>
+	</sensorData>
+</interface>

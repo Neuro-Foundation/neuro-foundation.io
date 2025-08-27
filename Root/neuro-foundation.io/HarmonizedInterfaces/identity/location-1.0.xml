@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:identity:location:1.0">
+	<description>Interface handling geospatial location of the device.</description>
+	<sensorData>
+		<field name="Location, Latitude" use="Mandatory" i="true" type="q" description="Latitude of the device, in degrees, using WGS-84 as a reference datum. Unit must be `°`."/>
+		<field name="Location, Longitude" use="Mandatory" i="true" type="q" description="Longitude of the device, in degrees, using WGS-84 as a reference datum. Unit must be `°`."/>
+		<field name="Location, Altitude" use="Optional" i="true" type="q" description="Altitude of the device."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Location, Latitude" use="Optional" type="db" range="RangeElement" min="-90" max="90" description="If parameter is published, it allows callers to set the latitude of the device. Unit of the value must be in degrees."/>
+		<parameter name="Location, Longitude" use="Optional" type="db" range="RangeElement" min="-90" max="90" description="If parameter is published, it allows callers to set the longitude of the device. Unit of the value must be in degrees."/>
+		<parameter name="Location, Altitude" use="Optional" type="db" range="RangeElement" description="If parameter is published, it allows callers to set the altitude of the device. Unit of the value must be the same as for the `Location, Altitude` field."/>
+	</controlParameters>
+</interface>
