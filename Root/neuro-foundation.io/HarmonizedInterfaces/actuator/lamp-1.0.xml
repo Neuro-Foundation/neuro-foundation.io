@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:lamp:1.0">
+	<description>Actuator controlling a lamp.</description>
+	<sensorData>
+		<field name="Lamp" use="Optional" m="true" type="b" description="Momentary state of lamp."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Lamp" use="Mandatory" type="b" description="If the lamp should be turned on or not."/>
+	</controlParameters>
+</interface>

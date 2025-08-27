@@ -349,6 +349,11 @@
 					<xs:documentation>Must have the same resolution and unit as the value in the field with the same name, if available.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value='ListElement'>
+				<xs:annotation>
+					<xs:documentation>The range must be defined in the corresponding control form, using the list-single element.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 

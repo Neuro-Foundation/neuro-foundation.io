@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:doorBell:1.0">
+	<description>Actuator producing a door bell sound.</description>
+	<sensorData>
+		<field name="Sound" use="Optional" s="true" type="s" description="What sound to play when activated."/>
+		<field name="Sound, Volume" use="Optional" s="true" type="numeric" description="Signal sound volume."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Ring" use="Mandatory" type="b" description="If value is set to true, sounds the door bell once."/>
+		<parameter name="Sound" use="Optional" type="s" range="ListElement" description="What sound to play when activated."/>
+		<parameter name="Sound, Volume" use="Optional" type="numeric" range="RangeElement" description="Desired sound volume. Must use the same unit as the `Sound, Volume` field during read-out."/>
+	</controlParameters>
+</interface>

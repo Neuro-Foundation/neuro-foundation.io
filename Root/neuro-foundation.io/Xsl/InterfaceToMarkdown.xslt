@@ -199,6 +199,9 @@ Master: /Master.md
 						<xsl:when test="@range='RangeElement'">
 							<xsl:text disable-output-escaping="yes">`&lt;range&gt;` element.</xsl:text>
 						</xsl:when>
+						<xsl:when test="@range='ListElement'">
+							<xsl:text disable-output-escaping="yes">`&lt;list-single&gt;` element.</xsl:text>
+						</xsl:when>
 					</xsl:choose>
 				</xsl:if>
 				<xsl:text> | </xsl:text>

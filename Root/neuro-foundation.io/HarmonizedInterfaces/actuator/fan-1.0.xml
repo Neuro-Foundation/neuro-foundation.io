@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:actuator:fan:1.0">
+	<description>Actuator controlling a fan.</description>
+	<sensorData>
+		<field name="Fan" use="Optional" m="true" type="numeric" description="Momentary fan level, in percent. Unit must be `%`."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Fan" use="Mandatory" type="numeric" range="RangeElement" min="0" max="100" description="Desired state of the fan. 0 = Off, 100 = Full. The device must support control parameter requests of both double and int types."/>
+	</controlParameters>
+</interface>
