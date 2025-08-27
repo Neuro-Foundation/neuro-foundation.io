@@ -219,7 +219,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security", "security", "{AB
 	ProjectSection(SolutionItems) = preProject
 		Root\neuro-foundation.io\HarmonizedInterfaces\security\alarm-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\alarm-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\security\burglar-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\burglar-1.0.xml
-		Root\neuro-foundation.io\HarmonizedInterfaces\security\clock-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\clock-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\security\co-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\co-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\security\co2-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\co2-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\security\door-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\security\door-1.0.xml

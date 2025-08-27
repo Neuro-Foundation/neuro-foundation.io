@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:security:lock:1.0">
+	<description>Interface for a lock.</description>
+	<sensorData>
+		<field name="Locked" use="Mandatory" s="true" type="b" description="If the lock is currently locked or not."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Locked" use="Optional" type="b" description="If the lock should be locked (true) or unlocked (false)."/>
+	</controlParameters>
+</interface>

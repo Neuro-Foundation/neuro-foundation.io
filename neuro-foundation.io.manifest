@@ -132,7 +132,6 @@
 				<Folder name="security">
 					<Content fileName="alarm-1.0.xml"/>
 					<Content fileName="burglar-1.0.xml"/>
-					<Content fileName="clock-1.0.xml"/>
 					<Content fileName="co-1.0.xml"/>
 					<Content fileName="co2-1.0.xml"/>
 					<Content fileName="door-1.0.xml"/>

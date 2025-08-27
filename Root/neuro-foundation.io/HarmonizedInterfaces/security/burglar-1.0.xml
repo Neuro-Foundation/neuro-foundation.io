@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:security:burglar:1.0">
+	<description>Interface for a burglar alarm.</description>
+	<sensorData>
+		<field name="State" use="Mandatory" s="true" type="b" description="If the alarm is currently activated or not."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="State" use="Optional" type="b" description="If the alarm should be activated (true) or deactivated (false)."/>
+		<parameter name="Enabled" use="Optional" type="b" description="If the alarm should be enabled (true) or disabled (false). Only enabled alarms can be activated."/>
+	</controlParameters>
+</interface>
