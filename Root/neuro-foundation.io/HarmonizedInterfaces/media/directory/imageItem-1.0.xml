@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:directory:imageItem:1.0">
+	<description>Represents an image item (photo, drawing, etc.)</description>
+	<sensorData>
+		<field name="URL" use="Mandatory" i="true" type="s" description="URL to the image."/>
+		<field name="Width" use="Optional" i="true" type="numeric" description="Width in pixels of the iamge."/>
+		<field name="Height" use="Optional" i="true" type="numeric" description="Height in pixels of the image."/>
+		<field name="Image Type" use="Optional" i="true" type="s" description="Image Format, in case camera supports still images."/>
+	</sensorData>
+</interface>

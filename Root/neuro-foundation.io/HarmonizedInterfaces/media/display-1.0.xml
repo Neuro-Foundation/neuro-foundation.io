@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:display:1.0">
+	<description><![CDATA[Represents a display that can show display video streams. If the node also implements a 
+`urn:nfi:iot:hi:media:loudSpeakers:*` interface, the node can play both video and audio streams.]]></description>
+	<sensorData>
+		<field name="URL" use="Optional" s="true" type="s" description="URL of the stream currently being played."/>
+		<field name="Width" use="Optional" s="true" type="s" description="Width in pixels of the video."/>
+		<field name="Height" use="Optional" s="true" type="s" description="Height in pixels of the video."/>
+		<field name="Position" use="Optional" s="true" type="s" description="Current position in stream."/>
+		<field name="Rate" use="Optional" s="true" type="s" description="Current playback rate. 1 = Normal playback. 2 = Twice the speed of normal playback. 0.5 = Half the speed of normal playback, etc."/>
+		<field name="Volume" use="Optional" s="true" type="s" description="Current volume, in percent. 0% = Volume off, 100% = Maximum volume."/>
+		<field name="Mute" use="Optional" s="true" type="s" description="If volume is muted or not."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Load" use="Mandatory" type="s" description="URL of new stream to play. Playback starts automatically."/>
+		<parameter name="Play" use="Mandatory" type="b" description="If true, starts playback of current stream. If false, stops playback."/>
+		<parameter name="Rate" use="Mandatory" type="db" range="RangeElement" min="0" description="Desired playback rate. The display can choose the play back rate closest to the desired value."/>
+		<parameter name="Volume" use="Mandatory" type="db" range="RangeElement" min="0" max="100" description="Desired volume, in percent."/>
+		<parameter name="Mute" use="Mandatory" type="b" description="If volume should be muted or not."/>
+		<parameter name="Position" use="Optional" type="t" range="RangeElement" description="Move the current position to a given timestamp within the current stream."/>
+	</controlParameters>
+</interface>

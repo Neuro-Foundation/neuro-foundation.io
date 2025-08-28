@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:camera:1.0">
+	<description>This interface defines a camera.</description>
+	<sensorData>
+		<field name="URL" use="Mandatory" i="true" type="s" description="URL to the camera video stream."/>
+		<field name="Width" use="Optional" i="true" type="numeric" description="Width in pixels of the video."/>
+		<field name="Height" use="Optional" i="true" type="numeric" description="Height in pixels of the video."/>
+		<field name="Transport" use="Optional" i="true" type="s" description="Transport protocol used to transfer stream."/>
+		<field name="Container" use="Optional" i="true" type="s" description="Video Container Format used to encapsulate stream."/>
+		<field name="Video Stream" use="Optional" i="true" type="s" description="Video Stream Format used to transfer stream."/>
+		<field name="Audio Stream" use="Optional" i="true" type="s" description="Audio Stream Format used to transfer stream."/>
+		<field name="Image Type" use="Optional" i="true" type="s" description="Image Format, in case camera supports still images."/>
+		<field name="Enabled" use="Optional" s="true" type="b" description="If the camera is enabled or not."/>
+		<field name="Angle" use="Optional" s="true" type="q" description="Rotation of camera around an imaginary vertical axis (looking left-right). Value must be of an angle unit."/>
+		<field name="Elevation" use="Optional" s="true" type="q" description="Rotation of camera around an imaginary horizontal axis (looking up-down). Value must be of an angle unit."/>
+		<field name="Rotation" use="Optional" s="true" type="q" description="Rotation of camera around an imaginary depth axis (tilting head). Value must be of an angle unit."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Angle" use="Optional" type="numeric" range="RangeElement" description="Rotation of camera around an imaginary vertical axis (looking left-right). Must have the same resolution and unit as the value in the field with the same name, if available."/>
+		<parameter name="Elevation" use="Optional" type="numeric" range="RangeElement" description="Rotation of camera around an imaginary horizontal axis (looking up-down). Must have the same resolution and unit as the value in the field with the same name, if available."/>
+		<parameter name="Rotation" use="Optional" type="numeric" range="RangeElement" description="Rotation of camera around an imaginary depth axis (tilting head). Must have the same resolution and unit as the value in the field with the same name, if available."/>
+	</controlParameters>
+</interface>

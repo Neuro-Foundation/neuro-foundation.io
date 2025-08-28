@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:microphone:1.0">
+	<description>Represents a live Microphone.</description>
+	<sensorData>
+		<field name="URL" use="Optional" s="true" type="s" description="URL to the audio stream."/>
+		<field name="Transport" use="Optional" i="true" type="s" description="Transport protocol used to transfer stream."/>
+		<field name="Container" use="Optional" i="true" type="s" description="Video Container Format used to encapsulate stream."/>
+		<field name="Audio Stream" use="Optional" i="true" type="s" description="Audio Stream Format used to transfer stream."/>
+		<field name="Enabled" use="Optional" s="true" type="b" description="If the microphone is enabled or not."/>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Enabled" use="Optional" type="b" description="If the microphone should be enabled (true) or disabled (false)."/>
+	</controlParameters>
+</interface>

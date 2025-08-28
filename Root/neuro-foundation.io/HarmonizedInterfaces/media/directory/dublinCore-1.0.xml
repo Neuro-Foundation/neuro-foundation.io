@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:directory:dublinCore:1.0">
+	<description>**Note:** The fields used in this interface, comes from the [DCMI Dublin Core Metadata Initiative](https://www.dublincore.org/).</description>
+	<sensorData>
+		<field name="Contributor" use="Optional" i="true" type="s" description="An entity responsible for making contributions to the resource."/>
+		<field name="Coverage" use="Optional" i="true" type="s" description="The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant."/>
+		<field name="Creator" use="Optional" i="true" type="s" description="An entity primarily responsible for making the resource."/>
+		<field name="Date" use="Optional" i="true" type="s" description="A point or period of time associated with an event in the lifecycle of the resource."/>
+		<field name="Description" use="Optional" i="true" type="s" description="An account of the resource."/>
+		<field name="Format" use="Optional" i="true" type="s" description="The file format, physical medium, or dimensions of the resource."/>
+		<field name="Identifier" use="Optional" i="true" type="s" description="An unambiguous reference to the resource within a given context."/>
+		<field name="Language" use="Optional" i="true" type="s" description="A language of the resource."/>
+		<field name="Publisher" use="Optional" i="true" type="s" description="An entity responsible for making the resource available."/>
+		<field name="Relation" use="Optional" i="true" type="s" description="A related resource."/>
+		<field name="Rights" use="Optional" i="true" type="s" description="Information about rights held in and over the resource."/>
+		<field name="Source" use="Optional" i="true" type="s" description="A related resource from which the described resource is derived."/>
+		<field name="Subject" use="Optional" i="true" type="s" description="The topic of the resource."/>
+		<field name="Title" use="Optional" i="true" type="s" description="A name given to the resource."/>
+		<field name="Type" use="Optional" i="true" type="s" description="The nature or genre of the resource."/>
+	</sensorData>
+</interface>

@@ -70,38 +70,10 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name='field' minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='field' type='SensorDataField' minOccurs='0' maxOccurs='unbounded'>
 								<xs:annotation>
 									<xs:documentation>represents a sensor-data field in the interface.</xs:documentation>
 								</xs:annotation>
-								<xs:complexType>
-									<xs:attribute name='name' type='xs:string' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines the name of the field.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='use' type='Use' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines if the field is mandatory or optional.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='type' type='FieldType' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines if the type of the field.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attributeGroup ref='sd:category'>
-										<xs:annotation>
-											<xs:documentation>Defines the category of the field.</xs:documentation>
-										</xs:annotation>
-									</xs:attributeGroup>
-									<xs:attribute name='description' type='MarkdownText' use='required'>
-										<xs:annotation>
-											<xs:documentation>A human-readable description of the field.</xs:documentation>
-											<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-								</xs:complexType>
 							</xs:element>
 							<xs:element name='comment' type='MarkdownText' minOccurs='0'>
 								<xs:annotation>
@@ -118,53 +90,10 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name='parameter' minOccurs='0' maxOccurs='unbounded'>
+							<xs:element name='parameter' type='ControlParameter' minOccurs='0' maxOccurs='unbounded'>
 								<xs:annotation>
 									<xs:documentation>represents a controllable actuator parameter in the interface.</xs:documentation>
 								</xs:annotation>
-								<xs:complexType>
-									<xs:attribute name='name' type='xs:string' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines the name of the parameter.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='use' type='Use' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines if the parameter is mandatory or optional.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='type' type='ParameterType' use='required'>
-										<xs:annotation>
-											<xs:documentation>Defines if the type of the parameter.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='range' type='ParameterRange' use='optional'>
-										<xs:annotation>
-											<xs:documentation>If the parameter has an associated range, and how it is defined.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='min' type='xs:double' use='optional'>
-										<xs:annotation>
-											<xs:documentation>Smallest value in range.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='max' type='xs:double' use='optional'>
-										<xs:annotation>
-											<xs:documentation>Largest value in range.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='regex' type='xs:string' use='optional'>
-										<xs:annotation>
-											<xs:documentation>Regular expression used to validate input.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-									<xs:attribute name='description' type='MarkdownText' use='required'>
-										<xs:annotation>
-											<xs:documentation>A human-readable description of the parameter.</xs:documentation>
-											<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
-										</xs:annotation>
-									</xs:attribute>
-								</xs:complexType>
 							</xs:element>
 							<xs:element name='comment' type='MarkdownText' minOccurs='0'>
 								<xs:annotation>
@@ -175,6 +104,33 @@
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name='commands' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>Element that describes commands defined by the interface.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:choice minOccurs='1' maxOccurs='unbounded'>
+							<xs:element name='simpleCommand' type='SimpleCommand'>
+								<xs:annotation>
+									<xs:documentation>A simple command has no parmeters and is simply executed.</xs:documentation>
+									<xs:documentation>A simple command either executes successfully or fails.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='parametrizedCommand' type='ParametrizedCommand'>
+								<xs:annotation>
+									<xs:documentation>A parametrized command has parmeters and is executed providing a corresponding set of parameter values.</xs:documentation>
+									<xs:documentation>A parametrized command either executes successfully or fails.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name='parametrizedQuery' type='ParametrizedQuery'>
+								<xs:annotation>
+									<xs:documentation>A parametrized query has parmeters and is executed providing a corresponding set of parameter values.</xs:documentation>
+									<xs:documentation>A parametrized query reports status, information and content back to the caller during the process of execution.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
 			<xs:attribute name='id' type='xs:anyURI' use='required'>
 				<xs:annotation>
@@ -183,6 +139,158 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:complexType name='SensorDataField'>
+		<xs:annotation>
+			<xs:documentation>represents a sensor-data field.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines the name of the field.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='use' type='Use' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines if the field is mandatory or optional.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='type' type='FieldType' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines if the type of the field.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref='sd:category'>
+			<xs:annotation>
+				<xs:documentation>Defines the category of the field.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attribute name='description' type='MarkdownText' use='required'>
+			<xs:annotation>
+				<xs:documentation>A human-readable description of the field.</xs:documentation>
+				<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='ControlParameter'>
+		<xs:annotation>
+			<xs:documentation>represents a control parameter for an actuator or parametrized command or query.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines the name of the parameter.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='use' type='Use' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines if the parameter is mandatory or optional.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='type' type='ParameterType' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines if the type of the parameter.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='range' type='ParameterRange' use='optional'>
+			<xs:annotation>
+				<xs:documentation>If the parameter has an associated range, and how it is defined.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='min' type='xs:double' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Smallest value in range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='max' type='xs:double' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Largest value in range.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='regex' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Regular expression used to validate input.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='description' type='MarkdownText' use='required'>
+			<xs:annotation>
+				<xs:documentation>A human-readable description of the parameter.</xs:documentation>
+				<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType abstract='true' name='CommandBase'>
+		<xs:annotation>
+			<xs:documentation>Abstract base class for Command types.</xs:documentation>
+			<xs:documentation>Contains common attributes.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines the name of the command.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='use' type='Use' use='required'>
+			<xs:annotation>
+				<xs:documentation>Defines if the command is mandatory or optional.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='description' type='MarkdownText' use='required'>
+			<xs:annotation>
+				<xs:documentation>A human-readable description of the parameter.</xs:documentation>
+				<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name='SimpleCommand'>
+		<xs:annotation>
+			<xs:documentation>Defines a simple command without parameters.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='CommandBase'>
+				<xs:sequence>
+					<xs:element name='comment' type='MarkdownText' minOccurs='0'>
+						<xs:annotation>
+							<xs:documentation>A human-readable comment associated with the command.</xs:documentation>
+							<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='ParametrizedCommand'>
+		<xs:annotation>
+			<xs:documentation>Defines a parametrized command.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='CommandBase'>
+				<xs:sequence>
+					<xs:element name='parameter' type='ControlParameter' minOccurs='0' maxOccurs='unbounded'>
+						<xs:annotation>
+							<xs:documentation>represents a controllable parameter for the command.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name='comment' type='MarkdownText' minOccurs='0'>
+						<xs:annotation>
+							<xs:documentation>A human-readable comment associated with the command.</xs:documentation>
+							<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name='ParametrizedQuery'>
+		<xs:annotation>
+			<xs:documentation>Defines a parametrized query.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base='ParametrizedCommand'/>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<xs:simpleType name='MarkdownText'>
 		<xs:restriction base='xs:string'>

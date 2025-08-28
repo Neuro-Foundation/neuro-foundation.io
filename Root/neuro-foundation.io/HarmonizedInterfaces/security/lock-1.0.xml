@@ -7,5 +7,9 @@
 	</sensorData>
 	<controlParameters>
 		<parameter name="Locked" use="Optional" type="b" description="If the lock should be locked (true) or unlocked (false)."/>
+		<comment><![CDATA[**Note**: A device implementing this lock interface as well as `urn:nfi:iot:hi:security:door:*` or
+`urn:nfi:iot:hi:security.window.*`, is allowed to reject a lock request if the corresponding door or window is in an open state.
+This is done by returning a corresponding error message if an `iq` stanza is used or by simply ignoring the command if a message 
+stanza is used.]]></comment>
 	</controlParameters>
 </interface>

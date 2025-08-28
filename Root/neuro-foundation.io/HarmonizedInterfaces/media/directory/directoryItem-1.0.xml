@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:directory:directoryItem:1.0">
+	<description><![CDATA[Represents an item in a directory. If the item is a single format, the node will also implement an interface corresponding to the 
+type of item it represends, such as:
+
+* Audio
+* Image
+* Video
+
+If the directory item contains different sources for the same item (for instance different resolutions, languages, etc.), the node will not 
+implement corresponding type interfaces, but instead contain subnodes representing each of the different formats supported.]]></description>
+</interface>

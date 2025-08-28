@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:textDisplay:1.0">
+	<description><![CDATA[A Text display is a simpler form of display displaying simple unformatted text arranged in rows and columns. Each row is 
+controlled by a separate parameter. This allows for provisioning of different parts of the display to different clients, if desired.]]></description>
+	<sensorData>
+		<field name="Nr Rows" use="Mandatory" i="true" type="i" description="numeric	Number of rows on the display. (1)"/>
+		<field name="Nr Columns" use="Mandatory" i="true" type="i" description="Number of columns on the display. (2)"/>
+		<field name="Row %1%" use="Mandatory" s="true" type="s" description="Contents currently displayed at Row %1%. Rows are numbered 1, 2, ..."/>
+		<comment>
+			<![CDATA[Notes:
+
+1. Even though the interface lists contents in rows, the display itself is not required to display the items exactly as a 
+sequence of rows. It might for instance contain one set of rows offset from the others.
+
+2. The interface allows for different column lengths for different rows. This value should be considered the maximum column length, or main column 
+length, of the display. Actual column lengths for each row is controlled using regular expressions in the corresponding control form.]]></comment>
+	</sensorData>
+	<controlParameters>
+		<parameter name="Row %1%" use="Mandatory" type="s" description="Changes the contents of Row number %1%. Rows are numbered 1, 2, ... In a control form, the parameter must be validated using a `&lt;regex&gt;` validation rule so that only allowed characters are accepted and the maximum length of the row is not exceeded."/>
+	</controlParameters>
+</interface>
