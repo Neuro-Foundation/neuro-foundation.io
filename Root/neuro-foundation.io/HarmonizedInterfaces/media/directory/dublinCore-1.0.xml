@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
 <interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:media:directory:dublinCore:1.0">
-	<description>**Note:** The fields used in this interface, comes from the [DCMI Dublin Core Metadata Initiative](https://www.dublincore.org/).</description>
+	<description>**Note**: The fields used in this interface, comes from the [DCMI Dublin Core Metadata Initiative](https://www.dublincore.org/).</description>
 	<sensorData>
 		<field name="Contributor" use="Optional" i="true" type="s" description="An entity responsible for making contributions to the resource."/>
 		<field name="Coverage" use="Optional" i="true" type="s" description="The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant."/>
