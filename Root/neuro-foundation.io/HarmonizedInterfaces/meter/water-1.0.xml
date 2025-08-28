@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:meter:water:1.0">
+	<description>Measures consumption of water.</description>
+	<sensorData>
+		<field name="Volume" use="Mandatory" m="true" type="q" description="Accumulated Volume."/>
+		<field name="Flow" use="Optional" m="true" type="q" description="Momentary flow value."/>
+	</sensorData>
+</interface>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:meter:heatingCooling:1.0">
+	<description>Measures consumption of heating and/or cooling energy.</description>
+	<sensorData>
+		<field name="Energy" use="Mandatory" m="true" type="q" description="Accumulated Energy."/>
+		<field name="Volume" use="Mandatory" m="true" type="q" description="Accumulated Volume."/>
+		<field name="Power" use="Optional" m="true" type="q" description="Momentary power value."/>
+		<field name="Flow" use="Optional" m="true" type="q" description="Momentary flow value."/>
+		<field name="Temperature Difference" use="Optional" m="true" type="q" description="Momentary temperatude difference value."/>
+		<field name="Supply Temperature" use="Optional" m="true" type="q" description="Momentary supply temperatude value."/>
+		<field name="Return Temperature" use="Optional" m="true" type="q" description="Momentary return temperatude value."/>
+	</sensorData>
+</interface>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:meter:electricity:1.0">
+	<description>Measures consumption of electrical energy.</description>
+	<sensorData>
+		<field name="Energy" use="Mandatory" m="true" type="q" description="Accumulated Energy."/>
+		<field name="Power" use="Optional" m="true" type="q" description="Momentary power value."/>
+	</sensorData>
+</interface>

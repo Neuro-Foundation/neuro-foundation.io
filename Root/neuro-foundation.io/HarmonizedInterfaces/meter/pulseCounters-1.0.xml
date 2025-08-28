@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:meter:pulseCounters:1.0">
+	<description>Measures pulses on multiple pulse inputs.</description>
+	<sensorData>
+		<field name="Counter %1%" use="Mandatory" m="true" type="integer" description="Accumulated number of pulses for counter %1%."/>
+		<field name="Pulse Counter Count" use="Optional" s="true" type="integer" description="Number of pulse counters available on the device."/>
+	</sensorData>
+</interface>
