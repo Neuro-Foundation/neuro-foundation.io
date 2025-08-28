@@ -3,7 +3,7 @@
 <interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:humidity:1.0">
 	<description>Humidity sensors (hygrometers), measuring a moisture content in the environment.</description>
 	<sensorData>
-		<field name="Relative Humidity" use="Mandatory" m="true" type="q" description="Momentary Relative Humidity value. Unit must be `%`"/>
+		<field name="Relative Humidity" use="Mandatory" m="true" type="q" description="Momentary Relative Humidity value. Unit must be `%`."/>
 		<field name="Temperature" use="Optional" m="true" type="q" description="Momentary Temperature."/>
 		<field name="Dew Point" use="Optional" c="true" type="q" description="Momentary Dew Point."/>
 	</sensorData>
