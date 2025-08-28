@@ -7,8 +7,10 @@
 		<field name="Sound, Volume" use="Optional" s="true" type="numeric" description="Signal sound volume."/>
 	</sensorData>
 	<controlParameters>
-		<parameter name="Ring" use="Mandatory" type="b" description="If value is set to true, sounds the door bell once."/>
 		<parameter name="Sound" use="Optional" type="s" range="ListElement" description="What sound to play when activated."/>
 		<parameter name="Sound, Volume" use="Optional" type="numeric" range="RangeElement" description="Desired sound volume. Must use the same unit as the `Sound, Volume` field during read-out."/>
 	</controlParameters>
+	<commands>
+		<simpleCommand name="Ring" use="Mandatory" description="Sounds the door bell once."/>
+	</commands>
 </interface>

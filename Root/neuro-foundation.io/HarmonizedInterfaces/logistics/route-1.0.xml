@@ -16,15 +16,19 @@
 		<field name="Destination, Longitude" use="Optional" i="true" type="q" description="Longitude of the destination, in degrees. Unit must be `°`."/>
 		<field name="Destination, Altitude" use="Optional" i="true" type="q" description="Altitude of the destination."/>
 	</sensorData>
-	<controlParameters>
-		<parameter name="Remove Waypoint" use="Optional" type="i" range="RangeElement" min="1" description="Removes a waypoint from the route."/>
-		<parameter name="Remove Source" use="Optional" type="b" description="If true, removes the source information from the route."/>
-		<parameter name="Remove Destination" use="Optional" type="b" description="If true, removes the destination information from the route."/>
-		<parameter name="Point URL" use="Optional" type="s" description="A URL describing the point."/>
-		<parameter name="Point Latitude" use="Optional" type="db" min="-90" max="90" description="Latitude of the point, in degrees."/>
-		<parameter name="Point Longitude" use="Optional" type="db" min="-180" max="180" description="Longitude of the point, in degrees."/>
-		<parameter name="Point Altitude" use="Optional" type="db" range="RangeElement" description="Altitude of the point, using the same unit as that provided by the altitude fields."/>
-		<parameter name="Add Point" use="Optional" type="s" range="ListElement" description="Adds the current point to the route, if parameters have been set correctly. After adding the point to the list, all parameters for the current item are cleared. Possible values are: `Source`, `Destination`, `Waypoint`."/>
-		<parameter name="Clear Points" use="Optional" type="b" description="If true, removes all waypoints as well as the source and the destination from the route."/>
-	</controlParameters>
+	<commands>
+		<parametrizedCommand name="Remove Waypoint" use="Optional" description="Removes a waypoint from the route.">
+			<parameter name="WaypointIndex" use="Mandatory" type="i" range="RangeElement" min="1" description="Waypont to remove from the list."/>
+		</parametrizedCommand>
+		<simpleCommand name="Remove Source" use="Optional" description="Removes the source information from the route."/>
+		<simpleCommand name="Remove Destination" use="Optional" description="Removes the destination information from the route."/>
+		<simpleCommand name="Clear Points" use="Optional" description="Removes all waypoints as well as the source and the destination from the route."/>
+		<parametrizedQuery name="Add Waypoint" use="Optional" description="Adds a point to the route.">
+			<parameter name="Type" use="Mandatory" type="s" range="ListElement" description="Type of point to add. Possible values are: `Source`, `Destination`, `Waypoint`."/>
+			<parameter name="URL" use="Optional" type="s" description="A URL describing the point."/>
+			<parameter name="Latitude" use="Mandatory" type="db" min="-90" max="90" description="Latitude of the point, in degrees."/>
+			<parameter name="Longitude" use="Mandatory" type="db" min="-180" max="180" description="Longitude of the point, in degrees."/>
+			<parameter name="Altitude" use="Optional" type="db" range="RangeElement" description="Altitude of the point, using the same unit as that provided by the altitude fields."/>
+		</parametrizedQuery>
+	</commands>
 </interface>

@@ -11,11 +11,15 @@
 		<field name="Mute" use="Optional" s="true" type="s" description="If volume is muted or not."/>
 	</sensorData>
 	<controlParameters>
-		<parameter name="Load" use="Mandatory" type="s" description="URL of new stream to play. Playback starts automatically."/>
 		<parameter name="Play" use="Mandatory" type="b" description="If true, starts playback of current stream. If false, stops playback."/>
 		<parameter name="Rate" use="Mandatory" type="db" range="RangeElement" min="0" description="Desired playback rate. The display can choose the play back rate closest to the desired value."/>
 		<parameter name="Volume" use="Mandatory" type="db" range="RangeElement" min="0" max="100" description="Desired volume, in percent."/>
 		<parameter name="Mute" use="Mandatory" type="b" description="If volume should be muted or not."/>
 		<parameter name="Position" use="Optional" type="t" range="RangeElement" description="Move the current position to a given timestamp within the current stream."/>
 	</controlParameters>
+	<commands>
+		<parametrizedCommand name="Load" use="Mandatory" description="Loads a new stream. Playback starts automatically.">
+			<parameter name="URL" use="Mandatory" type="s" description="URL of new stream to play"/>
+		</parametrizedCommand>
+	</commands>
 </interface>

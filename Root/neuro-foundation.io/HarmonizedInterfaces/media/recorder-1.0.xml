@@ -8,8 +8,12 @@
 		<field name="Duration" use="Optional" s="true" type="dr" description="Time spent on current recording."/>
 		<field name="Time Left" use="Optional" s="true" type="dr" description="Estimated Time Left of recording. If recording is indefinite, this field reports an estimation of how much can be recorded using current settings."/>
 	</sensorData>
-	<controlParameters>
-		<parameter name="StartRecording" use="Mandatory" type="s" description="URL of stream to start recording."/>
-		<parameter name="StopRecording" use="Mandatory" type="s" description="Stops current recording, and names the recorded stream according to the value of this parameter. If the parameter is the empty string, the recording is discarded. In a control form, the parameter must be validated using a `&lt;regex&gt;` validation rule so that only allowed characters and file names are accepted."/>
-	</controlParameters>
+	<commands>
+		<parametrizedCommand name="Start Recording" use="Mandatory" description="Starts recording a stream.">
+			<parameter name="URL" use="Mandatory" type="s" description="URL of stream to start recording."/>
+		</parametrizedCommand>
+		<parametrizedCommand name="Stop Recording" use="Mandatory" description="Stops current recording, and names the recorded stream.">
+			<parameter name="Name" use="Mandatory" type="s" description="Name of the recorded. If the parameter is the empty string, the recording is discarded. In a control form, the parameter must be validated using a `&lt;regex&gt;` validation rule so that only allowed characters and file names are accepted."/>
+		</parametrizedCommand>
+	</commands>
 </interface>
