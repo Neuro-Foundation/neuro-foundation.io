@@ -113,7 +113,24 @@ The following commands are defined for this interface.
 			<xsl:for-each select="hi:commands/*">
 				<xsl:text>### `</xsl:text>
 				<xsl:value-of select="@name"/>
-				<xsl:text>`
+				<xsl:text>` (</xsl:text>
+				<xsl:choose>
+					<xsl:when test="name()='simpleCommand'">
+						<xsl:text>Simple Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedCommand'">
+						<xsl:text>Parametrized Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedQuery'">
+						<xsl:text>Parametrized Query</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>`</xsl:text>
+						<xsl:value-of select="name()"/>
+						<xsl:text>`</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text>)
 
 </xsl:text>
 				<xsl:value-of select="@description"/>
