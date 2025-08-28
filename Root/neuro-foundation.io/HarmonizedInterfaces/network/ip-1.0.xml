@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:network:ip:1.0">
+	<description>Interface handling IPv4 network layer status information.</description>
+	<sensorData>
+		<field name="IP, Datagrams Received/sec" use="Optional" s="true" type="q" description="Datagrams received from the network, per second."/>
+		<field name="IP, Datagrams Sent/sec" use="Optional" s="true" type="q" description="Datagrams sent to the network, per second."/>
+		<field name="IP, Datagrams Total/sec" use="Optional" s="true" type="q" description="Total number of datagrams sent or received on the network, per second."/>
+		<field name="IP, Datagrams Outbound Discarded" use="Optional" s="true" type="q" description="Outbound datagrams that have been discarded."/>
+		<field name="IP, Datagrams Outbound Errors" use="Optional" s="true" type="q" description="Outbound datagrams lost due to errors."/>
+		<field name="IP, Datagrams Received Discarded" use="Optional" s="true" type="q" description="Received datagrams that have been discarded."/>
+		<field name="IP, Datagrams Received Errors" use="Optional" s="true" type="q" description="Received datagrams lost due to errors."/>
+	</sensorData>
+</interface>

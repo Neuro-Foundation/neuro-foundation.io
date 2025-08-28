@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:network:ethernet:1.0">
+	<description>Interface handling Ehternet adapter status information.</description>
+	<sensorData>
+		<field name="Ethernet, Bytes Received/sec" use="Optional" s="true" type="q" description="Bytes received from the network, per second."/>
+		<field name="Ethernet, Bytes Sent/sec" use="Optional" s="true" type="q" description="Bytes sent to the network, per second."/>
+		<field name="Ethernet, Bytes Total/sec" use="Optional" s="true" type="q" description="Total number of bytes sent or received on the network, per second."/>
+		<field name="Ethernet, Packets Received/sec" use="Optional" s="true" type="q" description="Packets received from the network, per second."/>
+		<field name="Ethernet, Packets Sent/sec" use="Optional" s="true" type="q" description="Packets sent to the network, per second."/>
+		<field name="Ethernet, Packets Total/sec" use="Optional" s="true" type="q" description="Total number of packets sent or received on the network, per second."/>
+		<field name="Ethernet, Packets Outbound Discarded" use="Optional" s="true" type="q" description="Outbound packets that have been discarded."/>
+		<field name="Ethernet, Packets Outbound Errors" use="Optional" s="true" type="q" description="Outbound packets lost due to errors."/>
+		<field name="Ethernet, Packets Received Discarded" use="Optional" s="true" type="q" description="Received packets that have been discarded."/>
+		<field name="Ethernet, Packets Received Errors" use="Optional" s="true" type="q" description="Received packets lost due to errors."/>
+	</sensorData>
+</interface>

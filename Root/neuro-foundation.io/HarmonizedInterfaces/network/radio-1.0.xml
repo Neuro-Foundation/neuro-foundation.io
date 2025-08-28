@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:network:radio:1.0">
+	<description>Interface handling radio network layer status information.</description>
+	<sensorData>
+		<field name="Radio, Signal Strength" use="Optional" s="true" type="q" description="Signal strength, in %. Unit must be `%`."/>
+		<field name="Radio, Signal Quality" use="Optional" s="true" type="q" description="Signal quality, in %. Unit must be `%`."/>
+	</sensorData>
+</interface>
