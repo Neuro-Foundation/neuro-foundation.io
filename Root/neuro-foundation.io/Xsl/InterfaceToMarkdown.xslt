@@ -111,28 +111,26 @@ The following commands are defined for this interface.
 </xsl:text>
 
 			<xsl:for-each select="hi:commands/*">
-				<xsl:if test="name()='parametrizedCommand' or name()='parametrizedQuery' or hi:comment">
-					<xsl:text>### `</xsl:text>
-					<xsl:value-of select="@name"/>
-					<xsl:text>`
+				<xsl:text>### `</xsl:text>
+				<xsl:value-of select="@name"/>
+				<xsl:text>`
 
 </xsl:text>
-					<xsl:value-of select="@description"/>
+				<xsl:value-of select="@description"/>
+				<xsl:text>
+
+</xsl:text>
+				<xsl:if test="name()='parametrizedCommand' or name()='parametrizedQuery'">
 					<xsl:text>
-
-</xsl:text>
-					<xsl:if test="name()='parametrizedCommand' or name()='parametrizedQuery'">
-						<xsl:text>
 | Command Parameters                                      |||||
 | Parameter Name | Use | Parameter Type | Range | Description |
 |:---------------|:----|:---------------|:------|:------------|
 </xsl:text>
-						<xsl:for-each select="hi:parameter">
-							<xsl:call-template name="ControlParameterRow"/>
-						</xsl:for-each>
-						<xsl:text>
+					<xsl:for-each select="hi:parameter">
+						<xsl:call-template name="ControlParameterRow"/>
+					</xsl:for-each>
+					<xsl:text>
 </xsl:text>
-					</xsl:if>
 				</xsl:if>
 			<xsl:if test="hi:comment">
 				<xsl:value-of select="hi:comment"/>
