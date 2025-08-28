@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:windSpeed:1.0">
+	<description>Wind Speed sensors, measuring the speed of current wind conditions.</description>
+	<sensorData>
+		<field name="Wind, Speed" use="Optional" m="true" type="q" description="Momentary Wind Speed value. A no wind condition is reported by reporting a wind speed of 0 kt (or compatible unit)."/>
+		<field name="Wind, Speed, Variation" use="Optional" m="true" type="q" description="If varying or gusty wind is measured and reported, this value represents the variation (±) from the mean or average wind speed reported in the field `Wind, Speed`. Note however, that in the case of a variation larger than the average, the wind speed is supposed to be from zero wind to average+variation. This field must use the same unit as `Wind, Speed`."/>
+	</sensorData>
+</interface>

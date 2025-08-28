@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:massFlow:1.0">
+	<description>Mass flow sensors (for example air flow sensors), measuring physical mass flow.</description>
+	<sensorData>
+		<field name="Mass Flow" use="Mandatory" m="true" type="q" description="Momentary Mass Flow value."/>
+	</sensorData>
+</interface>

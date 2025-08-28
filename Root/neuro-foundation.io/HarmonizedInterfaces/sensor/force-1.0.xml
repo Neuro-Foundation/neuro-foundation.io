@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:force:1.0">
+	<description>Force sensors, measuring physical force, or tension.</description>
+	<sensorData>
+		<field name="Force" use="Mandatory" m="true" type="q" description="Momentary Force or tension value."/>
+	</sensorData>
+</interface>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:pressure:1.0">
+	<description>Pressure sensors, measuring a pressure.</description>
+	<sensorData>
+		<field name="Pressure" use="Mandatory" m="true" type="q" description="Momentary Pressure value."/>
+	</sensorData>
+</interface>

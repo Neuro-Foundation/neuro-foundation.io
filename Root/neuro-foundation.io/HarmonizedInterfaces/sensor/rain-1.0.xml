@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:rain:1.0">
+	<description>Rain sensors (udometers, pluviometers, ombrometers), measuring if it is raining, and how much.</description>
+	<sensorData>
+		<field name="Is Raining" use="Mandatory" m="true" type="b" description="If it is raining or not."/>
+		<field name="Rain Rate" use="Optional" m="true" type="q" description="Rate of rainfall (for instance in mm/h)."/>
+	</sensorData>
+</interface>

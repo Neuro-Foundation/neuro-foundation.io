@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:windDirection:1.0">
+	<description>Wind Direction sensors, measuring where wind is blowing from.</description>
+	<sensorData>
+		<field name="Wind, Direction" use="Optional" m="true" type="q" description="Momentary Wind Direction value, as an angle against true north. Value must use an angle unit. If value is omitted, it means there's no wind."/>
+		<field name="Wind, Direction, Variation" use="Optional" m="true" type="q" description="If varying or gusty wind is measured and reported, this value represents the variation (±) from the mean or average wind direction reported in the field `Wind, Direction`. This field must use the same unit as `Wind, Direction`."/>
+	</sensorData>
+</interface>

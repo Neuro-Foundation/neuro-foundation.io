@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:digitalInputs:1.0">
+	<description>Devices containing an array of digital inputs.</description>
+	<sensorData>
+		<field name="Digital Input %1%" use="Mandatory" m="true" type="b" description="Momentary input value for input number %1%."/>
+		<field name="Digital Input Count" use="Optional" s="true" type="i" description="Number of digital inputs available on the device."/>
+	</sensorData>
+</interface>

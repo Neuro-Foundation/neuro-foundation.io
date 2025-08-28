@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:analogInput:1.0">
+	<description>Generical analog input.</description>
+	<sensorData>
+		<field name="Analog Input" use="Mandatory" m="true" type="q" description="Momentary input value."/>
+		<field name="Analog Input, Raw" use="Optional" m="true" type="integer" description="Momentary raw binary input value."/>
+		<field name="Analog Input, Bits" use="Optional" s="true" type="integer" description="Number of bits of precision of input value."/>
+		<field name="Analog Input, Range, Low" use="Optional" s="true" type="q" description="Lowest possible value."/>
+		<field name="Analog Input, Range, High" use="Optional" s="true" type="q" description="Highest possible value."/>
+		<comment><![CDATA[The input value must be reported using the correct precision and unit. Examples of units that could be used:
+
+* `%` - for instance 0-100 %
+* `mA` - for instance 4-20 mA
+* `V` - for instance 0-10 V]]></comment>
+	</sensorData>
+</interface>

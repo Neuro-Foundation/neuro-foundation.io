@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:dewPoint:1.0">
+	<description>Dew Point sensors, measuring current dew point in the environment.</description>
+	<sensorData>
+		<field name="Dew Point" use="Mandatory" m="true" type="q" description="Momentary Dew Point."/>
+	</sensorData>
+</interface>

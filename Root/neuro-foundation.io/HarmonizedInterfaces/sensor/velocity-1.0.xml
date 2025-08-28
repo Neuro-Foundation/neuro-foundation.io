@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:velocity:1.0">
+	<description>Distance sensors, measuring physical distance.</description>
+	<sensorData>
+		<field name="Velocity, Speed" use="Mandatory" m="true" type="q" description="Momentary Speed value."/>
+		<field name="Velocity, Direction" use="Mandatory" m="true" type="q" description="Momentary Direction value, as an angle against true north. Value must use an angle unit."/>
+	</sensorData>
+</interface>

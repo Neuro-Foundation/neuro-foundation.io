@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:analogInputs:1.0">
+	<description>Devices containing an array of analog inputs.</description>
+	<sensorData>
+		<field name="Analog Input %1%" use="Mandatory" m="true" type="q" description="Momentary input value for input number %1%."/>
+		<field name="Analog Input %1%, Raw" use="Optional" m="true" type="integer" description="Momentary raw binary input value for input number %1%."/>
+		<field name="Analog Input %1%, Bits" use="Optional" s="true" type="integer" description="Number of bits of precision of input value for input number %1%."/>
+		<field name="Analog Input %1%, Range, Low" use="Optional" s="true" type="q" description="Lowest possible value for input number %1%."/>
+		<field name="Analog Input %1%, Range, High" use="Optional" s="true" type="q" description="Highest possible value for input number %1%."/>
+		<field name="Analog Input Count" use="Optional" s="true" type="i" description="Number of analog inputs available on the device."/>
+		<comment>
+			<![CDATA[The input values must be reported using the correct precision and unit. Examples of units that could be used:
+
+* `%` - for instance 0-100 %
+* `mA` - for instance 4-20 mA
+* `V` - for instance 0-10 V]]>
+		</comment>
+	</sensorData>
+</interface>

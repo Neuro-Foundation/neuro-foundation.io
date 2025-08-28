@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:resistance:1.0">
+	<description>Resistance sensors, measuring a electrical resistance.</description>
+	<sensorData>
+		<field name="Resistance" use="Mandatory" m="true" type="q" description="Momentary Resistance value."/>
+	</sensorData>
+</interface>

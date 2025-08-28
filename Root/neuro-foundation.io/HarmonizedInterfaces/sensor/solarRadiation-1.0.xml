@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hi:sensor:solarRadiation:1.0">
+	<description>Solar radiation sensors (pyranometers), measuring solar radiation.</description>
+	<sensorData>
+		<field name="Solar Radiation" use="Mandatory" m="true" type="q" description="Momentary Solar Radiation value."/>
+	</sensorData>
+</interface>
