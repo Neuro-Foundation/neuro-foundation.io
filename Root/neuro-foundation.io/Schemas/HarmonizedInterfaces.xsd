@@ -375,6 +375,11 @@
 					<xs:documentation>Represents a field using any of the integer field types: i, l</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value='base'>
+				<xs:annotation>
+					<xs:documentation>The field has the same type as the type of the field in the base interface.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -446,6 +451,11 @@
 			<xs:enumeration value='integer'>
 				<xs:annotation>
 					<xs:documentation>Represents a parameter using any of the integer parameter types: i, l</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='base'>
+				<xs:annotation>
+					<xs:documentation>The parameter has the same type as the type of the parameter in the base interface.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>

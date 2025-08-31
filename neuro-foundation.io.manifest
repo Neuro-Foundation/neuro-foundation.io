@@ -40,6 +40,7 @@
 			<Content fileName="TransportEncryption.md"/>
 			<Content fileName="Units.md"/>
 			<Folder name="Api">
+				<Content fileName="ExpandAggregateInterfaceFolder.ws"/>
 				<Content fileName="ExpandInterfaceFolder.ws"/>
 			</Folder>
 			<Folder name="Definitions">
@@ -54,6 +55,18 @@
 				<Content fileName="SimpleSensorDataRequest.xml"/>
 				<Content fileName="SimpleSensorDataResponse.xml"/>
 				<Content fileName="TlsSecurity.xml"/>
+			</Folder>
+			<Folder name="HarmonizedAggregateInterfaces">
+				<Folder name="statistics">
+					<Content fileName="average-1.0.xml"/>
+					<Content fileName="consumption-1.0.xml"/>
+					<Content fileName="history-1.0.xml"/>
+					<Content fileName="max-1.0.xml"/>
+					<Content fileName="mean-1.0.xml"/>
+					<Content fileName="min-1.0.xml"/>
+					<Content fileName="stdDev-1.0.xml"/>
+					<Content fileName="sum-1.0.xml"/>
+				</Folder>
 			</Folder>
 			<Folder name="HarmonizedInterfaces">
 				<Folder name="actuator">

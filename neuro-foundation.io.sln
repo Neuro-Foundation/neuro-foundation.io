@@ -260,6 +260,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "network", "network", "{7409
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{1B3C851F-8355-4CE6-96C1-430F5773A950}"
 	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws
 		Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws
 	EndProjectSection
 EndProject
@@ -270,6 +271,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "directory", "directory", "{
 		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\dublinCore-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\dublinCore-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\imageItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\imageItem-1.0.xml
 		Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\videoItem-1.0.xml = Root\neuro-foundation.io\HarmonizedInterfaces\media\directory\videoItem-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HarmonizedAggregateInterfaces", "HarmonizedAggregateInterfaces", "{1640F11D-7FFB-4E4B-A03E-BB04800E56CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "statistics", "statistics", "{56E9DDF4-E32B-4E58-A83D-F06DC79F7EC7}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\average-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\average-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\consumption-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\consumption-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\history-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\history-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\max-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\max-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\mean-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\mean-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml
 	EndProjectSection
 EndProject
 Global
@@ -298,6 +313,8 @@ Global
 		{7409EF01-D16A-45E6-A733-FDC597F45C0E} = {0E6939C0-C2F0-4252-A713-509D1A1AD3E6}
 		{1B3C851F-8355-4CE6-96C1-430F5773A950} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{766B27A8-6F37-4B62-8A89-C6F27BC04241} = {AD05D03D-638C-44E0-ADB5-2292F88BE2B5}
+		{1640F11D-7FFB-4E4B-A03E-BB04800E56CE} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{56E9DDF4-E32B-4E58-A83D-F06DC79F7EC7} = {1640F11D-7FFB-4E4B-A03E-BB04800E56CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

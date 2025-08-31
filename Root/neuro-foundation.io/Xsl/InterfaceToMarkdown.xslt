@@ -223,6 +223,9 @@ Below you find the XML source that generated this page:
 			<xsl:when test="@type='integer'">
 				<xsl:text>Integer</xsl:text>
 			</xsl:when>
+			<xsl:when test="@type='base'">
+				<xsl:text>As in base interface</xsl:text>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>`</xsl:text>
 				<xsl:value-of select="@type"/>
@@ -299,6 +302,9 @@ Below you find the XML source that generated this page:
 			</xsl:when>
 			<xsl:when test="@type='integer'">
 				<xsl:text>Integer</xsl:text>
+			</xsl:when>
+			<xsl:when test="@type='base'">
+				<xsl:text>As in base interface</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>`</xsl:text>

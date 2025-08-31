@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hai:statistics:history:1.0">
+	<description><![CDATA[This interface adds historical values to the interface to which it is aggregated. In the case there are multiple fields 
+in the base interface, all fields can be aggregated, maintaining the same usage (required/optional) in the aggregated interface as in the original 
+base interface.]]></description>
+	<sensorData>
+		<field name="%0%" use="Mandatory" h="true" type="base" description="Sampled value of `%0%` for a given point in time in history. The timestamp of the field records the time when the value was sampled."/>
+		<comment><![CDATA[**Note**: In the table above, `%0%` represents the name of the corresponding field in the original base interface.]]></comment>
+	</sensorData>
+</interface>

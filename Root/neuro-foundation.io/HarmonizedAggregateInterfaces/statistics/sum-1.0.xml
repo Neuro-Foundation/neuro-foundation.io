@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hai:statistics:sum:1.0">
+	<description><![CDATA[This interface adds sums of values to the interface to which it is aggregated. In the case an interface contains 
+two fields, one (the accumulated value) the integration over time of the other (the momentary value), only the accumulated value is aggregated.
+
+In the case there are multiple fields in the base interface, all fields can be aggregated, maintaining the same usage (required/optional) 
+in the aggregated interface as in the original base interface.]]></description>
+	<sensorData>
+		<field name="%0%, Sum" use="Mandatory" c="true" type="base" description="Consumption value of `%0%` during period."/>
+		<field name="%0%, Sum, Start" use="Optional" c="true" type="dt" description="Start of period."/>
+		<field name="%0%, Sum, Stop" use="Optional" c="true" type="dt" description="Stop of period."/>
+		<comment><![CDATA[**Note**: In the table above, `%0%` represents the name of the corresponding field in the original base interface.
+
+Example: The field `Energy` is the integration over time of the field `Power` in the interface
+[`urn:nfi:iot:hi:meter:electricity:1.0`](/HarmonizedInterfaces/meter/electricity-1.0.xml). The interface 
+`urn:nfi:iot:hi:meter:electricity:statistics:sum:1.0` therefore, must thus include the field `Energy, Sum`.]]></comment>
+	</sensorData>
+</interface>

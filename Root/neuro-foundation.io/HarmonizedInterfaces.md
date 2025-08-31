@@ -77,6 +77,24 @@ interfaces within the Neuro-Foundation namespaces, all in an effort to create as
 communicty as possible that can agree on a set of interoperable interfaces that can be used to 
 exchange information in harmonized networks.
 
+Aggregate Interfaces
+-----------------------
+
+In addition to the basic interfaces, *aggregate interfaces* are defined. These are interfaces
+that extend existing interfaces with additional generic functionality. Instead of having to
+define a new interface for each new aggregate extension, a generic aggregate interface is defined.
+This aggregate interface can then be used to extend any existing interface.
+
+Example: The `urn:nfi:iot:hi:sensor.temperature:1.0` interface defines a minimum interface for
+a temperature sensor. The `urn:nfi:iot:hai:statistics:average:1.0` aggregate interface defines how 
+a sensor can report an average value (regardless of sensor type). If a temperature sensor would
+like to inform that it can report average values, it would then implement both the
+`urn:nfi:iot:hi:sensor.temperature:1.0` interface and the 
+`urn:nfi:iot:hi:sensor.temperature:statistics:average:1.0` interface. Note that the only the version of
+the aggregate interface is specified. The version of the aggregated interface is inferred from
+the version as reported for the base interface.
+
+
 Getting supported interfaces
 -------------------------------
 
@@ -160,6 +178,36 @@ foreach InterfaceFolder in Sort(InterfaceFolders) do
     ]]<li class="Expandable" onclick="ExpandNode(event,this)"[[;
     ]] data-id="((RelFolderName))"[[;
     ]] data-expand="Api/ExpandInterfaceFolder.ws"[[;
+    ]] data-collapsedimg="((HtmlAttributeEncode(MarkdownToHtml(":file_folder:") ) ))"[[;
+    ]] data-expandedimg="((HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:") ) ))">[[;
+    ]]<span class="ItemImage">:file_folder:</span>[[;
+    ]]`((InterfaceUri))`[[;
+    ]]</li>
+[[
+)
+}}
+</ul>
+
+Published Harmonized Aggregate Interfaces
+--------------------------------------------
+
+Following is a tree structure of published harmonized aggregate interfaces. Browse available 
+interfaces by expanding the tree and clicking on the interface you want to learn more about.
+
+<ul class="HarmonizedAggregateInterfaceTree">
+{{
+FolderName:=null;
+Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedAggregateInterfaces",false,FolderName);
+InterfaceFolders:=System.IO.Directory.GetDirectories(FolderName);
+
+foreach InterfaceFolder in Sort(InterfaceFolders) do
+(
+    RelFolderName:=InterfaceFolder.Substring(len(FolderName));
+    InterfaceUri:="urn:nfi:iot:hai" + RelFolderName.Replace("\\",":");
+	
+    ]]<li class="Expandable" onclick="ExpandNode(event,this)"[[;
+    ]] data-id="((RelFolderName))"[[;
+    ]] data-expand="Api/ExpandAggregateInterfaceFolder.ws"[[;
     ]] data-collapsedimg="((HtmlAttributeEncode(MarkdownToHtml(":file_folder:") ) ))"[[;
     ]] data-expandedimg="((HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:") ) ))">[[;
     ]]<span class="ItemImage">:file_folder:</span>[[;
