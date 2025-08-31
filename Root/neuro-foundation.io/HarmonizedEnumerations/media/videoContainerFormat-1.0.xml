@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:videoContainerFormat:1.0">
+	<description>The following table lists different video container formats recognized for use when encapsulating video.</description>
+	<value name="3GP" description="3GPP"/>
+	<value name="Avi" description="Avi"/>
+	<value name="DivX" description="DivX"/>
+	<value name="Dvb" description="Direct Video Broadcast (DVB)."/>
+	<value name="FlashVideo" description="Flash Video"/>
+	<value name="MotionJPeg" description="Motion JPEG"/>
+	<value name="Mov" description="QuickTime"/>
+	<value name="MPeg" description="MPeg"/>
+	<value name="MPeg4" description="MPeg-4"/>
+	<value name="Ogg" description="OGG"/>
+	<value name="RealMedia" description="Real Media"/>
+	<value name="StillImages" description="Video is created by repeatedly reading a still image."/>
+	<value name="TS" description="MPeg TS"/>
+	<value name="WebM" description="WebM"/>
+	<value name="Wmv" description="Windows Media Video Stream"/>
+</enumeration>

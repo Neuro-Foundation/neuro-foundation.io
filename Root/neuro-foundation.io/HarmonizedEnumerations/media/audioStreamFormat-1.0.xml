@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:audioStreamFormat:1.0">
+	<description>The following table lists different audio stream formats recognized for encoding audio.</description>
+	<value name="Aac" description="Advanced Audio Coding (AAC)"/>
+	<value name="Arm" description="Adaptive Rate Modulation (ARM)"/>
+	<value name="MPeg1" description="MPeg-1"/>
+	<value name="MPeg3" description="MPeg-3"/>
+	<value name="Pcm" description="Pulse Code Modulation (PCM)"/>
+	<value name="Wma9" description="Windows Media Audio v9"/>
+</enumeration>

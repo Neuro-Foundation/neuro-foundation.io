@@ -8,6 +8,24 @@
 	<xsl:output method="html" indent="no"/>
 
 	<xsl:template match="/hi:interface">
+		<xsl:call-template name="Header"/>
+		<xsl:call-template name="SensorData"/>
+		<xsl:call-template name="ControlParameters"/>
+		<xsl:call-template name="Commands"/>
+		<xsl:call-template name="XmlDefinition"/>
+	</xsl:template>
+
+
+
+	<xsl:template match="/hi:enumeration">
+		<xsl:call-template name="Header"/>
+		<xsl:call-template name="Enumeration"/>
+		<xsl:call-template name="XmlDefinition"/>
+	</xsl:template>
+
+
+
+	<xsl:template name="Header">
 		<xsl:text>Title: </xsl:text>
 		<xsl:value-of select="@id"/>
 		<xsl:text>
@@ -29,7 +47,11 @@ Master: /Master.md
 		<xsl:text>
 
 </xsl:text>
+	</xsl:template>
 
+	
+	
+	<xsl:template name="SensorData">
 		<xsl:if test="hi:sensorData">
 			<xsl:text>## Sensor Data Interface
 
@@ -49,137 +71,10 @@ Master: /Master.md
 </xsl:text>
 			</xsl:if>
 		</xsl:if>
-
-		<xsl:if test="hi:controlParameters">
-			<xsl:text>## Actuator Interface
-
-| Actuator Control Parameters                             |||||
-| Parameter Name | Use | Parameter Type | Range | Description |
-|:---------------|:----|:---------------|:------|:------------|
-</xsl:text>
-			<xsl:for-each select="hi:controlParameters/hi:parameter">
-				<xsl:call-template name="ControlParameterRow"/>
-			</xsl:for-each>
-			<xsl:text>
-</xsl:text>
-			<xsl:if test="hi:controlParameters/hi:comment">
-				<xsl:value-of select="hi:controlParameters/hi:comment"/>
-				<xsl:text>
-
-</xsl:text>
-			</xsl:if>
-		</xsl:if>
-
-		<xsl:if test="hi:commands">
-			<xsl:text>## Command Interface
-
-The following commands are defined for this interface.
-
-| Commands                                     ||||
-| Command Name | Use | Command Type | Description |
-|:-------------|:----|:-------------|:------------|
-</xsl:text>
-
-			<xsl:for-each select="hi:commands/*">
-				<xsl:text>| `</xsl:text>
-				<xsl:value-of select="@name"/>
-				<xsl:text>` | </xsl:text>
-				<xsl:value-of select="@use"/>
-				<xsl:text> | </xsl:text>
-				<xsl:choose>
-					<xsl:when test="name()='simpleCommand'">
-						<xsl:text>Simple Command</xsl:text>
-					</xsl:when>
-					<xsl:when test="name()='parametrizedCommand'">
-						<xsl:text>Parametrized Command</xsl:text>
-					</xsl:when>
-					<xsl:when test="name()='parametrizedQuery'">
-						<xsl:text>Parametrized Query</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>`</xsl:text>
-						<xsl:value-of select="name()"/>
-						<xsl:text>`</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:text> | </xsl:text>
-				<xsl:value-of select="@description"/>
-				<xsl:text> |
-</xsl:text>
-			</xsl:for-each>
-			<xsl:text>
-</xsl:text>
-
-			<xsl:for-each select="hi:commands/*">
-				<xsl:text>### `</xsl:text>
-				<xsl:value-of select="@name"/>
-				<xsl:text>` (</xsl:text>
-				<xsl:choose>
-					<xsl:when test="name()='simpleCommand'">
-						<xsl:text>Simple Command</xsl:text>
-					</xsl:when>
-					<xsl:when test="name()='parametrizedCommand'">
-						<xsl:text>Parametrized Command</xsl:text>
-					</xsl:when>
-					<xsl:when test="name()='parametrizedQuery'">
-						<xsl:text>Parametrized Query</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>`</xsl:text>
-						<xsl:value-of select="name()"/>
-						<xsl:text>`</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:text>)
-
-</xsl:text>
-				<xsl:value-of select="@description"/>
-				<xsl:text>
-
-</xsl:text>
-				<xsl:if test="name()='parametrizedCommand' or name()='parametrizedQuery'">
-					<xsl:text>
-| Command Parameters                                      |||||
-| Parameter Name | Use | Parameter Type | Range | Description |
-|:---------------|:----|:---------------|:------|:------------|
-</xsl:text>
-					<xsl:for-each select="hi:parameter">
-						<xsl:call-template name="ControlParameterRow"/>
-					</xsl:for-each>
-					<xsl:text>
-</xsl:text>
-				</xsl:if>
-			<xsl:if test="hi:comment">
-				<xsl:value-of select="hi:comment"/>
-				<xsl:text>
-
-</xsl:text>
-			</xsl:if>
-			</xsl:for-each>
-
-			<xsl:if test="hi:controlParameters/hi:comment">
-				<xsl:value-of select="hi:controlParameters/hi:comment"/>
-				<xsl:text>
-
-</xsl:text>
-			</xsl:if>
-		</xsl:if>
-
-		<xsl:text>
-
-## XML Interface Definition
-
-Below you find the XML source that generated this page:
-
-```xml
-</xsl:text>
-		<xsl:copy-of select="."/>
-		<xsl:text>
-```
-</xsl:text>
-
 	</xsl:template>
 
+	
+	
 	<xsl:template name="SensorFieldRow">
 		<xsl:text>| `</xsl:text>
 		<xsl:value-of select="@name"/>
@@ -256,6 +151,32 @@ Below you find the XML source that generated this page:
 		<xsl:text> |
 </xsl:text>
 	</xsl:template>
+
+
+
+	<xsl:template name="ControlParameters">
+		<xsl:if test="hi:controlParameters">
+			<xsl:text>## Actuator Interface
+
+| Actuator Control Parameters                             |||||
+| Parameter Name | Use | Parameter Type | Range | Description |
+|:---------------|:----|:---------------|:------|:------------|
+</xsl:text>
+			<xsl:for-each select="hi:controlParameters/hi:parameter">
+				<xsl:call-template name="ControlParameterRow"/>
+			</xsl:for-each>
+			<xsl:text>
+</xsl:text>
+			<xsl:if test="hi:controlParameters/hi:comment">
+				<xsl:value-of select="hi:controlParameters/hi:comment"/>
+				<xsl:text>
+
+</xsl:text>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+
+
 
 	<xsl:template name="ControlParameterRow">
 		<xsl:text>| `</xsl:text>
@@ -345,6 +266,148 @@ Below you find the XML source that generated this page:
 			</xsl:choose>
 		</xsl:if>
 		<xsl:text> | </xsl:text>
+		<xsl:value-of select="@description"/>
+		<xsl:text> |
+</xsl:text>
+	</xsl:template>
+
+
+
+	<xsl:template name="Commands">
+		<xsl:if test="hi:commands">
+			<xsl:text>## Command Interface
+
+The following commands are defined for this interface.
+
+| Commands                                     ||||
+| Command Name | Use | Command Type | Description |
+|:-------------|:----|:-------------|:------------|
+</xsl:text>
+
+			<xsl:for-each select="hi:commands/*">
+				<xsl:text>| `</xsl:text>
+				<xsl:value-of select="@name"/>
+				<xsl:text>` | </xsl:text>
+				<xsl:value-of select="@use"/>
+				<xsl:text> | </xsl:text>
+				<xsl:choose>
+					<xsl:when test="name()='simpleCommand'">
+						<xsl:text>Simple Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedCommand'">
+						<xsl:text>Parametrized Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedQuery'">
+						<xsl:text>Parametrized Query</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>`</xsl:text>
+						<xsl:value-of select="name()"/>
+						<xsl:text>`</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text> | </xsl:text>
+				<xsl:value-of select="@description"/>
+				<xsl:text> |
+</xsl:text>
+			</xsl:for-each>
+			<xsl:text>
+</xsl:text>
+
+			<xsl:for-each select="hi:commands/*">
+				<xsl:text>### `</xsl:text>
+				<xsl:value-of select="@name"/>
+				<xsl:text>` (</xsl:text>
+				<xsl:choose>
+					<xsl:when test="name()='simpleCommand'">
+						<xsl:text>Simple Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedCommand'">
+						<xsl:text>Parametrized Command</xsl:text>
+					</xsl:when>
+					<xsl:when test="name()='parametrizedQuery'">
+						<xsl:text>Parametrized Query</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>`</xsl:text>
+						<xsl:value-of select="name()"/>
+						<xsl:text>`</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:text>)
+
+</xsl:text>
+				<xsl:value-of select="@description"/>
+				<xsl:text>
+
+</xsl:text>
+				<xsl:if test="name()='parametrizedCommand' or name()='parametrizedQuery'">
+					<xsl:text>
+| Command Parameters                                      |||||
+| Parameter Name | Use | Parameter Type | Range | Description |
+|:---------------|:----|:---------------|:------|:------------|
+</xsl:text>
+					<xsl:for-each select="hi:parameter">
+						<xsl:call-template name="ControlParameterRow"/>
+					</xsl:for-each>
+					<xsl:text>
+</xsl:text>
+				</xsl:if>
+				<xsl:if test="hi:comment">
+					<xsl:value-of select="hi:comment"/>
+					<xsl:text>
+
+</xsl:text>
+				</xsl:if>
+			</xsl:for-each>
+
+			<xsl:if test="hi:controlParameters/hi:comment">
+				<xsl:value-of select="hi:controlParameters/hi:comment"/>
+				<xsl:text>
+
+</xsl:text>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+
+
+
+	<xsl:template name="XmlDefinition">
+		<xsl:text>
+
+## XML Interface Definition
+
+Below you find the XML source that generated this page:
+
+```xml
+</xsl:text>
+		<xsl:copy-of select="."/>
+		<xsl:text>
+```
+</xsl:text>
+	</xsl:template>
+
+
+
+	<xsl:template name="Enumeration">
+		<xsl:text>
+| Enumearation Values            ||
+| Enumeration Value | Description |
+|:------------------|:------------|
+</xsl:text>
+		<xsl:for-each select="hi:value">
+			<xsl:call-template name="EnumerationRow"/>
+		</xsl:for-each>
+		<xsl:text>
+</xsl:text>
+	</xsl:template>
+
+
+
+	<xsl:template name="EnumerationRow">
+		<xsl:text>| `</xsl:text>
+		<xsl:value-of select="@name"/>
+		<xsl:text>` | </xsl:text>
 		<xsl:value-of select="@description"/>
 		<xsl:text> |
 </xsl:text>

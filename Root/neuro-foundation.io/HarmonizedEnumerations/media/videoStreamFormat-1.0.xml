@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:videoStreamFormat:1.0">
+	<description>The following table lists different video stream formats recognized for encoding video.</description>
+	<value name="H263" description="H.263"/>
+	<value name="MPeg1" description="MPeg-1"/>
+	<value name="MPeg2" description="MPeg-2"/>
+	<value name="MPeg4" description="MPeg-4"/>
+	<value name="Wmv8" description="Windows Media Video v8"/>
+	<value name="Wmv9" description="Windows Media Video v9"/>
+</enumeration>

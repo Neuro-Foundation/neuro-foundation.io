@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:audioContainerFormat:1.0">
+	<description>The following table lists different audio container formats recognized for use when encapsulating audio.</description>
+	<value name="3GP" description="3GPP"/>
+	<value name="Aiff" description="Audio Interchange File Format (AIFF)."/>
+	<value name="Flac" description="FLAC"/>
+	<value name="M3U" description="M3U"/>
+	<value name="MPeg3" description="MPeg-3."/>
+	<value name="MPeg4" description="MPeg-4 audio"/>
+	<value name="Ogg" description="OGG"/>
+	<value name="Pls" description="Pls"/>
+	<value name="RealMedia" description="Real Media"/>
+	<value name="Wav" description="Wave Audio."/>
+	<value name="WebM" description="WebM"/>
+	<value name="Wma" description="Windows Media Audio Stream"/>
+</enumeration>

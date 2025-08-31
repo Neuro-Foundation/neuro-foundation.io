@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
-<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hai:statistics:history:1.0">
+<interface xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hia:statistics:history:1.0">
 	<description><![CDATA[This interface adds historical values to the interface to which it is aggregated. In the case there are multiple fields 
 in the base interface, all fields can be aggregated, maintaining the same usage (required/optional) in the aggregated interface as in the original 
 base interface.]]></description>

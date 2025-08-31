@@ -86,7 +86,7 @@ define a new interface for each new aggregate extension, a generic aggregate int
 This aggregate interface can then be used to extend any existing interface.
 
 Example: The `urn:nfi:iot:hi:sensor.temperature:1.0` interface defines a minimum interface for
-a temperature sensor. The `urn:nfi:iot:hai:statistics:average:1.0` aggregate interface defines how 
+a temperature sensor. The `urn:nfi:iot:hia:statistics:average:1.0` aggregate interface defines how 
 a sensor can report an average value (regardless of sensor type). If a temperature sensor would
 like to inform that it can report average values, it would then implement both the
 `urn:nfi:iot:hi:sensor.temperature:1.0` interface and the 
@@ -94,6 +94,13 @@ like to inform that it can report average values, it would then implement both t
 the aggregate interface is specified. The version of the aggregated interface is inferred from
 the version as reported for the base interface.
 
+Enumerations
+---------------
+
+Some interfaces declare fields or control parameters that use enumeration values. For this reason,
+a set of *harmonized enuemrations* are also defined, each one given its own URI. When reporting
+sensor data fields or control parameters of such enumeration types, the harmonized enumeration URI
+is used to identify the type of enumeration used.
 
 Getting supported interfaces
 -------------------------------
@@ -192,7 +199,7 @@ Published Harmonized Aggregate Interfaces
 --------------------------------------------
 
 Following is a tree structure of published harmonized aggregate interfaces. Browse available 
-interfaces by expanding the tree and clicking on the interface you want to learn more about.
+aggregate interfaces by expanding the tree and clicking on the interface you want to learn more about.
 
 <ul class="HarmonizedAggregateInterfaceTree">
 {{
@@ -203,7 +210,7 @@ InterfaceFolders:=System.IO.Directory.GetDirectories(FolderName);
 foreach InterfaceFolder in Sort(InterfaceFolders) do
 (
     RelFolderName:=InterfaceFolder.Substring(len(FolderName));
-    InterfaceUri:="urn:nfi:iot:hai" + RelFolderName.Replace("\\",":");
+    InterfaceUri:="urn:nfi:iot:hia" + RelFolderName.Replace("\\",":");
 	
     ]]<li class="Expandable" onclick="ExpandNode(event,this)"[[;
     ]] data-id="((RelFolderName))"[[;
@@ -212,6 +219,36 @@ foreach InterfaceFolder in Sort(InterfaceFolders) do
     ]] data-expandedimg="((HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:") ) ))">[[;
     ]]<span class="ItemImage">:file_folder:</span>[[;
     ]]`((InterfaceUri))`[[;
+    ]]</li>
+[[
+)
+}}
+</ul>
+
+Published Harmonized Enumerations
+------------------------------------
+
+Following is a tree structure of published harmonized enumerations. Browse available 
+enumerations by expanding the tree and clicking on the enumeration you want to learn more about.
+
+<ul class="HarmonizedEnumerationTree">
+{{
+FolderName:=null;
+Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedEnumerations",false,FolderName);
+EnumerationFolders:=System.IO.Directory.GetDirectories(FolderName);
+
+foreach EnumerationFolder in Sort(EnumerationFolders) do
+(
+    RelFolderName:=EnumerationFolder.Substring(len(FolderName));
+    EnumerationUri:="urn:nfi:iot:hie" + RelFolderName.Replace("\\",":");
+	
+    ]]<li class="Expandable" onclick="ExpandNode(event,this)"[[;
+    ]] data-id="((RelFolderName))"[[;
+    ]] data-expand="Api/ExpandEnumerationFolder.ws"[[;
+    ]] data-collapsedimg="((HtmlAttributeEncode(MarkdownToHtml(":file_folder:") ) ))"[[;
+    ]] data-expandedimg="((HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:") ) ))">[[;
+    ]]<span class="ItemImage">:file_folder:</span>[[;
+    ]]`((EnumerationUri))`[[;
     ]]</li>
 [[
 )

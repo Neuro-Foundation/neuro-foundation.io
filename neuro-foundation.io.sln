@@ -261,6 +261,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{1B3C851F-8355-4CE6-96C1-430F5773A950}"
 	ProjectSection(SolutionItems) = preProject
 		Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws
+		Root\neuro-foundation.io\Api\ExpandEnumerationFolder.ws = Root\neuro-foundation.io\Api\ExpandEnumerationFolder.ws
 		Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws
 	EndProjectSection
 EndProject
@@ -285,6 +286,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "statistics", "statistics", 
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HarmonizedEnumerations", "HarmonizedEnumerations", "{3CE4B177-0CC9-479E-8289-A39EC52A9FFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{D52F4B4F-AB02-4AFA-BDC9-1C7317B7E882}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\audioContainerFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\audioContainerFormat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\audioStreamFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\audioStreamFormat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\imageFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\imageFormat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\transportProtocol-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\transportProtocol-1.0.xml
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\videoContainerFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\videoContainerFormat-1.0.xml
+		Root\neuro-foundation.io\HarmonizedEnumerations\media\videoStreamFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\videoStreamFormat-1.0.xml
 	EndProjectSection
 EndProject
 Global
@@ -315,6 +328,8 @@ Global
 		{766B27A8-6F37-4B62-8A89-C6F27BC04241} = {AD05D03D-638C-44E0-ADB5-2292F88BE2B5}
 		{1640F11D-7FFB-4E4B-A03E-BB04800E56CE} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{56E9DDF4-E32B-4E58-A83D-F06DC79F7EC7} = {1640F11D-7FFB-4E4B-A03E-BB04800E56CE}
+		{3CE4B177-0CC9-479E-8289-A39EC52A9FFE} = {FE17EE9B-9567-430E-8317-6B411D781F78}
+		{D52F4B4F-AB02-4AFA-BDC9-1C7317B7E882} = {3CE4B177-0CC9-479E-8289-A39EC52A9FFE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}

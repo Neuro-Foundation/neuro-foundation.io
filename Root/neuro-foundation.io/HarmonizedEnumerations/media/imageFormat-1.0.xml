@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:imageFormat:1.0">
+	<description>The following table lists different image formats recognized for encoding images.</description>
+	<value name="Png" description="PNG"/>
+	<value name="Jpeg" description="JPEG"/>
+	<value name="Gif" description="GIF"/>
+	<value name="Svg" description="SVG"/>
+	<value name="WebP" description="WEBP"/>
+	<value name="Bmp" description="BMP"/>
+	<value name="Tiff" description="TIFF"/>
+	<value name="Wmf" description="WMF"/>
+	<value name="Emf" description="EMF"/>
+	<value name="Ico" description="ICO"/>
+</enumeration>

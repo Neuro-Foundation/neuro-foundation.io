@@ -41,6 +41,7 @@
 			<Content fileName="Units.md"/>
 			<Folder name="Api">
 				<Content fileName="ExpandAggregateInterfaceFolder.ws"/>
+				<Content fileName="ExpandEnumerationFolder.ws"/>
 				<Content fileName="ExpandInterfaceFolder.ws"/>
 			</Folder>
 			<Folder name="Definitions">
@@ -66,6 +67,16 @@
 					<Content fileName="min-1.0.xml"/>
 					<Content fileName="stdDev-1.0.xml"/>
 					<Content fileName="sum-1.0.xml"/>
+				</Folder>
+			</Folder>
+			<Folder name="HarmonizedEnumerations">
+				<Folder name="media">
+					<Content fileName="videoContainerFormat-1.0.xml"/>
+					<Content fileName="videoStreamFormat-1.0.xml"/>
+					<Content fileName="audioContainerFormat-1.0.xml"/>
+					<Content fileName="audioStreamFormat-1.0.xml"/>
+					<Content fileName="imageFormat-1.0.xml"/>
+					<Content fileName="transportProtocol-1.0.xml"/>
 				</Folder>
 			</Folder>
 			<Folder name="HarmonizedInterfaces">

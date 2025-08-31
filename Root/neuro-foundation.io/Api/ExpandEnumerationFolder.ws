@@ -9,7 +9,7 @@ if Posted matches
 		Forbidden("Illegal characters.");
 
 	FolderName:=null;
-	Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedAggregateInterfaces",false,FolderName);
+	Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedEnumerations",false,FolderName);
 	SubFolderName:=FolderName+PId;
 
 	if !System.IO.Directory.Exists(SubFolderName) then
@@ -27,12 +27,12 @@ if Posted matches
 		[foreach SubFolder in Sort(SubFolders) do 
 			(
 				RelFolderName:=SubFolder.Substring(len(FolderName));
-				InterfaceUri:="urn:nfi:iot:hia" + RelFolderName.Replace("\\",":");
+				EnumerationUri:="urn:nfi:iot:hie" + RelFolderName.Replace("\\",":");
 
 				{
 					"id":RelFolderName, 
-					"expand": "Api/ExpandAggregateInterfaceFolder.ws", 
-					"html": "<code>"+InterfaceUri+"</code>",
+					"expand": "Api/ExpandEnumerationFolder.ws", 
+					"html": "<code>"+EnumerationUri+"</code>",
 					"collapsedImg": FileFolderImg,
 					"expandedImg": OpenFileFolderImg
 				}
@@ -42,12 +42,12 @@ if Posted matches
 			(
 				RelFileName:=FileName.Substring(len(FolderName));
 				RelUrl:=RelFileName.Replace("\\","/");
-				InterfaceUri:="urn:nfi:iot:hia" + RelFileName.Replace("\\",":").Replace("-",":").Replace(".xml","");
+				EnumerationUri:="urn:nfi:iot:hie" + RelFileName.Replace("\\",":").Replace("-",":").Replace(".xml","");
 
 				{
 					"id":RelFileName, 
 					"expand": null, 
-					"html": "<a href=\"HarmonizedAggregateInterfaces"+RelUrl+"\" target=\"_blank\"><code>"+InterfaceUri+"</code></a>",
+					"html": "<a href=\"HarmonizedEnumerations"+RelUrl+"\" target=\"_blank\"><code>"+EnumerationUri+"</code></a>",
 					"collapsedImg": PageImg,
 					"expandedImg": PageImg
 				}

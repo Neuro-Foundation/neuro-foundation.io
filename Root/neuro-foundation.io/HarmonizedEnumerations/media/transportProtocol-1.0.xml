@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/Xsl/InterfaceToMarkdown.xslt"?>
+<enumeration xmlns="urn:nfi:iot:hi:1.0" id="urn:nfi:iot:hie:media:transportProtocol:1.0">
+	<description>The following table lists different transport protocols recognized for transporting video or audio streams.</description>
+	<value name="Dvb" description="Digital Video Broadcast (DVB) Tuner"/>
+	<value name="Http" description="Hyper Text Transfer Protocol"/>
+	<value name="Https" description="Hyper Text Transfer Protocol (SSL)"/>
+	<value name="Mms" description="Microsoft Media Stream"/>
+	<value name="Rtsp" description="RTSP (Real Time Streaming Protocol)"/>
+	<value name="Shoutcast" description="AOL Shoutcast"/>
+	<value name="UdpMulticast" description="UDP Multicast"/>
+</enumeration>

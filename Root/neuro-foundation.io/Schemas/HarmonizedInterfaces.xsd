@@ -480,4 +480,43 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xs:element name='enumeration'>
+		<xs:annotation>
+			<xs:documentation>Describes an enumeration used by harmonized interfaces.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='description' type='MarkdownText'>
+					<xs:annotation>
+						<xs:documentation>A human-readable description of the enumeration.</xs:documentation>
+						<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name='value' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Defines a value in the enumeration.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='name' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>The string representation used to represent the enumerated value.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='description' type='MarkdownText' use='required'>
+							<xs:annotation>
+								<xs:documentation>A human-readable description of the enumeration value.</xs:documentation>
+								<xs:documentation>The text can be formatted using commonly recognized Markdown rules.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='id' type='xs:anyURI' use='required'>
+				<xs:annotation>
+					<xs:documentation>Defines the namespace of the harmonized enumeration.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
