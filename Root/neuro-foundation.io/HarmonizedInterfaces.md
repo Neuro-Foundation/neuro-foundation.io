@@ -141,26 +141,26 @@ Response example:
     to='master@example.com/1234'
     id='1'>
   <interfaces xmlns='urn:nfi:iot:hi:1.0'>
-    <interface ref='urn:nfi:iot:hi:sensor.dewPoint:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.rainRate:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.windDirection:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.windSpeed:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.humidity:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.solarRadiation:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.temperature:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.dewPoint.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.rainRate.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.windDirection.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.windSpeed.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.humidity.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.solarRadiation.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:sensor.temperature.history:1.0'/>
-    <interface ref='urn:nfi:iot:hi:identity.clock:1.0'/>
-    <interface ref='urn:nfi:iot:hi:identity.location:1.0'/>
-    <interface ref='urn:nfi:iot:hi:identity.manufacturer:1.0'/>
-    <interface ref='urn:nfi:iot:hi:identity.name:1.0'/>
-    <interface ref='urn:nfi:iot:hi:identity.version:1.0'/>
-    <interface ref='urn:nfi:iot:hi:media.camera:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:dewPoint:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:rainRate:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:windDirection:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:windSpeed:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:humidity:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:solarRadiation:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:temperature:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:dewPoint:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:rainRate:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:windDirection:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:windSpeed:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:humidity:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:solarRadiation:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:sensor:temperature:statistics:history:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity:clock:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity:location:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity:manufacturer:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity:name:1.0'/>
+    <interface ref='urn:nfi:iot:hi:identity:version:1.0'/>
+    <interface ref='urn:nfi:iot:hi:media:camera:1.0'/>
   </interfaces>
 </iq>
 ```
