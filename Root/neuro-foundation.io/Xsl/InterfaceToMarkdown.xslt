@@ -81,6 +81,9 @@ Master: /Master.md
 		<xsl:text>` | </xsl:text>
 		<xsl:value-of select="@use"/>
 		<xsl:text> | </xsl:text>
+		<xsl:if test="@typeRef">
+			<xsl:text>[</xsl:text>
+		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="@type='q'">
 				<xsl:text>Physical Quantity</xsl:text>
@@ -127,6 +130,13 @@ Master: /Master.md
 				<xsl:text>`</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
+		<xsl:if test="@typeRef">
+			<xsl:text>](</xsl:text>
+			<xsl:call-template name="OutputLink">
+				<xsl:with-param name="Resource" select="@typeRef"/>
+			</xsl:call-template>
+			<xsl:text>)</xsl:text>
+		</xsl:if>
 		<xsl:text> |</xsl:text>
 		<xsl:if test="@m">
 			<xsl:text> Momentary</xsl:text>
@@ -148,11 +158,78 @@ Master: /Master.md
 		</xsl:if>
 		<xsl:text> | </xsl:text>
 		<xsl:value-of select="@description"/>
+		<xsl:if test="@typeRef">
+			<xsl:text> Reference: [`</xsl:text>
+			<xsl:value-of select="@typeRef"/>
+			<xsl:text>`](</xsl:text>
+			<xsl:call-template name="OutputLink">
+				<xsl:with-param name="Resource" select="@typeRef"/>
+			</xsl:call-template>
+			<xsl:text>)</xsl:text>
+		</xsl:if>
 		<xsl:text> |
 </xsl:text>
 	</xsl:template>
+	
+	
 
+	<xsl:template name="OutputLink">
+		<xsl:param name="Resource"/>
+		<xsl:choose>
+			<xsl:when test="starts-with($Resource, 'urn:nfi:iot:hi:')">
+				<xsl:text>/HarmonizedInterfaces</xsl:text>
+				<xsl:call-template name="OutputLocalResource">
+					<xsl:with-param name="Resource" select="substring($Resource, 16)"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="starts-with($Resource, 'urn:nfi:iot:hia:')">
+				<xsl:text>/HarmonizedAggregateInterfaces</xsl:text>
+				<xsl:call-template name="OutputLocalResource">
+					<xsl:with-param name="Resource" select="substring($Resource, 17)"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="starts-with($Resource, 'urn:nfi:iot:hie:')">
+				<xsl:text>/HarmonizedEnumerations</xsl:text>
+				<xsl:call-template name="OutputLocalResource">
+					<xsl:with-param name="Resource" select="substring($Resource, 17)"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$Resource"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template name="OutputLocalResource">
+		<xsl:param name="Resource"/>
+		<xsl:call-template name="OutputLocalResourceInternal">
+			<xsl:with-param name="Resource" select="$Resource"/>
+			<xsl:with-param name="NrColons" select="string-length($Resource) - string-length(translate($Resource,':',''))"/>
+		</xsl:call-template>
+	</xsl:template>
 
+	<xsl:template name="OutputLocalResourceInternal">
+		<xsl:param name="Resource"/>
+		<xsl:param name="NrColons"/>
+		<xsl:text>/</xsl:text>
+		<xsl:value-of select="substring-before($Resource, ':')"/>
+		<xsl:choose>
+			<xsl:when test="$NrColons &lt;= 1">
+				<xsl:text>-</xsl:text>
+				<xsl:value-of select="substring-after($Resource, ':')"/>
+				<xsl:text>.xml</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+					<xsl:call-template name="OutputLocalResourceInternal">
+					<xsl:with-param name="Resource" select="substring-after($Resource, ':')"/>
+					<xsl:with-param name="NrColons" select="$NrColons - 1"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	
+	
 
 	<xsl:template name="ControlParameters">
 		<xsl:if test="hi:controlParameters">

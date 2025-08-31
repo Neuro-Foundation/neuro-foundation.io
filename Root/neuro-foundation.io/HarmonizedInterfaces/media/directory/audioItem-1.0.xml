@@ -5,9 +5,9 @@
 	<sensorData>
 		<field name="URL" use="Mandatory" i="true" type="s" description="URL to the audio."/>
 		<field name="Duration" use="Optional" i="true" type="dr" description="Duration of item."/>
-		<field name="Transport" use="Optional" i="true" type="s" description="Transport protocol used to transfer stream."/>
-		<field name="Container" use="Optional" i="true" type="s" description="Video Container Format used to encapsulate stream."/>
-		<field name="Audio Stream" use="Optional" i="true" type="s" description="Audio Stream Format used to transfer stream."/>
+		<field name="Transport" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:transportProtocol:1.0" description="Transport protocol used to transfer stream."/>
+		<field name="Container" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:audioContainerFormat:1.0" description="Audio Container Format used to encapsulate stream."/>
+		<field name="Audio Stream" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:audioStreamFormat:1.0" description="Audio Stream Format used to transfer stream."/>
 		<field name="Language" use="Optional" s="true" type="s" description="IETF Language tag for the language of the audio."/>
 	</sensorData>
 </interface>

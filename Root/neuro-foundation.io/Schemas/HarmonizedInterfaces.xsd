@@ -159,6 +159,11 @@
 				<xs:documentation>Defines if the type of the field.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name='typeRef' type='xs:anyURI' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Optional reference for type.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:attributeGroup ref='sd:category'>
 			<xs:annotation>
 				<xs:documentation>Defines the category of the field.</xs:documentation>

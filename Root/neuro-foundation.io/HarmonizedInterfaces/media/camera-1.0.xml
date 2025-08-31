@@ -6,11 +6,11 @@
 		<field name="URL" use="Mandatory" i="true" type="s" description="URL to the camera video stream."/>
 		<field name="Width" use="Optional" i="true" type="numeric" description="Width in pixels of the video."/>
 		<field name="Height" use="Optional" i="true" type="numeric" description="Height in pixels of the video."/>
-		<field name="Transport" use="Optional" i="true" type="s" description="Transport protocol used to transfer stream."/>
-		<field name="Container" use="Optional" i="true" type="s" description="Video Container Format used to encapsulate stream."/>
-		<field name="Video Stream" use="Optional" i="true" type="s" description="Video Stream Format used to transfer stream."/>
-		<field name="Audio Stream" use="Optional" i="true" type="s" description="Audio Stream Format used to transfer stream."/>
-		<field name="Image Type" use="Optional" i="true" type="s" description="Image Format, in case camera supports still images."/>
+		<field name="Transport" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:transportProtocol:1.0" description="Transport protocol used to transfer stream."/>
+		<field name="Container" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:videoContainerFormat:1.0" description="Video Container Format used to encapsulate stream."/>
+		<field name="Video Stream" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:videoStreamFormat:1.0" description="Video Stream Format used to transfer stream."/>
+		<field name="Audio Stream" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:audioStreamFormat:1.0" description="Audio Stream Format used to transfer stream."/>
+		<field name="Image Type" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:imageFormat:1.0" description="Image Format, in case camera supports still images."/>
 		<field name="Enabled" use="Optional" s="true" type="b" description="If the camera is enabled or not."/>
 		<field name="Angle" use="Optional" s="true" type="q" description="Rotation of camera around an imaginary vertical axis (looking left-right). Value must be of an angle unit."/>
 		<field name="Elevation" use="Optional" s="true" type="q" description="Rotation of camera around an imaginary horizontal axis (looking up-down). Value must be of an angle unit."/>

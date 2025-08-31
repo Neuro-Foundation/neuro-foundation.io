@@ -4,9 +4,9 @@
 	<description>Represents a live Microphone.</description>
 	<sensorData>
 		<field name="URL" use="Optional" s="true" type="s" description="URL to the audio stream."/>
-		<field name="Transport" use="Optional" i="true" type="s" description="Transport protocol used to transfer stream."/>
-		<field name="Container" use="Optional" i="true" type="s" description="Video Container Format used to encapsulate stream."/>
-		<field name="Audio Stream" use="Optional" i="true" type="s" description="Audio Stream Format used to transfer stream."/>
+		<field name="Transport" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:transportProtocol:1.0" description="Transport protocol used to transfer stream."/>
+		<field name="Container" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:audioContainerFormat:1.0" description="Audio Container Format used to encapsulate stream."/>
+		<field name="Audio Stream" use="Optional" i="true" type="e" typeRef="urn:nfi:iot:hie:media:audioStreamFormat:1.0" description="Audio Stream Format used to transfer stream."/>
 		<field name="Enabled" use="Optional" s="true" type="b" description="If the microphone is enabled or not."/>
 	</sensorData>
 	<controlParameters>
