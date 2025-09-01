@@ -43,6 +43,7 @@
 				<Content fileName="ExpandAggregateInterfaceFolder.ws"/>
 				<Content fileName="ExpandEnumerationFolder.ws"/>
 				<Content fileName="ExpandInterfaceFolder.ws"/>
+				<Content fileName="ExpandNamespaceFolder.ws"/>
 			</Folder>
 			<Folder name="Definitions">
 				<Content fileName="Units.md"/>
