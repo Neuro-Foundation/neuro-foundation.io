@@ -171,7 +171,7 @@ Published Harmonized Interfaces
 Following is a tree structure of published harmonized interfaces. Browse available interfaces
 by expanding the tree and clicking on the interface you want to learn more about.
 
-<ul class="HarmonizedInterfaceTree">
+<ul class="SimpleTree">
 {{
 FolderName:=null;
 Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedInterfaces",false,FolderName);
@@ -201,7 +201,7 @@ Published Harmonized Aggregate Interfaces
 Following is a tree structure of published harmonized aggregate interfaces. Browse available 
 aggregate interfaces by expanding the tree and clicking on the interface you want to learn more about.
 
-<ul class="HarmonizedAggregateInterfaceTree">
+<ul class="SimpleTree">
 {{
 FolderName:=null;
 Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedAggregateInterfaces",false,FolderName);
@@ -231,7 +231,7 @@ Published Harmonized Enumerations
 Following is a tree structure of published harmonized enumerations. Browse available 
 enumerations by expanding the tree and clicking on the enumeration you want to learn more about.
 
-<ul class="HarmonizedEnumerationTree">
+<ul class="SimpleTree">
 {{
 FolderName:=null;
 Waher.IoTGateway.Gateway.HttpServer.TryGetFileName("/neuro-foundation.io/HarmonizedEnumerations",false,FolderName);

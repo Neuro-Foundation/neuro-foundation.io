@@ -263,6 +263,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{1B3C851F-835
 		Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandAggregateInterfaceFolder.ws
 		Root\neuro-foundation.io\Api\ExpandEnumerationFolder.ws = Root\neuro-foundation.io\Api\ExpandEnumerationFolder.ws
 		Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws = Root\neuro-foundation.io\Api\ExpandInterfaceFolder.ws
+		Root\neuro-foundation.io\Api\ExpandNamespaceFolder.ws = Root\neuro-foundation.io\Api\ExpandNamespaceFolder.ws
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "directory", "directory", "{766B27A8-6F37-4B62-8A89-C6F27BC04241}"

@@ -3,6 +3,9 @@ Description: Main page of neuro-foundation.io
 Date: 2024-08-02
 Author: Peter Waher
 Master: Master.md
+JavaScript: /Controls/SimpleTree.js
+JavaScript: /Events.js
+CSS: /Controls/SimpleTree.cssx
 
 =============================================
 
@@ -98,30 +101,24 @@ Agreements
 * [Smart Contracts](/SmartContracts.md)
 * Automatic provisioning using smart contracts
 
-Schemas
--------------
+Schemas & Interfaces
+-----------------------
 
 All Neuro-Foundation namespaces are identified using the 
 [URN Namespace Identifier `nfi`](https://www.iana.org/assignments/urn-formal/nfi). Each
-interface namespace is defined in an XML Schema. You can access these schemas, by namespace
-below:
+interface namespace is defined in an XML Schema or XML interface file. You can access these schemas
+and interfaces, by namespace below:
 
-* [`urn:nfi:iot:concentrator:1.0`](Schemas/Concentrator.xsd) - Concentrators
-* [`urn:nfi:iot:ctr:1.0`](Schemas/Control.xsd) - Actuator Control
-* [`urn:nfi:iot:disco:1.0`](Schemas/Discovery.xsd) - Discovery
-* [`urn:nfi:iot:e2e:1.0`](Schemas/E2E.xsd) - End-to-End Encryption
-* [`urn:nfi:iot:events:1.0`](Schemas/EventSubscription.xsd) - Event subscription
-* [`urn:nfi:iot:geo:1.0`](Schemas/Geo.xsd) - Geo-spatial information
-* [`urn:nfi:iot:hi:1.0`](Schemas/HarmonizedInterfaces.xsd) - Harmonized Interfaces
-* [`urn:nfi:iot:leg:id:1.0`](Schemas/LegalIdentities.xsd) - Legal identities
-* [`urn:nfi:iot:leg:sc:1.0`](Schemas/SmartContracts.xsd) - Smart Contracts
-* [`urn:nfi:iot:p2p:1.0`](Schemas/P2P.xsd) - Peer-to-Peer Connectivity
-* [`urn:nfi:iot:prov:d:1.0`](Schemas/ProvisioningDevice.xsd) - Provisioning for Devices
-* [`urn:nfi:iot:prov:o:1.0`](Schemas/ProvisioningOwner.xsd) - Provisioning for Owners
-* [`urn:nfi:iot:prov:t:1.0`](Schemas/ProvisioningTokens.xsd) - Provisioning Tokens
-* [`urn:nfi:iot:sd:1.0`](Schemas/SensorData.xsd) - Sensor Data
-* [`urn:nfi:iot:swu:1.0`](Schemas/SoftwareUpdates.xsd) - Software Updates
-* [`urn:nfi:iot:synchronization:1.0`](Schemas/Synchronization.xsd) - Synchronization
+<ul class="SimpleTree">
+<li class="Expandable" onclick="ExpandNode(event,this)"
+    data-id="urn:nfi"
+    data-expand="Api/ExpandNamespaceFolder.ws"
+    data-collapsedimg="{{HtmlAttributeEncode(MarkdownToHtml(":file_folder:"))}}"
+    data-expandedimg="{{HtmlAttributeEncode(MarkdownToHtml(":open_file_folder:"))}}">
+    <span class="ItemImage">:file_folder:</span>
+    `urn:nfi` - Neuro-Foundation Interfaces
+    </li>
+</ul>
 
 
 Agent API
