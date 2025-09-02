@@ -97,7 +97,6 @@ Agreements
 
 * [Legal Identities](LegalIdentities.md)
 * [Smart Contracts](/SmartContracts.md)
-* Automatic provisioning using smart contracts
 
 Schemas & Interfaces
 -----------------------
