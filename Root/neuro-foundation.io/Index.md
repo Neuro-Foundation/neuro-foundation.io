@@ -64,8 +64,6 @@ Communication Patterns
 * [Sensor Data Publish/Subscribe communication pattern](SensorDataPublishSubscribe.md)
 * [Simple Control Actions](ControlSimpleActions.md)
 * [Data Form Control Actions](ControlDataForm.md)
-* Queues
-* Quality of Service
 
 
 Data Protection, Security and Privacy
