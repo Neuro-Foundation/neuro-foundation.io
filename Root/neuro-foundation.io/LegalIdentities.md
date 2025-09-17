@@ -96,8 +96,13 @@ Some names are predefined however, as described in the following table:
 | `REGION`      | Region, state                                                   |
 | `COUNTRY`     | Country                                                         |
 | `NATIONALITY` | Nationality                                                     |
+| `BDAY`        | Birth Day                                                       |
+| `BMONTH`      | Borth Month                                                     |
+| `BYEAR`       | Birth Year                                                      |
 | `GENDER`      | Gender (`M` or `F`)                                             |
 | `PHONE`       | Phone number, international phone number format.                |
+| `EMAIL`       | E-mail address.                                                 |
+| `JID`         | XMPP address (Jabber ID).                                       |
 | `DOMAIN`      | If the ID represents the legal representative of a domain.      |
 | `ORGNAME`     | Name of organization                                            |
 | `ORGNR`       | Organization number                                             |
