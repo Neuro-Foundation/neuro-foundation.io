@@ -85,6 +85,7 @@ Viewport: width=device-width,initial-scale=1
 * [More Information](#)
 	* [Papers](#)
 		* [IoT Harmonization using XMPP](/Papers/IoT%20Harmonization%20using%20XMPP.pdf)
+		* [Harmonized Web API for real-time data](/Papers/Harmonized%20Web%20API%20for%20real-time%20data.pdf)
 		* [Biotic - Executive Summary](/Papers/Biotic%20-%20Executive%20Summary.pdf)
 		* [Identity Architecture for Smart Societies](/Papers/Identity%20Architecture%20for%20Smart%20Societies.pdf)
 		* [Neuro-Ledger, Executive Summary](/Papers/Neuro-Ledger,%20Executive%20Summary.pdf)
