@@ -97,6 +97,8 @@ Viewport: width=device-width,initial-scale=1
 		* [Open Threat Intelligence using Neuro-Ledger](/Papers/Open%20Threat%20Intelligence%20using%20Neuro-Ledger.pdf)
 		* [Interoperability of Medical Records on the Neuro-Ledger](/Papers/Interoperability%20of%20Medical%20Records%20on%20the%20Neuro-Ledger.pdf)
 		* [Federated Clock Synchronization in IIoT](/Papers/Federated%20Clock%20Synchronization%20in%20IIoT.pdf)
+	* [Presentations](#)
+		* [Harmonized Web API for real-time data](/Presentations/Harmonized%20Web%20API%20for%20real-time%20data.pptx)
 	* [Books](#)
 		* [Mastering Internet of Things](https://www.packtpub.com/en-us/product/mastering-internet-of-things-9781788397483)
 		* [Learning Internet of Things](https://www.amazon.com/Learning-Internet-Things-Peter-Waher/dp/1783553537/)

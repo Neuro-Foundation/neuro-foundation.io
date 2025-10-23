@@ -214,6 +214,9 @@
 				<Content fileName="Smart Agriculture, Executive Summary.pdf"/>
 				<Content fileName="Tokenization of sustainable real estate in Smart Cities.pdf"/>
 			</Folder>
+			<Folder name="Presentations">
+				<Content fileName="Harmonized Web API for real-time data.pptx"/>
+			</Folder>
 			<Folder name="Partners">
 				<Folder name="LynxNode">
 					<Content fileName="Introduction.md"/>

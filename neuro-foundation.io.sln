@@ -301,6 +301,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "media", "media", "{D52F4B4F
 		Root\neuro-foundation.io\HarmonizedEnumerations\media\videoStreamFormat-1.0.xml = Root\neuro-foundation.io\HarmonizedEnumerations\media\videoStreamFormat-1.0.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentations", "Presentations", "{0B38C316-203E-4089-8A45-55A00DC88AD3}"
+	ProjectSection(SolutionItems) = preProject
+		Root\neuro-foundation.io\Presentations\Harmonized Web API for real-time data.pptx = Root\neuro-foundation.io\Presentations\Harmonized Web API for real-time data.pptx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -331,6 +336,7 @@ Global
 		{56E9DDF4-E32B-4E58-A83D-F06DC79F7EC7} = {1640F11D-7FFB-4E4B-A03E-BB04800E56CE}
 		{3CE4B177-0CC9-479E-8289-A39EC52A9FFE} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 		{D52F4B4F-AB02-4AFA-BDC9-1C7317B7E882} = {3CE4B177-0CC9-479E-8289-A39EC52A9FFE}
+		{0B38C316-203E-4089-8A45-55A00DC88AD3} = {FE17EE9B-9567-430E-8317-6B411D781F78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85931438-0417-4678-8D74-283B5E895901}
