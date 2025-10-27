@@ -104,6 +104,7 @@ Some names are predefined however, as described in the following table:
 | `EMAIL`       | E-mail address.                                                 |
 | `JID`         | XMPP address (Jabber ID).                                       |
 | `DOMAIN`      | If the ID represents the legal representative of a domain.      |
+| `PSEUDONYM`   | Lists which properties are pseudonymous. Comma-separated list.  |
 | `ORGNAME`     | Name of organization                                            |
 | `ORGNR`       | Organization number                                             |
 | `ORGDEPT`     | Organization department, where person works.                    |
@@ -254,6 +255,15 @@ Example:
    </identity>
 </iq>
 ```
+
+### Pseudonymous identities
+
+If is possible to create pseudonymous identities, in a transparent manner. To do so, the client 
+includes a property named `PSEUDONYM`, which contains a comma-separated list of property names
+which contain invented values. Such values will be ignored during automated identity approval
+processes (KyC), and clearly listed as pseudonymous. Pseudonymous identities may be excluded from
+certain types of services, depending on rules and regulations. Examples of such services may be
+payment services, or signing of legal smart contracts.
 
 Identity state changes
 ----------------------------
