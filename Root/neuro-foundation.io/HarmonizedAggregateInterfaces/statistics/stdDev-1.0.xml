@@ -8,8 +8,10 @@ In the case there are multiple fields in the base interface, all fields can be a
 in the aggregated interface as in the original base interface.]]></description>
 	<sensorData>
 		<field name="%0%, StdDev" use="Mandatory" c="true" type="base" description="Stadard Deviation value of `%0%` during period."/>
-		<field name="%0%, StdDev, Start" use="Optional" c="true" type="dt" description="Start of period."/>
-		<field name="%0%, StdDev, Stop" use="Optional" c="true" type="dt" description="Stop of period."/>
+		<field name="%0%, StdDev, Start" use="Optional" c="true" type="dt" description="Start of period for specific aggregate value."/>
+		<field name="%0%, StdDev, Stop" use="Optional" c="true" type="dt" description="Stop of period for specific aggregate value."/>
+		<field name="Period, Start" use="Optional" c="true" type="dt" description="Start of period, if same period applies to multiple aggregates."/>
+		<field name="Period, Stop" use="Optional" c="true" type="dt" description="Stop of period, if same period applies to multiple aggregates."/>
 		<comment><![CDATA[**Note**: In the table above, `%0%` represents the name of the corresponding field in the original base interface.
 
 Example: The field `Energy` is the integration over time of the field `Power` in the interface
