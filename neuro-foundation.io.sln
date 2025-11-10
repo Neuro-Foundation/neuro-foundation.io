@@ -285,6 +285,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "statistics", "statistics", 
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\history-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\history-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\max-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\max-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\mean-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\mean-1.0.xml
+		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\median-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\median-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\min-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\stdDev-1.0.xml
 		Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml = Root\neuro-foundation.io\HarmonizedAggregateInterfaces\statistics\sum-1.0.xml

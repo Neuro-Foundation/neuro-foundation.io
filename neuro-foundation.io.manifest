@@ -65,6 +65,7 @@
 					<Content fileName="history-1.0.xml"/>
 					<Content fileName="max-1.0.xml"/>
 					<Content fileName="mean-1.0.xml"/>
+					<Content fileName="median-1.0.xml"/>
 					<Content fileName="min-1.0.xml"/>
 					<Content fileName="stdDev-1.0.xml"/>
 					<Content fileName="sum-1.0.xml"/>
