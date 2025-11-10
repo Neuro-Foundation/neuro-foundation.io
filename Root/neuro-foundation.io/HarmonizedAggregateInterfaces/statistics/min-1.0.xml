@@ -7,11 +7,11 @@ two fields, one (the accumulated value) the integration over time of the other (
 In the case there are multiple fields in the base interface, all fields can be aggregated, maintaining the same usage (required/optional) 
 in the aggregated interface as in the original base interface.]]></description>
 	<sensorData>
-		<field name="%0%, Min" use="Mandatory" c="true" type="base" description="Minimum value of `%0%` during period."/>
-		<field name="%0%, Min, Start" use="Optional" c="true" type="dt" description="Start of period for specific aggregate value."/>
-		<field name="%0%, Min, Stop" use="Optional" c="true" type="dt" description="Stop of period for specific aggregate value."/>
-		<field name="Period, Start" use="Optional" c="true" type="dt" description="Start of period, if same period applies to multiple aggregates."/>
-		<field name="Period, Stop" use="Optional" c="true" type="dt" description="Stop of period, if same period applies to multiple aggregates."/>
+		<field name="%0%, Min" use="Mandatory" p="true" type="base" description="Minimum value of `%0%` during period."/>
+		<field name="%0%, Min, Start" use="Optional" p="true" type="dt" description="Start of period for specific aggregate value."/>
+		<field name="%0%, Min, Stop" use="Optional" p="true" type="dt" description="Stop of period for specific aggregate value."/>
+		<field name="Period, Start" use="Optional" p="true" type="dt" description="Start of period, if same period applies to multiple aggregates."/>
+		<field name="Period, Stop" use="Optional" p="true" type="dt" description="Stop of period, if same period applies to multiple aggregates."/>
 		<comment><![CDATA[**Note**: In the table above, `%0%` represents the name of the corresponding field in the original base interface.
 
 Example: The field `Energy` is the integration over time of the field `Power` in the interface
