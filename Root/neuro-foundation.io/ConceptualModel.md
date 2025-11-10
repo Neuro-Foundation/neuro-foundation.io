@@ -99,7 +99,10 @@ Source
 	depending on context. A Data source may optionally be divided into partitions. A
 	source is identified in a concentrator using a Source ID. Some data sources may have
 	specific purposes, such as the `MeteringTopology` source, which contains the topology
-	of metering devices and physical sensor networks.
+	of metering devices and physical sensor networks. Other data sources with specific
+	purposes includ `Groups` for logical grouping of nodes from other sources, `Jobs` for
+	executable jobs, `Processors` for in-memory processing of data, `Output` for data
+	storage or export, and `Reports` for report generation.
 
 	Sources may be organized into a tree structure of sources in a concentrator.
 
