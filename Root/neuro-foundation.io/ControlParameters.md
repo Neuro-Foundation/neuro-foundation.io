@@ -9,11 +9,12 @@ Master: Master.md
 Control Parameters
 ========================
 
-This document outlines the XML representation of control parameters. The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of control parameters. The XML representation is 
+modelled using an annotated XML Schema:
 
 | Control                                         ||
 | ------------|------------------------------------|
-| Namespace:  | `urn:nfi:iot:ctr:1.0`               |
+| Namespace:  | `urn:nfi:iot:ctr:1.0`              |
 | Schema:     | [Control.xsd](Schemas/Control.xsd) |
 
 ![Table of Contents](toc)
@@ -21,17 +22,39 @@ This document outlines the XML representation of control parameters. The XML rep
 Motivation and design goal
 ----------------------------
 
-The representation of control parameters in this document, is designed with the following goals in mind:
+The representation of control parameters in this document, is designed with the following 
+goals in mind:
 
-* The representation must be **loosely coupled** with the type of device and the data being represented. Loose coupling guarantees that
-infrastructure and software components do not need to be updated, by the introduction of new types of devices into the network.
+* The representation must be **loosely coupled** with the type of device and the data being 
+represented. Loose coupling guarantees that infrastructure and software components do not need 
+to be updated, by the introduction of new types of devices into the network.
 
-* Sufficient **meta-data** must be available, to be able to process the data in a generic sense and create both Machine-to-Machine (M2M) and 
-Human-to-Machine (H2M) interfaces automatically.
+* Sufficient **meta-data** must be available, to be able to process the data in a generic 
+sense and create both Machine-to-Machine (M2M) and Human-to-Machine (H2M) interfaces 
+automatically.
 
 * Quick atomic control actions should be possible.
 
 * Intelligible and intuitive human interfaces should be possible to define.
+
+
+Requirements
+---------------
+
+The Control namespace defines the following elements that can be sent in stanzas. The 
+following table list the elements, the type of stanza used, the entities that can or need to
+handle incoming stanzas containing the corresponding element, as well as implementation 
+requirements, if the namespace is present in the device's *Service Discovery* response 
+(XEP-0030). Elements associated with any response stanzas are assumed to be implemented by
+the entity making the corresponding request. Both the Control Client and Control Server 
+entities are XMPP clients. The Control namespace is primarily intended for connected clients.
+The broker is only involved in routing stanzas between control clients and control servers.
+
+| Namespace elements                                          |||||
+| Element   | Stanza Type | Control Client |     | Control Server |
+|:----------|:------------|:---------------|:---:|:---------------|
+| `set`     | `iq set`    |                | ==> | Required       |
+| `getForm` | `iq get`    |                | ==> | Required       |
 
 
 Conceptual model
