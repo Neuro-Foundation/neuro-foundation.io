@@ -38,6 +38,12 @@ symmetric cipher, which is then used to encrypt/decrypt the payload of the stanz
 that public/private key pair are affected.
 
 
+Requirements
+---------------
+
+![End-to-End Encryption Requirements](E2ERequirements.md)
+
+
 Hybrid Ciphers
 --------------------
 

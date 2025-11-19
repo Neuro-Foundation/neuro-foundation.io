@@ -33,6 +33,12 @@ presence subscription to learn how to connect to the device.
 * P2P communication is optional, and can be used where privacy or band-width concerns are such that P2P connections are warranted.
 
 
+Requirements
+---------------
+
+![Peer-to-Peer Communication Requirements](P2PRequirements.md)
+
+
 Registering with Internet Gateway
 --------------------------------------
 

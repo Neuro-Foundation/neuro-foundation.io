@@ -7,6 +7,7 @@
 			<Content fileName="Binding.md"/>
 			<Content fileName="ClockSynchronization.md"/>
 			<Content fileName="Concentrator.md"/>
+			<Content fileName="ConcentratorRequirements.md"/>
 			<Content fileName="CommunicationModel.md"/>
 			<Content fileName="ConceptualModel.md"/>
 			<Content fileName="ControlDataForm.md"/>
@@ -18,6 +19,7 @@
 			<Content fileName="DecisionSupportRequirements.md"/>
 			<Content fileName="Discovery.md"/>
 			<Content fileName="E2E.md"/>
+			<Content fileName="E2ERequirements.md"/>
 			<Content fileName="Federation.md"/>
 			<Content fileName="Geo.md"/>
 			<Content fileName="HarmonizedInterfaces.md"/>
@@ -32,6 +34,7 @@
 			<Content fileName="OperationalModel.md"/>
 			<Content fileName="Overview.md"/>
 			<Content fileName="P2P.md"/>
+			<Content fileName="P2PRequirements.md"/>
 			<Content fileName="Provisioning.md"/>
 			<Content fileName="ProvisioningRequirements.md"/>
 			<Content fileName="Requirements.md"/>
