@@ -136,8 +136,7 @@ also available. It maps HTTP requests to the Neuro-Foundation interface operatio
 limitations of the HTTP protocol, it does not have full support of features that do not 
 conform to the basic request-response pattern available in HTTP. 
 
-Software
------------
+### Software
 
 A list of software available implementing the interfaces defined on this site, is available in 
 the [Implementations page](Implementations.md). You can also review the 
