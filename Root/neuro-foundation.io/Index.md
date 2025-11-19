@@ -118,15 +118,28 @@ and interfaces, by namespace below:
 </ul>
 
 
-Agent API
------------
+Implementations
+------------------
 
-A simplified HTTP-based RESTful API called the [Agent API](/Documentation/Neuron/Agent.md) is also available. It maps HTTP requests to the 
-Neuro-Foundation interface operations. Due to limitations of the HTTP protocol, it does not have full support of features that do not conform to 
-the basic request-response pattern available in HTTP. 
+Following are some notes regarding implementations of the Neuro-Foundation interfaces.
+
+### Requirements
+
+In each article defining a namespace and its interfaces, requirements for implementation are 
+also defined. These requirements are also summarized in the [Requirements](Requirements.md)
+page for easier access.
+
+### Agent API
+
+A simplified HTTP-based RESTful API called the [Agent API](/Documentation/Neuron/Agent.md) is 
+also available. It maps HTTP requests to the Neuro-Foundation interface operations. Due to 
+limitations of the HTTP protocol, it does not have full support of features that do not 
+conform to the basic request-response pattern available in HTTP. 
 
 Software
 -----------
 
-A list of software available implementing the interfaces defined on this site, is available in the [Implementations page](Implementations.md).
-You can also review the [Implementation Guide](ImplementationGuide.md) if you plan on implementing the interfaces yourself.
+A list of software available implementing the interfaces defined on this site, is available in 
+the [Implementations page](Implementations.md). You can also review the 
+[Implementation Guide](ImplementationGuide.md) if you plan on implementing the interfaces 
+yourself.
