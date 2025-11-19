@@ -15,98 +15,83 @@ they are described.
 
 ![Table of Contents](toc)
 
+Client <--> Client Interfaces
+--------------------------------
 
-Sensor Data
---------------
+Following requirements apply to interfaces between XMPP clients.
+
+### Sensor Data
 
 ![Sensor Data Requirements](SensorDataRequirements.md)
 
-
-Event Subscription
----------------------
+### Event Subscription
 
 ![Sensor Data Event Subscription Requirements](SensorDataEventSubscriptionRequirements.md)
 
-
-Actuator Control
--------------------
+### Actuator Control
 
 ![Control Parameters Requirements](ControlParametersRequirements.md)
 
-
-Harmonized Interfaces
-------------------------
+### Harmonized Interfaces
 
 ![Harmonized Interface Requirements](HarmonizedInterfacesRequirements.md)
 
-
-Tokens for distributed transactions
---------------------------------------
-
-![Tokens Requirements](TokensRequirements.md)
-
-
-Decision Support
--------------------
-
-![Decision Support Requirements](DecisionSupportRequirements.md)
-
-
-Provisioning for Owners
---------------------------
-
-![Provisioning Requirements](ProvisioningRequirements.md)
-
-
-Peer-to-Peer Communication
------------------------------
+### Peer-to-Peer Communication
 
 ![Peer-to-Peer Communication Requirements](P2PRequirements.md)
 
-
-End-to-End Encryption
-------------------------
+### End-to-End Encryption
 
 ![End-to-End Encryption Requirements](E2ERequirements.md)
 
-
-Concentrators
-----------------
+### Concentrators
 
 ![Concentrator Requirements](ConcentratorRequirements.md)
 
+Client <--> Broker Interfaces
+--------------------------------
 
-Discovery
-----------------
+Following requirements apply to interfaces between XMPP clients and XMPP brokers or 
+components.
+
+### Tokens for distributed transactions
+
+![Tokens Requirements](TokensRequirements.md)
+
+### Decision Support
+
+![Decision Support Requirements](DecisionSupportRequirements.md)
+
+### Provisioning for Owners
+
+![Provisioning Requirements](ProvisioningRequirements.md)
+
+### Discovery
 
 ![Discovery Requirements](DiscoveryRequirements.md)
 
-
-Clock Synchronization
-------------------------
-
-![Clock Synchronization Requirements](ClockSynchronizationRequirements.md)
-
-
-Software Updates
--------------------
+### Software Updates
 
 ![Software Updates Requirements](SoftwareUpdatesRequirements.md)
 
-
-Real-time Geo-spatial information
-------------------------------------
+### Real-time Geo-spatial information
 
 ![Real-time Geo-spatial information Requirements](GeoRequirements.md)
 
-
-Legal Identities
--------------------
+### Legal Identities
 
 ![Legal Identities Requirements](LegalIdentitiesRequirements.md)
 
-
-Smart Contracts
-------------------
+### Smart Contracts
 
 ![Smart Contracts Requirements](SmartContractsRequirements.md)
+
+Mixed Interfaces
+-------------------
+
+Following requirements apply to interfaces that may be between any connected XMPP entities,
+being clients, brokers or components.
+
+### Clock Synchronization
+
+![Clock Synchronization Requirements](ClockSynchronizationRequirements.md)
