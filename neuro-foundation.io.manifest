@@ -18,6 +18,7 @@
 			<Content fileName="DecisionSupport.md"/>
 			<Content fileName="DecisionSupportRequirements.md"/>
 			<Content fileName="Discovery.md"/>
+			<Content fileName="DiscoveryRequirements.md"/>
 			<Content fileName="E2E.md"/>
 			<Content fileName="E2ERequirements.md"/>
 			<Content fileName="Federation.md"/>

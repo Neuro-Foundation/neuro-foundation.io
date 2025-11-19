@@ -68,3 +68,9 @@ Concentrators
 ----------------
 
 ![Concentrator Requirements](ConcentratorRequirements.md)]
+
+
+Discovery
+----------------
+
+![Discovery Requirements](DiscoveryRequirements.md)]
