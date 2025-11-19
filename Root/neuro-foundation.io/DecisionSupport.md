@@ -43,6 +43,13 @@ decision support.
 
 * Decisions should be possible to base on any of available [identities](Identities.md): network identity, domain identity, user, service or device identity.
 
+
+Requirements
+---------------
+
+![Decision Support Requirements](DecisionSupportRequirements.md)
+
+
 Checking friendships
 --------------------------
 

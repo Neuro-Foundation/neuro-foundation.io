@@ -15,6 +15,7 @@
 			<Content fileName="ControlSimpleActions.md"/>
 			<Content fileName="Copyright.md"/>
 			<Content fileName="DecisionSupport.md"/>
+			<Content fileName="DecisionSupportRequirements.md"/>
 			<Content fileName="Discovery.md"/>
 			<Content fileName="E2E.md"/>
 			<Content fileName="Federation.md"/>

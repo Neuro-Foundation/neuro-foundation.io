@@ -15,22 +15,32 @@ they are described.
 
 ![Table of Contents](toc)
 
+
 Sensors
 ----------
 
 ![Sensor Data Requirements](SensorDataRequirements.md)
+
 
 Actuators
 ------------
 
 ![Control Parameters Requirements](ControlParametersRequirements.md)
 
+
 Harmonized Interfaces
 ------------------------
 
 ![Harmonized Interface Requirements](HarmonizedInterfacesRequirements.md)
 
+
 Tokens for distributed transactions
 --------------------------------------
 
 ![Tokens Requirements](TokensRequirements.md)
+
+
+Decision Support
+-------------------
+
+![Decision Support Requirements](DecisionSupportRequirements.md)
