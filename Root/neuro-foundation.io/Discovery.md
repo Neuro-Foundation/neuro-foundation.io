@@ -46,7 +46,7 @@ The discovery feature described in this document, is designed with the following
 * It must be possible to search for public devices in the registry by third parties, using available meta-data to limit the result set to suitable devices.
 * Links to single devices, or sets of devices, must be easy to share, via URIs.
 
-* 
+
 Requirements
 ---------------
 

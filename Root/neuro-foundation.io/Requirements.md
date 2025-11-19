@@ -67,10 +67,10 @@ End-to-End Encryption
 Concentrators
 ----------------
 
-![Concentrator Requirements](ConcentratorRequirements.md)]
+![Concentrator Requirements](ConcentratorRequirements.md)
 
 
 Discovery
 ----------------
 
-![Discovery Requirements](DiscoveryRequirements.md)]
+![Discovery Requirements](DiscoveryRequirements.md)
