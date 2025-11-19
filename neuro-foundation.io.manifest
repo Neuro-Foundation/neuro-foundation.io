@@ -32,6 +32,7 @@
 			<Content fileName="Implementations.md"/>
 			<Content fileName="Index.md"/>
 			<Content fileName="LegalIdentities.md"/>
+			<Content fileName="LegalIdentitiesRequirements.md"/>
 			<Content fileName="Master.md"/>
 			<Content fileName="NeuroFoundationStyles.cssx"/>
 			<Content fileName="OperationalModel.md"/>

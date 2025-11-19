@@ -98,3 +98,9 @@ Real-time Geo-spatial information
 ------------------------------------
 
 ![Real-time Geo-spatial information Requirements](GeoRequirements.md)
+
+
+Legal Identities requirements
+--------------------------------
+
+![Legal Identities Requirements](LegalIdentitiesRequirements.md)

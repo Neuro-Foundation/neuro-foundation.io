@@ -40,6 +40,13 @@ the broker to sign that it attests to the validity of a claim, such as the integ
 
 * Legal Identities can have a variable number of signed attachments associated with it.
 
+
+Requirements
+---------------
+
+![Legal Identities Requirements](LegalIdentitiesRequirements.md)
+
+
 Getting Server Public Key
 ------------------------------
 
