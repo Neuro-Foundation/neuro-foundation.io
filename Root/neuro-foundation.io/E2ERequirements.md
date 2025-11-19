@@ -15,6 +15,6 @@ stanzas between peers.
 | `aes`      | Any         | ==>           | Required^1    |
 | `cha`      | Any         | ==>           | Required^1    |
 | `acp`      | Any         | ==>           | Required^1    |
-| `synchE2e` | `iq set`    | ==>           | Required^1    |
+| `synchE2e` | `iq set`    | ==>           | Required      |
 
 1. Required, if the `e2e` presence element is available in the client's online presence.
