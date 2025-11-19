@@ -10,6 +10,6 @@ broker is only involved in routing stanzas between control clients and control s
 
 | Namespace elements                                     ||||
 | Element   | Stanza Type | Control Client | Control Server |
-|:----------|:------------|:---------------|:---------------|
-| `set`     | `iq set`    |>> ==>        <<| Required       |
-| `getForm` | `iq get`    |>> ==>        <<| Required       |
+|:----------|:-----------:|:--------------:|:--------------:|
+| `set`     | `iq set`    | ==>            | Required       |
+| `getForm` | `iq get`    | ==>            | Required       |

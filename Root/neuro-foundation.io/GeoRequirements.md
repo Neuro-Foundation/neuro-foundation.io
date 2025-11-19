@@ -7,18 +7,18 @@ associated with any response stanzas are assumed to be implemented by the entity
 corresponding request. The Client making the requests is assumed to be an XMPP Client, and the 
 Service Component an XMPP Component.
 
-| Namespace elements                                              ||||
+| Namespace elements                                               ||||
 | Element              | Stanza Type | Client     | Service Component |
-|:---------------------|:------------|:-----------|:------------------|
-| `subscribe`          | `iq set`    |>> ==>    <<| Required          |
+|:---------------------|:-----------:|:----------:|:-----------------:|
+| `subscribe`          | `iq set`    | ==>        | Required          |
 | `subscribed`         | `iq result` | Required   |<< <==           >>|
-| `unsubscribe`        | `iq set`    |>> ==>    <<| Required          |
+| `unsubscribe`        | `iq set`    | ==>        | Required          |
 | `unsubscribed`       | `iq result` | Required   |<< <==           >>|
-| `publish`            | `iq set`    |>> ==>    <<| Required          |
+| `publish`            | `iq set`    | ==>        | Required          |
 | `published`          | `iq result` | Required   |<< <==           >>|
-| `delete`             | `iq set`    |>> ==>    <<| Required          |
+| `delete`             | `iq set`    | ==>        | Required          |
 | `deleted`            | `iq result` | Required   |<< <==           >>|
-| `search`             | `iq get`    |>> ==>    <<| Required          |
+| `search`             | `iq get`    | ==>        | Required          |
 | `references`         | `iq result` | Required   |<< <==           >>|
 | `added`              | `message`   | Required   |<< <==           >>|
 | `updated`            | `message`   | Required   |<< <==           >>|

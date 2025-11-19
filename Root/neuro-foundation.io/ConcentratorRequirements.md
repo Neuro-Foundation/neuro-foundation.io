@@ -9,9 +9,9 @@ Server entities are XMPP clients. The Concentrator namespace is primarily intend
 connected clients. The broker is only involved in routing stanzas between concentrator 
 clients and concentrator servers.
 
-| Namespace elements                                                                            |||||
+| Namespace elements                                                                             |||||
 | Element                            | Stanza Type | Concentrator Client |     | Concentrator Server |
-|:-----------------------------------|:------------|:--------------------|:---:|:--------------------|
+|:-----------------------------------|:-----------:|:-------------------:|:---:|:-------------------:|
 | `getCapabilities`                  | `iq get`    |                     | ==> | Required            |
 | `getAllDataSources`                | `iq get`    |                     | ==> | Optional^1          |
 | `getRootDataSources`               | `iq get`    |                     | ==> | Optional^1          |

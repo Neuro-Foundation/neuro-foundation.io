@@ -12,6 +12,6 @@ servers.
 
 | Namespace elements                                       ||||
 | Element       | Stanza Type | Sensor Client | Sensor Server |
-|:--------------|:------------|:--------------|:--------------|
-| `subscribe`   | `iq set`    |>> ==>       <<| Required      |
-| `unsubscribe` | `iq set`    |>> ==>       <<| Required      |
+|:--------------|:-----------:|:-------------:|:-------------:|
+| `subscribe`   | `iq set`    | ==>           | Required      |
+| `unsubscribe` | `iq set`    | ==>           | Required      |

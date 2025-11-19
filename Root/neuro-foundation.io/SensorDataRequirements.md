@@ -10,15 +10,15 @@ only involved in routing stanzas between sensor clients and sensor servers.
 
 | Namespace elements                                    ||||
 | Element    | Stanza Type | Sensor Client | Sensor Server |
-|:-----------|:------------|:--------------|:--------------|
-| `req`      | `iq get`    |>> ==>       <<| Required      |
-| `accepted` | `iq result` | Required^1    |>> <==       <<|
-| `started`  | `iq result` | Required^2    |>> <==       <<|
-|            | `message`   | Required^3    |>> <==       <<|
-| `resp`     | `iq result` | Required^4    |>> <==       <<|
-|            | `message`   | Required^5    |>> <==       <<|
-| `cancel`   | `iq set`    |>> ==>       <<| Required      |
-| `done`     | `message`   | Required^6    |>> <==       <<|
+|:-----------|:-----------:|:-------------:|:-------------:|
+| `req`      | `iq get`    | ==>           | Required      |
+| `accepted` | `iq result` | Required^1    | <==           |
+| `started`  | `iq result` | Required^2    | <==           |
+|            | `message`   | Required^3    | <==           |
+| `resp`     | `iq result` | Required^4    | <==           |
+|            | `message`   | Required^5    | <==           |
+| `cancel`   | `iq set`    | ==>           | Required      |
+| `done`     | `message`   | Required^6    | <==           |
 
 1. A sensor server can choose to start readout at a later time, and returning the `accepted`
 element in the response, to let the client know the request has been received and been 

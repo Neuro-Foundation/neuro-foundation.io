@@ -11,5 +11,5 @@ is only involved in routing stanzas between entity clients.
 
 | Namespace elements                                         ||||
 | Element         | Stanza Type | Entity Client | Entity Server |
-|:----------------|:------------|:--------------|:--------------|
-| `getInterfaces` | `iq get`    |>> ==>       <<| Required      |
+|:----------------|:-----------:|:-------------:|:-------------:|
+| `getInterfaces` | `iq get`    | ==>           | Required      |

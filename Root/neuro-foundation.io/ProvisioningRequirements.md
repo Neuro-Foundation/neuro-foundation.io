@@ -10,13 +10,13 @@ client is connected to.
 
 | Namespace elements                                               ||||
 | Element              | Stanza Type | Client     | Service Component |
-|:---------------------|:------------|:-----------|:------------------|
-| `isFriend`           | `message`   | Required   |>> <==           <<|
-| `isFriendRule`       | `message`   |>> ==>    <<| Required          |
-| `canRead`            | `message`   | Required   |>> <==           <<|
-| `canReadResponse`    | `message`   |>> ==>    <<| Required          |
-| `canControl`         | `message`   | Required   |>> <==           <<|
-| `canControlResponse` | `message`   |>> ==>    <<| Required          |
-| `clearCache`         | `message`   |>> ==>    <<| Required          |
-| `getDevices`         | `iq get`    |>> ==>    <<| Required          |
-| `deleteRules`        | `iq set`    |>> ==>    <<| Required          |
+|:---------------------|:-----------:|:----------:|:-----------------:|
+| `isFriend`           | `message`   | Required   | <==               |
+| `isFriendRule`       | `message`   | ==>        | Required          |
+| `canRead`            | `message`   | Required   | <==               |
+| `canReadResponse`    | `message`   | ==>        | Required          |
+| `canControl`         | `message`   | Required   | <==               |
+| `canControlResponse` | `message`   | ==>        | Required          |
+| `clearCache`         | `message`   | ==>        | Required          |
+| `getDevices`         | `iq get`    | ==>        | Required          |
+| `deleteRules`        | `iq set`    | ==>        | Required          |

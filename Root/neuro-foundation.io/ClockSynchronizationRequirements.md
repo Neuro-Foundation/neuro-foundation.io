@@ -9,8 +9,8 @@ making the corresponding request. Entities can be XMPP clients, components or br
 
 | Namespace elements                                      ||||
 | Element      | Stanza Type | Entity        | Entity        |
-|:-------------|:------------|:--------------|:--------------|
-| `req`        | `iq get`    |>> ==>       <<| Required      |
-| `resp`       | `iq result` | Required      |>> <==       <<|
-| `sourceReq`  | `iq get`    |>> ==>       <<| Required      |
-| `sourceResp` | `iq result` | Required      |>> <==       <<|
+|:-------------|:-----------:|:-------------:|:-------------:|
+| `req`        | `iq get`    | ==>           | Required      |
+| `resp`       | `iq result` | Required      | <==           |
+| `sourceReq`  | `iq get`    | ==>           | Required      |
+| `sourceResp` | `iq result` | Required      | <==           |

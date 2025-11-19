@@ -10,13 +10,13 @@ client is connected to.
 
 | Namespace elements                                              ||||
 | Element              | Stanza Type | Client     | Service Component |
-|:---------------------|:------------|:-----------|:------------------|
-| `isFriend`           | `iq get`    |>> ==>    <<| Required          |
-| `isFriendResponse`   | `iq result` | Required   |>> <==           <<|
-| `canRead`            | `iq get`    |>> ==>    <<| Required          |
-| `canReadResponse`    | `iq result` | Required   |>> <==           <<|
-| `canControl`         | `iq get`    |>> ==>    <<| Required          |
-| `canControlResponse` | `iq result` | Required   |>> <==           <<|
-| `clearCache`         | `iq set`    | Required   |>> <==           <<|
-| `unfriend`           | `message`   | Optional   |>> <==           <<|
-| `friend`             | `message`   | Optional   |>> <==           <<|
+|:---------------------|:-----------:|:----------:|:-----------------:|
+| `isFriend`           | `iq get`    | ==>        | Required          |
+| `isFriendResponse`   | `iq result` | Required   | <==               |
+| `canRead`            | `iq get`    | ==>        | Required          |
+| `canReadResponse`    | `iq result` | Required   | <==               |
+| `canControl`         | `iq get`    | ==>        | Required          |
+| `canControlResponse` | `iq result` | Required   | <==               |
+| `clearCache`         | `iq set`    | Required   | <==               |
+| `unfriend`           | `message`   | Optional   | <==               |
+| `friend`             | `message`   | Optional   | <==               |

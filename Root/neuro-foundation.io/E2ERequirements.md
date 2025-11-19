@@ -10,9 +10,9 @@ stanzas between peers.
 
 | Namespace elements                                    ||||
 | Element    | Stanza Type | Peer          | Peer          |
-|:-----------|:------------|:--------------|:--------------|
-| `e2e`      | `presence`  |>> ==>       <<| Optional      |
-| `aes`      | Any         |>> ==>       <<| Required      |
-| `cha`      | Any         |>> ==>       <<| Required      |
-| `acp`      | Any         |>> ==>       <<| Required      |
-| `synchE2e` | `iq set`    |>> ==>       <<| Required      |
+|:-----------|:-----------:|:-------------:|:-------------:|
+| `e2e`      | `presence`  | ==>           | Optional      |
+| `aes`      | Any         | ==>           | Required      |
+| `cha`      | Any         | ==>           | Required      |
+| `acp`      | Any         | ==>           | Required      |
+| `synchE2e` | `iq set`    | ==>           | Required      |

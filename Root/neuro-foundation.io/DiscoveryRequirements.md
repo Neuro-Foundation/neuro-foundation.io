@@ -11,15 +11,15 @@ connected to (depends on element).
 
 | Namespace elements                                               ||||
 | Element              | Stanza Type | Client     | Service Component |
-|:---------------------|:------------|:-----------|:------------------|
-| `register`           | `iq set`    |>> ==>    <<| Required          |
-| `mine`               | `iq set`    |>> ==>    <<| Required          |
-| `update`             | `iq set`    |>> ==>    <<| Required          |
-| `claimed`            | `iq set`    | Required   |>> <==           <<|
-| `remove`             | `iq set`    |>> ==>    <<| Required          |
-| `removed`            | `iq set`    | Required   |>> <==           <<|
-| `unregister`         | `iq set`    |>> ==>    <<| Required          |
-| `disown`             | `iq set`    |>> ==>    <<| Required          |
-| `disowned`           | `iq set`    | Required   |>> <==           <<|
-| `search`             | `iq get`    |>> ==>    <<| Required          |
-| `found`              | `iq result` | Required   |>> <==           <<|
+|:---------------------|:-----------:|:----------:|:-----------------:|
+| `register`           | `iq set`    | ==>        | Required          |
+| `mine`               | `iq set`    | ==>        | Required          |
+| `update`             | `iq set`    | ==>        | Required          |
+| `claimed`            | `iq set`    | Required   | <==               |
+| `remove`             | `iq set`    | ==>        | Required          |
+| `removed`            | `iq set`    | Required   | <==               |
+| `unregister`         | `iq set`    | ==>        | Required          |
+| `disown`             | `iq set`    | ==>        | Required          |
+| `disowned`           | `iq set`    | Required   | <==               |
+| `search`             | `iq get`    | ==>        | Required          |
+| `found`              | `iq result` | Required   | <==               |

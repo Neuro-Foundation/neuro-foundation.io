@@ -11,12 +11,12 @@ client, component or broker.
 
 | Namespace elements                                                              |||||
 | Element                     | Stanza Type | Client   | Service Component | Entity   |
-|:----------------------------|:------------|:---------|:------------------|:---------|
-| `getToken`                  | `iq get`    |>> ==>  <<| Required          |          |
-| `getTokenChallenge`         | `iq result` | Required |>> <==           <<|          |
-| `getTokenChallengeResponse` | `iq get`    |>> ==>  <<| Required          |          |
-| `getTokenResponse`          | `iq result` | Required |>> <==           <<|          |
-| `getCertificate`            | `iq get`    |          | Required          |>> <==  <<|
-| `certificate`               | `iq result` |          |>> ==>           <<| Required |
-| `tokenChallenge`            | `iq get`    | Required |                   |>> <==  <<|
-| `tokenChallengeResponse`    | `iq result` |>> ==>  <<|                   | Required |
+|:----------------------------|:-----------:|:--------:|:-----------------:|:--------:|
+| `getToken`                  | `iq get`    | ==>      | Required          |          |
+| `getTokenChallenge`         | `iq result` | Required | <==               |          |
+| `getTokenChallengeResponse` | `iq get`    | ==>      | Required          |          |
+| `getTokenResponse`          | `iq result` | Required | <==               |          |
+| `getCertificate`            | `iq get`    |          | Required          | <==      |
+| `certificate`               | `iq result` |          | ==>               | Required |
+| `tokenChallenge`            | `iq get`    | Required |                   | <==      |
+| `tokenChallengeResponse`    | `iq result` | ==>      |                   | Required |

@@ -10,5 +10,5 @@ stanzas between peers.
 
 | Namespace elements                                    ||||
 | Element    | Stanza Type | Peer          | Peer          |
-|:-----------|:------------|:--------------|:--------------|
-| `p2p`      | `presence`  |>> ==>       <<| Optional      |
+|:-----------|:-----------:|:-------------:|:-------------:|
+| `p2p`      | `presence`  | ==>           | Optional      |
