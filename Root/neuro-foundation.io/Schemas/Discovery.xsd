@@ -104,7 +104,7 @@
 
 	<xs:element name='claimed'>
 		<xs:annotation>
-			<xs:documentation>Element sent to device in asynchronous message, and to owner in iq response, when it has been successfully claimed.</xs:documentation>
+			<xs:documentation>Element sent to device in asynchronous message, and to owner in an iq result, when it has been successfully claimed.</xs:documentation>
 			<xs:documentation>The address contains the address of the other party, i.e. the address of the owner, when sent to the device, and the address of the device, when sent to the owner.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
