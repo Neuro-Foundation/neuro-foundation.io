@@ -44,6 +44,7 @@
 			<Content fileName="SensorData.md"/>
 			<Content fileName="SensorDataRequirements.md"/>
 			<Content fileName="SensorDataEventSubscription.md"/>
+			<Content fileName="SensorDataEventSubscriptionRequirements.md"/>
 			<Content fileName="SensorDataPublishSubscribe.md"/>
 			<Content fileName="SensorDataRequestResponse.md"/>
 			<Content fileName="SmartContracts.md"/>
