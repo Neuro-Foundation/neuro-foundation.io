@@ -24,6 +24,7 @@
 			<Content fileName="E2ERequirements.md"/>
 			<Content fileName="Federation.md"/>
 			<Content fileName="Geo.md"/>
+			<Content fileName="GeoRequirements.md"/>
 			<Content fileName="HarmonizedInterfaces.md"/>
 			<Content fileName="HarmonizedInterfacesRequirements.md"/>
 			<Content fileName="Identities.md"/>

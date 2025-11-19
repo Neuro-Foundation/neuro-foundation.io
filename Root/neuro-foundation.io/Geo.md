@@ -53,6 +53,13 @@ or maximum sizes of bounding boxes.
 * The geo-spatial edge service is provided by a component on the broker, and identifies using
 Service-Discovery.
 
+
+Requirements
+---------------
+
+![Real-time Geo-spatial information Requirements](GeoRequirements.md)
+
+
 Subscriptions
 ----------------
 

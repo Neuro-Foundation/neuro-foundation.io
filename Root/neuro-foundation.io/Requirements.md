@@ -86,3 +86,9 @@ Software Updates
 -------------------
 
 ![Software Updates Requirements](SoftwareUpdatesRequirements.md)
+
+
+Real-time Geo-spatial information
+------------------------------------
+
+![Real-time Geo-spatial information Requirements](GeoRequirements.md)
