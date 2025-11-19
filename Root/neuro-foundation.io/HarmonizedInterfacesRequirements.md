@@ -9,7 +9,7 @@ corresponding request. Both the Client Entity and Server Entity entities are XMP
 The harmonized interfaces namespace is primarily intended for connected clients. The broker 
 is only involved in routing stanzas between entity clients.
 
-| Namespace elements                                              |||||
-| Element         | Stanza Type | Entity Client |     | Entity Server |
-|:----------------|:------------|:--------------|:---:|:--------------|
-| `getInterfaces` | `iq get`    |               | ==> | Required      |
+| Namespace elements                                         ||||
+| Element         | Stanza Type | Entity Client | Entity Server |
+|:----------------|:------------|:--------------|:--------------|
+| `getInterfaces` | `iq get`    |>> ==>       <<| Required      |

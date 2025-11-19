@@ -8,8 +8,8 @@ entity making the corresponding request. Both the Control Client and Control Ser
 are XMPP clients. The Control namespace is primarily intended for connected clients. The 
 broker is only involved in routing stanzas between control clients and control servers.
 
-| Namespace elements                                          |||||
-| Element   | Stanza Type | Control Client |     | Control Server |
-|:----------|:------------|:---------------|:---:|:---------------|
-| `set`     | `iq set`    |                | ==> | Required       |
-| `getForm` | `iq get`    |                | ==> | Required       |
+| Namespace elements                                     ||||
+| Element   | Stanza Type | Control Client | Control Server |
+|:----------|:------------|:---------------|:---------------|
+| `set`     | `iq set`    |>> ==>        <<| Required       |
+| `getForm` | `iq get`    |>> ==>        <<| Required       |

@@ -9,14 +9,14 @@ a token is assumed to be an XMPP Client, and the Service Component an XMPP Compo
 broker the client is connected to. Third party entities can be any connected XMPP entity, a
 client, component or broker.
 
-| Namespace elements                                                                        |||||||
-| Element                     | Stanza Type | Client   |     | Service Component |     | Entity   |
-|:----------------------------|:------------|:---------|:---:|:------------------|:---:|:---------|
-| `getToken`                  | `iq get`    |          | ==> | Required          |               ||
-| `getTokenChallenge`         | `iq result` | Required | <== |                   |               ||
-| `getTokenChallengeResponse` | `iq get`    |          | ==> | Required          |               ||
-| `getTokenResponse`          | `iq result` | Required | <== |                   |               ||
-| `getCertificate`            | `iq get`    |               || Required          | <== |          |
-| `certificate`               | `iq result` |               ||                   | ==> | Required |
-| `tokenChallenge`            | `iq get`    | Required | <==                                   ||||
-| `tokenChallengeResponse`    | `iq result` |          | ==>                         ||| Required |
+| Namespace elements                                                              |||||
+| Element                     | Stanza Type | Client   | Service Component | Entity   |
+|:----------------------------|:------------|:---------|:------------------|:---------|
+| `getToken`                  | `iq get`    |>> ==>  <<| Required          |          |
+| `getTokenChallenge`         | `iq result` | Required |>> <==           <<|          |
+| `getTokenChallengeResponse` | `iq get`    |>> ==>  <<| Required          |          |
+| `getTokenResponse`          | `iq result` | Required |>> <==           <<|          |
+| `getCertificate`            | `iq get`    |          | Required          |>> <==  <<|
+| `certificate`               | `iq result` |          |>> ==>           <<| Required |
+| `tokenChallenge`            | `iq get`    | Required |                   |>> <==  <<|
+| `tokenChallengeResponse`    | `iq result` |>> ==>  <<|                   | Required |
