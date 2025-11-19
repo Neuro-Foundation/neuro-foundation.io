@@ -61,6 +61,13 @@ be purged from the corresponding domains.
 
 * Contracts can have a variable number of signed attachments associated with it.
 
+
+Requirements
+---------------
+
+![Smart Contracts Requirements](SmartContractsRequirements.md)
+
+
 Contract structure
 -----------------------
 

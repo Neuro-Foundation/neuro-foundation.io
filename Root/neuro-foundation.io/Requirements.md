@@ -100,7 +100,13 @@ Real-time Geo-spatial information
 ![Real-time Geo-spatial information Requirements](GeoRequirements.md)
 
 
-Legal Identities requirements
---------------------------------
+Legal Identities
+-------------------
 
 ![Legal Identities Requirements](LegalIdentitiesRequirements.md)
+
+
+Smart Contracts
+------------------
+
+![Smart Contracts Requirements](SmartContractsRequirements.md)
