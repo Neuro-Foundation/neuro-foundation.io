@@ -56,6 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neur
 		Root\neuro-foundation.io\Requirements.md = Root\neuro-foundation.io\Requirements.md
 		Root\neuro-foundation.io\SensorData.md = Root\neuro-foundation.io\SensorData.md
 		Root\neuro-foundation.io\SensorDataEventSubscription.md = Root\neuro-foundation.io\SensorDataEventSubscription.md
+		Root\neuro-foundation.io\SensorDataEventSubscriptionRequirements.md = Root\neuro-foundation.io\SensorDataEventSubscriptionRequirements.md
 		Root\neuro-foundation.io\SensorDataPublishSubscribe.md = Root\neuro-foundation.io\SensorDataPublishSubscribe.md
 		Root\neuro-foundation.io\SensorDataRequestResponse.md = Root\neuro-foundation.io\SensorDataRequestResponse.md
 		Root\neuro-foundation.io\SensorDataRequirements.md = Root\neuro-foundation.io\SensorDataRequirements.md

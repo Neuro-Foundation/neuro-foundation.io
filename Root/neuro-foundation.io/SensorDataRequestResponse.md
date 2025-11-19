@@ -31,6 +31,11 @@ The request/response pattern for sensor data described in this document, is desi
 * Pattern should support secure distributed transactions.
 * Pattern should support limitation of requests.
 
+Requirements
+---------------
+
+![Sensor Data Requirements](SensorDataRequirements.md)
+
 Building the request
 -------------------------
 

@@ -16,14 +16,20 @@ they are described.
 ![Table of Contents](toc)
 
 
-Sensors
-----------
+Sensor Data
+--------------
 
 ![Sensor Data Requirements](SensorDataRequirements.md)
 
 
-Actuators
-------------
+Event Subscription
+---------------------
+
+![Sensor Data Event Subscription Requirements](SensorDataEventSubscriptionRequirements.md)
+
+
+Actuator Control
+-------------------
 
 ![Control Parameters Requirements](ControlParametersRequirements.md)
 

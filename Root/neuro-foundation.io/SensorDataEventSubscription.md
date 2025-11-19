@@ -31,6 +31,11 @@ The event subscription pattern for sensor data described in this document, is de
 * Pattern should allow client to specify when events should be triggered.
 * Pattern should avoid complex semantics in setting up trigger rules.
 
+Requirements
+---------------
+
+![Sensor Data Event Subscription Requirements](SensorDataEventSubscriptionRequirements.md)
+
 
 Building the subscription request
 ---------------------------------------
