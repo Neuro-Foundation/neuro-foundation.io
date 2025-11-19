@@ -6,6 +6,7 @@
 			<Content fileName="Authorization.md"/>
 			<Content fileName="Binding.md"/>
 			<Content fileName="ClockSynchronization.md"/>
+			<Content fileName="ClockSynchronizationRequirements.md"/>
 			<Content fileName="Concentrator.md"/>
 			<Content fileName="ConcentratorRequirements.md"/>
 			<Content fileName="CommunicationModel.md"/>
@@ -46,6 +47,7 @@
 			<Content fileName="SensorDataRequestResponse.md"/>
 			<Content fileName="SmartContracts.md"/>
 			<Content fileName="SoftwareUpdates.md"/>
+			<Content fileName="SoftwareUpdatesRequirements.md"/>
 			<Content fileName="Tokens.md"/>
 			<Content fileName="TokensRequirements.md"/>
 			<Content fileName="TransportEncryption.md"/>

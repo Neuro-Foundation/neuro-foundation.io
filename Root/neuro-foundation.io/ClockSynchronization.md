@@ -35,6 +35,12 @@ to a relative high degree of accuracy.
 * The method should allow for varying latency between different nodes in the network.
 
 
+Requirements
+---------------
+
+![Clock Synchronization Requirements](ClockSynchronizationRequirements.md)
+
+
 Process
 ------------------------
 

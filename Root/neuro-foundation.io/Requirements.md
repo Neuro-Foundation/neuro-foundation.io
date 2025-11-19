@@ -74,3 +74,15 @@ Discovery
 ----------------
 
 ![Discovery Requirements](DiscoveryRequirements.md)
+
+
+Clock Synchronization
+------------------------
+
+![Clock Synchronization Requirements](ClockSynchronizationRequirements.md)
+
+
+Software Updates
+-------------------
+
+![Software Updates Requirements](SoftwareUpdatesRequirements.md)

@@ -1,5 +1,5 @@
 ﻿The [Tokens namespace](Schemas/ProvisioningTokens.xsd) [defines](Tokens.md) the following 
-elements that can be sent in stanzas. The following table list the elements, the type of 
+elements that can be sent in stanzas. The following table lists the elements, the type of 
 stanza used, the entities that can or need to handle incoming stanzas containing the 
 corresponding element, as well as implementation requirements, if the namespace is present in 
 the service component's [XEP-0030](https://xmpp.org/extensions/xep-0030.html) 

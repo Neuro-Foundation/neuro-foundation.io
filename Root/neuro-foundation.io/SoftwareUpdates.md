@@ -37,6 +37,12 @@ software packages.
 * Package distribution must be scalable, to allow fo updating large amounts of devices over a short period of time.
 
 
+Requirements
+---------------
+
+![Software Updates Requirements](SoftwareUpdatesRequirements.md)
+
+
 Software packages
 ---------------------
 
