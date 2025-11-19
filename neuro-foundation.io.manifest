@@ -33,6 +33,7 @@
 			<Content fileName="Overview.md"/>
 			<Content fileName="P2P.md"/>
 			<Content fileName="Provisioning.md"/>
+			<Content fileName="ProvisioningRequirements.md"/>
 			<Content fileName="Requirements.md"/>
 			<Content fileName="SensorData.md"/>
 			<Content fileName="SensorDataRequirements.md"/>

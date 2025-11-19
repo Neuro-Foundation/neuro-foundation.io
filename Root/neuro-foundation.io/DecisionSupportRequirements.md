@@ -8,15 +8,15 @@ implemented by the entity making the corresponding request. The Client making th
 is assumed to be an XMPP Client, and the Service Component an XMPP Component on the broker the
 client is connected to.
 
-| Namespace elements                                            ||||
-| Element              | Stanza Type | Client        | Service Component |
-|:---------------------|:------------|:--------------|:------------------|
-| `isFriend`           | `iq get`    |>> ==>       <<| Required          |
-| `isFriendResponse`   | `iq result` | Required      |>> <==           <<|
-| `canRead`            | `iq get`    |>> ==>       <<| Required          |
-| `canReadResponse`    | `iq result` | Required      |>> <==           <<|
-| `canControl`         | `iq get`    |>> ==>       <<| Required          |
-| `canControlResponse` | `iq result` | Required      |>> <==           <<|
-| `clearCache`         | `iq set`    | Required      |>> <==           <<|
-| `unfriend`           | `message`   | Optional      |>> <==           <<|
-| `friend`             | `message`   | Optional      |>> <==           <<|
+| Namespace elements                                              ||||
+| Element              | Stanza Type | Client     | Service Component |
+|:---------------------|:------------|:-----------|:------------------|
+| `isFriend`           | `iq get`    |>> ==>    <<| Required          |
+| `isFriendResponse`   | `iq result` | Required   |>> <==           <<|
+| `canRead`            | `iq get`    |>> ==>    <<| Required          |
+| `canReadResponse`    | `iq result` | Required   |>> <==           <<|
+| `canControl`         | `iq get`    |>> ==>    <<| Required          |
+| `canControlResponse` | `iq result` | Required   |>> <==           <<|
+| `clearCache`         | `iq set`    | Required   |>> <==           <<|
+| `unfriend`           | `message`   | Optional   |>> <==           <<|
+| `friend`             | `message`   | Optional   |>> <==           <<|

@@ -48,6 +48,13 @@ decision support.
 * Decision making by the owner should be completely decoupled from decision support to devices. Responses to devices occur in real-time. Responses from
 owners in asynchronous human-time (i.e. whenever the owner has time or opportunity to respond.)
 
+
+Requirements
+---------------
+
+![Provisioning Requirements](ProvisioningRequirements.md)
+
+
 Authorizing friendships
 --------------------------
 
