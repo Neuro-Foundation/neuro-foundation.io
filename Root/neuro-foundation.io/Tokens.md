@@ -9,9 +9,11 @@ Master: Master.md
 Tokens
 =============
 
-This document outlines the XML representation of token management. Using tokens is an optional method services, users or devices can use to identify 
-themselves. The recipient of sensor or actuator commands can base their security decisions based on the XMPP address of the immediate sender, the 
-domain of the immediate sender, and any device, user or service tokens. The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of token management. Using tokens is an optional 
+method services, users or devices can use to identify themselves. The recipient of sensor or 
+actuator commands can base their security decisions based on the XMPP address of the immediate 
+sender, the domain of the immediate sender, and any device, user or service tokens. The XML 
+representation is modelled using an annotated XML Schema:
 
 | Tokens                                                                ||
 | ------------|----------------------------------------------------------|
@@ -34,6 +36,12 @@ The method of token management described here, is designed with the following go
 * Tokens should be difficult to forge.
 
 * Transmitting shared secrets or private keys should be avoided.
+
+
+Requirements
+---------------
+
+![Tokens Requirements](TokensRequirements.md)
 
 
 Getting a token

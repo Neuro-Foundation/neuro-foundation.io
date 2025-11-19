@@ -41,6 +41,7 @@
 			<Content fileName="SmartContracts.md"/>
 			<Content fileName="SoftwareUpdates.md"/>
 			<Content fileName="Tokens.md"/>
+			<Content fileName="TokensRequirements.md"/>
 			<Content fileName="TransportEncryption.md"/>
 			<Content fileName="Units.md"/>
 			<Folder name="Api">

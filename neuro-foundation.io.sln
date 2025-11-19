@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neuro-foundation.io", "neur
 		Root\neuro-foundation.io\SmartContracts.md = Root\neuro-foundation.io\SmartContracts.md
 		Root\neuro-foundation.io\SoftwareUpdates.md = Root\neuro-foundation.io\SoftwareUpdates.md
 		Root\neuro-foundation.io\Tokens.md = Root\neuro-foundation.io\Tokens.md
+		Root\neuro-foundation.io\TokensRequirements.md = Root\neuro-foundation.io\TokensRequirements.md
 		Root\neuro-foundation.io\TransportEncryption.md = Root\neuro-foundation.io\TransportEncryption.md
 		Root\neuro-foundation.io\Units.md = Root\neuro-foundation.io\Units.md
 	EndProjectSection

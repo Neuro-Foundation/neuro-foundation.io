@@ -29,3 +29,8 @@ Harmonized Interfaces
 ------------------------
 
 ![Harmonized Interface Requirements](HarmonizedInterfacesRequirements.md)
+
+Tokens for distributed transactions
+--------------------------------------
+
+![Tokens Requirements](TokensRequirements.md)
