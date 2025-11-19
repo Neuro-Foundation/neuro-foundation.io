@@ -12,7 +12,9 @@ stanzas between peers.
 | Element    | Stanza Type | Peer          | Peer          |
 |:-----------|:-----------:|:-------------:|:-------------:|
 | `e2e`      | `presence`  | ==>           | Optional      |
-| `aes`      | Any         | ==>           | Required      |
-| `cha`      | Any         | ==>           | Required      |
-| `acp`      | Any         | ==>           | Required      |
-| `synchE2e` | `iq set`    | ==>           | Required      |
+| `aes`      | Any         | ==>           | Required^1    |
+| `cha`      | Any         | ==>           | Required^1    |
+| `acp`      | Any         | ==>           | Required^1    |
+| `synchE2e` | `iq set`    | ==>           | Required^1    |
+
+1. Required, if the `e2e` presence element is available in the client's online presence.
