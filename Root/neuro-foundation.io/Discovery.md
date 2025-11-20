@@ -837,12 +837,14 @@ time for the Registry to process the response, before the new registration is re
 Search for Public Things in Registry
 ----------------------------------------
 
-It is possible for anyone with access to the Thing Registry to search for public Things that have been claimed, including self-owned Things. Such searches
-will never return things that have not been claimed or have been removed from the registry (i.e. are private).
+It is possible for anyone with access to the Thing Registry to search for public Things that 
+have been claimed, including self-owned Things. Such searches will never return things that 
+have not been claimed or have been removed from the registry (i.e. are private).
 
-A search is performed by providing one or more comparison operators in a search request to the registry. If more than one comparison operator is provided, the
-search is assumed to be performed on the intersection (i.e. AND) of all operators. If the union (i.e. OR) of different conditions is desired, multiple consecutive
-searches have to be performed.
+A search is performed by providing one or more comparison operators in a search request to the 
+registry. If more than one comparison operator is provided, the search is assumed to be 
+performed on the intersection (i.e. AND) of all operators. If the union (i.e. OR) of different 
+conditions is desired, multiple consecutive searches have to be performed.
 
 The following table lists available search operators, their element names and meanings:
 
@@ -887,13 +889,34 @@ degrees south and between longitude 70 and 72 west.
 </iq>
 ```
 
-The `offset` attribute tells the registry the number of responses to skip before returning found things. It provides a mechanism to page result sets
-that are too large to return in one response. the `maxCount` attribute contains the desired maximum number of things to return in the response. The
-registry can lower this value, if it decides the requested maximum number is too large.
+You can use wildcards in the name attribute. To do this, you also need to declare the wildcard
+used using the `nameWildcard` attribute. Using name wildcard is a conveniant way of searching
+for registered devices publishing their harmonized interfaces in the thing registry. Example:
 
-If tag names are not found corresponding to the names provided in the search, the result set will always be empty. There's a reserved tag named `KEY`
-that can be used to provide information shared only between things and their owners. If a search contains an operator referencing this tag name, the result set
-must also always be empty. Searches on `KEY` MUST never find things. Furthermore, search results must never return `KEY` tags.
+```xml:Searching for Things with harmonized sensor interfaces
+<iq type='get'
+    from='curious@example.org/client'
+    to='discovery.example.org'
+    id='9'>
+   <search xmlns='urn:nfi:iot:disco:1.0' offset='0' maxCount='20'>
+       <numGtEq name='urn:nfi:iot:hi:sensor:*' nameWildcard='*' value='1.0'>
+       <numRange name='LON' min='-72' minIncluded='true' max='-70' maxIncluded='true'/>
+       <numRange name='LAT' min='-34' minIncluded='true' max='-33' maxIncluded='true'/>
+   </search>
+</iq>
+```
+
+The `offset` attribute tells the registry the number of responses to skip before returning 
+found things. It provides a mechanism to page result sets that are too large to return in one 
+response. the `maxCount` attribute contains the desired maximum number of things to return in 
+the response. The registry can lower this value, if it decides the requested maximum number is
+too large.
+
+If tag names are not found corresponding to the names provided in the search, the result set 
+will always be empty. There's a reserved tag named `KEY` that can be used to provide 
+information shared only between things and their owners. If a search contains an operator 
+referencing this tag name, the result set must also always be empty. Searches on `KEY` MUST 
+never find things. Furthermore, search results must never return `KEY` tags.
 
 The registry returns any things found in a response similar to the following:
 
@@ -917,7 +940,8 @@ The registry returns any things found in a response similar to the following:
 </iq>
 ```
 
-If a Thing resides behind a concentrator, the response must contain those of the attributes `id`, `src` and `pt` that are required to access the Thing, as follows:
+If a Thing resides behind a concentrator, the response must contain those of the attributes 
+`id`, `src` and `pt` that are required to access the Thing, as follows:
 
 ```xml:Search result containing Thing behind a concentrator
 <iq type='result'
@@ -939,9 +963,11 @@ If a Thing resides behind a concentrator, the response must contain those of the
 </iq>
 ```
 
-If more results are available in the search (accessible by using the `offset` attribute in a new search), the `more` attribute is present with value `true`.
+If more results are available in the search (accessible by using the `offset` attribute in a 
+new search), the `more` attribute is present with value `true`.
 
-**Note**: Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
+**Note**: Meta Tag names are case insensitive. In this document, all tag names have been 
+written using upper case letters.
 
 ### IoTDisco URI Scheme for searches
 
