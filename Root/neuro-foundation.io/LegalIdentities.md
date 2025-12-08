@@ -272,6 +272,11 @@ processes (KyC), and clearly listed as pseudonymous. Pseudonymous identities may
 certain types of services, depending on rules and regulations. Examples of such services may be
 payment services, or signing of legal smart contracts.
 
+Getting Application Attributes
+---------------------------------
+
+TODO
+
 Identity state changes
 ----------------------------
 
@@ -509,6 +514,46 @@ Example:
 
 Petitioning access to a legal identity
 -----------------------------------------
+
+TODO
+
+Adding attachments
+---------------------
+
+TODO
+
+Removing attachments
+-----------------------
+
+TODO
+
+Removing attachments
+-----------------------
+
+TODO
+
+Authorizing access
+---------------------
+
+TODO
+
+Identity Reviewer services
+-----------------------------
+
+TODO
+
+Know Your Customer services (KyC)
+------------------------------------
+
+TODO
+
+Feedback messages
+--------------------
+
+TODO
+
+Trust Chains
+---------------
 
 TODO
 
