@@ -1,14 +1,14 @@
 Neuro-Foundation License
 ===========================
 
-Copyright (c) 2024 Neuro-Foundation
+Copyright (c) 2024-2026 Neuro-Foundation
 
 You are free to use the information and software, which includes *interfaces*, *documentation*, *files* and *source code*, as source code or 
-in binary compiled form, in any repository hosted by the [Neuro-Foundation](https://github.com/Neuro-Foundation), provided by **Neuro-Foundation** 
+in binary compiled form, from any repository hosted by the [Neuro-Foundation](https://github.com/Neuro-Foundation), provided by **Neuro-Foundation** 
 under the following conditions:
 
-*	The use is for personal, evaluation, academic, or security analysis purposes. Commercial use, in part or in full, requires a commercial license
-	with the Neuro-Foundation.
+*	The use is for personal, evaluation, academic, standardization or security analysis purposes. Other commercial use, in part or in full, requires 
+	a commercial license with the Neuro-Foundation.
 
 *	Any derived work, including republishing information originally published by the Neuro-Foundation, must include a visible and proper attribution
 	to the Neuro-Foundation and relevant repositories, as well as a reference to or a copy of this license agreement.
