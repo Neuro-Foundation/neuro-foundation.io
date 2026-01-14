@@ -251,7 +251,7 @@ In the following examples, assume `lns="NS"`:
 |-------|-------------|
 | 1     | Temperature |
 | 2     | Input %1%   |
-| 3     | %0%, Max    |
+| 3     | \%0\%, Max  |
 
 | ID    | `Stat`      |
 |-------|-------------|
