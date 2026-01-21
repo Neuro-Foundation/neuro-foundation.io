@@ -64,9 +64,9 @@ Node
 	organized as tree structures or as flat lists. They may be hosted by data sources.
 	A node is identified using a Node ID, which must be unique within the scope it is defined.
 	If no sources are used (for simpler concentrators), the Node ID must be unique within the 
-	concentrator. If a node resides in a data source, the Node ID must be unique within that 
-	data source. If the data source is partitioned, the Node ID must be unique within that 
-	partition of the data source.
+	concentrator. If a node resides in a data source that is not partitioned, the Node ID must 
+	be unique within that data source. If the data source is partitioned, the Node ID must be 
+	unique within that partition of the data source.
 
 Parent
 
