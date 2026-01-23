@@ -40,8 +40,8 @@ Requirements
 Building the subscription request
 ---------------------------------------
 
-The request is sent using an `<iq type="set"/>` stanza with a `<subscribe/>` element to the device. This request may optionally include references to nodes 
-(if the device supports nodes) and field names the request should be limited to. If no field names are provided, all fields names are implied.
+The request is sent using an `<iq type="set"/>` stanza with a `<subscribe/>` element to the device. The request may optionally include references to nodes 
+(if the device supports nodes) and field names the request should be limited to. If no field names are provided, all field names are implied.
 If no node references are provided, only devices not supporting nodes are implied. Concentrators should interpret this as an empty request, reading zero nodes.
 
 Each field can provide trigger parameters, allowing the device to know when an event should be triggered, based on how much the field value changes.

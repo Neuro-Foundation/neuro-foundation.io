@@ -39,12 +39,12 @@ Requirements
 Building the request
 -------------------------
 
-The request is sent using an `<iq type="get"/>` stanza with a `<req/>` element to the device. This request may optionally include references to nodes 
-(if the device supports nodes) and field names the request should be limited to. If no field names are provided, all fields names are implied.
+The request is sent using an `<iq type="get"/>` stanza with a `<req/>` element to the device. The request may optionally include references to nodes 
+(if the device supports nodes) and field names the request should be limited to. If no field names are provided, all field names are implied.
 If no node references are provided, only devices not supporting nodes are implied. Concentrators should interpret this as an empty request, reading zero nodes.
 
 The request also contains an **Identity**, that will be used to match response messages to the original request. Field **categories** are also included in the
-request. The device filters the response, as to only return fields in these categories. The special `all` attribute can be used, to mean all categories.
+request. The device filters the response, as to only return fields in these categories. The special `all` attribute can be used to mean all categories.
 **Time intervals** can be defined using a `from` and a `to` attribute. The readout can also be scheduled by using the `when` attribute. Distributed transactions can be executed by the
 use of [tokens](#tokens).
 
@@ -289,7 +289,7 @@ Deactivate Device
 
 A request that has been scheduled or queued, can be cancelled. Cancelling a request is done by sending an `<iq type="set"/>` stanza with a `<cancel/>` element to the 
 device, with the identifier used to identify the request. The device responds with an empty `<iq type="result"/>` stanza. Optionally, a device may also support the 
-cancellation of ongoing readouts. 
+cancellation of ongoing readouts.
 
 ```uml:Cancel Readout
 @startuml
@@ -338,7 +338,6 @@ is being reported back.
 | Start notification  | `started`  | Optional | `id`       | `xs:string`   | Required | Request identity                                                               |
 | Completion          | `done`     | Optional | `id`       | `xs:string`   | Required | Request identity                                                               |
 | Cancel request      | `cancel`   | Optional | `id`       | `xs:string`   | Required | Request identity                                                               |
-| Request cancelled   | `cancel`   | Optional | `id`       | `xs:string`   | Required | Request identity                                                               |
 
 
 Tokens
@@ -370,7 +369,7 @@ Determining Support
 -------------------------
 
 Devices supporting the protocol described in this document should advertise this fact, by including the `urn:nfi:iot:sd:1.0` namespace in the features list in responses to
-[Service Discover](https://xmpp.org/extensions/xep-0030.html) requests.
+[Service Discovery](https://xmpp.org/extensions/xep-0030.html) requests.
 
 
 Examples
