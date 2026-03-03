@@ -111,6 +111,7 @@ Some names are predefined however, as described in the following table:
 | `EMAIL`       | E-mail address.                                                 |
 | `JID`         | XMPP address (Jabber ID).                                       |
 | `DOMAIN`      | If the ID represents the legal representative of a domain.      |
+| `PREVIEW`     | A reference to a preview of the identity application.           |
 | `PSEUDONYM`   | Lists which properties are pseudonymous. Comma-separated list.  |
 | `ORGNAME`     | Name of organization                                            |
 | `ORGNR`       | Organization number                                             |
@@ -271,6 +272,22 @@ which contain invented values. Such values will be ignored during automated iden
 processes (KyC), and clearly listed as pseudonymous. Pseudonymous identities may be excluded from
 certain types of services, depending on rules and regulations. Examples of such services may be
 payment services, or signing of legal smart contracts.
+
+### Digital identities without sensitive personal information
+
+It is possible to create legal identities without including any sensitive personal 
+information. One way to do so, is to first send an identity application preview, which is
+an `<apply preview='true'>` element. Personal data will be used only to validate its 
+correctness, but the information will not be stored in a read digital identity. If the
+preview gets approved, a new legal identity application can be sent, this time without the
+`preview` attribute. This application may contain a smaller set of personal information,
+or even none at all. A special property `PREVIEW`, with a reference to the preview application,
+must be added. Any other properties provided will be matched with the preview, and if the
+preview was successful, and the values and attachments match, the new application will be
+considered automatically valid.
+
+**Note**: Preview applications will only be available for a limited time on the broker. The
+time the previews will be available, is implementation and configuration specific.
 
 Getting Application Attributes
 ---------------------------------
