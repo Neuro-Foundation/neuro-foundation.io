@@ -253,14 +253,14 @@
 
 	<xs:element name='q'>
 		<xs:annotation>
-			<xs:documentation>Represents a physical quantity.</xs:documentation>
+			<xs:documentation>Represents a measurable quantity.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base='field'>
 					<xs:attribute name="v" type="xs:double" use="required">
 						<xs:annotation>
-							<xs:documentation>Value of the physical quantity. Precision is given by the number of decimal digits.</xs:documentation>
+							<xs:documentation>Value of the measurable quantity. Precision is given by the number of decimal digits.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 					<xs:attribute name="u" type="xs:string" use="optional">

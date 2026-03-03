@@ -322,7 +322,7 @@
 			</xs:annotation>
 			<xs:enumeration value='q'>
 				<xs:annotation>
-					<xs:documentation>Represents a physical quantity.</xs:documentation>
+					<xs:documentation>Represents a measurable quantity.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value='s'>

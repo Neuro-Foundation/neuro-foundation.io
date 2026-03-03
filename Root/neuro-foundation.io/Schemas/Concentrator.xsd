@@ -1659,17 +1659,17 @@
 							</xs:element>
 							<xs:element name='quantity'>
 								<xs:annotation>
-									<xs:documentation>A physical quantity cell.</xs:documentation>
+									<xs:documentation>A measurable quantity cell.</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
 									<xs:attribute name='m' type='xs:double' use='required'>
 										<xs:annotation>
-											<xs:documentation>The magnitude of the physical quantity.</xs:documentation>
+											<xs:documentation>The magnitude of the measurable quantity.</xs:documentation>
 										</xs:annotation>
 									</xs:attribute>
 									<xs:attribute name='u' type='xs:string' use='required'>
 										<xs:annotation>
-											<xs:documentation>The unit of the physical quantity.</xs:documentation>
+											<xs:documentation>The unit of the measurable quantity.</xs:documentation>
 										</xs:annotation>
 									</xs:attribute>
 								</xs:complexType>

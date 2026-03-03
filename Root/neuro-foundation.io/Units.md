@@ -26,7 +26,7 @@ Motivation and design goal
 
 The representation of units described in this document, is designed with the following goals in mind:
 
-* Most known physical units must be representable using the model.
+* Most known measurable units must be representable using the model.
 
 * Unit presentations must be compact and easy to read, both for humans and machines.
 
@@ -127,17 +127,17 @@ Constant <|-- Pi
 ```
 
 A **Unit Category** represents a set of units that are *compatible* in the sense they can be
-used to represent the same physical quantity and can be converted between each other. Each Unit 
+used to represent the same measurable quantity and can be converted between each other. Each Unit 
 Category defines exactly one **Reference Unit**. This should be the SI unit, if applicable, or 
 contain a **derivation** from SI units, or similar well-known unit if SI units are not available 
-for the corresponding physical quantity. If a derivation does not exist, it is assumed that the
+for the corresponding measurable quantity. If a derivation does not exist, it is assumed that the
 reference unit is a **base unit**. The name of a unit category should be a human-readable string 
-that describes the physical quantity represented by the units. It is not used in unit conversion, 
+that describes the measurable quantity represented by the units. It is not used in unit conversion, 
 communication, or user interfaces. It is available only for documentation purposes.
 
 After the reference unit, the Unit Category can define any number of additional Units. There are 
 two types: The regular **Unit** and the **Compound Unit**. Each unit is referenced to by its 
-name, which should correspond to the short-hand form used when expressing physical quantities, 
+name, which should correspond to the short-hand form used when expressing measurable quantities, 
 for example `m` for meters, `g` for grams, `s` for seconds, etc.
 
 Normal Unit objects define a set of [Reverse Polish Notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation)

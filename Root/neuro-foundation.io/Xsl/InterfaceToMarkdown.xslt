@@ -86,7 +86,7 @@ Master: /Master.md
 		</xsl:if>
 		<xsl:choose>
 			<xsl:when test="@type='q'">
-				<xsl:text>Physical Quantity</xsl:text>
+				<xsl:text>Measurable Quantity</xsl:text>
 			</xsl:when>
 			<xsl:when test="@type='s'">
 				<xsl:text>String</xsl:text>

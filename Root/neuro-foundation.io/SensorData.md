@@ -93,7 +93,7 @@ The sensor data model defines different types of fields, depending on the data t
 
 ```uml:Conceptual model
 @startuml
-Field <|-- PhysicalQuantity
+Field <|-- MeasurableQuantity
 Field <|-- String
 Field <|-- Boolean
 Field <|-- Date
@@ -110,8 +110,8 @@ Field : Quality of Service
 Field : Localization
 Field : Custom Annotation
 
-PhysicalQuantity : Value : xs:double
-PhysicalQuantity : Unit : xs:string
+MeasurableQuantity : Value : xs:double
+MeasurableQuantity : Unit : xs:string
 
 String : Value : xs:string
 
@@ -136,20 +136,20 @@ Time : Value : xs:time
 
 ### XML representation
 
-| Entity                  | Element | Use      | Attributes | Type          | Use      | Description                |
-|-------------------------|---------|----------|------------|---------------|----------|----------------------------|
-| Boolean Field           | `b`     | Optional | `v`        | `xs:boolean`  | Required | Boolean field value        |
-| Date Field              | `d`     | Optional | `v`        | `xs:date`     | Required | Date field value           |
-| Date & Time Field       | `dt`    | Optional | `v`        | `xs:dateTime` | Required | Date & Time field value    |
-| Duration Field          | `dr`    | Optional | `v`        | `xs:duration` | Required | Duration field value       |
-| Enumeration Field       | `e`     | Optional | `v`        | `xs:string`   | Required | Enumeration field value    |
-|                         |         |          | `t`        | `xs:string`   | Required | Enumeration Type used      |
-| 32-bit Integer Field    | `i`     | Optional | `v`        | `xs:int`      | Required | 32-bit Integer field value |
-| 64-bit Integer Field    | `l`     | Optional | `v`        | `xs:long`     | Required | 64-bit Integer field value |
-| Physical Quantity Field | `q`     | Optional | `v`        | `xs:double`   | Required | Floating-point field value |
-|                         |         |          | `u`        | `xs:string`   | Optional | Unit used                  |
-| String Field            | `s`     | Optional | `v`        | `xs:string`   | Required | String field value         |
-| Time Field              | `t`     | Optional | `v`        | `xs:time`     | Required | Time field value           |
+| Entity                    | Element | Use      | Attributes | Type          | Use      | Description                |
+|---------------------------|---------|----------|------------|---------------|----------|----------------------------|
+| Boolean Field             | `b`     | Optional | `v`        | `xs:boolean`  | Required | Boolean field value        |
+| Date Field                | `d`     | Optional | `v`        | `xs:date`     | Required | Date field value           |
+| Date & Time Field         | `dt`    | Optional | `v`        | `xs:dateTime` | Required | Date & Time field value    |
+| Duration Field            | `dr`    | Optional | `v`        | `xs:duration` | Required | Duration field value       |
+| Enumeration Field         | `e`     | Optional | `v`        | `xs:string`   | Required | Enumeration field value    |
+|                           |         |          | `t`        | `xs:string`   | Required | Enumeration Type used      |
+| 32-bit Integer Field      | `i`     | Optional | `v`        | `xs:int`      | Required | 32-bit Integer field value |
+| 64-bit Integer Field      | `l`     | Optional | `v`        | `xs:long`     | Required | 64-bit Integer field value |
+| Measurable Quantity Field | `q`     | Optional | `v`        | `xs:double`   | Required | Floating-point field value |
+|                           |         |          | `u`        | `xs:string`   | Optional | Unit used                  |
+| String Field              | `s`     | Optional | `v`        | `xs:string`   | Required | String field value         |
+| Time Field                | `t`     | Optional | `v`        | `xs:time`     | Required | Time field value           |
 
 Common field attributes
 --------------------------
