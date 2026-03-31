@@ -1,0 +1,46 @@
+@startuml
+Client -> Device : iq[type=set](subscribe)
+Activate Device
+
+Client <- Device : iq[type=result](accepted)
+
+group While subscription active
+
+    == Wait for event to trigger ==
+
+    Device -> Device : start readout
+    Activate Device
+
+    opt
+        Client <- Device : message(started)
+        note right
+            If readout slow, client can
+            be alerted that readout has
+            begun.
+        end note
+    end
+
+    group Variable number of fragments
+
+        == Delay ==
+
+        Client <- Device : message(resp[more=true])
+        note right
+            Sensor data transmission
+            can be fragmented into
+            multiple messages.
+        end note
+    end
+
+    == Delay ==
+
+    Client <- Device : message(resp[more=false])
+    Deactivate Device
+
+end
+
+Client -> Device : iq[type=set](unsubscribe)
+Client <- Device : iq[type=result]()
+
+Deactivate Device
+@enduml

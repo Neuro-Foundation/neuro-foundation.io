@@ -1,0 +1,23 @@
+@startuml
+Client -> Device : iq[type=set](subscribe)
+Activate Device
+
+Client <- Device : iq[type=result](accepted)
+
+group While subscription active
+
+    == Wait for event to trigger ==
+
+    Device -> Device : start readout
+    Activate Device
+
+    Client <- Device : message(resp)
+    Deactivate Device
+
+end
+
+Client -> Device : iq[type=set](unsubscribe)
+Client <- Device : iq[type=result]()
+
+Deactivate Device
+@enduml

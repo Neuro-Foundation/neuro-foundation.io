@@ -95,14 +95,14 @@
 			</xs:attribute>
 			<xs:attribute name='minInt' type='xs:duration' use='optional'>
 				<xs:annotation>
-					<xs:documentation>The longest time allowed between triggers.</xs:documentation>
-					<xs:documentation>If the event hasn't been triggered withing this amount of time, the event is triggered.</xs:documentation>
+					<xs:documentation>The shortest time allowed between triggers.</xs:documentation>
+					<xs:documentation>If conditions for an event to trigger occur before this time has elapsed, the trigger is delayed until the end of this time period.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name='maxInt' type='xs:duration' use='optional'>
 				<xs:annotation>
-					<xs:documentation>The shortest time allowed between triggers.</xs:documentation>
-					<xs:documentation>If conditions for an event to trigger occur before this time has elapsed, the trigger is delayed until the end of this time period.</xs:documentation>
+					<xs:documentation>The longest time allowed between triggers.</xs:documentation>
+					<xs:documentation>If the event hasn't been triggered within this amount of time, the event is triggered.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name='st' type='xs:string' use='optional'>
@@ -120,7 +120,11 @@
 					<xs:documentation>User token, identifying the user generating the original request.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name='req' type='xs:boolean' use='optional' default='false'/>
+			<xs:attribute name='req' type='xs:boolean' use='optional' default='false'>
+				<xs:annotation>
+					<xs:documentation>If the subscription immediately requests sensor data to be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

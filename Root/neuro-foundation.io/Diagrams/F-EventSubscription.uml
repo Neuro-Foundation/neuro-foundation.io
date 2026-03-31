@@ -1,0 +1,22 @@
+@startuml
+Subscription "1" --> "*" Node
+Subscription "1" --> "*" Field
+
+Subscription : Id
+Subscription : Categories
+Subscription : Max Age
+Subscription : Max Interval
+Subscription : Min Interval
+Subscription : Tokens
+Subscription : Request
+
+Node : Node ID
+Node : Source ID
+Node : Partition
+
+Field : Name
+Field : Current Value
+Field : Change By
+Field : Change Up
+Field : Change Down
+@enduml
