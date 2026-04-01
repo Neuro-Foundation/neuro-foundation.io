@@ -1,0 +1,25 @@
+@startuml
+Activate Client
+Activate Broker1
+Activate Broker2
+Activate Sensor
+
+Client -> Broker1 : subscribe presence[to=sensorJid]
+Broker1 -> Broker2 : subscribe presence[from=clientJid, to=sensorJid]
+Broker2 -> Sensor : subscribe presence[from=clientJid, jid=sensorJid]
+Sensor -> Broker2 : accept
+Broker2 -> Broker2 : update roster
+Broker2 -> Broker1 : accept
+Broker1 -> Broker1 : update roster
+Broker1 -> Client : accept
+
+Sensor -> Broker2 : publish[sensor data]
+Broker2 --> Sensor : ok
+Broker2 -> Broker1 : notification[if client capabilities show interest]
+Broker1 -> Client : notification[if client capabilities show interest]
+
+Deactivate Client
+Deactivate Broker1
+Deactivate Broker2
+Deactivate Sensor
+@enduml

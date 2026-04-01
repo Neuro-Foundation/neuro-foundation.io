@@ -329,6 +329,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{9E
 	ProjectSection(SolutionItems) = preProject
 		Root\neuro-foundation.io\Diagrams\F-EventSubscription.uml = Root\neuro-foundation.io\Diagrams\F-EventSubscription.uml
 		Root\neuro-foundation.io\Diagrams\F-FragmentedEvents.uml = Root\neuro-foundation.io\Diagrams\F-FragmentedEvents.uml
+		Root\neuro-foundation.io\Diagrams\F-PubSubPEP.uml = Root\neuro-foundation.io\Diagrams\F-PubSubPEP.uml
 		Root\neuro-foundation.io\Diagrams\F-SimpleEvents.uml = Root\neuro-foundation.io\Diagrams\F-SimpleEvents.uml
 	EndProjectSection
 EndProject
