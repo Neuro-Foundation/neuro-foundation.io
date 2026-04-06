@@ -1,0 +1,46 @@
+@startuml
+Device "1" *-- "0..*" Node
+Node o-- "*" Parameter
+Device "1" o-- "*" Parameter
+
+Parameter <|-- Boolean
+Parameter <|-- Color
+Parameter <|-- Date
+Parameter <|-- DateTime
+Parameter <|-- Double
+Parameter <|-- Duration
+Parameter <|-- Enum
+Parameter <|-- Int32
+Parameter <|-- Int64
+Parameter <|-- String
+Parameter <|-- Time
+
+Node : ID
+Node : [Source]
+Node : [Partition]
+
+Parameter : Name
+
+String : Value : xs:string
+
+Boolean : Value : xs:boolean
+
+Color : Value : Color
+
+Date : Value : xs:date
+
+DateTime : Value : xs:dateTime
+
+Double : Value : xs:double
+
+Duration : Value : xs:duration
+
+Enum : Value : xs:string
+Enum : Type : xs:string
+
+Int32 : Value : xs:int
+
+Int64 : Value : xs:long
+
+Time : Value : xs:time
+@enduml

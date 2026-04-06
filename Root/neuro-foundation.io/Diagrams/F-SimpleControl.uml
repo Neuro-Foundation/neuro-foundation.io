@@ -1,0 +1,11 @@
+@startuml
+Client -> Device : iq[type=set](set)
+Activate Device
+
+Device -> Device : set parameters
+Activate Device
+
+Client <- Device : iq[type=result](resp)
+Deactivate Device
+Deactivate Device
+@enduml

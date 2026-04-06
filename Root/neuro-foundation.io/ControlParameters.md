@@ -109,7 +109,7 @@ if not used. It is the triple (Node ID, Source ID, Partition) that must be uniqu
 XML representation
 --------------------
 
-Control parameters can be represented in two different ways. One, for quick control options, and another for human interfaces. Quick control commands
+Control parameters can be represented in two different ways. One, for quick control operations, and another for human interfaces. Quick control commands
 only concern themselves with parameter names and their corresponding parameter values. Human interfaces for control options require more information,
 including possible layout information. For this reason, XMPP data forms are used to represent the control parameters. Both of these representations
 are made inside a node element.
@@ -165,7 +165,7 @@ The basic layout of data forms XML is defined in [XEP-0004: Data Forms](https://
 fields. More detailed rules for the validation of field content is defined in [XEP-0122: Data Forms Validation](https://xmpp.org/extensions/xep-0122.html).
 The ability to put fields into sections and tabs (pages) is then introduced in [XEP-0141: Data Forms Layout](https://xmpp.org/extensions/xep-0141.html).
 Multimedia elements can also be inserted through the use of [XEP-0221: Data Forms Media Element](https://xmpp.org/extensions/xep-0221.html). Color-valued
-field parameters are defined in [XEP-0331: Data Forms - Color Field Types](https://xmpp.org/extensions/xep-0331.html). Creating dynamic forms, including
+control parameters are defined in [XEP-0331: Data Forms - Color Field Types](https://xmpp.org/extensions/xep-0331.html). Creating dynamic forms, including
 the management of server post-backs, contextual content, visual feedback, asynchronous server updates (push), etc., is defined in 
 [XEP-0336: Data Forms - Dynamic Forms](https://xmpp.org/extensions/xep-0336.html).
 

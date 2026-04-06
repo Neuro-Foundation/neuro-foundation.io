@@ -1,0 +1,21 @@
+@startuml
+Client -> Device : iq[type=get](getForm)
+Activate Device
+
+Device -> Device : get parameters
+Activate Device
+
+Client <- Device : iq[type=result](x)
+Deactivate Device
+Deactivate Device
+
+Client -> Device : iq[type=set](set(x))
+Activate Device
+
+Device -> Device : set parameters in form
+Activate Device
+
+Client <- Device : iq[type=result](resp)
+Deactivate Device
+Deactivate Device
+@enduml
