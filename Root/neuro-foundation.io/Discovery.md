@@ -1058,8 +1058,7 @@ replaced by underscore characters (`_`), as the colon character is not a valid c
 
 *   The Tag Value, is the numerical form of the version number of the URI.
 
-Geo-spatial object references to things
-------------------------------------------
+### Geo-spatial object references to things
 
 If the Meta-data tags of a Thing contain geo-spatial information, such as `LAT` and `LON`, and
 the optional `ALT`, and the object is registered as public, an implicit geo-spatial object 
@@ -1101,6 +1100,20 @@ tag names defined in this document. If it has a configurable list of approved ta
 
 ### External services for creating QR-codes
 
-If using external services when creating QR-codes, like the Google Charts API, make sure HTTPS is used and certificates validated. If HTTP is used,
-meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the corresponding devices.
-Also, sensitive information might leak to the host of the encoding service.
+If using external services when creating QR-codes, like the Google Charts API, make sure HTTPS is used and certificates validated. If HTTP is 
+used, meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the 
+corresponding devices. Also, sensitive information about Things in the network might leak to the host and third parties the host of the 
+encoding service shares the data with. It is recommended that internal generation of QR codes is performed, to avoid leakage of sensitive 
+information.
+
+### Rate Limits
+
+To avoid spam and protect against unwanted behavior, the Thing Registry may implement rate limitations, and other limitations, to registrations 
+and updates.
+
+### Authorized access
+
+Thing Registries may allow registration and updates of meta-data only from accounts connected to the same Broker as is hosting the Thing 
+Registry. It may also restrict access based on privileges assigned to such accounts. Searching the Thing Registry should however be possible 
+from clients connected to other Brokers, to maintain a searchable, interoperable and federated network of Things.
+
