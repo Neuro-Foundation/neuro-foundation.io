@@ -1,0 +1,20 @@
+@startuml
+start;
+:Production;
+:Installation;
+:Finding Network;
+:Create Network Identity;
+:Find Network Services;
+:Register Conceptual Identity;
+while (operational?) is (yes)
+:Transfer Conceptual Identity;
+:Ownership Claim;
+while (same owner?) is (yes)
+:Update Meta-Data;
+:Operation;
+endwhile (no)
+:Disown;
+endwhile (no)
+:Unregister;
+stop
+@enduml

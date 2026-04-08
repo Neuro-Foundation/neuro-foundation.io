@@ -21,7 +21,7 @@ The XML representation is modelled using an annotated XML Schema:
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | `urn:nfi:iot:disco:1.0`                                   |
+| Namespace:  | `urn:nfi:iot:disco:1.0`                                  |
 | Schema:     | [Discovery.xsd](Schemas/Discovery.xsd)                   |
 
 ![Table of Contents](toc)
@@ -50,7 +50,7 @@ The discovery feature described in this document, is designed with the following
 Requirements
 ---------------
 
-![Discovery Requirements](DiscoveryRequirements.md)]
+![Discovery Requirements](DiscoveryRequirements.md)
 
 
 Legacy
@@ -73,7 +73,7 @@ Introduction
 ----------------
 
 When installing massive amounts of Things into public networks care has to be taken to make installation simple, but at the same time secure so that the Things cannot be 
-hijacked or hacked, making sure access to the Thing is controlled by the physical owner of the Thing. One of the main problems is how to match the characteristics of a 
+hijacked or hacked, making sure access to the Thing is controlled by the legal owner of the Thing. One of the main problems is how to match the characteristics of a 
 Thing, like serial number, manufacturer, model, etc., with information automatically created by the Thing itself, like perhaps its JID, in an environment with massive 
 amounts of Things without rich user interfaces. Care has also to be taken when specifying rules for access rights and user privileges.
 
@@ -141,9 +141,9 @@ device can connect to the XMPP network.
 ### Finding Network Services
 
 Once connected to the network, the thing needs to search for available network services on the broker. This includes iterating through available
-components on the broker and matching their features with the namespaces defined by the different services the thing will use. Each component has a separate JID that can
-be used when communicating with it. For an XMPP broker to be compliant with this specification, it needs to provide components that publish features define by the services
-defined in this specification. For the current section, this includes the *Thing Registry*. But it should also include components for decision support & provisioning, 
+components on the broker and matching their features with the namespaces defined by the different services the thing will use. Each component 
+has a separate JID that must be used when communicating with it. For an XMPP broker to be compliant with this specification, it needs to provide 
+components that publish features defined by the services defined in this specification. For the current section, this includes the *Thing Registry*. But it should also include components for decision support & provisioning, 
 software updates, synchronization, legal identities and smart contracts.
 
 **Note**: Services can be provided by a single component or multiple components. The features of available components need to be analysed to make sure what services are
@@ -151,8 +151,8 @@ available on the broker, and what components service the different features.
 
 ### Registering a Thing
 
-Once a Thing Registry has been found and been befriended, the Thing can register itself with the registry. A concentrator can register itself, and its nodes if it wishes
-to. Registration of a Thing requires the Thing to send its *conceptual identity* in a `<register/>` element to the Thing Registry in a `<iq type="set">` stanza. The 
+Once a Thing Registry has been found, the Thing can register itself with the registry. A concentrator can register itself, and its nodes if it wishes
+to. Registration of a Thing requires the Thing to send its *conceptual identity* in a `<register/>` element to the Thing Registry in an `<iq type="set">` stanza. The 
 following subsections describe different alternatives.
 
 #### Registering a stand-alone Thing
@@ -278,11 +278,11 @@ This URI can then be encoded and transmitted to the owner in multiple ways, for 
 using e-mail, SMS, Bluetooth or embedded in a web page for instance, or visually, for instance on a display, or sticker, using some form of visual encoding, 
 like QR-codes.
 
-To generate a `iotdisco` URI, generate a string as follows: Begin with `iotdisco:` and append each meta tag in order. Each tag name is prefixed by a semi-colon `;`, 
-and if the tag is numeric, the tag is further prefixed by an additional hash sign `#`. Each tag value is prefixed by an equal's sign `=`. If the meta value contains 
-semi-colons or back-slashes, each one is prefixed by a backslash `\\`. When decoding the string, this allows the decoder to correctly differ 
-between tag delimiters and characters belonging to tag values. A tag name must never contain equal characters (`=`), hash characters (`#`), lesser than characters (`<`),
-greater than characters (`>`) or white space characters.
+To generate a `iotdisco` URI, generate a string as follows: Begin with `iotdisco:` and append each meta tag in order. Each tag name except the 
+first is prefixed by a semi-colon `;`. If the tag is numeric, the tag is further prefixed by an additional hash sign `#`. Each tag value is 
+prefixed by an equal's sign `=`. If the meta value contains semi-colons or back-slashes, each one is prefixed by a backslash `\\`. When decoding 
+the string, this allows the decoder to correctly differ between tag delimiters and characters belonging to tag values. A tag name must never 
+contain equal characters (`=`), hash characters (`#`), lesser than characters (`<`), greater than characters (`>`) or white space characters.
 
 The  meta data presented in previous sections can be transferred using a `iotdisco` URI as follows:
 
@@ -388,8 +388,9 @@ should avoid including information informing the client why the claim failed. Ex
 </iq>
 ```
 
-When the Thing has been successfully claimed, the Registry sends information about this to the Thing in a `<claimed/>` element in a `<iq type="set"/>` stanza, to inform 
-it that it has been claimed and what the bare JID of owner is. After receiving this information, it doesn't need to register itself with the Registry anymore.
+When the Thing has been successfully claimed, the Registry sends information about this to the Thing in a `<claimed/>` element in an 
+`<iq type="set"/>` stanza, to inform it that it has been claimed and what the bare JID of owner is. After receiving this information, it 
+doesn't need to register itself with the Registry anymore, unless the Owner disowns the Thing.
 
 ```xml:Ownership claimed
 <iq type='set'
@@ -445,7 +446,8 @@ activate Registry
 Registry -> Registry : Match(conceptualId,KEY)
 activate Registry
 Registry -> Registry : Delete(KEY)
-Owner <-- Registry : <claimed thing addr/>
+Owner <- Registry : <claimed thing addr/>
+Owner --> Registry :
 Registry -> Thing : <claimed owner addr/>
 Registry <-- Thing :
 deactivate Registry
@@ -630,7 +632,7 @@ to be re-claimed.
 ### Owner updating Meta Information about Thing in Registry
 
 An owner of a thing can also update the meta-data of a thing it has claimed. To do this, you simply add a `jid` attribute containing the JID of the thing to the
-`<update/>` element. (If this attribute is not present, the JID is assumed to be that of the sender of the message.)
+`<update/>` element.
 
 ```xml:Owner requests an update of Meta Data of Thing
 <iq type='set'
@@ -673,7 +675,7 @@ as follows:
 </iq>
 ```
 
-If the Thing is found in the registry and it is claimed by the sender of the current message (i.e. owner is the sender), the registry simply acknowledges the update 
+If the Thing is found in the registry and it is claimed by the sender of the current request (i.e. owner is the sender), the registry simply acknowledges the update 
 as follows:
 
 ```xml:Owner updating thing Meta Data request acknowledgement
@@ -698,7 +700,6 @@ But if the owner is not the sender of the current message (i.e. owner is somebod
 ```
 
 ### Unregistering Thing from Registry
-
 
 A thing can unregister itself from the Registry. This can be done in an uninstallation procedure for instance. To unregister from the registry, it simply sends
 an un-registration request to the registry as follows.
@@ -769,8 +770,9 @@ If such a Thing is not found, or if the thing is not owned by the caller, an `it
 </iq>
 ```
 
-If such a Thing is found, and it is owned by the caller, but not online as a friend, the Thing cannot be disowned, since it might put the Thing in a state from which
-it cannot be re-claimed. Therefore, the Thing Registry must respond with a `not-allowed` error, in the following manner:
+If such a Thing is found, and it is owned by the caller, but is not online, or returns an error when notified that it is being disowned, 
+the Thing cannot be disowned since it might put the Thing in a state from which it cannot be re-claimed. Therefore, the Thing Registry 
+must respond with a `not-allowed` error, in the following manner:
 
 ```xml:Failure to disown Thing - Offline
 <iq type='error'

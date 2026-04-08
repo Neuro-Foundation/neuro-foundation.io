@@ -1,0 +1,15 @@
+@startuml
+activate Owner
+Owner -> Registry : <mine conceptualId KEY/>
+activate Registry
+Registry -> Registry : Match(conceptualId,KEY)
+activate Registry
+Registry -> Registry : Delete(KEY)
+Owner <- Registry : <claimed thing addr/>
+Owner --> Registry :
+Registry -> Thing : <claimed owner addr/>
+Registry <-- Thing :
+deactivate Registry
+deactivate Registry
+deactivate Owner
+@enduml
