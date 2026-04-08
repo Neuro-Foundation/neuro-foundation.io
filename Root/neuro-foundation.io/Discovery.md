@@ -858,9 +858,10 @@ The following table lists available search operators, their element names and me
 | `<strGtEq/>`   | String  | tag >= c                           | Searches for string values tags with values greater than or equal to a provided constant value. |
 | `<strLt/>`     | String  | tag < c                            | Searches for string values tags with values lesser than a provided constant value. |
 | `<strLtEq/>`   | String  | tag <= c                           | Searches for string values tags with values lesser than or equal to a provided constant value. |
+| `<strRegEx/>`  | String  | tag LIKE c (regular expression)    | Searches for string values tags with values similar to a provided constant regular expression value. |
 | `<strRange/>`  | String  | min <\(\=\) tag <\(\=\) max        | Searches for string values tags with values within a specified range of values. The endpoints can be included or excluded in the search. |
 | `<strNRange/>` | String  | tag <\(\=\) min OR tag >\(\=\) max | Searches for string values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
-| `<strMask/>`   | String  | tag LIKE c                         | Searches for string values tags with values similar to a provided constant value including wildcards. |
+| `<strMask/>`   | String  | tag LIKE c (wildcard)              | Searches for string values tags with values similar to a provided constant value including wildcards. |
 | `<numEq/>`     | Numeric | tag = c                            | Searches for numerical values tags with values equal to a provided constant value. |
 | `<numNEq/>`    | Numeric | tag <> c                           | Searches for numerical values tags with values not equal to a provided constant value. |
 | `<numGt/>`     | Numeric | tag > c                            | Searches for numerical values tags with values greater than a provided constant value. |
@@ -871,7 +872,7 @@ The following table lists available search operators, their element names and me
 | `<numNRange/>` | Numeric | tag <\(\=\) min OR tag >\(\=\) max | Searches for numerical values tags with values outside of a specified range of values. The endpoints can be included or excluded in the range (and therefore correspondingly excluded or included in the search). |
 [Search operators]
 
-The following example shows how a search for specific devices within a specific geographic area can be found. More precisely, it searches for a certain kind of PLC
+The following example shows how a search for specific devices within a specific geographic area can be performed. More precisely, it searches for a certain kind of PLC
 produced by a certain manufacturer, but only versions 1.0 <= v < 2.0 and with serial numbers beginning with 9873. The PLCs must also lie within latitude 33 ad 34
 degrees south and between longitude 70 and 72 west.
 
@@ -891,8 +892,8 @@ degrees south and between longitude 70 and 72 west.
 </iq>
 ```
 
-You can use wildcards in the name attribute. To do this, you also need to declare the wildcard
-used using the `nameWildcard` attribute. Using name wildcard is a conveniant way of searching
+You can use wildcards in the `name` attribute. To do this, you also need to declare the wildcard
+used using the `nameWildcard` attribute. Using a name wildcard is a conveniant way of searching
 for registered devices publishing their harmonized interfaces in the thing registry. Example:
 
 ```xml:Searching for Things with harmonized sensor interfaces
@@ -908,9 +909,9 @@ for registered devices publishing their harmonized interfaces in the thing regis
 </iq>
 ```
 
-The `offset` attribute tells the registry the number of responses to skip before returning 
+The `offset` attribute tells the registry the number of things to skip before returning 
 found things. It provides a mechanism to page result sets that are too large to return in one 
-response. the `maxCount` attribute contains the desired maximum number of things to return in 
+response. The `maxCount` attribute contains the desired maximum number of things to return in 
 the response. The registry can lower this value, if it decides the requested maximum number is
 too large.
 
@@ -992,10 +993,10 @@ iotdisco:MAN=www.example.org;MODEL=Device;SN~*9873*;#V>=1.0;#V<2;#LON>=-72;#LON<
 Meta Tags
 ------------
 
-This document does not limit the number or names of tags used by Things to register meta information about themselves. However, it provides some general limits 
+This document does not limit the number or names of tags when Things register meta-data information about themselves. However, it provides some general limits 
 and defines the meaning of a few tags that must have the meanings specified herein.
 
-The maximum length of a tag name is `32` characters. Tag names must not include colon (`:`), hash sign (`#`) or white space characters. String tag values
+The maximum length of a tag name is `64` characters. Tag names must not include colon (`:`), hash sign (`#`) or white space characters. String tag values
 must not exceed `128` characters in length.
 
 The following table lists predefined tag names and their corresponding meanings.
@@ -1025,13 +1026,37 @@ The following table lists predefined tag names and their corresponding meanings.
 | `STREET`   | String  | Street Name                                    |
 | `STREETNR` | String  | Street Number                                  |
 | `V`        | Numeric | Version Number                                 |
- [Predefined tags]
+[Predefined tag names]
  
 It is up to the Thing Registry to choose which tags it persists and which tags it doesn't. To avoid the possibility of malicious reporting of tags, some limit should be
 imposed on what tags are supported. As a minimum, a Thing Registry must support all predefined tags, as listed above.
 
 **Note**: Meta Tag names are case insensitive. In this document, all tag names have been written using upper case letters.
 
+### Including Support for Harmonized Interfaces in Thing Meta-Data
+
+Things can register their support for [Harmonized Interfaces](HarmonizedInterfaces.md) in the Thing Registry. This allows clients to search 
+for Things that support required interfaces. Each Harmonized Interface is identified using a URI using the `nfi` Namespace Identifier together 
+with the `urn` URI schema. This is a compact URI schema and Namespace, that concatenates short names (the first two being `urn` and `nfi`), 
+delimited by colons (`:`), followed by a colon (`:`) and a version number, in the form of a Major Version period (`.`) Minor Version. (The 
+same type of URI is used to define the namespaces of the XML schemas used in this specification.) The formal syntax is:
+
+```
+nfi-uri      = "urn:nfi:" category ":" subcat : version
+category     = name
+subcat       = 1*( ":" name )
+name         = ALPHA *( unreserved / pct-encoded )
+version      = 1*DIGIT "." 1*DIGIT
+```
+
+To include support for Harmonized Interfaces in Thing Meta-Data, report them as tags, as follows:
+
+*   Each Harmonized Interface Tag is a numerical tag.
+
+*   The Tag Name corresponds to everything in the URI up to the last colon (`:`), but not the last colon itself. Furthermore, all colons are
+replaced by underscore characters (`_`), as the colon character is not a valid character in a tag name.
+
+*   The Tag Value, is the numerical form of the version number of the URI.
 
 Geo-spatial object references to things
 ------------------------------------------

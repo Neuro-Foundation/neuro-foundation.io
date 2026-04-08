@@ -227,9 +227,21 @@
 						<xs:documentation>Only return devices having a specific named string-valued tag match a value containing wildcards.</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
-						<xs:attribute name='name' type='xs:string' use='required'/>
-						<xs:attribute name='value' type='xs:string' use='required'/>
-						<xs:attribute name='wildcard' type='xs:string' use='required'/>
+						<xs:attribute name='name' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Name of tag to search on.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='value' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>String value used by the search operator.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='wildcard' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Wildcard used in the tag value attribute.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name='numEq' type='NumTag'>
@@ -344,7 +356,7 @@
 		</xs:attribute>
 		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 			<xs:annotation>
-				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open interval).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name='max' type='xs:string' use='required'>
@@ -354,7 +366,7 @@
 		</xs:attribute>
 		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 			<xs:annotation>
-				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open interval).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
@@ -375,7 +387,7 @@
 		</xs:attribute>
 		<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 			<xs:annotation>
-				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+				<xs:documentation>If the minimum value is included (closed interval) in the range or not (open interval).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name='max' type='xs:double' use='required'>
@@ -385,7 +397,7 @@
 		</xs:attribute>
 		<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 			<xs:annotation>
-				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open  interval).</xs:documentation>
+				<xs:documentation>If the maximum value is included (closed interval) in the range or not (open interval).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
