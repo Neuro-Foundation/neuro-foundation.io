@@ -972,6 +972,268 @@ new search), the `more` attribute is present with value `true`.
 **Note**: Meta Tag names are case insensitive. In this document, all tag names have been 
 written using upper case letters.
 
+### Distributed Searches
+
+If no responses are found in the local Thing Registry, a distributed search can be performed if the client desires it. This permission is
+granted by setting the `distributed` attribute in the search request to `true`. If this attribute is set, and no local thing references matching
+the query are found, the Thing Registry can forward the search request upwards in the network, to its parent broker, or downwards in the network,
+to connected child brokers.
+
+Example of a distributed search:
+
+```xml:Distributed search for Things
+<iq type='get'
+    from='curious@example.org/client'
+    to='discovery.example.org'
+    id='9'>
+   <search xmlns='urn:nfi:iot:disco:1.0' offset='0' maxCount='20' distributed='true'>
+       <strEq name='MAN' value='www.example.org'/>
+       <strEq name='MODEL' value='Device'/>
+       <strMask name='SN' value='9873*' wildcard='*'/>
+       <numRange name='V' min='1' minIncluded='true' max='2' maxIncluded='false'/>
+       <numRange name='LON' min='-72' minIncluded='true' max='-70' maxIncluded='true'/>
+       <numRange name='LAT' min='-34' minIncluded='true' max='-33' maxIncluded='true'/>
+   </search>
+</iq>
+```
+
+Example of a response showing a distributed search has been initiated:
+
+```xml:Distributed search started
+<iq type='result'
+    from='discovery.example.org'
+    to='curious@example.org/client'
+    id='9'>
+   <debby xmlns='urn:nfi:iot:disco:1.0' qid='rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4='/>
+</iq>
+```
+
+**DEBBY** is an acronym for *Distributed Ephemeral Bulletin Board sYstem*. It is a mechanism to distribute search queries and cache their
+results, to allow for a federated search infrastructure and avoid having to collect all information in a central storage.
+
+#### Forwarding Distributed Query to Parent Broker
+
+After creating the identifier for the distributed search, the Thing Registry forwards the search request to the Thing Registry of its parent 
+broker, if any. The forwarded search request is embedded in a `<query>` element that contains the `qid` attribute identifying the distributed 
+query and sent in an `<iq type='get'>` stanza.
+
+```xml:Distributed search query forwarded to parent broker
+<iq type='get'
+    from='discovery.example.org'
+    to='discovery.parent.example.org'
+    id='10'>
+    <query xmlns="urn:nfi:iot:disco:1.0"
+           qid="rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4="
+           created="2026-04-09T15:59:37Z"
+           source="curious@example.org/client">
+       <search offset="0" maxCount="20"
+               distributed="true">
+           <strEq name="MAN" 
+                  value="www.example.org"/>
+           <strEq name="MODEL" 
+                  value="Device"/>
+           <strMask name="SN" 
+                    value="9873*" 
+                    wildcard="*"/>
+           <numRange name="V" min="1" max="2"
+                     minIncluded="true" 
+                     maxIncluded="false"/>
+           <numRange name="LON"
+                     min="-72" max="-70"
+                     minIncluded="true" 
+                     maxIncluded="true"/>
+           <numRange name="LAT"
+                     min="-34" max="-33"
+                     minIncluded="true" 
+                     maxIncluded="true"/>
+       </search>
+    </query>
+</iq>
+```
+
+The parent Broker can respond to this query in different ways:
+
+#.  The parent broker first checks if the sender is authorized to perform the request. The broker should verify that the sender is a child
+broker with an account on the parent broker. If not, it should return a corresponding error response to the sender.
+
+#.  If it recognizes the query identifier, and has a cached result, it can return the cached result immediately.
+
+#.  If it recognizes the query, and has a cached result, it can return the cached result immediately.
+
+#.  It performs a local-only search, and returns the result set, even if the result is empty.
+
+**Note**: At this point, the query is not forwarded to the parent broker of the parent broker, if a result is not found. Instead, the parent
+broker should check if it is subscribed to the senders `nf:debby` publish/subscribe node. Through this node, the parent broker receives
+notifications of new distributed queries, as well as the status of the current query. If not subscribed, the Parent Broker subscribes to its
+Child Broker's `nf:debby` node.
+
+The response to the forwarded query is a `<result>` element sent in an `<iq type='result'>` stanza. The `<result>` element may contain
+a `<found>` element, if a result was found on the parent, or be empty, if no result was found. The `<result>` element must also have a `qid` 
+attribute with the same value as the `qid` attribute of the forwarded query.
+
+```xml:Distributed search query response from Parent Broker
+<iq type='result'
+    from='discovery.parent.example.org'
+    to='discovery.example.org'
+    id='10'>
+    <result xmlns="urn:nfi:iot:disco:1.0"
+            qid="rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4=">
+        <found xmlns='urn:nfi:iot:disco:1.0' more='false'>
+            <thing jid='rack@example.org' id='plc1' src='MeteringTopology'>
+                <str name='SN' value='98734238472634'/>
+                <str name='MAN' value='www.example.org'/>
+                <str name='MODEL' value='Device'/>
+                <num name='V' value='1.0'/>
+                <str name='CLASS' value='PLC'/>
+                <num name='LON' value='-71.519722'/>
+                <num name='LAT' value='-33.008055'/>
+            </thing>
+            ...
+        </found>
+    </result>
+</iq>
+```
+
+Example of a response to a forwarded query with no result:
+
+```xml:Distributed search query response with no result from Parent Broker
+<iq type='result'
+    from='discovery.parent.example.org'
+    to='discovery.example.org'
+    id='10'>
+    <result xmlns="urn:nfi:iot:disco:1.0"
+            qid="rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4="/>
+</iq>
+```
+
+#### Forwarding Distributed Query to Child Brokers
+
+If no response is available, and no prior similar query has been received, the DEBBY publishes the same query (the `<query>` element and its
+contents), together with its source network address and query identifier, on a non-persistent Publish and Subscribe Node named `nf:debby`, 
+having a limited number of concurrent items, and sending notifications with their corresponding payloads. Notifications must also contain
+a `replyto` extended address reference, in accordance with [XEP-0033: Extended Stanza Addressing](https://xmpp.org/extensions/xep-0033.html). 
+The publication is initiated internally, so no external XMPP communication is necessary. The Publish/Subscribe Item identifier is the same as 
+the `qid` attribute of the `<query>` element. An event notification to subscribed entities may look as follows (see 
+[XEP-0060](https://xmpp.org/extensions/xep-0060.html) for details):
+
+```xml:Publish/Subscribe notification of new distributed query
+<message from='pubsub.example.org' to='subscriber@example.org'>
+  <event xmlns='http://jabber.org/protocol/pubsub#event'>
+    <items node='nf:debby'>
+      <item id='rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4='>
+        <query xmlns="urn:nfi:iot:disco:1.0"
+                qid="rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4="
+                created="2026-04-09T15:59:37Z"
+                source="curious@example.org/client">
+            <search offset="0" maxCount="20"
+                    distributed="true">
+                <strEq name="MAN" 
+                        value="www.example.org"/>
+                <strEq name="MODEL" 
+                        value="Device"/>
+                <strMask name="SN" 
+                        value="9873*" 
+                        wildcard="*"/>
+                <numRange name="V" min="1" max="2"
+                            minIncluded="true" 
+                            maxIncluded="false"/>
+                <numRange name="LON"
+                            min="-72" max="-70"
+                            minIncluded="true" 
+                            maxIncluded="true"/>
+                <numRange name="LAT"
+                            min="-34" max="-33"
+                            minIncluded="true" 
+                            maxIncluded="true"/>
+            </search>
+        </query>
+      </item>
+    </items>
+  </event>
+  <addresses xmlns='http://jabber.org/protocol/address'>
+    <address type='replyto' jid='discovery.example.org'/>
+  </addresses>
+</message>
+```
+
+Subscribed Child Brokers can choose to subscribe to the `nf:debby` node of its Parent Broker and receive the queries at their own pace. 
+If a child Broker can resolve the query, it informs the DEBBY from which it received the query of the response, and the DEBBY propagates 
+it to the sender (its source, or parent Broker), as well as removes the item from the Publish and Subscribe Node. The address to 
+send the response to is found in the `<addresses>` element, looking for the `<address>` with `type='replyto'`. The JID is available in the 
+`jid` attribute. The response is sent using a `<result>` element sent in an `<iq type='set'>` stanza to the JID found in the notification. 
+The `<result>` element must contain a `<found>` element with the result set. Empty result sets must not be sent at this point. Only brokers
+with valid results send them.
+
+```xml:Distributed search query response from Child Broker
+<iq type='set'
+    from='subscriber@example.org/1234'
+    to='discovery.example.org'
+    id='11'>
+    <result xmlns="urn:nfi:iot:disco:1.0"
+            qid="rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4=">
+        <found xmlns='urn:nfi:iot:disco:1.0' more='false'>
+            <thing jid='rack@example.org' id='plc1' src='MeteringTopology'>
+                <str name='SN' value='98734238472634'/>
+                <str name='MAN' value='www.example.org'/>
+                <str name='MODEL' value='Device'/>
+                <num name='V' value='1.0'/>
+                <str name='CLASS' value='PLC'/>
+                <num name='LON' value='-71.519722'/>
+                <num name='LAT' value='-33.008055'/>
+            </thing>
+            ...
+        </found>
+    </query>
+</iq>
+```
+
+The recipient acknowledges the receipt of the response with an empty `<iq type='result'>` stanza, as follows:
+
+```xml:Acknowledging distributed search query response
+<iq type='result'
+    from='discovery.example.org'
+    to='subscriber@example.org/1234'
+    id='11'/>
+```
+
+When a response is received, the recipient must first check that the sender of the result is a valid sender. First, it must be an approved
+subscriber to the `nf:debby` node. Second, the Broker may add additional checks, such as ensuring the sender is a proper Child Broker with 
+an account on the recipient Broker, or the Parent Broker. If the sender is approved, the recipient broker adds the result to the cache of the
+query, and forwards the response to the address from where it got it (the Parent Broker if received via publish/subscribe, or the query source, 
+if received directly from the source). The DEBBY also removes the corresponding item from the Publish and Subscribe Node. New Distributed 
+queries can also replace old ones. In both cases, the removal gets propagated, allowing child Brokers to discard the query, if it has not been 
+processed yet. Assuming that similar queries can occur in close proximity to each other, the response is also cached for a limited time, to 
+allow for quick responses to similar such queries. The DEBBY responsible for a query must also return an empty response to the source of the 
+query, if the query expires or gets removed. A removal notification may look as follows:
+
+```xml:Publish/Subscribe notification of distributed query removal
+<message from='pubsub.example.org' to='subscriber@example.org'>
+  <event xmlns='http://jabber.org/protocol/pubsub#event'>
+    <items node='nf:debby'>
+      <retract id='rvSiK4z3s0BOAyPrApWcSNvxJ0apNdBW7bLyXG40+t4='/>
+    </items>
+  </event>
+</message>
+```
+
+#### Propagating the Distributed Query further in the network
+
+If a DEBBY that received a query from a Publish/Subscribe node cannot resolve the query or does not see the query being solved within a
+certain configurable time, can choose to propagate the query further one step by publishing it on its own Publish and Subscribe Node 
+`nf:debby`. At this point, child brokers, as well as the Parent Broker are subscribed to the `nf:debby` node, so they can 
+follow how the query gets propagated.
+
+Likewise, the Parent Broker of a Broker, receiving the propagated query via a dedicated request can monitor the query via notifications from
+the Publish/Subscribe node on the Broker sending the request. If the query does not get resolved within a certain (configurable) time, the
+Parent broker also, can publish the query on its own `nf:debby` node, to propagate it among the siblings of the Broker sending the request.
+
+In this way, the query gets propagated one step, both upwards and downwards in the network, if no-one resolves the query. When republishing 
+queries, each DEBBY makes sure to ignore queries it has already received, to avoid creating loops. The `replyto` address of the notification
+should be updated by each publisher also, to ensure that responses get routed the same way the query was sent in the network, cached in all 
+instances along the route of the query. This ensures that the next time the same query is performed, it is answered much quicker, without 
+having to propagate the query as far in the network as the first time. It also ensures the query items of the Publish/Subscribe nodes gets
+removed appropriately, so the query stops propagating.
+
 ### IoTDisco URI Scheme for searches
 
 The `iotdisco` URI scheme allows for encoding searches as one URI as well. This facilitates providing URIs for finding public devices based on their registered meta-data.
@@ -1108,12 +1370,26 @@ information.
 
 ### Rate Limits
 
-To avoid spam and protect against unwanted behavior, the Thing Registry may implement rate limitations, and other limitations, to registrations 
-and updates.
+A Thing Registry can receive queries from anyone on the federated network. To avoid being overwhelmed by queries (DDoS), it can apply a 
+rate-limiting mechanism based on the authenticated sender address (Bare JID). The number of simultaneous outstanding, unresolved queries 
+can thus be limited. It can also restrict access based on previous interactions, permitting temporal as well as permanent blocking of 
+senders. An analysis of the queries sent by a sender can also be employed, identifying queries resulting in null responses, or too wide 
+search parameters, use of  wildcards, etc., as an indication of scanning, and therefore a candidate for a temporal or permanent block.
 
 ### Authorized access
 
 Thing Registries may allow registration and updates of meta-data only from accounts connected to the same Broker as is hosting the Thing 
-Registry. It may also restrict access based on privileges assigned to such accounts. Searching the Thing Registry should however be possible 
-from clients connected to other Brokers, to maintain a searchable, interoperable and federated network of Things.
+Registry. They may also restrict access based on privileges assigned to such accounts. Domain-local searches of the Thing Registry should 
+however be possible from clients connected to other Brokers, to maintain a searchable, interoperable and federated network of Things. 
 
+While a Thing Registry can receive queries from any authenticated entity on the network, a DEBBY is accessible upwards only by connected 
+and authenticated Brokers, and downwards, via the predefined Publish and Subscribe Node. This means it can employ rate limits of upward 
+queries made by its child Brokers. On the other hand, child Brokers control the downward rate by limiting the number of queries they 
+process out of those received from the DEBBY publish/subscribe node.
+
+### Discovery versus Access
+
+It is worth noting that discovering a device does not mean getting access to it or revealing more personal information about it than those 
+the owner has not already agreed to publish. It only gives the network address (permitting the recipient to request access), and the meta-data
+the Owner and Thing have published in the Registry. The owner, via the provisioning service, has full control over who can access its devices,
+and what they can do with them. The owner can also revoke access at any time.

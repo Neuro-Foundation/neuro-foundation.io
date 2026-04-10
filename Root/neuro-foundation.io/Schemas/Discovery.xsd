@@ -295,6 +295,11 @@
 					<xs:documentation>Maximum number of items in the result.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name='distributed' type='xs:boolean' use='optional' default='false'>
+				<xs:annotation>
+					<xs:documentation>If a distributed search should be initiated, if no responses are found locally.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 
@@ -454,4 +459,66 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='debby'>
+		<xs:annotation>
+			<xs:documentation>If no local thing references are found, and a distributed search is permitted, the Thing Registry can respond with this element, containing an identifier for the distributed search procedure.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='qid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>A unique identifier created by the Thing Registry, identifying the distributed search operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='query'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a query for a distributed search operation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='search'>
+					<xs:annotation>
+						<xs:documentation>The original search element containing the search operators used in the distributed search operation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='qid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>A unique identifier identifying the distributed search operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='created' type='xs:dateTime' use='required'>
+				<xs:annotation>
+					<xs:documentation>The timestamp when the distributed search operation was created, in UTC.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='source' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>The source of the distributed search operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='result'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a query result set for a distributed search operation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref='found' minOccurs='0' maxOccurs='1'>
+					<xs:annotation>
+						<xs:documentation>The response element containing a result to the referenced query.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='qid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>A unique identifier identifying the distributed search operation.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>
