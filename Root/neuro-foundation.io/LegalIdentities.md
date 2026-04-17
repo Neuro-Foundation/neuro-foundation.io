@@ -106,6 +106,7 @@ Some names are predefined however, as described in the following table:
 | `BDAY`        | Birth Day                                                       |
 | `BMONTH`      | Borth Month                                                     |
 | `BYEAR`       | Birth Year                                                      |
+| `AGEABOVE`    | Age above the stated number of years                            |
 | `GENDER`      | Gender (`M` or `F`)                                             |
 | `PHONE`       | Phone number, international phone number format.                |
 | `EMAIL`       | E-mail address.                                                 |
