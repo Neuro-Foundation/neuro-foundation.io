@@ -1,0 +1,29 @@
+@startuml
+Activate Entity
+
+Entity -> Device : subscribe
+
+Activate Device
+
+Device -> Device : Can I accept? (checking cache)
+
+Activate Device
+
+Device -> Provisioning : isFriend(jid) [Don't know]
+
+Activate Provisioning
+
+Device <- Provisioning : isFriendResponse(jid,result)
+
+Device -> Device : Store in cache
+
+Deactivate Provisioning
+
+Entity <- Device : Accept [If true]
+
+Entity <- Device : Reject [If false]
+
+Deactivate Device
+Deactivate Device
+Deactivate Entity
+@enduml
