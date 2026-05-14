@@ -12,7 +12,22 @@
 		<xs:annotation>
 			<xs:documentation>Sent to a device to clear its provisioning rule cache.</xs:documentation>
 		</xs:annotation>
-		<xs:complexType/>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
 
 	<xs:element name='isFriend'>

@@ -418,6 +418,20 @@
 			<xs:documentation>The owner sends this in a request to the provisioning server, to ask it to clear the caches of one or all of its owned devices.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='nd' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attributeGroup ref='sd:nodeIdentity'>
+							<xs:annotation>
+								<xs:documentation>Node identification attributes.</xs:documentation>
+							</xs:annotation>
+						</xs:attributeGroup>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
 			<xs:attribute name='jid' type='xs:string' use='optional'>
 				<xs:annotation>
 					<xs:documentation>The bare JID of the device whose cache is to be cleared.</xs:documentation>
