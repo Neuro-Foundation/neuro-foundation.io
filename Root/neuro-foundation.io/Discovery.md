@@ -1362,7 +1362,7 @@ tag names defined in this document. If it has a configurable list of approved ta
 
 ### External services for creating QR-codes
 
-If using external services when creating QR-codes, like the Google Charts API, make sure HTTPS is used and certificates validated. If HTTP is 
+If using external services when creating QR-codes, make sure HTTPS is used and certificates validated. If HTTP is 
 used, meta-data tags used in Thing Registry registrations can be found out by sniffing the network, making it possible to hijack the 
 corresponding devices. Also, sensitive information about Things in the network might leak to the host and third parties the host of the 
 encoding service shares the data with. It is recommended that internal generation of QR codes is performed, to avoid leakage of sensitive 
