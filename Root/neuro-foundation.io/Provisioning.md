@@ -43,6 +43,9 @@ decision support.
 
 * Partial permissions should be permitted.
 
+* Generalized answers should be possible, so that the owner does not have to respond to every 
+single event.
+
 * Decisions should be possible to base on any of available [identities](Identities.md): network identity, domain identity, user, service or device identity.
 
 * Decision making by the owner should be completely decoupled from decision support to devices. Responses to devices occur in real-time. Responses from
