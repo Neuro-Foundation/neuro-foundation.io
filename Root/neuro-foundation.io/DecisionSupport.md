@@ -199,5 +199,9 @@ Deactivate Entity
 Clearing the cache
 ----------------------
 
-When the provisioning server, or the owner, wants to clear the cache of a device, it sends a `<clearCache/>` element in an `<iq type="set"/>` stanza to the device.
-This makes the device re-ask the questions to the provisioning server, making sure any new rules are effectively applied.
+When the provisioning server, wants to clear the cache of a device, it sends a `<clearCache/>` 
+element in an `<iq type="set"/>` stanza to the device. This makes the device re-ask the 
+questions to the provisioning server, making sure any new rules are effectively applied. 
+If the node is embedded in a concentrator, the `<clearCache/>` element must also contain the 
+`id`, `src` and `pt` attributes, as appropraite, to identify the node whose cache is to be 
+cleared.

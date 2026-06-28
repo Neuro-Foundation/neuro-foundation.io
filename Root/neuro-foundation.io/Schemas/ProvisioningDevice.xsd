@@ -13,22 +13,34 @@
 			<xs:documentation>Sent to a device to clear its provisioning rule cache.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name='nd' minOccurs='0' maxOccurs='unbounded'>
-					<xs:annotation>
-						<xs:documentation>Defines a node in a concentrator.</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:attributeGroup ref='sd:nodeIdentity'>
-							<xs:annotation>
-								<xs:documentation>Node identification attributes.</xs:documentation>
-							</xs:annotation>
-						</xs:attributeGroup>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
+			<xs:attributeGroup ref='optionalNodeIdentity'>
+				<xs:annotation>
+					<xs:documentation>optional Node identification attributes.</xs:documentation>
+				</xs:annotation>
+			</xs:attributeGroup>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:attributeGroup name='optionalNodeIdentity'>
+		<xs:annotation>
+			<xs:documentation>Defines attributes for the identification of a node in a device.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name='id' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Node identity. (Required)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='src' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Source identity. (Optional. Scopes the node identity.)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='pt' type='xs:string' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Source partition. (Optional. Scopes the node identity, within a source.)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
 
 	<xs:element name='isFriend'>
 		<xs:annotation>

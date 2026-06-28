@@ -171,18 +171,26 @@ service that the remote entity is only authorized to control some of the control
 Refreshing rules in device
 --------------------------------------
 
-The owner can request the provisioning service to request the cache to be cleared in one of its devices. This can be useful to make sure rules are 
-up-to-date in the device. The owner simply sends a `<clearCache/>` element in an `<iq type="set"/>` stanza to the provisioning service. The element 
-should contain the bare JID of the device in the `jid` attribute.
+The owner can request the provisioning service to request the cache to be cleared in one of 
+its devices. This can be useful to make sure rules are up-to-date in the device. The owner 
+simply sends a `<clearCache/>` element in an `<iq type="set"/>` stanza to the provisioning 
+service. The element should contain the bare JID of the device in the `jid` attribute. If the
+`jid` attribute is omitted, the cache will be cleared in all devices of the owner. If the 
+device is a concentrator, the Owner can specify the corresponding node whose caches should 
+be cleared, by including the `id`, `src` and `pt` attributes, as appropriate. Omitting these 
+node specifications, all rules related to the Concentrator will be cleared.
 
 
 Deleting rules for device
 --------------------------------------
 
-The owner can ask the provisioning service to delete all rules pertaining to a specific device, or node in a concentrator. This is done by sending a
-`<deleteRules/>` element in an `<iq type="set"/>` stanza to the provisioning service, with the bare JID of the device in the `jid` attribute. If the 
-device is a concentrator, you also need to specify the corresponding node. After deleting all rules, any new operations performed on the device will 
-cause events to be sent to owner, letting the owner reprovision the device or node.
+The owner can ask the provisioning service to delete all rules pertaining to a specific device,
+or node in a concentrator. This is done by sending a `<deleteRules/>` element in an 
+`<iq type="set"/>` stanza to the provisioning service, with the bare JID of the device in the 
+`jid` attribute. If the device is a concentrator, you also need to specify the corresponding 
+node using the `id`, `src` and `pt` attributes, as appropriate. After deleting all rules, any 
+new operations performed on the device will cause events to be sent to owner, letting the 
+owner reprovision the device or node.
 
 
 Getting list of devices
