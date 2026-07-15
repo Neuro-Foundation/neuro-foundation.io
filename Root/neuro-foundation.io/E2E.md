@@ -121,6 +121,8 @@ The list of supported curves may change over time.
 | Brainpool P-384r1[^RFC5639] | `bp384`   |            192 |           7680 | ECDSA, SHA-384                 | No          |
 | Brainpool P-512r1[^RFC5639] | `bp512`   |            256 |          15360 | ECDSA, SHA-512                 | No          |
 
+**Note**: Asymmetric Cipher extensions declare their support using elements from other namespaces.
+
 [^RFC7748]: Curve25519 and Curve448 are described in [RFC 7748](https://tools.ietf.org/html/rfc7748). This includes binary representations
 of public keys and signatures.
 [^RFC8032]: Edwards25519 and Edwards448 are described in [RFC 8032](https://tools.ietf.org/html/rfc8032). This includes binary representations
@@ -172,6 +174,8 @@ symmetric cipher elements and attributes include:
 | AEAD-ChaCha20-Poly1305 | `acp`             |            256 |
 | AES-256                | `aes`             |            256 |
 | ChaCha20               | `cha`             |            256 |
+
+**Note**: Symmetric Cipher extensions declare their support using attributes from other namespaces.
 
 Symmetric cipher elements share the following attributes:
 
