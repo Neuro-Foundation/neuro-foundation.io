@@ -142,9 +142,9 @@ The following Module-Lattice-based endpoints are currently supported for End-to-
 
 | Key Exchange  | Signatures  | Pre-Hash    | Element | Security Level |
 |:--------------|:------------|:------------|:--------|---------------:|
-| `ML_KEM_512`  | `ML_DSA_44` | `SHAKE-256` | `ml128` |            128 | 
-| `ML_KEM_768`  | `ML_DSA_65` | `SHAKE-256` | `ml192` |            192 | 
-| `ML_KEM_1024` | `ML_DSA_87` | `SHAKE-256` | `ml256` |            256 | 
+| `ML-KEM-512`  | `ML-DSA-44` | `SHAKE-256` | `ml128` |            128 | 
+| `ML-KEM-768`  | `ML-DSA-65` | `SHAKE-256` | `ml192` |            192 | 
+| `ML-KEM-1024` | `ML-DSA-87` | `SHAKE-256` | `ml256` |            256 | 
 
 [^FIPS203]: [NIST FIPS 203](https://csrc.nist.gov/pubs/fips/203/final), Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM).
 [^FIPS204]: [NIST FIPS 204](https://csrc.nist.gov/pubs/fips/204/final), Module-Lattice-Based Digital Signature Standard (ML-DSA).
