@@ -263,7 +263,7 @@ Following are some examples of stanzas related to End-to-End encryption.
 ### Publishing public keys
 
 The following example shows a `<presence/>` stanza, where the sender publishes a set of
-public keys for available asymmetric ciphers.
+public keys for available asymmetric ciphers, as well as support for symmetric ciphers.
 
 ```
 <presence>
