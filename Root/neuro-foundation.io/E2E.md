@@ -131,7 +131,7 @@ add an extra layer of authentication of the sender and integrity protection of t
 ### Post-Quantum Cryptography (PQC)
 
 Post-Quantum Cryptography (PQC) is an area of cryptography that aims to develop secure cryptographic algorithms against the potential 
-threats posed by quantum computers. The algorithms available are based on module lattice-based cryptography, mainly the `ML-KEM`[^FIPS2023]
+threats posed by quantum computers. The algorithms available are based on module lattice-based cryptography, mainly the `ML-KEM`[^FIPS203]
 algorithm for key exchange, and `ML-DSA`[^FIPS204] for digital signatures. A single algorithm cannot do both, so, and End-to-End encryption
 endpoint need to instantiate both algorithms, and keep keys for both algorithms, in order to both negotiate shared secrets for symmetric
 encryption, and sign messages. The public key of the endpoint, is simply the public keys concatenated together, with the key exchange
