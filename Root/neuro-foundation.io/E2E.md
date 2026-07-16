@@ -146,8 +146,8 @@ threats posed by quantum computers. The algorithms available are based on module
 algorithm for key exchange, and `ML-DSA`[^FIPS204] for digital signatures. A single algorithm cannot do both, so, and End-to-End encryption
 endpoint need to instantiate both algorithms, and keep keys for both algorithms, in order to both negotiate shared secrets for symmetric
 encryption, and sign messages. The public key of the endpoint, is simply the public keys concatenated together, with the key exchange
-encapsulation key first followed by the signature public key. When using the ML-DSA algorithm, messages are furthermore *pre-hashed* using 
-`SHAKE-256`. `ML-KEM` emits a cipher text during key encapsulation, is is sent BASE64-encoded in the `k` attribute of the symmetric cipher 
+encapsulation key first followed by the signature public key. When using the `ML-DSA` algorithm, messages are furthermore *pre-hashed* using 
+`SHAKE-256`. `ML-KEM` emits a cipher text during key encapsulation, which is sent BASE64-encoded in the `k` attribute of the symmetric cipher 
 element.
 
 The following Module-Lattice-based endpoints are currently supported for End-to-End Encryption using PQC:
