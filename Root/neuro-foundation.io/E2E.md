@@ -102,24 +102,24 @@ Support for Elliptic Curve encryption endpoints is shown by including the curve 
 `<presence/>` stanza. Each curve element includes a `pub` attribute containing a BASE64-encoded binary representation of the public key.
 The list of supported curves may change over time.
 
-| Curve Name                  | Element   | Security Level | RSA equivalent | Signatures                     | Safe[^Safe] |
-|:----------------------------|:----------|---------------:|---------------:|:-------------------------------|:-----------:|
-| Curve25519[^RFC7748]        | `x25519`  |            128 |           3072 | N/A[^CurveNote]                | Yes         |
-| Curve448[^RFC7748]          | `x448`    |            224 |           7680 | N/A[^CurveNote]                | Yes         |
-| Edwards25519[^RFC8032]      | `ed25519` |            128 |           3072 | EdDSA, SHA-512                 | Yes         |
-| Edwards448[^RFC8032]        | `ed448`   |            224 |           7680 | EdDSA, SHAKE256[114][^FIPS202] | Yes         |
-| NIST P-192[^FIPS1864]       | `p192`    |             96 |           1024 | ECDSA, SHA-256                 | No          |
-| NIST P-224[^FIPS1864]       | `p224`    |            112 |           2048 | ECDSA, SHA-256                 | No          |
-| NIST P-256[^FIPS1864]       | `p256`    |            128 |           3072 | ECDSA, SHA-256                 | No          |
-| NIST P-384[^FIPS1864]       | `p384`    |            192 |           7680 | ECDSA, SHA-512                 | No          |
-| NIST P-521[^FIPS1864]       | `p521`    |            256 |          15360 | ECDSA, SHA-512                 | No          |
-| Brainpool P-160r1[^RFC5639] | `bp160`   |             80 |            768 | ECDSA, SHA-256                 | No          |
-| Brainpool P-192r1[^RFC5639] | `bp192`   |             96 |           1024 | ECDSA, SHA-256                 | No          |
-| Brainpool P-224r1[^RFC5639] | `bp224`   |            112 |           2048 | ECDSA, SHA-256                 | No          |
-| Brainpool P-256r1[^RFC5639] | `bp256`   |            128 |           3072 | ECDSA, SHA-256                 | No          |
-| Brainpool P-320r1[^RFC5639] | `bp320`   |            160 |           7680 | ECDSA, SHA-384                 | No          |
-| Brainpool P-384r1[^RFC5639] | `bp384`   |            192 |           7680 | ECDSA, SHA-384                 | No          |
-| Brainpool P-512r1[^RFC5639] | `bp512`   |            256 |          15360 | ECDSA, SHA-512                 | No          |
+| Curve Name                  | Element   | Security Level | RSA equivalent | Signatures                       | Safe[^Safe] |
+|:----------------------------|:----------|---------------:|---------------:|:---------------------------------|:-----------:|
+| Curve25519[^RFC7748]        | `x25519`  |            128 |           3072 | N/A[^CurveNote]                  | Yes         |
+| Curve448[^RFC7748]          | `x448`    |            224 |           7680 | N/A[^CurveNote]                  | Yes         |
+| Edwards25519[^RFC8032]      | `ed25519` |            128 |           3072 | EdDSA, SHA-512                   | Yes         |
+| Edwards448[^RFC8032]        | `ed448`   |            224 |           7680 | EdDSA, SHAKE256\[114\][^FIPS202] | Yes         |
+| NIST P-192[^FIPS1864]       | `p192`    |             96 |           1024 | ECDSA, SHA-256                   | No          |
+| NIST P-224[^FIPS1864]       | `p224`    |            112 |           2048 | ECDSA, SHA-256                   | No          |
+| NIST P-256[^FIPS1864]       | `p256`    |            128 |           3072 | ECDSA, SHA-256                   | No          |
+| NIST P-384[^FIPS1864]       | `p384`    |            192 |           7680 | ECDSA, SHA-512                   | No          |
+| NIST P-521[^FIPS1864]       | `p521`    |            256 |          15360 | ECDSA, SHA-512                   | No          |
+| Brainpool P-160r1[^RFC5639] | `bp160`   |             80 |            768 | ECDSA, SHA-256                   | No          |
+| Brainpool P-192r1[^RFC5639] | `bp192`   |             96 |           1024 | ECDSA, SHA-256                   | No          |
+| Brainpool P-224r1[^RFC5639] | `bp224`   |            112 |           2048 | ECDSA, SHA-256                   | No          |
+| Brainpool P-256r1[^RFC5639] | `bp256`   |            128 |           3072 | ECDSA, SHA-256                   | No          |
+| Brainpool P-320r1[^RFC5639] | `bp320`   |            160 |           7680 | ECDSA, SHA-384                   | No          |
+| Brainpool P-384r1[^RFC5639] | `bp384`   |            192 |           7680 | ECDSA, SHA-384                   | No          |
+| Brainpool P-512r1[^RFC5639] | `bp512`   |            256 |          15360 | ECDSA, SHA-512                   | No          |
 
 **Note**: Asymmetric Cipher extensions declare their support using elements from other namespaces.
 
