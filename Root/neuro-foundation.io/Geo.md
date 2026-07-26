@@ -14,7 +14,7 @@ information. The XML representation is modelled using an annotated XML Schema:
 
 | Peer-to-Peer communication              ||
 | ------------|----------------------------|
-| Namespace:  | `urn:nfi:iot:geo:1.0`       |
+| Namespace:  | `urn:nfi:iot:geo:1.0`      |
 | Schema:     | [Geo.xsd](Schemas/Geo.xsd) |
 
 ![Table of Contents](toc)

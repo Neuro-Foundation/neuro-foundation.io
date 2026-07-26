@@ -15,7 +15,7 @@ decision support and provisioning.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | `urn:nfi:iot:leg:id:1.0`                                  |
+| Namespace:  | `urn:nfi:iot:leg:id:1.0`                                 |
 | Schema:     | [LegalIdentities.xsd](Schemas/LegalIdentities.xsd)       |
 
 ![Table of Contents](toc)

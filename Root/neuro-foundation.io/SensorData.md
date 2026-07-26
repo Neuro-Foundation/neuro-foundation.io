@@ -13,7 +13,7 @@ This document outlines the XML representation of sensor data. The XML representa
 
 | Sensor Data                                           ||
 | ------------|------------------------------------------|
-| Namespace:  | `urn:nfi:iot:sd:1.0`                      |
+| Namespace:  | `urn:nfi:iot:sd:1.0`                     |
 | Schema:     | [SensorData.xsd](Schemas/SensorData.xsd) |
 
 ![Table of Contents](toc)

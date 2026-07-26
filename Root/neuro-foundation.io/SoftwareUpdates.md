@@ -13,7 +13,7 @@ This document outlines the XML representation of the software updates service. T
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
-| Namespace:  | `urn:nfi:iot:swu:1.0`                                     |
+| Namespace:  | `urn:nfi:iot:swu:1.0`                                    |
 | Schema:     | [Discovery.xsd](Schemas/SoftwareUpdates.xsd)             |
 
 ![Table of Contents](toc)
