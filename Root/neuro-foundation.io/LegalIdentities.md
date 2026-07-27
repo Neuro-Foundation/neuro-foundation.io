@@ -60,8 +60,20 @@ Example:
 </iq>
 ```
 
-The response contains the public key in a `<publicKey/>` element, if successful. Public keys are encoded using the 
-[End-to-End Encryption](E2E.md) namespace and elements.
+An historic public key is requested, by including a `ts` attribute with a timestamp in the
+`<getPublicKey/>` element. The timestamp must be in UTC, and represents a point in time when
+the key was used.
+
+Example:
+
+```xml
+<iq type='get' id='3' to='legal.example.org'>
+   <getPublicKey ts='2024-08-06T12:00:00Z' xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+The response contains the public key in a `<publicKey/>` element, if successful. Public keys 
+are encoded using the [End-to-End Encryption](E2E.md) namespace and elements.
 
 Example:
 
@@ -72,6 +84,9 @@ Example:
    </publicKey>
 </iq>
 ```
+
+If no public key was found for a requested timestamp, an `item-not-found` error must be
+returned.
 
 Applying for Legal Identity registration
 ------------------------------------------
@@ -545,11 +560,6 @@ Removing attachments
 
 TODO
 
-Removing attachments
------------------------
-
-TODO
-
 Authorizing access
 ---------------------
 
@@ -572,6 +582,11 @@ TODO
 
 Trust Chains
 ---------------
+
+TODO
+
+Getting Identity References
+------------------------------
 
 TODO
 
