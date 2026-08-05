@@ -62,7 +62,7 @@
 			</xs:sequence>
 			<xs:attribute name='preview' type='xs:boolean' use='optional' default='false'>
 				<xs:annotation>
-					<xs:documentation>If set to true, the application is a preview of a coming application, and is not persisted as a normal application, but kept in short-live protected memory only, and are removed once validation of the following identity application concludes.</xs:documentation>
+					<xs:documentation>If set to true, the application is a preview of a coming application, and is not persisted as a normal application, but kept in short-lived protected memory only, and are removed once validation of the following identity application concludes.</xs:documentation>
 					<xs:documentation>Allows a client to test the creation and verification of a digital identity, without creating a persisted identity.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
