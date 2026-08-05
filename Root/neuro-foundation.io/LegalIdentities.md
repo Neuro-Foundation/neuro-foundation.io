@@ -97,49 +97,54 @@ is notified, and validation can be performed, either manually, or automatically,
 outside the scope of this specification.
 
 The `<apply/>` element must contain the information about the legal identity, encoded in an `<identity/>` element. This element must not contain
-an `id` attribute. Such requests must be rejected. The `id` attribute is added by the broker, after validating the request. The `<identity/>`
+an `id` attribute, or attachments or attachment references. Such requests must be rejected. 
+The `id` attribute is added by the broker, after validating the request. Attachments can be
+added once the identity object has been created. Attachment references are added by the
+broker to provide short-lived URIs to uploaded attachments. The `<identity/>`
 element contains a sequence of child elements, however. The first is a `<clientPublicKey/>` element, which contains the public key of the client 
 making the request. The corresponding private key will be used to sign the request later. Then comes a sequence of `<property/>` elements. Each 
 one encodes a `name`/`value` attribute pair. It is up to the client to decide the number of properties included, and which ones. Any names can be used.
 Some names are predefined however, as described in the following table:
 
-| Property      | Description                                                     |
-|:--------------|:----------------------------------------------------------------|
-| `FIRST`       | First name                                                      |
-| `MIDDLE`      | Middle name                                                     |
-| `LAST`        | Last name                                                       |
-| `FULLNAME`    | Full name. Can be used instead of `FIRST`, `MIDDLE` and `LAST`. |
-| `PNR`         | Personal number                                                 |
-| `ADDR`        | Address                                                         |
-| `ADDR2`       | Address, second line                                            |
-| `ZIP`         | Zip or postal code                                              |
-| `AREA`        | Area                                                            |
-| `CITY`        | City                                                            |
-| `REGION`      | Region, state                                                   |
-| `COUNTRY`     | Country                                                         |
-| `NATIONALITY` | Nationality                                                     |
-| `BDAY`        | Birth Day                                                       |
-| `BMONTH`      | Borth Month                                                     |
-| `BYEAR`       | Birth Year                                                      |
-| `AGEABOVE`    | Age above the stated number of years                            |
-| `GENDER`      | Gender (`M` or `F`)                                             |
-| `PHONE`       | Phone number, international phone number format.                |
-| `EMAIL`       | E-mail address.                                                 |
-| `JID`         | XMPP address (Jabber ID).                                       |
-| `DOMAIN`      | If the ID represents the legal representative of a domain.      |
-| `PREVIEW`     | A reference to a preview of the identity application.           |
-| `PSEUDONYM`   | Lists which properties are pseudonymous. Comma-separated list.  |
-| `ORGNAME`     | Name of organization                                            |
-| `ORGNR`       | Organization number                                             |
-| `ORGDEPT`     | Organization department, where person works.                    |
-| `ORGROLE`     | Role of person in organization.                                 |
-| `ORGADDR`     | Address of organization.                                        |
-| `ORGADDR2`    | Address of organization, second line                            |
-| `ORGZIP`      | Zip or postal code of organization                              |
-| `ORGAREA`     | Area of organization.                                           |
-| `ORGCITY`     | City of organization.                                           |
-| `ORGREGION`   | Region or state of organization.                                |
-| `ORGCOUNTRY`  | Country code of organization.                                   |
+| Property      | Description                                                           |
+|:--------------|:----------------------------------------------------------------------|
+| `FIRST`       | First name                                                            |
+| `MIDDLE`      | Middle name                                                           |
+| `LAST`        | Last name                                                             |
+| `FULLNAME`    | Full name. Can be used instead of `FIRST`, `MIDDLE` and `LAST`.       |
+| `PNR`         | Personal number, as defined in `COUNTRY`                              |
+| `ADDR`        | Address                                                               |
+| `ADDR2`       | Address, second line                                                  |
+| `ZIP`         | Zip or postal code                                                    |
+| `AREA`        | Area                                                                  |
+| `CITY`        | City                                                                  |
+| `REGION`      | Region, state                                                         |
+| `COUNTRY`     | Country                                                               |
+| `NATIONALITY` | Nationality                                                           |
+| `BDAY`        | Birth Day                                                             |
+| `BMONTH`      | Borth Month                                                           |
+| `BYEAR`       | Birth Year                                                            |
+| `AGEABOVE`    | Having an age above the stated number of years                        |
+| `GENDER`      | Gender (`M` or `F`)                                                   |
+| `PHONE`       | Validated phone number, using the international phone number format.  |
+| `EMAIL`       | Validated e-mail address.                                             |
+| `JID`         | Validated XMPP address (Jabber ID).                                   |
+| `DOMAIN`      | If the ID represents the legal representative of a domain.            |
+| `PREVIEW`     | A reference to a preview of the identity application.                 |
+| `PROFILE`     | Name of Identity Profile or Identity Profiles (Comma-separated list). |
+| `PSEUDONYM`   | Lists which properties are pseudonymous. Comma-separated list.        |
+| `DEVICE_ID`   | Device-specific identifier of the device.                             |
+| `ORGNAME`     | Name of organization                                                  |
+| `ORGNR`       | Organization number, as defined in `ORGCOUNTRY`                       |
+| `ORGDEPT`     | Organization department, where person works.                          |
+| `ORGROLE`     | Role of person in organization.                                       |
+| `ORGADDR`     | Address of organization.                                              |
+| `ORGADDR2`    | Address of organization, second line                                  |
+| `ORGZIP`      | Zip or postal code of organization                                    |
+| `ORGAREA`     | Area of organization.                                                 |
+| `ORGCITY`     | City of organization.                                                 |
+| `ORGREGION`   | Region or state of organization.                                      |
+| `ORGCOUNTRY`  | Country code of organization.                                         |
 
 Names in legal identities can be defined, either using the properties `FIRST`, `MIDDLE` and
 `LAST`, or by using the property `FULLNAME`. Both cannot be used at the same time, to avoid
@@ -152,25 +157,25 @@ availale, the entire name is `FIRST`, and `MIDDLE` and `LAST` are empty. The nam
 last space is `LAST` if available, or empty if no last space. After removing the `FIRST` and
 `LAST` names from `FULLNAME`, trimming any beginning or ending spaces, is `MIDDLE`.
 
-Other property names are reserved as they can be used in role reference parameters to refer to
-concatenations of multiple parameters:
+Other property names that are reserved, as they can be used in role reference parameters to 
+refer to either automatically generated values, or concatenations of multiple parameters:
 
-| Property            | Description                                             |
-|:--------------------|:--------------------------------------------------------|
-| `FULLADDR`          | Full address (`ADDR [ ", " ADDR2]`)                     |
-| `FULLORGADDR`       | Full organization address (`ORGADDR [ ", " ORGADDR2]`)  |
-| `SIGNATURE`         | Digital signature reference.                            |
-| `SIGNATUREDATE`     | Date of digital signature.                              |
-| `SIGNATURETIME`     | Time of digital signature.                              |
-| `SIGNATUREDATETIME` | Date and Time of digital signature.                     |
-
-Some property names are reserved for future use:
-
-| Property  | Description                     |
-|:----------|:--------------------------------|
-| `FP`      | Fingerprint biometric data      |
-| `VOICE`   | Voice biometric data            |
-| `FR`      | Face recognition biometric data |
+| Property            | Description                                                   |
+|:--------------------|:--------------------------------------------------------------|
+| `AGENT`             | URL to the web agent used in creating the identity.           |
+| `ACCOUNT`           | Refers to the account name part of the JID of the identity.   |
+| `CREATED`           | When the identity object was created, in UTC.                 |
+| `FROM`              | From when the identity object is valid, in UTC.               |
+| `FULLADDR`          | Full address (`ADDR [ ", " ADDR2]`)                           |
+| `FULLORGADDR`       | Full organization address (`ORGADDR [ ", " ORGADDR2]`)        |
+| `ID`                | Refers to the legal identity identifier                       |
+| `SIGNATURE`         | Digital signature reference.                                  |
+| `SIGNATUREDATE`     | Date of digital signature.                                    |
+| `SIGNATURETIME`     | Time of digital signature.                                    |
+| `SIGNATUREDATETIME` | Date and Time of digital signature.                           |
+| `STATE`             | State of the identity object.                                 |
+| `TO`                | To when then identity object is valid, in UTC.                |
+| `UPDATED`           | When the identity object was last updated, in UTC.            |
 
 After all properties have been listed, the client signs the identity using a `<clientSignature/>` element. Client signatures are calculated
 as follows:
@@ -191,7 +196,7 @@ public keys registered with the trust provider, and that the contents of the ide
 
 **Note**: Whitespace and indentation in the example above has been added for readability only.
 
-**Note**: Legal identities are case insensitive in searches and references.
+**Note**: Properties used in Legal identities are case insensitive in searches and references.
 
 Example:
 
@@ -214,18 +219,19 @@ Example:
 </iq>
 ```
 
-After passing all validation tests by the server, it responds with an annotated `<identity/>` element back to the client. The server attaches
-an reference identity to the legal identity, which it makes available in the `id` attribute of the `<identity/>` element.
-The identifier is formed as a JID, but is not a JID. The domain part corresponds to the domain of the Trust Provider.
+After passing initial validation tests by the server, it responds with an annotated `<identity/>` element back to the client. The server attaches
+a reference identifier to the legal identity, which it makes available in the `id` attribute of the `<identity/>` element.
+The identifier is formed as a JID, but is not a JID. The domain part corresponds to the domain of the legal component of the Trust Provider.
+The account-part is a random identifier or GUID that shall be unique on the domain.
 The `<identity/>` element provided by the server contains the original information provided by the client, as well as some state information 
 about the identity, encoded in a `<status/>` element. This element can have the following attributes:
 
 | Attribute   | Type            | Use      | Description                                                                       |
 |:------------|:----------------|:---------|-----------------------------------------------------------------------------------|
 | `provider`  | `xs:string`     | Required | JID of Trust Provider validating the correctness of the identity.                 |
-| `state`     | `IdentityState` | Required | Contains information about the current statue of the legal identity registration. |
-| `created`   | `xs:dateTime`   | Required | When the legal identity was first created.                                        |
-| `updated`   | `xs:dateTime`   | Optional | When the legal identity was last updated.                                         |
+| `state`     | `IdentityState` | Required | Contains information about the current status of the legal identity registration. |
+| `created`   | `xs:dateTime`   | Required | When the legal identity was first created, in UTC.                                |
+| `updated`   | `xs:dateTime`   | Optional | When the legal identity was last updated, in UTC.                                 |
 | `from`      | `xs:date`       | Optional | From what date (inclusive) the legal identity can be used.                        |
 | `to`        | `xs:date`       | Optional | To what date (inclusive) the legal identity can be used.                          |
 
@@ -252,7 +258,7 @@ is UTF-8 encoded before being signed.
 
 **Note**: The purpose of the server signature, is to validate the legal identity to other clients that have access to the server public keys.
 
-**Note**: Server keys may change over time. If a signature does not validate, make sure to get the most recent public key from the server 
+**Note**: Server keys may change over time. If a new signature does not validate, make sure to get the most recent public key from the server 
 and check signature again.
 
 Example:
@@ -270,11 +276,11 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
-      <status created="2019-06-09T21:59:17.000"
-              from="2019-06-09T00:00:00.000"
+      <status created="2019-06-09T21:59:17Z"
+              from="2019-06-09"
               provider="legal.example.org" 
               state="Created"
-              to="2021-06-09T00:00:00.000"/>
+              to="2021-06-09"/>
       <serverSignature>JK6blBGAzEOD9Q4ica4NodNMO4Lt9prcaNl7T96YYvrYTtwfeyLMgsTHf1Dl+UqxCwWRb8wQl2YA2yljTyhEiFYXMIs8wBR1S0Nz7rBbbZO9SGMaJWKkrHMoAyHgales6k6sIVEFwAf+Q4l3Flnu8TwA</serverSignature>
    </identity>
 </iq>
@@ -294,13 +300,13 @@ payment services, or signing of legal smart contracts.
 It is possible to create legal identities without including any sensitive personal 
 information. One way to do so, is to first send an identity application preview, which is
 an `<apply preview='true'>` element. Personal data will be used only to validate its 
-correctness, but the information will not be stored in a read digital identity. If the
-preview gets approved, a new legal identity application can be sent, this time without the
-`preview` attribute. This application may contain a smaller set of personal information,
-or even none at all. A special property `PREVIEW`, with a reference to the preview application,
-must be added. Any other properties provided will be matched with the preview, and if the
-preview was successful, and the values and attachments match, the new application will be
-considered automatically valid.
+correctness, but the information will only be stored in protected memory, and not as a normal 
+digital identity. If the preview gets approved, a new legal identity application can be sent, 
+this time without the `preview` attribute. This application may contain a smaller set of 
+personal information, or even none at all. A special property `PREVIEW`, with a reference to 
+the preview application, must be added. Any other properties provided will be matched with the 
+preview, and if the preview was successful, and the values and attachments match, the new 
+application will be considered automatically valid.
 
 **Note**: Preview applications will only be available for a limited time on the broker. The
 time the previews will be available, is implementation and configuration specific.
