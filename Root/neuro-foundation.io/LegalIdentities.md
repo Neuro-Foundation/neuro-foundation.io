@@ -92,9 +92,12 @@ Applying for Legal Identity registration
 ------------------------------------------
 
 Legal identities are validated and attested by the broker out-of-band. To start the process, the client sends an application for a
-legal identity to be registered by sending the `<apply/>` element in an `<iq type='set'/>` stanza to the legal component of the server. The operator 
-is notified, and validation can be performed, either manually, or automatically, depending on the context. How this process is done lies 
-outside the scope of this specification.
+legal identity to be registered by sending the `<apply/>` element in an `<iq type='set'/>` stanza to the legal component of the server. 
+The `<apply/>` element may include a `days` attribute that specifies the number of days the legal
+identity is valid. The Broker may honor this request, or specify its own value, depending in
+internal rules and configurations. After the application has been received, the operator is 
+notified, and validation can be performed, either manually, or automatically, depending on the 
+context. How this process is done lies outside the scope of this specification.
 
 The `<apply/>` element must contain the information about the legal identity, encoded in an `<identity/>` element. This element must not contain
 an `id` attribute, or attachments or attachment references. Such requests must be rejected. 
