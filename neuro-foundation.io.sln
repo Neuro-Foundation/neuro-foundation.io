@@ -335,6 +335,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{9E
 		Root\neuro-foundation.io\Diagrams\F-EventSubscription.uml = Root\neuro-foundation.io\Diagrams\F-EventSubscription.uml
 		Root\neuro-foundation.io\Diagrams\F-FragmentedEvents.uml = Root\neuro-foundation.io\Diagrams\F-FragmentedEvents.uml
 		Root\neuro-foundation.io\Diagrams\F-IsFriend.uml = Root\neuro-foundation.io\Diagrams\F-IsFriend.uml
+		Root\neuro-foundation.io\Diagrams\F-IdentityStates.dot = Root\neuro-foundation.io\Diagrams\F-IdentityStates.dot
 		Root\neuro-foundation.io\Diagrams\F-LifeCycle.uml = Root\neuro-foundation.io\Diagrams\F-LifeCycle.uml
 		Root\neuro-foundation.io\Diagrams\F-PubSubPEP.uml = Root\neuro-foundation.io\Diagrams\F-PubSubPEP.uml
 		Root\neuro-foundation.io\Diagrams\F-SimpleControl.uml = Root\neuro-foundation.io\Diagrams\F-SimpleControl.uml

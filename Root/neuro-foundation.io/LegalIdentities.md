@@ -88,6 +88,50 @@ Example:
 If no public key was found for a requested timestamp, an `item-not-found` error must be
 returned.
 
+Getting Identity Application Attributes
+------------------------------------------
+
+Before sending an identity application, a client may request information about what 
+attributes and properties are expected from the application by the Broker, especially if 
+the goal is to validate the application via a peer review process. This is done by sending 
+an empty `<applicationAttributes>` element in an `<iq type="get">` stanza to the Legal 
+Component of the Broker. The Broker responds with an `<idApplicationAttributes>` element 
+containing relevant attributes and required properties for peer review. The
+`reuqired` attribute of the <idApplicationAttributes>` element lets the client know if the
+Broker accepts peer-review as a valid method of validation of the applcation. If so, the
+`nrReviewers` attribute specifies the number of reviewers that must validate the contents of
+the application before the Broker validates the application. The `nrPhotos` attribute tells
+the client the minimum number of photos that need to be provided in the application for it
+to participate in peer review. The `iso3166` attribute informs the client is all country
+code reference must adhere to ISO-3166. The `<idApplicationAttributes>` element
+may also contain a sequence of `<required/>` elements, that list the names of required 
+properties that must be included in the identity application, for it to be considered for
+peer-review.
+
+Example:
+
+```xml
+<iq type='get' id='5' to='legal.example.org'>
+   <applicationAttributes xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Example response:
+
+```xml
+<iq id='5' type='result' to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
+   <idApplicationAttributes xmlns='urn:nfi:iot:leg:id:1.0'
+                            peerReview='true' nrReviewers='2'
+                            nrPhotos='1' iso3166='true'>
+      <required>FIRST</required>
+      <required>LAST</required>
+      <required>PNR</required>
+      <required>REGION</required>
+      <required>COUNTRY</required>
+   </idApplicationAttributes>
+</iq>
+```
+
 Applying for Legal Identity registration
 ------------------------------------------
 
@@ -133,6 +177,7 @@ Some names are predefined however, as described in the following table:
 | `EMAIL`       | Validated e-mail address.                                             |
 | `JID`         | Validated XMPP address (Jabber ID).                                   |
 | `DOMAIN`      | If the ID represents the legal representative of a domain.            |
+| `HOMEPAGE`    | Validated home page.                                                  |
 | `PREVIEW`     | A reference to a preview of the identity application.                 |
 | `PROFILE`     | Name of Identity Profile or Identity Profiles (Comma-separated list). |
 | `PSEUDONYM`   | Lists which properties are pseudonymous. Comma-separated list.        |
@@ -314,11 +359,6 @@ application will be considered automatically valid.
 **Note**: Preview applications will only be available for a limited time on the broker. The
 time the previews will be available, is implementation and configuration specific.
 
-Getting Application Attributes
----------------------------------
-
-TODO
-
 Identity state changes
 ----------------------------
 
@@ -326,13 +366,26 @@ Whenever the state of the legal identity is changed on the server, a message is 
 in an `<identity/>` element. Identities must only be accepted, if the provider corresponds to the sender, and if the server signature is 
 valid, and corresponds to the public key of the server.
 
+```dot:Identity States
+digraph G {
+
+Created -> Created
+Created -> Approved
+Created -> Rejected
+Approved -> Rejected
+Approved -> Obsoleted
+Approved -> Compromised
+
+}
+```
+
 Example:
 
 ```xml
 <message to='client@example.org/8a7c35a7d545bfc83c6928f48e5fcb86' from='legal.example.org'>
    <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nfi:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
@@ -340,20 +393,20 @@ Example:
       <property name="ADDR" value="Street 1A"/>
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
-      <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
       <status created="2019-06-09T21:59:23.000"
               from="2019-06-09T00:00:00.000"
               provider="legal.example.org"
               state="Approved"
               to="2021-06-09T00:00:00.000"
               updated="2019-06-09T21:59:24.000"/>
-      <serverSignature>GnlKyllIGAfIDLoYTF8TyrsgzgR9dCVsf812gVjPfUoqzmUSF7d4qoxXV3zY7aEdjuJzoHx9/9eAkXqcRjILy727+cCCjwbTXhlwgAWHsKjfsbJC0pXX0QXGu6sVmxz8LchfrIAQi/YnBd+39zgURDUA</serverSignature>
+      <serverSignature>GnlKyllIGAfI...</serverSignature>
    </identity>
 </message>
 ```
 
-Getting legal identity
----------------------------
+Getting legal identities belonging to the account
+----------------------------------------------------
 
 You can get a legal identity from the server, if it belongs to you. You send the `<getLegalIdentity/>` element 
 with the `id` attribute set to the identity of the legal identity object in an `<iq type='get'/>` to the server.
@@ -381,7 +434,7 @@ Example:
 <iq id='5' type='result' to='client@example.org/3179ba14cb1bbd5aa7d68003fc8aec48' from='legal.example.org'>
    <identity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nfi:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
@@ -389,14 +442,58 @@ Example:
       <property name="ADDR" value="Street 1A"/>
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
-      <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
       <status created="2019-06-09T21:59:23.000" 
               from="2019-06-09T00:00:00.000" 
               provider="legal.example.org" 
               state="Created" 
               to="2021-06-09T00:00:00.000"/>
-      <serverSignature>fR4LuS4Tg34dHY6NlyH9hB91RCdxNSYHWhqxbpYESXAotbnqNHUfbvhI7oEtEp7Lax2U0RPT8t+ADc5BZw0+iNQsRh7rkr+dwoV9iIswg9JQSsiLM7aNI2oZSP5n1zFrexD/3r1TeyGvnpFNtWnmqxQA</serverSignature>
+      <serverSignature>fR4LuS4Tg34dH...</serverSignature>
    </identity>
+</iq>
+```
+
+You can also get all Legal Identities belonging to the account, by sending an empty
+`<getLegalIdentities>` element in an `<iq type='get'/>` stanza to the Broker. The server 
+responds with an `<identities>` element containing a sequence of `<identity/>` elements, 
+one for each legal identity belonging to the account.
+
+Example:
+
+```xml
+<iq type='get' id='6' to='legal.example.org'>
+   <getLegalIdentities xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+The server responds with an `<identities>` element containing a sequence of `<identity/>` 
+elements, one for each legal identity belonging to the account.
+
+Example:
+
+```xml
+<iq id='6' type='result' to='client@example.org/3179ba14cb1bbd5aa7d68003fc8aec48' from='legal.example.org'>
+   <identities xmlns="urn:nfi:iot:leg:id:1.0">
+       <identity id="2490219b-6e17-46bf-fc55-bae9786b6757@legal.example.org">
+          <clientPublicKey>
+             <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
+          </clientPublicKey>
+          <property name="FIRST" value="John"/>
+          <property name="LAST" value="Doe"/>
+          <property name="PNR" value="123456789-0"/>
+          <property name="ADDR" value="Street 1A"/>
+          <property name="ZIP" value="12345"/>
+          <property name="CITY" value="Metropolis"/>
+          <clientSignature>RKeeeS7CdtK...</clientSignature>
+          <status created="2019-06-09T21:59:23.000" 
+                  from="2019-06-09T00:00:00.000" 
+                  provider="legal.example.org" 
+                  state="Created" 
+                  to="2021-06-09T00:00:00.000"/>
+          <serverSignature>fR4LuS4Tg34dH...</serverSignature>
+       </identity>
+       ...
+    </identities>
 </iq>
 ```
 
@@ -435,7 +532,7 @@ Example:
 <iq id='5' type='result' to='client@example.org/3954d7dc9705417fcc09527bb4d98465' from='legal.example.org'>
    <identity id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nfi:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
@@ -443,13 +540,13 @@ Example:
       <property name="ADDR" value="Street 1A"/>
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
-      <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
       <status created="2019-06-09T21:59:26.000" 
               from="2019-06-09T00:00:00.000" 
               provider="legal.example.org" 
               state="Created" 
               to="2021-06-09T00:00:00.000"/>
-      <serverSignature>2QhPLCgwudKChLoOYFAK04gePlGMyEkzHzjMDXMx9GU5EgM1SXi/pu/Uz6Huylhc80eBT2w9SGqAFzHtyVUC2oOU/K0Yne4cgxDKoxv58AKFG6PiFeFGZLnXYNFraJvpvvaIyfd8yctSzfhocN7irSoA</serverSignature>
+      <serverSignature>2QhPLCgwudK...</serverSignature>
    </identity>
 </iq>
 ```
@@ -484,7 +581,7 @@ Example:
 <iq id='5' type='result' to='client@example.org/8a7c35a7d545bfc83c6928f48e5fcb86' from='legal.example.org'>
    <identity id="2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nfi:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
@@ -492,14 +589,14 @@ Example:
       <property name="ADDR" value="Street 1A"/>
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
-      <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
       <status created="2019-06-09T21:59:23.000" 
               from="2019-06-09T00:00:00.000" 
               provider="legal.example.org" 
               state="Obsoleted" 
               to="2021-06-09T00:00:00.000" 
               updated="2019-06-09T21:59:24.000"/>
-      <serverSignature>GnlKyllIGAfIDLoYTF8TyrsgzgR9dCVsf812gVjPfUoqzmUSF7d4qoxXV3zY7aEdjuJzoHx9/9eAkXqcRjILy727+cCCjwbTXhlwgAWHsKjfsbJC0pXX0QXGu6sVmxz8LchfrIAQi/YnBd+39zgURDUA</serverSignature>
+      <serverSignature>GnlKyllIGAfI...</serverSignature>
    </identity>
 </iq>
 ```
@@ -534,7 +631,7 @@ Example:
 <iq id='5' type='result' to='client@example.org/032e50a69ad719e1e347661394fb6a45' from='legal.example.org'>
    <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
       <clientPublicKey>
-         <ed448 pub="0nvHYWUD3BZZe96Nz8DROhpyg4FII4b2guBk2cQ7cSCc57sDMABWguYBIQ0zRtY+Y2L76CB7FI6A" xmlns="urn:nfi:iot:e2e:1.0"/>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
       </clientPublicKey>
       <property name="FIRST" value="John"/>
       <property name="LAST" value="Doe"/>
@@ -542,22 +639,17 @@ Example:
       <property name="ADDR" value="Street 1A"/>
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
-      <clientSignature>RKeeeS7CdtKX0rbCitiI0dM6ZSCAGqoXcFYyNbNat9oJfQ1aeC4NvMWaI/XWhyyH328joYCkdciAoHrEZhH0bIxy2d1t9jO5zbL+BB10zRIors4I9wBpsUECxstNXr/Eokqkr1A+mcsLIykf/BgJyiAA</clientSignature>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
       <status created="2019-06-09T21:59:25.000" 
               from="2019-06-09T00:00:00.000" 
               provider="legal.example.org" 
-              state="Rejected" 
+              state="Compromised" 
               to="2021-06-09T00:00:00.000" 
               updated="2019-06-09T21:59:25.000"/>
-      <serverSignature>8cJy/lI4GuYP0wQ54z6mLA3Ojjr2K3H6OGzvYFsRCvWsywPT94tlpoXPB3eGR9wPdYlT73Qv0c2AekJolA6M1LyoQNd1ZDhDlxSAaDNpEUUtW2RmhCuZqtTWl1xrdEQTGWUPYnYBF5vKvA2dvOgRIiAA</serverSignature>
+      <serverSignature>8cJy/lI4GuYP0...</serverSignature>
    </identity>
 </iq>
 ```
-
-Petitioning access to a legal identity
------------------------------------------
-
-TODO
 
 Adding attachments
 ---------------------
@@ -566,6 +658,16 @@ TODO
 
 Removing attachments
 -----------------------
+
+TODO
+
+Petitioning access to a legal identity
+-----------------------------------------
+
+TODO
+
+Petitioning digital signature from a legal identity
+------------------------------------------------------
 
 TODO
 

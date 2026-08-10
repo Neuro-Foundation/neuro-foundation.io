@@ -1,0 +1,10 @@
+digraph G {
+
+Created -> Created
+Created -> Approved
+Created -> Rejected
+Approved -> Rejected
+Approved -> Obsoleted
+Approved -> Compromised
+
+}

@@ -14,6 +14,7 @@ client is connected to.
 | `getPublicKey`                 | `iq get`    | ==>        | Required          |                 |
 | `publicKey`                    | `iq result` | Required   | <==               |                 |
 | `applicationAttributes`        | `iq get`    | ==>        | Required          |                 |
+| `idApplicationAttributes`      | `iq result` | Required   | <==               |                 |
 | `apply`                        | `iq set`    | ==>        | Required          |                 |
 | `identity`                     | `iq result` | Required   | <==               |                 |
 | `getLegalIdentities`           | `iq get`    | ==>        | Required          |                 |
