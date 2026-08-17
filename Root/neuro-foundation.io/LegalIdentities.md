@@ -654,7 +654,129 @@ Example:
 Adding attachments
 ---------------------
 
-TODO
+Adding attachment to Legal Identities are done by using
+[XEP-0363: HTTP File Upload](https://xmpp.org/extensions/xep-0363.html) in conjunction with
+a sequence of requests to ensure the upload is managed securely, and is attached to the
+correct Legal Identity. The following steps are performed:
+
+#. A `<prepare>` element using namespace `urn:nfi:iot:upl:it:1.0` is sent to the HTTP File
+Upload component in an `<iq type="set">` stanza, to ensure it manages the upload as an 
+*Internal Transfer*. This means the file cannot be retrieved using its GET URL, and that it 
+is only used as a means to transfer the uploaded file to the intended recipient. The 
+`<prepare>` element takes a `filename` attribute specifying the name of the file to be 
+uploaded, a `size` attribute specifying the size of the file in bytes, and a `content-type` 
+attribute specifying the Internet Content-Type of the file. The HTTP File Upload component
+responds with an empty `<iq type="result">` stanza.
+
+#. Secondly, the client requests to upload the file using HTTP File Upload, using the same 
+file name, size and Content-Type as specified in the `<prepare>` element. The HTTP File Upload 
+component will return a GET URL and a PUT URL for the file upload. The GET URL cannot be used
+except as an identifier in the last step.
+
+#. Thirdly, the client uploads the file using HTTP PUT, to the PUT URL provided in the
+previous step.
+
+#. Fourthly, the client sends an `<addAttachment>` element to the Legal Component in an
+`<iq type="set">` stanza, with the `id` attribute set to the identity of the of the
+Legal Identity to receive the attachment, a `getUrl` attribute containing the GET URL
+provided by the HTTP File Upload component, and a `s` attribute with a BASE64-encoded
+digital signature of the attachment, using the same keys used when signing the original
+Identity Application. The Legal Component responds with an `<iq type="result">` stanza, 
+containing updated `<identity>` element with the attachment added, and updated `Updated`
+property and server signature.
+
+Example of a preparation command:
+
+```xml
+<iq type='set' id='6' to='upload.example.org'>
+   <prepare xmlns="urn:nfi:iot:upl:it:1.0"
+            filename="ProfilePhoto.png" 
+            size="123456" 
+            content-type="image/png"/>
+</iq>
+```
+
+With empty reponse from the Broker:
+
+```xml
+<iq type='result' 
+    id='6' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45' 
+    from='upload.example.org'/>
+```
+
+Requesting upload slot for uploading attachment file:
+
+```xml
+<iq type='get' id='7' to='upload.example.org'>
+   <request xmlns='urn:xmpp:http:upload:0'
+            filename='ProfilePhoto.png'
+            size='123456'
+            content-type='image/png' />
+</iq>
+```
+
+Receiving the upload slot from the component.
+
+```xml
+<iq type='result'
+    from='upload.example.org'
+    id='7'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'>
+   <slot xmlns='urn:xmpp:http:upload:0'>
+      <put url='https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk'/>
+      <get url='https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk'/>
+   </slot>
+</iq>
+```
+
+After uploading the file using HTTP PUT to the PUT url provided in the upload slot, the
+attachment is added to the identity application:
+
+```xml
+<iq id='8' type='set' to='legal.example.org'>
+   <addAttachment id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                  getUrl="https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk"
+                  s="..."
+                  xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+The result is the updated identity object:
+
+```xml
+<iq id='8' 
+    type='result' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    from='legal.example.org'>
+   <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+      <clientPublicKey>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
+      </clientPublicKey>
+      <property name="FIRST" value="John"/>
+      <property name="LAST" value="Doe"/>
+      <property name="PNR" value="123456789-0"/>
+      <property name="ADDR" value="Street 1A"/>
+      <property name="ZIP" value="12345"/>
+      <property name="CITY" value="Metropolis"/>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
+      <attachment contentType="image/png" 
+                  fileName="ProfilePhoto.png" 
+                  id="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" 
+                  s="HVYE7CMyb..." 
+                  timestamp="2019-06-09T21:59:37.000" />
+      <status created="2019-06-09T21:59:25.000" 
+              from="2019-06-09T00:00:00.000" 
+              provider="legal.example.org" 
+              state="Compromised" 
+              to="2021-06-09T00:00:00.000" 
+              updated="2019-06-09T21:59:38.000"/>
+      <serverSignature>+NYUZhCTL0gTx2...</serverSignature>
+      <attachmentRef attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" 
+                     url="https://example.org/Attachments/3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.lab.tagroot.io" />
+   </identity>
+</iq>
+```
 
 Removing attachments
 -----------------------
