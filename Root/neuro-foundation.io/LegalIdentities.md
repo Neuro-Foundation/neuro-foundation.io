@@ -778,6 +778,46 @@ The result is the updated identity object:
 </iq>
 ```
 
+Getting attachments
+-----------------------
+
+To get an attachment, you download it via the URL provided in the corresponding
+`<attachmentRef>` element. This element may vary over time, which is why it resides outside
+of the scope of the server signature. The URL must be authenticated using the 
+`WWW-Authenticate` mechanism `NeuroFoundation.Sign`. The procedure is as follows:
+
+#.  First, a GET is performed without an `Authorization` header.
+
+#.  The server returns an HTTP `Unauthorized` error, with a `WWW-Authenticate` challenge
+if the form:
+    
+    ```
+    "NeuroFoundation.Sign realm=\"" | REALM | "\", n=\"" | NONCE | "\""
+    ```
+
+    `REALM` is the domain or realm used during authentication, and `NONCE` is a BASE64-encoded
+    random number with sufficient entropy.
+
+#.  The client then reattempts the GET operation, this time with an `Authorization` header
+of the form:
+    
+    ```
+    "NeuroFoundation.Sign jid=\"" | FULLJID | "\", realm=\"" | REALM | "\", n=\"" | NONCE | "\", s=\"" | SIGNATURE | "\""
+    ```
+
+    Where `REALM` and `NONCE` are taken from the request, `FULLJID` is taken from the Full JID
+    of the XMPP client making the request, and `s` is the BASE64-encoded signature of the
+    binary (BASE64-decoded) `NONCE` value.
+
+#.  The server shall verify the `REALM` and `NONCE` values correspond to values it sent to the
+    client. `NONCE` values must expire after one minute, or after first use, using HTTP GET.
+    (HTTP HEAD should not expire the `NONCE` value.) The signature must correspond to a
+    Legal Identity associated with the Bare JID of the client (taken from the `FULLJID`),
+    and must be in the `Approved` state (or `Created` state if requesting one of its own
+    attachments). If authentication succeeds, the attachment is returned. If authentication
+    fails, a `Forbidden` error is returned.
+
+
 Removing attachments
 -----------------------
 
