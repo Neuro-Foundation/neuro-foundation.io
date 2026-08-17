@@ -768,7 +768,7 @@ The result is the updated identity object:
       <status created="2019-06-09T21:59:25.000" 
               from="2019-06-09T00:00:00.000" 
               provider="legal.example.org" 
-              state="Compromised" 
+              state="Created" 
               to="2021-06-09T00:00:00.000" 
               updated="2019-06-09T21:59:38.000"/>
       <serverSignature>+NYUZhCTL0gTx2...</serverSignature>
@@ -821,7 +821,53 @@ of the form:
 Removing attachments
 -----------------------
 
-TODO
+A client can remove an attachment from a Legal Identity in the `Created` state. This is done
+by sending a `<removeAttachment>` element with the attachment specified in the `attachmentId`
+attribute, in an `<iq type="set">` stanza to the Legal Component of the Broker.
+
+The Broker validates that the attachment exists, and belongs to a Legal Identity in the 
+`Created` state belonging to the sender of the request. If request is valid, the attachment
+is removed from the Legal Identity, and the Legal Identity is updated and returned to the
+caller.
+
+Example:
+
+```xml
+<iq id='9' type='set' to='legal.example.org'>
+   <removeAttachment attachmetId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org"/>
+</iq>
+```
+
+The result is the updated identity object:
+
+```xml
+<iq id='9' 
+    type='result' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    from='legal.example.org'>
+   <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+      <clientPublicKey>
+         <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
+      </clientPublicKey>
+      <property name="FIRST" value="John"/>
+      <property name="LAST" value="Doe"/>
+      <property name="PNR" value="123456789-0"/>
+      <property name="ADDR" value="Street 1A"/>
+      <property name="ZIP" value="12345"/>
+      <property name="CITY" value="Metropolis"/>
+      <clientSignature>RKeeeS7CdtK...</clientSignature>
+      <status created="2019-06-09T21:59:25.000" 
+              from="2019-06-09T00:00:00.000" 
+              provider="legal.example.org" 
+              state="Created" 
+              to="2021-06-09T00:00:00.000" 
+              updated="2019-06-09T21:59:39.000"/>
+      <serverSignature>...</serverSignature>
+   </identity>
+</iq>
+```
+
+
 
 Petitioning access to a legal identity
 -----------------------------------------
