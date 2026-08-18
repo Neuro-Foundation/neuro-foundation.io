@@ -1,0 +1,41 @@
+@startuml
+
+participant "Entity A"
+participant "Legal Component A"
+participant "Legal Component B"
+participant "Entity B"
+
+activate "Entity A"
+activate "Entity B"
+activate "Legal Component A"
+activate "Legal Component B"
+
+activate "Entity A"
+"Entity A" -> "Legal Component B" : petitionIdentity(B,pid,n,s,purpose)
+activate "Legal Component B"
+
+"Legal Component B" -> "Legal Component A" : validateSignature(A,s)
+activate "Legal Component A"
+"Legal Component A" -> "Legal Component B" : identity(A)
+deactivate "Legal Component A"
+
+"Legal Component B" --> "Entity A"
+
+"Legal Component B" -> "Entity B" : petitionIdentityMsg(A,pid,pupose)
+deactivate "Legal Component B"
+
+"Entity B" -> "Entity B" : view and decide
+activate "Entity B"
+
+"Entity B" -> "Legal Component B" : petitionIdentityResponse(pid,[B])
+activate "Legal Component B"
+"Legal Component B" --> "Entity B"
+deactivate "Entity B"
+
+"Legal Component B" -> "Entity A" : petitionIdentityResponseMsg(pid,[B])
+deactivate "Legal Component B"
+
+"Entity A" -> "Entity A" : process
+deactivate "Entity A"
+
+@enduml
