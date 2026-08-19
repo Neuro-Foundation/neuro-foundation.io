@@ -97,13 +97,15 @@ the goal is to validate the application via a peer review process. This is done 
 an empty `<applicationAttributes>` element in an `<iq type="get">` stanza to the Legal 
 Component of the Broker. The Broker responds with an `<idApplicationAttributes>` element 
 containing relevant attributes and required properties for peer review. The
-`reuqired` attribute of the <idApplicationAttributes>` element lets the client know if the
+`reuqired` attribute of the `<idApplicationAttributes>` element lets the client know if the
 Broker accepts peer-review as a valid method of validation of the applcation. If so, the
 `nrReviewers` attribute specifies the number of reviewers that must validate the contents of
 the application before the Broker validates the application. The `nrPhotos` attribute tells
 the client the minimum number of photos that need to be provided in the application for it
 to participate in peer review. The `iso3166` attribute informs the client is all country
-code reference must adhere to ISO-3166. The `<idApplicationAttributes>` element
+code reference must adhere to ISO-3166. The `reivewTimeout` attribute specifies the time the
+client has from receiving an identity review document, to sign and add it as an attachment to
+the recently approved application. The `<idApplicationAttributes>` element
 may also contain a sequence of `<required/>` elements, that list the names of required 
 properties that must be included in the identity application, for it to be considered for
 peer-review.
@@ -121,8 +123,8 @@ Example response:
 ```xml
 <iq id='5' type='result' to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
    <idApplicationAttributes xmlns='urn:nfi:iot:leg:id:1.0'
-                            peerReview='true' nrReviewers='2'
-                            nrPhotos='1' iso3166='true'>
+                            peerReview='true' nrReviewers='2' nrPhotos='1' 
+                            iso3166='true' reviewTimeout='3600'>
       <required>FIRST</required>
       <required>LAST</required>
       <required>PNR</required>
