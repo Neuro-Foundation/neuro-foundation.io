@@ -103,12 +103,16 @@ Broker accepts peer-review as a valid method of validation of the applcation. If
 the application before the Broker validates the application. The `nrPhotos` attribute tells
 the client the minimum number of photos that need to be provided in the application for it
 to participate in peer review. The `iso3166` attribute informs the client is all country
-code reference must adhere to ISO-3166. The `reivewTimeout` attribute specifies the time the
+code reference must adhere to ISO-3166. The `reviewTimeout` attribute specifies the time the
 client has from receiving an identity review document, to sign and add it as an attachment to
 the recently approved application. The `<idApplicationAttributes>` element
 may also contain a sequence of `<required/>` elements, that list the names of required 
 properties that must be included in the identity application, for it to be considered for
-peer-review.
+peer-review. The list of required properties for peer review may be followed by a sequence
+of `<authenticator>` elements listing available identity authenticator services and their
+requirements, followed by a sequence of `<peerReviewService>` elements listing available
+peer review services and their requirements. The client may use this information to decide 
+which properties to include in the application.
 
 Example:
 
@@ -130,6 +134,25 @@ Example response:
       <required>PNR</required>
       <required>REGION</required>
       <required>COUNTRY</required>
+      <authenticator id='AgeAuthenticator' name='Age Authenticator' 
+                     fqn='NAMESPACE.AgeAuthenticator'>
+         <properties>
+            <required>BYEAR</required>
+            <required>BMONTH</required>
+            <required>BDAY</required>
+            <required>AGEABOVE</required>
+         </properties>
+         <attachments></attachments>
+      </authenticator>
+      <authenticator id='PreviewAuthenticator' name='Preview Authenticator' 
+                     fqn='NAMESPACE.PreviewAuthenticator'>
+         <properties>
+            <required>PREVIEW</required>
+         </properties>
+         <attachments>
+            <required>ProfilePhoto</required>
+         </attachments>
+      </authenticator>
    </idApplicationAttributes>
 </iq>
 ```
