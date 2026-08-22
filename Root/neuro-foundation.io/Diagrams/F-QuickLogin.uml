@@ -1,0 +1,46 @@
+@startuml
+
+participant "Server"
+participant "Legal Component Server"
+participant "Legal Component User"
+participant "User"
+
+activate "Server"
+activate "User"
+activate "Legal Component Server"
+activate "Legal Component User"
+
+"Server" --> "User" : Address of Server (via QR/NFC/web/etc)
+
+"User" --> "Server" : Initiate Login(User_ID)
+
+activate "Server"
+"Server" -> "Legal Component User" : petitionSignature(User_ID,pid,n,s,purpose,content)
+activate "Legal Component User"
+
+"Legal Component User" -> "Legal Component Server" : validateSignature(Server_ID,s)
+activate "Legal Component Server"
+"Legal Component Server" -> "Legal Component User" : identity(Server_ID)
+deactivate "Legal Component Server"
+
+"Legal Component User" --> "Server"
+
+"Legal Component User" -> "User" : petitionSignatureMsg(Server_ID,pid,pupose,content)
+deactivate "Legal Component User"
+
+"User" -> "User" : view and decide
+activate "User"
+
+"User" -> "Legal Component User" : petitionSignatureResponse(pid,[User_ID],[Signature])
+activate "Legal Component User"
+"Legal Component User" --> "User"
+deactivate "User"
+
+"Legal Component User" -> "Server" : petitionSignatureResponseMsg(pid,[User_ID],[Signature])
+deactivate "Legal Component User"
+
+"Server" -> "Server" : process
+"Server" --> "User"  : Logged In (Token/Session/Cooike/etc)
+deactivate "Server"
+
+@enduml

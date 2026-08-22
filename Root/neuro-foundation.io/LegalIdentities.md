@@ -1401,7 +1401,79 @@ It then forwards the response, together with the identity, to the original Reque
 
 ### Password-less login
 
-TODO
+Signature petitions can be used to implement password-less login. The service gives its 
+address to the client that wants to login, and the client initiates the login session byti
+providing its Legal Identity idenfier to the service. The service then petitions the client
+for a signature of a random challenge. When the client signs the challenge, the service
+receives the Legal Identity of the user, and after validating the user can let the user
+login without the need for a password, or onboard the user if the user is not yet registered 
+with the service. The following figure illustrates the procedure:
+
+```uml
+@startuml
+
+participant "Server"
+participant "Legal Component Server"
+participant "Legal Component User"
+participant "User"
+
+activate "Server"
+activate "User"
+activate "Legal Component Server"
+activate "Legal Component User"
+
+"Server" --> "User" : Address of Server (via QR/NFC/web/etc)
+
+"User" --> "Server" : Initiate Login(User_ID)
+
+activate "Server"
+"Server" -> "Legal Component User" : petitionSignature(User_ID,pid,n,s,purpose,content)
+activate "Legal Component User"
+
+"Legal Component User" -> "Legal Component Server" : validateSignature(Server_ID,s)
+activate "Legal Component Server"
+"Legal Component Server" -> "Legal Component User" : identity(Server_ID)
+deactivate "Legal Component Server"
+
+"Legal Component User" --> "Server"
+
+"Legal Component User" -> "User" : petitionSignatureMsg(Server_ID,pid,pupose,content)
+deactivate "Legal Component User"
+
+"User" -> "User" : view and decide
+activate "User"
+
+"User" -> "Legal Component User" : petitionSignatureResponse(pid,[User_ID],[Signature])
+activate "Legal Component User"
+"Legal Component User" --> "User"
+deactivate "User"
+
+"Legal Component User" -> "Server" : petitionSignatureResponseMsg(pid,[User_ID],[Signature])
+deactivate "Legal Component User"
+
+"Server" -> "Server" : process
+"Server" --> "User"  : Logged In (Token/Session/Cooike/etc)
+deactivate "Server"
+
+@enduml
+```
+
+Benefits of using Legal Identities and Digital Signature petitions for access authorization 
+instead of using usernames and passwords:
+
+* User names and Passwords are often reused and have low entropy. Keys used in Legal 
+Identities are cryptographically random and have higher entropy.
+
+* No need to manage separate user databases in each service.
+
+* No need to manage custom onboarding and KyC of users for each service. Services gain 
+automatic access to such information via the Legal Identity.
+ 
+* Decentralized users can access decentralized services. There is no master database of users 
+required for interoperable access.
+
+* Services can interoperate across domains, sharing ownership information, as references to 
+Legal Identities are valid across the entire Internet.
 
 ### Peer Review of Identity Applications
 
