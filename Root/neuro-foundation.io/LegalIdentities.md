@@ -1475,6 +1475,8 @@ required for interoperable access.
 * Services can interoperate across domains, sharing ownership information, as references to 
 Legal Identities are valid across the entire Internet.
 
+Note: The [QuickLogin API](/QuickLogin.md) provides an implementation of this procedure.
+
 ### Peer Review of Identity Applications
 
 TODO
