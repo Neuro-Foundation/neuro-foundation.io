@@ -1005,8 +1005,8 @@ deactivate "Entity A"
     
     where `LOWER(BAREJID)` represents the Bare JID of the sender, in lower case.
 
-#.  Entity B validates the signature with Legal Component A, to ensure Entity A has access
-    to its private keys. This validation also provides access to the Legal Identity of 
+#.  Legal Component B validates the signature with Legal Component A, to ensure Entity A has 
+    access to its private keys. This validation also provides access to the Legal Identity of 
     Entity A.
 
 #.  The Legal Component B sends a `<petitionIdentityMsg>` element in a `<message>` stanza to
@@ -1092,7 +1092,27 @@ Legal Component forwards the petition to the second client:
                         id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
                         from="client@example.org/032e50a69ad719e1e347661394fb6a45"
                         clientEp="1.2.3.4"
-                        xmlns="urn:nfi:iot:leg:id:1.0"/>
+                        xmlns="urn:nfi:iot:leg:id:1.0">
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Smith"/>
+         <property name="PNR" value="234567890-1"/>
+         <property name="ADDR" value="Street 2A"/>
+         <property name="ZIP" value="23456"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>nTXnxsEXdTt...</clientSignature>
+         <status created="2019-05-01T13:12:45.000" 
+                 from="2019-05-01T00:00:00.000" 
+                 provider="legal.example.org" 
+                 state="Approved" 
+                 to="2021-05-01T00:00:00.000" 
+                 updated="2019-05-01T13:12:46.000"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+   </petitionIdentityMsg>
 </message>
 ```
 
@@ -1149,6 +1169,241 @@ It then forwards the response, together with the identity, to the original Reque
 
 Petitioning digital signature from a legal identity
 ------------------------------------------------------
+
+An Entity A, with a Legal Identity, can petition a Legal Identity of another Entity B for a
+Digital Signature, using only the identifier of the Legal Identity, and without knowing the 
+network address of Entity B. The procedure constsists of four messages, two performed using 
+`iq` stanzas, and two using `message` stanzas:
+
+```uml
+@startuml
+
+participant "Entity A"
+participant "Legal Component A"
+participant "Legal Component B"
+participant "Entity B"
+
+activate "Entity A"
+activate "Entity B"
+activate "Legal Component A"
+activate "Legal Component B"
+
+activate "Entity A"
+"Entity A" -> "Legal Component B" : petitionSignature(B,pid,n,s,purpose,content)
+activate "Legal Component B"
+
+"Legal Component B" -> "Legal Component A" : validateSignature(A,s)
+activate "Legal Component A"
+"Legal Component A" -> "Legal Component B" : identity(A)
+deactivate "Legal Component A"
+
+"Legal Component B" --> "Entity A"
+
+"Legal Component B" -> "Entity B" : petitionSignatureMsg(A,pid,pupose,content)
+deactivate "Legal Component B"
+
+"Entity B" -> "Entity B" : view and decide
+activate "Entity B"
+
+"Entity B" -> "Legal Component B" : petitionSignatureResponse(pid,[B],[Signature])
+activate "Legal Component B"
+"Legal Component B" --> "Entity B"
+deactivate "Entity B"
+
+"Legal Component B" -> "Entity A" : petitionSignatureResponseMsg(pid,[B],[Signature])
+deactivate "Legal Component B"
+
+"Entity A" -> "Entity A" : process
+deactivate "Entity A"
+
+@enduml
+```
+
+#.  Entity A sends a `<petitionSignature>` stanza to Legal Component B (taken from the domain
+    part of the identifier of the Legal Identity) in an `<iq type="set">` stanza. The element 
+    must contain a petition identifier in `pid`, a purpose string to display to Entity B in 
+    `purpose`, the identifier of the Legal Identity in `id`, a random string in `nonce` and 
+    the BASE64-encoded digital signature of the request in `s`. The element must contain a
+    `<content>` element containing the BASE64-encoded binary string requested to be signed.
+    The Legal Component returns an empty `<iq type="result">` stanza to acknowledge receipt, 
+    if request is correctly formed.
+    
+    The signature is calculated on the UTF-8 encoding of the following string concatenation:
+    
+    ```
+    pid | ":" | id | ":" | purpose | ":" | nonce | ":" | LOWER(BAREJID) | BASE64(CONTENT)
+    ```
+    
+    where `LOWER(BAREJID)` represents the Bare JID of the sender, in lower case.
+
+#.  Legal Component B validates the signature with Legal Component A, to ensure Entity A has 
+    access to its private keys. This validation also provides access to the Legal Identity of
+    Entity A.
+
+#.  The Legal Component B sends a `<petitionSignatureMsg>` element in a `<message>` stanza to
+    Entity B. It retains the `pid`, `purpose` and `id` attributes from the first request,
+    and adds a `from` attribute containing the Full JID of the client making the petition,
+    and an optional `clientEp` attribute, containing the remote endpoint of the client, if
+    available. The `<petitionSignatureMsg>` also contains an `<identity>` element, 
+    representing the Legal Identity of the Requestor making the request, following by the
+    `<content>` element containing the BASE64-encoded binary content requested to be signed.
+
+#.  Entity B reviews the request, in its own time. It ignores the request if it is received 
+    from someone other than its own Trust Provider. Entity B can ignore the request for any
+    other reason as well. If Entity B chooses to return a response, it does so by sending a
+    `<petitionSignatureResponse>` element in an `<iq type="set">` stanza back to Legal 
+    Component B. The `<petitionSignatureResponse>` element retains the `pid` and `id` 
+    attributes of the message, and adds a `jid` attribute containing the Bare JID of the
+    Requestor, and an optional Boolean `repsonse` attribute, declaring if the petition should
+    be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
+    is assumed to be `false`. If the `response` is `true`, the `<petitionSignatureResponse>` 
+    element also contains a `<content>` element with the BASE64-encoded binary content to be
+    signed, and a `<signature>` element, with the BASE64-encoded digital signature of the
+    content.
+
+#.  Legal Component B sends a `<petitionSignatureResponseMsg>` in a `<message>` stanza back
+    to the Requestor, informing the Requestor of the decision made by Entity B. The
+    `<petitionSignatureResponseMsg>` element retains the `pid` and `response` attributes
+    (explicitly including `response="false"` if not provided in the response from Entity B\).
+    If Entity B gave consent to digitally sign the content, the 
+    `<petitionSignatureResponseMsg>` element also contains first a `<content>` element with
+    the BASE64-encoded content that was signed, a `<signature>` element with the BASE64-encoded
+    sigital signature, followed by the requested Legal Identity using its `<identity>` object 
+    representation.
+
+### Specifying properties and attachments
+
+Properties and attachments of the signatory's Legal Identity can be filtered, in the same way
+as for Legal Identity Petitions. Note however, that the digital signature of a partial 
+identity object itself cannot be verified by the Requestor. If requesting a partial set of 
+information from a Legal Identity, the Requestor must rely on signature validation being made 
+by the corresponding Trust Providers. The digital signature of the content however, can still
+be validated.
+
+### Adding server-specific context to petitions
+
+As for Legal Identity Petitions, Legal Component B is free to add server-specific and 
+context-specific information to the petition.
+
+### Example
+
+Following is an example of a Digital Signature petition:
+
+```xml
+<iq id='14' type='set' to='legal.example.org'>
+   <petitionSignature pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
+                      purpose="Sign this for demonstration purposes."
+                      id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                      nonce="2LyKeT_jU8lhxbAfd1L2A0ryov-HTDJ_AHdnLKDrvOw"
+                      s="IEwrxgr_6WSHpjnkH..."
+                      xmlns="urn:nfi:iot:leg:id:1.0">
+      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
+   </petitionSignature>
+</iq>
+```
+
+Legal Component acknowledges petition with an empty response:
+
+```xml
+<iq id='14' type='result' from='legal.example.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
+```
+
+Legal Component forwards the petition to the second client:
+
+```xml
+<message id='15' to='client2@example.org/2B95AY0lawvCYhEwJR72BJan2'>
+   <petitionSignatureMsg pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
+                         purpose="Sign this for demonstration purposes."
+                         id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                         from="client@example.org/032e50a69ad719e1e347661394fb6a45"
+                         clientEp="1.2.3.4"
+                         xmlns="urn:nfi:iot:leg:id:1.0">
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Smith"/>
+         <property name="PNR" value="234567890-1"/>
+         <property name="ADDR" value="Street 2A"/>
+         <property name="ZIP" value="23456"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>nTXnxsEXdTt...</clientSignature>
+         <status created="2019-05-01T13:12:45.000" 
+                 from="2019-05-01T00:00:00.000" 
+                 provider="legal.example.org" 
+                 state="Approved" 
+                 to="2021-05-01T00:00:00.000" 
+                 updated="2019-05-01T13:12:46.000"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
+   </petitionSignatureMsg>
+</message>
+```
+
+The second client responds affirmative to the petition:
+
+```xml
+<iq id='16' type='set' to='legal.example.org'>
+   <petitionSignatureResponse pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
+                              id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                              jid="client@example.org"
+                              response="true"
+                              xmlns="urn:nfi:iot:leg:id:1.0">
+      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
+      <signature>qrNt3V3xCBMltc9WNOvyD8Qcwhe...</signature>
+   </petitionSignatureResponse>
+</iq>
+```
+
+The Legal Component acknowledges the petition response with an empty response:
+
+```xml
+<iq id='16' type='result' from='legal.example.org'
+    to='client2@example.org/2B95AY0lawvCYhEwJR72BJan2'/>
+```
+
+It then forwards the response, together with the identity, to the original Requestor:
+
+```xml
+<message id='17'
+         to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+         from='legal.example.org'>
+   <petitionSignatureResponseMsg pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
+                                response="true"
+                                xmlns="urn:nfi:iot:leg:id:1.0">
+      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
+      <signature>qrNt3V3xCBMltc9WNOvyD8Qcwhe...</signature>
+      <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Doe"/>
+         <property name="PNR" value="123456789-0"/>
+         <property name="ADDR" value="Street 1A"/>
+         <property name="ZIP" value="12345"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>RKeeeS7CdtK...</clientSignature>
+         <status created="2019-06-09T21:59:25.000" 
+                 from="2019-06-09T00:00:00.000" 
+                 provider="legal.example.org" 
+                 state="Created" 
+                 to="2021-06-09T00:00:00.000" 
+                 updated="2019-06-09T21:59:39.000"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+   </petitionSignatureResponseMsg>
+</message>
+```
+
+### Password-less login
+
+TODO
+
+### Peer Review of Identity Applications
 
 TODO
 
