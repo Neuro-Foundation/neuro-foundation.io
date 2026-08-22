@@ -1479,7 +1479,98 @@ Note: The [QuickLogin API](/QuickLogin.md) provides an implementation of this pr
 
 ### Peer Review of Identity Applications
 
-TODO
+Peer Reviews can be used to implement a decentralized review of identity applications. A
+Peer Review is a Signature petition, where the content is the UTF-8 encoding of the 
+`<identity>` object itself. If a Broker supports peer review, it must permit the Requestor 
+to make a Signature Petition even though the Identity is still in the `Created` state.
+
+When the Requestor receives a digital signature back from the peer reviewer, it uploads
+an XML attachment to the Identity Application. The XML document must have a root element
+`<peerReview>` containing a `<reviewed>` element with the `<identity>` object being reviewed,
+and a `<reviewer>` element with the `<identity>` object that made the review. The 
+`<peerReview>` element must have an `s` attribute containing the BASE64-encoding of the
+Digital Signature, and a `tp` attribute containing the timestamp when the review was received
+(in UTC). The attachment is added to the Identity Application using a file name the client
+decides. It could be the Legal Identity of the reviewed, with the file extension `.xml`
+added. The Content-Type of the attachment must be `text/xml; charset=utf-8`.
+
+The Legal Component receiving peer review attachments shall at least perform the following 
+checks. It may add additional implementation-specific checks also. If any of the checks fail,
+the `<addAttachment>` request shall fail and return an error.
+
+* The `<reviewed>` Legal Identity is the same as the Legal Identity to which the attachment 
+is made.
+
+* The Legal Identity being reviewed is in the `Created` state.
+
+* The signature of the review is a valid signature made by the `<reviewer>` Legal Identity.
+
+* The Legal Identity received when validating the reviewer signature, shall be the same as 
+the Legal Identity for the `<reviewer>` in the `<peerReview>` document.
+
+* Both the reviewed Legal Identity and the reviewer's Legal Identity shall have the `JID` 
+property defined, and they shall match the Bare JID's of each party respectively.
+
+* If the reviewed Legal Identity and the reviewer's Legal Identity have the `COUNTRY` and 
+`PNR` properties defined, they must not match between the identities.
+
+* The reviewer has not reviewed the Legal Identity before in another attachment on the same
+reviewed Legal Identity.
+
+* The reviewer Legal Identity shall be in the `Approved` state.
+
+* The current timestamp (in UTC) shall be within the `From` and `To` properties of the 
+reviewer Legal Identity.
+
+Example of a Peer Review attachment:
+
+```xml
+<peerReview s="DA4zJWXE..." tp="2019-06-09T21:59:45.000Z" xmlns="urn:nfi:iot:leg:id:1.0">
+   <reviewed>
+      <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Doe"/>
+         <property name="PNR" value="123456789-0"/>
+         <property name="ADDR" value="Street 1A"/>
+         <property name="ZIP" value="12345"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>RKeeeS7CdtK...</clientSignature>
+         <status created="2019-06-09T21:59:25.000" 
+                 from="2019-06-09T00:00:00.000" 
+                 provider="legal.example.org" 
+                 state="Created" 
+                 to="2021-06-09T00:00:00.000" 
+                 updated="2019-06-09T21:59:39.000"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+   </reviewed>
+   <reviewer>
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Smith"/>
+         <property name="PNR" value="234567890-1"/>
+         <property name="ADDR" value="Street 2A"/>
+         <property name="ZIP" value="23456"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>nTXnxsEXdTt...</clientSignature>
+         <status created="2019-05-01T13:12:45.000" 
+                 from="2019-05-01T00:00:00.000" 
+                 provider="legal.example.org" 
+                 state="Approved" 
+                 to="2021-05-01T00:00:00.000" 
+                 updated="2019-05-01T13:12:46.000"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+   </reviewer>
+</peerReview>
+```
+
 
 Authorizing access
 ---------------------

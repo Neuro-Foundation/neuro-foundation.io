@@ -942,6 +942,48 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='peerReview'>
+		<xs:annotation>
+			<xs:documentation>Contains information about a peer review of an identity application.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='reviewed'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='identity' minOccurs='1' maxOccurs='1'>
+								<xs:annotation>
+									<xs:documentation>Legal Identity being reviewed.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name='reviewer'>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref='identity' minOccurs='1' maxOccurs='1'>
+								<xs:annotation>
+									<xs:documentation>Legal Identity of the reviewer.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='s' type='xs:base64Binary' use='required'>
+				<xs:annotation>
+					<xs:documentation>Signature of the peer review, made by the reviewer.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='tp' type='xs:dateTime' use='required'>
+				<xs:annotation>
+					<xs:documentation>Timestamp (in UTC) when the peer review was received.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name='identityReview'>
 		<xs:annotation>
 			<xs:documentation>Contains information about an identity review.</xs:documentation>
