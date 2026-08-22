@@ -157,6 +157,23 @@ Example response:
 </iq>
 ```
 
+### Special considerations
+
+Most property names listed in the response are interpreted literally. A few property names
+have special meaning:
+
+* If `FULLNAME` is listed, it means the service only processes the full name of the identity,
+not its individual parts. The application can use the `FIRST`, `MIDDLE`, and/or `LAST`
+properties instead, and they will be concatenated to form the `FULLNAME` property before
+being processed.
+
+* If `FIRST`, `MIDDLE` and/or `LAST` is listed, it means the service processes the indivudual
+parts during review or validation. The application can use `FULLNAME` instead, and the service
+will extract the individual parts before processing.
+
+* If `PREVIEW` is listed, it means the identity application must be a preview application
+itself, or refer to a preview application using the `PREVIEW` property.
+
 Applying for Legal Identity registration
 ------------------------------------------
 
@@ -802,6 +819,33 @@ The result is the updated identity object:
    </identity>
 </iq>
 ```
+
+### Reserved Attachment File Names
+
+Some attachment file names (excluding their file extensions) are reserved for special 
+purposes. The following file names are reserved. If they are used, the attachment must
+follow the indicated meaning for the attachment.
+
+| File Name w/o extension | Content-Type | Description |
+|-------------------------|--------------|-------------|
+| `ProfilePhoto`          | `image/*`    | The attachment is a profile photo of the identified person. |
+| `Passport`			  | `image/*`    | The attachment is a photo of the biodata page of a passport belonging to the identified person. |
+| `IdCardFront`			  | `image/*`    | The attachment is a photo of the front of an ID card belonging to the identified person. |
+| `IdCardBack`			  | `image/*`    | The attachment is a photo of the back of an ID card belonging to the identified person. |
+| `DriverLicenseFront`	  | `image/*`    | The attachment is a photo of the front of a Driver's License belonging to the identified person. |
+| `DriverLicenseBack`	  | `image/*`    | The attachment is a photo of the back of a Driver's License belonging to the identified person. |
+
+### XML attachments
+
+XML documents can be added as attachments. The meaning of the XML document is determined by
+the local name and namespace of the root element. The following XML documents are reserved,
+and have the following special meanings:
+
+| Local Name         | Namespace                | Description |
+|--------------------|--------------------------|-------------|
+| `<identityReview>` | `urn:nfi:iot:leg:id:1.0` | Contains a signed Identity Review, listing results from individual services and their findings concerning claimed properties and attachments. |
+| `<peerReview>`     | `urn:nfi:iot:leg:id:1.0` | Contains a signed Peer Review, listing the opinion reached by a peer concerning claimed properties and attachments. The peer review document also contains the public part of the legal identity of the peer that made the review. |
+
 
 Getting attachments
 -----------------------
