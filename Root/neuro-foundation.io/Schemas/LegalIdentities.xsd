@@ -1088,6 +1088,24 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
+	
+	<xs:element name='selectReviewService'>
+		<xs:annotation>
+			<xs:documentation>Selects a Peer Review service.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='provider' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Type of Peer Review service to select.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='serviceId' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of Peer Review service to select.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
 
 	<xs:element name='clientMessage'>
 		<xs:annotation>

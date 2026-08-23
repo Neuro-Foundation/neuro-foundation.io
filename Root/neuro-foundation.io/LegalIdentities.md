@@ -1732,7 +1732,12 @@ an identifier of the service, implementation-specific type of the service, a dis
 for the service, the Legal Identity identifier to invoke when requesting a Peer Review, and
 if the service is an external service, or if it runs internally in the broker. Each
 `<provider>` element may also specify an icon using the `iconUrl`, `iconWidth` and 
-`iconHeight` attributes.
+`iconHeight` attributes. Before invoking the Peer Review from the service, the service needs
+to be selected by the client. This is done by sending a `<selectReviewService>` element in
+an `<iq type="set">` stanza to the Legal Component, with the `provider` attribute set to the
+type of provider selected, and the `serviceId` attribute set to the instance ID of the 
+service. The Legal Component acknowledges the selection by returning an empty 
+`<iq type="result">` stanza to the client.
 
 Example of initiating the automatic approval process:
 
@@ -1743,7 +1748,7 @@ Example of initiating the automatic approval process:
 </iq>
 ```
 
-Acknowledgement of reciept of request and initiation of approval process.
+Acknowledgement of reciept of request and initiation of approval process:
 
 ```xml
 <iq type='result'
@@ -1780,10 +1785,24 @@ Response containing list of Peer Review services featured for the client.
 </iq>
 ```
 
-Know Your Customer services (KyC)
-------------------------------------
+Example of initiating the automatic approval process:
 
-TODO
+```xml
+<iq id='23' type='set' to='legal.example.org'>
+   <selectReviewService provider="Featured.Reviewer"
+                        serviceId="FeaturedReviewer1"
+                        xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Acknowledgement of selection:
+
+```xml
+<iq type='result'
+    from='legal.example.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    id='23'/>
+```
 
 Feedback messages
 --------------------
