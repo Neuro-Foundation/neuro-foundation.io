@@ -436,12 +436,12 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:23.000"
-              from="2019-06-09T00:00:00.000"
+      <status created="2019-06-09T21:59:23Z"
+              from="2019-06-09Z"
               provider="legal.example.org"
               state="Approved"
-              to="2021-06-09T00:00:00.000"
-              updated="2019-06-09T21:59:24.000"/>
+              to="2021-06-09Z"
+              updated="2019-06-09T21:59:24Z"/>
       <serverSignature>GnlKyllIGAfI...</serverSignature>
    </identity>
 </message>
@@ -485,11 +485,11 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:23.000" 
-              from="2019-06-09T00:00:00.000" 
+      <status created="2019-06-09T21:59:23Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Created" 
-              to="2021-06-09T00:00:00.000"/>
+              to="2021-06-09Z"/>
       <serverSignature>fR4LuS4Tg34dH...</serverSignature>
    </identity>
 </iq>
@@ -527,11 +527,11 @@ Example:
           <property name="ZIP" value="12345"/>
           <property name="CITY" value="Metropolis"/>
           <clientSignature>RKeeeS7CdtK...</clientSignature>
-          <status created="2019-06-09T21:59:23.000" 
-                  from="2019-06-09T00:00:00.000" 
+          <status created="2019-06-09T21:59:23Z" 
+                  from="2019-06-09Z" 
                   provider="legal.example.org" 
                   state="Created" 
-                  to="2021-06-09T00:00:00.000"/>
+                  to="2021-06-09Z"/>
           <serverSignature>fR4LuS4Tg34dH...</serverSignature>
        </identity>
        ...
@@ -583,11 +583,11 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:26.000" 
-              from="2019-06-09T00:00:00.000" 
+      <status created="2019-06-09T21:59:26Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Created" 
-              to="2021-06-09T00:00:00.000"/>
+              to="2021-06-09Z"/>
       <serverSignature>2QhPLCgwudK...</serverSignature>
    </identity>
 </iq>
@@ -632,12 +632,12 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:23.000" 
-              from="2019-06-09T00:00:00.000" 
+      <status created="2019-06-09T21:59:23Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Obsoleted" 
-              to="2021-06-09T00:00:00.000" 
-              updated="2019-06-09T21:59:24.000"/>
+              to="2021-06-09Z" 
+              updated="2019-06-09T21:59:24Z"/>
       <serverSignature>GnlKyllIGAfI...</serverSignature>
    </identity>
 </iq>
@@ -682,12 +682,12 @@ Example:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:25.000" 
-              from="2019-06-09T00:00:00.000" 
+      <status created="2019-06-09T21:59:25Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Compromised" 
-              to="2021-06-09T00:00:00.000" 
-              updated="2019-06-09T21:59:25.000"/>
+              to="2021-06-09Z" 
+              updated="2019-06-09T21:59:25Z"/>
       <serverSignature>8cJy/lI4GuYP0...</serverSignature>
    </identity>
 </iq>
@@ -806,13 +806,13 @@ The result is the updated identity object:
                   fileName="ProfilePhoto.png" 
                   id="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" 
                   s="HVYE7CMyb..." 
-                  timestamp="2019-06-09T21:59:37.000" />
-      <status created="2019-06-09T21:59:25.000" 
-              from="2019-06-09T00:00:00.000" 
+                  timestamp="2019-06-09T21:59:37Z" />
+      <status created="2019-06-09T21:59:25Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Created" 
-              to="2021-06-09T00:00:00.000" 
-              updated="2019-06-09T21:59:38.000"/>
+              to="2021-06-09Z" 
+              updated="2019-06-09T21:59:38Z"/>
       <serverSignature>+NYUZhCTL0gTx2...</serverSignature>
       <attachmentRef attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" 
                      url="https://example.org/Attachments/3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.lab.tagroot.io" />
@@ -925,12 +925,12 @@ The result is the updated identity object:
       <property name="ZIP" value="12345"/>
       <property name="CITY" value="Metropolis"/>
       <clientSignature>RKeeeS7CdtK...</clientSignature>
-      <status created="2019-06-09T21:59:25.000" 
-              from="2019-06-09T00:00:00.000" 
+      <status created="2019-06-09T21:59:25Z" 
+              from="2019-06-09Z" 
               provider="legal.example.org" 
               state="Created" 
-              to="2021-06-09T00:00:00.000" 
-              updated="2019-06-09T21:59:39.000"/>
+              to="2021-06-09Z" 
+              updated="2019-06-09T21:59:39Z"/>
       <serverSignature>...</serverSignature>
    </identity>
 </iq>
@@ -1104,12 +1104,12 @@ Legal Component forwards the petition to the second client:
          <property name="ZIP" value="23456"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>nTXnxsEXdTt...</clientSignature>
-         <status created="2019-05-01T13:12:45.000" 
-                 from="2019-05-01T00:00:00.000" 
+         <status created="2019-05-01T13:12:45Z" 
+                 from="2019-05-01Z" 
                  provider="legal.example.org" 
                  state="Approved" 
-                 to="2021-05-01T00:00:00.000" 
-                 updated="2019-05-01T13:12:46.000"/>
+                 to="2021-05-01Z" 
+                 updated="2019-05-01T13:12:46Z"/>
          <serverSignature>...</serverSignature>
       </identity>
    </petitionIdentityMsg>
@@ -1155,12 +1155,12 @@ It then forwards the response, together with the identity, to the original Reque
          <property name="ZIP" value="12345"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>RKeeeS7CdtK...</clientSignature>
-         <status created="2019-06-09T21:59:25.000" 
-                 from="2019-06-09T00:00:00.000" 
+         <status created="2019-06-09T21:59:25Z" 
+                 from="2019-06-09Z" 
                  provider="legal.example.org" 
                  state="Created" 
-                 to="2021-06-09T00:00:00.000" 
-                 updated="2019-06-09T21:59:39.000"/>
+                 to="2021-06-09Z" 
+                 updated="2019-06-09T21:59:39Z"/>
          <serverSignature>...</serverSignature>
       </identity>
    </petitionIdentityResponseMsg>
@@ -1330,12 +1330,12 @@ Legal Component forwards the petition to the second client:
          <property name="ZIP" value="23456"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>nTXnxsEXdTt...</clientSignature>
-         <status created="2019-05-01T13:12:45.000" 
-                 from="2019-05-01T00:00:00.000" 
+         <status created="2019-05-01T13:12:45Z" 
+                 from="2019-05-01Z" 
                  provider="legal.example.org" 
                  state="Approved" 
-                 to="2021-05-01T00:00:00.000" 
-                 updated="2019-05-01T13:12:46.000"/>
+                 to="2021-05-01Z" 
+                 updated="2019-05-01T13:12:46Z"/>
          <serverSignature>...</serverSignature>
       </identity>
       <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
@@ -1387,12 +1387,12 @@ It then forwards the response, together with the identity, to the original Reque
          <property name="ZIP" value="12345"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>RKeeeS7CdtK...</clientSignature>
-         <status created="2019-06-09T21:59:25.000" 
-                 from="2019-06-09T00:00:00.000" 
+         <status created="2019-06-09T21:59:25Z" 
+                 from="2019-06-09Z" 
                  provider="legal.example.org" 
                  state="Created" 
-                 to="2021-06-09T00:00:00.000" 
-                 updated="2019-06-09T21:59:39.000"/>
+                 to="2021-06-09Z" 
+                 updated="2019-06-09T21:59:39Z"/>
          <serverSignature>...</serverSignature>
       </identity>
    </petitionSignatureResponseMsg>
@@ -1525,7 +1525,7 @@ reviewer Legal Identity.
 Example of a Peer Review attachment:
 
 ```xml
-<peerReview s="DA4zJWXE..." tp="2019-06-09T21:59:45.000Z" xmlns="urn:nfi:iot:leg:id:1.0">
+<peerReview s="DA4zJWXE..." tp="2019-06-09T21:59:45Z" xmlns="urn:nfi:iot:leg:id:1.0">
    <reviewed>
       <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
          <clientPublicKey>
@@ -1538,12 +1538,12 @@ Example of a Peer Review attachment:
          <property name="ZIP" value="12345"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>RKeeeS7CdtK...</clientSignature>
-         <status created="2019-06-09T21:59:25.000" 
-                 from="2019-06-09T00:00:00.000" 
+         <status created="2019-06-09T21:59:25Z" 
+                 from="2019-06-09Z" 
                  provider="legal.example.org" 
                  state="Created" 
-                 to="2021-06-09T00:00:00.000" 
-                 updated="2019-06-09T21:59:39.000"/>
+                 to="2021-06-09Z" 
+                 updated="2019-06-09T21:59:39Z"/>
          <serverSignature>...</serverSignature>
       </identity>
    </reviewed>
@@ -1559,18 +1559,58 @@ Example of a Peer Review attachment:
          <property name="ZIP" value="23456"/>
          <property name="CITY" value="Metropolis"/>
          <clientSignature>nTXnxsEXdTt...</clientSignature>
-         <status created="2019-05-01T13:12:45.000" 
-                 from="2019-05-01T00:00:00.000" 
+         <status created="2019-05-01T13:12:45Z" 
+                 from="2019-05-01Z" 
                  provider="legal.example.org" 
                  state="Approved" 
-                 to="2021-05-01T00:00:00.000" 
-                 updated="2019-05-01T13:12:46.000"/>
+                 to="2021-05-01Z" 
+                 updated="2019-05-01T13:12:46Z"/>
          <serverSignature>...</serverSignature>
       </identity>
    </reviewer>
 </peerReview>
 ```
 
+
+Getting Network Identity of Identifier
+-----------------------------------------
+
+A Broker or Legal Component can get the network identity from an identifier by sending a
+`<getNetworkIdentity>` element with an `id` attribute in an `<iq type="get">` request to 
+either a Broker (`id` attribute containing a Bare JID of an account on the Broker) or a Legal 
+Component (`id` attribute containing an identifier of a Legal Identity on the Legal Component).
+The recipient must return a `forbidden` error if the sender of the request is not a domain JID.
+The recipient may limit access to remote endpoints, based on implementation-specific or
+configuration-specific rules, such as limiting access to domains within the same tree of trust
+(see below).
+
+The expected response is a `<networkIdentity>` element in an `<iq type="result">` stanza.
+The element contains a `jid` attribute containing the Bare JID associated with the identifier
+in the request. If the request is authorized, the `<networkIdentity>` may also contain a
+sequence of `<connection>` elements, each one representing a live connection held by a client
+associated with that Bare JID. Each `<connection>` element has a `clientEp` attribute,
+representing the remote endpoint of the client, and a `ts` attribute, containing a timestamp
+(in UTC), representing the last time a `<presence>` stanza was received over that connection.
+
+**Security Note**: The Full JID of each connection must never be returned.
+
+Example:
+
+```xml
+<iq id='18' type='get' from='legal.example2.org' to='legal.example.org'>
+   <getNetworkIdentity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"/>
+</iq>
+```
+
+Legal Component responds:
+
+```xml
+<iq id='18' type='result' from='legal.example.org' to='legal.example2.org'>
+   <networkIdentity jid="client@example.org">
+      <connection clientEp="1.2.3.4" ts="2019-07-01T14:56:12Z"/>
+   </networkIdentity>
+</iq>
+```
 
 Authorizing access
 ---------------------

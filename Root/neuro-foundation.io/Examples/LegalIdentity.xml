@@ -12,12 +12,12 @@
 	<property name="ZIP" value="12345"/>
 	<property name="CITY" value="Metropolis"/>
 	<clientSignature>RKeeeS7CdtKX0rb...</clientSignature>
-	<status created="2019-06-09T21:59:23.000"
-	        from="2019-06-09T00:00:00.000" 
+	<status created="2019-06-09T21:59:23Z"
+	        from="2019-06-09Z" 
 	        provider="legal.example.org" 
 	        state="Obsoleted" 
-	        to="2021-06-09T00:00:00.000" 
-	        updated="2019-06-09T21:59:24.000"/>
+	        to="2021-06-09Z" 
+	        updated="2019-06-09T21:59:24Z"/>
 	<serverSignature>GnlKyllIGAfIDLoY...</serverSignature>
 </identity>
 

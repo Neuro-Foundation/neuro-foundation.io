@@ -917,6 +917,81 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='getNetworkIdentity'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq get stanza from one	Broker or Legal Component to another Broker or Legal Component, to get the network identity of an identifier (Legal Identity or Account).</xs:documentation>
+			<xs:documentation>If a client sends this request, a forbidden error is returned.</xs:documentation>
+			<xs:documentation>Expected response element: networkIdentity</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the Legal Identity or Account to get the network address to.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='networkIdentity'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq result stanza as a response to a getNetworkIdentity request.</xs:documentation>
+			<xs:documentation>Contains information about the Bare JID of an identifier, and any associated connections currently open.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='connection' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Represents an active connection.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name='clientEp' type='xs:string' use='required'>
+							<xs:annotation>
+								<xs:documentation>Representation of the remote endpoint of the connection.</xs:documentation>
+								<xs:documentation>Format and syntax of remote endpoint depend on binding and transport used for the connection. My be a remote IP-address of a socket connection, for example.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name='ts' type='xs:dateTime' use='required'>
+							<xs:annotation>
+								<xs:documentation>Timestamp (in UTC) of last presence stanza sent by client.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name='jid' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Bare JID associated with identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='authorizeAccess'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq set stanza from a client to a Trust Provider, to add or remove authorization to access one of its Legal Identities.</xs:documentation>
+			<xs:documentation>A client can only control authorization to its own identities.</xs:documentation>
+			<xs:documentation>An empty response is expected to be returned, to acknowledge the request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the Legal Identity to authorize access to.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteId' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Remote ID, either a Legal Identity identifier or a Bare JID.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='auth' type='xs:boolean' use='optional' default='true'>
+				<xs:annotation>
+					<xs:documentation>If true, authorizes access to the identity to the remote ID.</xs:documentation>
+					<xs:documentation>If false, removes authorization to access the identity from the remote ID.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name='clientMessage'>
 		<xs:annotation>
 			<xs:documentation>Contains information message about an identity application.</xs:documentation>
