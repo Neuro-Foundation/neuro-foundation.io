@@ -1785,7 +1785,7 @@ Response containing list of Peer Review services featured for the client.
 </iq>
 ```
 
-Example of initiating the automatic approval process:
+Example of selecting a Peer Review service:
 
 ```xml
 <iq id='23' type='set' to='legal.example.org'>
