@@ -1643,6 +1643,53 @@ Legal Component responds:
     to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
 ```
 
+Identity Progression and Signatures
+--------------------------------------
+
+To check if a new Legal Identity corresponds to an old obsoleted or compromized Legal Identity,
+a `<canSignAs>` element is sent in an `<iq type="get">` stanza to the Trust Provider of both.
+The element contains a `referenceId` attribute containing the identifier of the obsoleted or
+compromized Legal Identity, and a `signatoryId` attribute containing the identifier of the
+new Legal Identity. If all checks pass, an empty `<iq type="result">` stanza is returned.
+Otherwise, an appropriate error stanza is returned. The following checks are performed:
+
+* Both Legal Identity references shall be hosted by the Legal Component receiving the request.
+
+* The reference Legal Identity shall be in the `Obsoleted` or `Compromised` states. It shall 
+not be in the `Created`, `Approved` or `Rejected` states.
+
+* The new signatory Legal Identity shall be in the `Approved` state. It shall not be in the 
+`Created`, `Rejected`, `Obsoleted` or `Compromised` states.
+
+* Both Legal Identity objects shall be associated with the same Account.
+
+* Both Legal Identity objects shall have the `JID`, `PNR` and `COUNTRY` properties defined, 
+and they shall have the same values between the two Legal Identities. Other properties may 
+vary, as time progresses.
+
+Example request:
+
+```xml
+<iq id='20' type='get' to='legal.example.org'>
+   <canSignAs 
+      referenceId="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+      signatoryId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"/>
+</iq>
+```
+
+Example error response, if the identities do not correspond:
+
+```xml
+<iq type='error'
+    from='legal.example.org'
+    to=' client@example.org/032e50a69ad719e1e347661394fb6a45'
+    id='20'>
+   <error type='cancel'>
+      <forbidden xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
+   </error>
+</iq>
+```
+
 
 Identity Reviewer services
 -----------------------------

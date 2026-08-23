@@ -992,6 +992,24 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='canSignAs'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq get stanza from a client to a Trust Provider, to check if a new Legal Identity can sign using the same Conceptual Identity as an obsoleted or compromized Legal Identity.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='referenceId' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the obsoleted or compromized Legal Identity.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='signatoryId' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the new Legal Identity.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name='clientMessage'>
 		<xs:annotation>
 			<xs:documentation>Contains information message about an identity application.</xs:documentation>
