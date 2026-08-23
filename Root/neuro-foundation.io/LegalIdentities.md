@@ -1598,7 +1598,8 @@ Example:
 
 ```xml
 <iq id='18' type='get' from='legal.example2.org' to='legal.example.org'>
-   <getNetworkIdentity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"/>
+   <getNetworkIdentity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                       xmlns="urn:nfi:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -1606,7 +1607,8 @@ Legal Component responds:
 
 ```xml
 <iq id='18' type='result' from='legal.example.org' to='legal.example2.org'>
-   <networkIdentity jid="client@example.org">
+   <networkIdentity jid="client@example.org"
+                    xmlns="urn:nfi:iot:leg:id:1.0">
       <connection clientEp="1.2.3.4" ts="2019-07-01T14:56:12Z"/>
    </networkIdentity>
 </iq>
@@ -1632,7 +1634,8 @@ Example request:
 <iq id='19' type='set' to='legal.example.org'>
    <authorizeAccess id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
                     remoteId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"
-                    auth="true"/>
+                    auth="true"
+                    xmlns="urn:nfi:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -1673,7 +1676,8 @@ Example request:
 <iq id='20' type='get' to='legal.example.org'>
    <canSignAs 
       referenceId="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
-      signatoryId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"/>
+      signatoryId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"
+      xmlns="urn:nfi:iot:leg:id:1.0"/>
 </iq>
 ```
 
@@ -1682,7 +1686,7 @@ Example error response, if the identities do not correspond:
 ```xml
 <iq type='error'
     from='legal.example.org'
-    to=' client@example.org/032e50a69ad719e1e347661394fb6a45'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
     id='20'>
    <error type='cancel'>
       <forbidden xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
@@ -1690,11 +1694,91 @@ Example error response, if the identities do not correspond:
 </iq>
 ```
 
+Initiating the Legal Identity review process
+-----------------------------------------------
 
-Identity Reviewer services
------------------------------
+The client can initiate the Legal Identity review process in different ways. A Legal Identity
+can be approved using the following mechanisms:
 
-TODO
+* Manually, by an operator of the Broker.
+
+* Using Peer Review, requesting peers to review the application. When sufficient number of
+positive peer reviews have been attached to the application, the Broker approves the Legal
+Identity, if the Broker supports Peer Review, and has the feature enabled.
+
+* Using automatic Identity Application Authenticator services. Such services can automatically
+approve or reject services based on the claims and any included photos.
+
+* Calling Peer Review services.
+
+Automatic approval (or rejection) is initiated by sending a `<readyForApproval>` element in
+an `<iq type="set">` stanza to the Legal Component. The element has an `id` attribute that
+references the Legal Identity application to be approved. The Legal Component returns an
+empty `<iq type="result">` stanza to acknowledge receipt of the request. Any response is
+returned in the form of a feedback message, or an identity update notification, showing a
+change of the state of the application.
+
+To get a list of available Peer Review services available, the client sends a
+`<reviewIdProviders>` element to the Legal Component in an `<iq type="get">` stanza. The
+Legal Component may return an error if no Legal Identity applications are available for the
+sender. It may also modify the contents of the list depending on the Legal Identity 
+applications available. For example, it may return Peer Review services available in the
+location of the client, or based on any other of the claims made in the application.
+As a successful response to the request, the Legal Component returns a `<providers>` element
+in a `<iq type="result">` stanza. The `<providers>` element contains a list (possibly empty)
+of `<provider>` elements, each one representing one Peer Review service. Each `<provider>`
+element has the required `id`, `type`, `name`, `legalId` and `external` attributes providing
+an identifier of the service, implementation-specific type of the service, a displayable name
+for the service, the Legal Identity identifier to invoke when requesting a Peer Review, and
+if the service is an external service, or if it runs internally in the broker. Each
+`<provider>` element may also specify an icon using the `iconUrl`, `iconWidth` and 
+`iconHeight` attributes.
+
+Example of initiating the automatic approval process:
+
+```xml
+<iq id='21' type='set' to='legal.example.org'>
+   <readyForApproval id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                     xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Acknowledgement of reciept of request and initiation of approval process.
+
+```xml
+<iq type='result'
+    from='legal.example.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    id='21'/>
+```
+
+Example of requesting Peer Review services:
+
+```xml
+<iq id='22' type='get' to='legal.example.org'>
+   <reviewIdProviders xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Response containing list of Peer Review services featured for the client.
+
+```xml
+<iq type='result'
+    from='legal.example.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    id='22'>
+    <providers xmlns="urn:nfi:iot:leg:id:1.0">
+       <provider id='FeaturedReviewer1'
+                 type='Featured.Reviewer'
+                 name='Featured Reviewer 1'
+                 legalId='2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org'
+                 external='true'
+                 iconUrl='https://example.org/Photos/Reviewer1'
+                 iconWidth='512'
+                 iconHeight='512'/>
+    </providers>
+</iq>
+```
 
 Know Your Customer services (KyC)
 ------------------------------------

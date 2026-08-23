@@ -1010,6 +1010,85 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='readyForApproval'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq set stanza from a client to a Trust Provider, to tell the Broker that Identity Authenticator services can initiate processing of the applcation.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the Legal Identity that is ready for approval.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name='reviewIdProviders'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq get stanza from a client to a Trust Provider, to get a list of available Peer Review Service Providers on the broker.</xs:documentation>
+			<xs:documentation>Expected response element: providers</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+
+	<xs:element name='providers'>
+		<xs:annotation>
+			<xs:documentation>Contains a list (possibly empty) of service providers.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name='provider' type='Provider' minOccurs='0' maxOccurs='unbounded'>
+					<xs:annotation>
+						<xs:documentation>Contains a reference to one service provider.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name='Provider'>
+		<xs:attribute name='id' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Identifier of the service provider.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='type' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Implementation-specific type name of the service provider.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='name' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Displayable name of the service provider.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='legalId' type='xs:string' use='required'>
+			<xs:annotation>
+				<xs:documentation>Legal Identity identifier to invoke, if requesting Peer Review from the service.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='external' type='xs:boolean' use='required'>
+			<xs:annotation>
+				<xs:documentation>If the service is external (true) or runs internally in the broker (false).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='iconUrl' type='xs:anyURI' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Optional URL to an icon that can be presented for the service provider.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='iconWidth' type='xs:positiveInteger' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Width, in pixels, of the optional icon, if provided.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name='iconHeight' type='xs:positiveInteger' use='optional'>
+			<xs:annotation>
+				<xs:documentation>Height, in pixels, of the optional icon, if provided.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
 	<xs:element name='clientMessage'>
 		<xs:annotation>
 			<xs:documentation>Contains information message about an identity application.</xs:documentation>
