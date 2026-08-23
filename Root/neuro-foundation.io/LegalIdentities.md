@@ -1615,7 +1615,34 @@ Legal Component responds:
 Authorizing access
 ---------------------
 
-TODO
+A client can authorize access to one of its Legal Identities to a remote Entity, by sending a
+`<authorizeAccess>` element in a n`<iq type="set">` stanza to its Legal Component. The
+Legal Identity identifier is set in the `id` attribute and the remote Entity is identified by
+the value in the `remoteId` attribute (it can be a Bare JID or a Legal Identity identifier).
+An optional third attribute `auth` (which is by default `true`) can be used to control if
+authorization is granted (if `true`) or revoked (if `false`). The Legal Component responds
+with an error if the Legal Identity is not found, or does not belong to the caller, or is
+not hosted by the Legal Component, otherwise it acknowledges the request with an empty
+`<iq type="result">` stanza response. Authorization should only be granted for a limited time
+(for example, one hour).
+
+Example request:
+
+```xml
+<iq id='19' type='set' to='legal.example.org'>
+   <authorizeAccess id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
+                    remoteId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"
+                    auth="true"/>
+</iq>
+```
+
+Legal Component responds:
+
+```xml
+<iq id='19' type='result' from='legal.example.org' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
+```
+
 
 Identity Reviewer services
 -----------------------------
