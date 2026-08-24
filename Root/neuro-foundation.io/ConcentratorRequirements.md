@@ -75,16 +75,16 @@ clients and concentrator servers.
 1. Optional to implement, depending on concentrator capabilities, which the concentrator server
 defines in the response to the `getCapabilities` request.`
 
-2. Needs to be implenented if the `getNodeCommands` operation returns commands that can be
+2. Needs to be implemented if the `getNodeCommands` operation returns commands that can be
 executed and which are not queries.
 
-3. Needs to be implenented if the `getNodeCommands` operation returns queries that can be
+3. Needs to be implemented if the `getNodeCommands` operation returns queries that can be
 executed.
 
-4. Needs to be implenented if the `getCommonNodeCommands` operation returns commands that can 
+4. Needs to be implemented if the `getCommonNodeCommands` operation returns commands that can 
 be executed and which are not queries.
 
-5. Needs to be implenented if the `getCommonNodeCommands` operation returns queries that can 
+5. Needs to be implemented if the `getCommonNodeCommands` operation returns queries that can 
 be executed.
 
 6. Requires implementation if client executes node queries on the concentrator server.
