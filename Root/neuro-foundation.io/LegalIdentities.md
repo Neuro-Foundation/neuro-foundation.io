@@ -2056,11 +2056,42 @@ Verification message sent to client, with proof:
 </message>
 ```
 
-
 Getting Identity References
 ------------------------------
 
-TODO
+Brokers (or Components) can request other Brokers of Legal Identity references for accounts
+hosted by the recipient Broker. This is done by sending a `<getIdentityReferences>` element 
+in an `<iq type="get">` stanza to the Broker domain (i.e. domain part of the Bare JID of the
+account). The `<getIdentityReferences>` element has a `jid` attribute that must contain the
+Bare JID of the account. The Broker must return an error, if the sender of the request is
+not a domain JID. If the sender is a domain JID, the Broker returns an `<identityReferences>` 
+element in an `<iq type="result">` stanza. The `<identityReferences>` element contains a 
+sequence of `<identityReference>` elements (possibly empty), each one representing a valid
+Legal Identity hosted by the Broker for the account. Each `<identityReference>` element 
+contains the identifier in its text content.
+
+Example of requesting Legal Identity references for an account:
+
+```xml
+<iq id='27' type='get' to='example.org' from='example2.org'>
+   <getIdentityReferences jid="client@example.org"
+                          xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+The response contains a list of Legal Identity references for the account:
+
+```xml
+<iq type='result'
+    from='example.org'
+    to='example2.org'
+    id='27'>
+    <identityReferences xmlns="urn:nfi:iot:leg:id:1.0">
+       <identityReference>24902199-6e17-46be-fc55-bae978c1fe10@legal.example.org</identityReference>
+       <identityReference>2490219b-6e17-46c0-fc55-bae978192cf4@legal.example.org</identityReference>
+    </identityReferences>
+</iq>
+```
 
 Security considerations
 ------------------------------
