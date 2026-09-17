@@ -815,7 +815,7 @@ The result is the updated identity object:
               updated="2019-06-09T21:59:38Z"/>
       <serverSignature>+NYUZhCTL0gTx2...</serverSignature>
       <attachmentRef attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" 
-                     url="https://example.org/Attachments/3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.lab.tagroot.io" />
+                     url="https://example.org/Attachments/3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org" />
    </identity>
 </iq>
 ```
@@ -1841,7 +1841,7 @@ Example of a successful identity review message:
 
 ```xml
 <message to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
-   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="323e9ad6-2457-23a2-bc0f-f93fdd22176c@legal.lab.tagroot.io">
+   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="323e9ad6-2457-23a2-bc0f-f93fdd22176c@legal.example.org">
       <validatedClaim claim="ID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
       <validatedClaim claim="Account" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
       <validatedClaim claim="Provider" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
@@ -1860,7 +1860,7 @@ Example of a partially successful identity review message:
 
 ```xml
 <message to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
-   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="3236c747-86fc-bb0c-7c10-11175cde2e6f@legal.lab.tagroot.io">
+   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="3236c747-86fc-bb0c-7c10-11175cde2e6f@legal.example.org">
       <validatedClaim claim="ID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
       <validatedClaim claim="Account" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
       <validatedClaim claim="Provider" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
