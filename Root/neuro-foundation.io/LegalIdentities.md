@@ -1925,7 +1925,137 @@ Example of an Identity review error report:
 Trust Chains
 ---------------
 
-TODO
+A Broker is connected to a Parent Broker, which is connected to a Parent Broker, and so on, 
+until reaching a Root Broker. The sequence of Brokers from a Broker to the Root Broker is 
+called a *Trust Chain*. All Brokers with the same Root Broker are considered to be in the 
+same *Trust Tree*. The following figure illustrates two separate Trust Trees, and a 
+Trust Chain if the first tree is highlighted.
+
+```dot:Trust Trees and Trust Chains
+digraph G
+{
+    "Prod P" -> "Prod N1" [style=bold, dir=back]
+    "Prod P" -> "Prod N2" [dir=back]
+    "Prod P" -> "Prod N3" [dir=back]
+    "Prod N1" -> "Prod N11" [dir=back]
+    "Prod N1" -> "Prod N12" [dir=back]
+    "Prod N1" -> "Prod N13" [style=bold, dir=back]
+    "Prod N13" -> "Prod N131" [style=bold, dir=back]
+    "Prod N13" -> "Client1" [dir=back]
+    "Prod N13" -> "Client2" [dir=back]
+    "Prod N131" -> "Client3" [dir=back]
+    "Prod N131" -> "Client4" [dir=back]
+    "Prod N131" -> "Client5" [dir=back]
+
+    "Test P" -> "Test N1" [dir=back]
+    "Test P" -> "Test N2" [dir=back]
+    "Test N1" -> "Test N11" [dir=back]
+    "Test N1" -> "Test N12" [dir=back]
+    "Test N12" -> "Client6" [dir=back]
+    "Test N12" -> "Client7" [dir=back]
+
+    // Styling is applied after all nodes have been created.
+    "Prod P"    [style=bold, label=<<B>Prod P</B>>]
+    "Prod N1"   [style=bold, label=<<B>Prod N1</B>>]
+    "Prod N13"  [style=bold, label=<<B>Prod N13</B>>]
+    "Prod N131" [style=bold, label=<<B>Prod N131</B>>]
+}
+```
+
+A client can get the Trust Chain of a Broker by sending a `<getTrustChain>` element in an
+`<iq type="get">` stanza to a Broker, or a Legal Component. The Broker (or Legal Component) 
+responds with a `<trustChain>` element consisting of a sequence of `<broker>` elements, each 
+one representing a Broker in the Trust Chain. Each `<broker>` element has a `domain` attribute 
+containing the domain of a Broker in the Chain, starting with the Trust Root, and ending with
+the Broker receiving the request.
+
+The client can then verify a Link in the Chain, by sending a `<verifyTrustLink>` element in 
+an `<iq type="set">` stanza to the Broker (or Legal Component). The `<verifyTrustLink>` 
+element must contain a `proof` attribute containing a random string with sufficient entropy
+as to not be guessable. The Broker (or Legal Component) responds with an empty 
+`<iq type="result">` stanza. At the same time, it sends the same `<verifyTrustLink>` element 
+in a normal `<message>` stanza to the sender of the original request, but using its Parent
+connection (or the domain of the Broker hosting the Legal Component). The recipient of the
+message must verify that the `proof` attribute matches the one sent in the original request,
+and that the domain part of the sender of the message matches the domain of the parent Broker,
+as provided in the Trust Chain response.
+
+Example of requesting the Trust Chain of a Broker:
+
+```xml
+<iq id='24' type='get' to='legal.sub.example2.org'>
+   <getTrustChain xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Response containing a Trust Chain:
+
+```xml
+<iq type='result'
+    from='legal.sub.example2.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    id='24'>
+    <trustChain xmlns="urn:nfi:iot:leg:id:1.0">
+       <broker domain='example.org'/>
+       <broker domain='example2.org'/>
+       <broker domain='sub.example2.org'/>
+       <broker domain='legal.sub.example2.org'/>
+    </trustChain>
+</iq>
+```
+
+Example of verifying the Legal Component link to its Broker:
+
+```xml
+<iq id='25' type='set' to='legal.sub.example2.org'>
+   <verifyTrustLink proof="tzYkw_ErYFS4J-S5eGL2nBzNwrPhIlwxfxRgbLGQPCY"
+                    xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Empty response returned:
+
+```xml
+<iq id='25' type='result' from='legal.sub.example2.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
+```
+
+Verification message sent to client, with proof:
+
+```xml
+<message from='sub.example2.org'
+         to='client@example.org/032e50a69ad719e1e347661394fb6a45'>
+   <verifyTrustLink proof="tzYkw_ErYFS4J-S5eGL2nBzNwrPhIlwxfxRgbLGQPCY"
+                    xmlns="urn:nfi:iot:leg:id:1.0"/>
+</message>
+```
+
+Example of verifying a Broker connection to its Parent Broker:
+
+```xml
+<iq id='26' type='set' to='sub.example2.org'>
+   <verifyTrustLink proof="1U3FN3Uwo8Y394zZP7ZYOwMrGkAeqjPrkN1eQKRI7Mg"
+                    xmlns="urn:nfi:iot:leg:id:1.0"/>
+</iq>
+```
+
+Empty response returned:
+
+```xml
+<iq id='26' type='result' from='sub.example2.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
+```
+
+Verification message sent to client, with proof:
+
+```xml
+<message from='sub.example2.org@example2.org'
+         to='client@example.org/032e50a69ad719e1e347661394fb6a45'>
+   <verifyTrustLink proof="1U3FN3Uwo8Y394zZP7ZYOwMrGkAeqjPrkN1eQKRI7Mg"
+                    xmlns="urn:nfi:iot:leg:id:1.0"/>
+</message>
+```
+
 
 Getting Identity References
 ------------------------------

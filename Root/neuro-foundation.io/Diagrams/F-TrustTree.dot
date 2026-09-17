@@ -1,0 +1,28 @@
+digraph G
+{
+    "Prod P" -> "Prod N1" [style=bold, dir=back]
+    "Prod P" -> "Prod N2" [dir=back]
+    "Prod P" -> "Prod N3" [dir=back]
+    "Prod N1" -> "Prod N11" [dir=back]
+    "Prod N1" -> "Prod N12" [dir=back]
+    "Prod N1" -> "Prod N13" [style=bold, dir=back]
+    "Prod N13" -> "Prod N131" [style=bold, dir=back]
+    "Prod N13" -> "Client1" [dir=back]
+    "Prod N13" -> "Client2" [dir=back]
+    "Prod N131" -> "Client3" [dir=back]
+    "Prod N131" -> "Client4" [dir=back]
+    "Prod N131" -> "Client5" [dir=back]
+
+    "Test P" -> "Test N1" [dir=back]
+    "Test P" -> "Test N2" [dir=back]
+    "Test N1" -> "Test N11" [dir=back]
+    "Test N1" -> "Test N12" [dir=back]
+    "Test N12" -> "Client6" [dir=back]
+    "Test N12" -> "Client7" [dir=back]
+
+    // Styling is applied after all nodes have been created.
+    "Prod P"    [style=bold, label=<<B>Prod P</B>>]
+    "Prod N1"   [style=bold, label=<<B>Prod N1</B>>]
+    "Prod N13"  [style=bold, label=<<B>Prod N13</B>>]
+    "Prod N131" [style=bold, label=<<B>Prod N131</B>>]
+}

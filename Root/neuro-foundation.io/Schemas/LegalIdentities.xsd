@@ -1430,6 +1430,23 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='verifyTrustLink'>
+		<xs:annotation>
+			<xs:documentation>Sends a message using the parent connection of the Broker, to the sender of the request, to verify a Trust Link.</xs:documentation>
+			<xs:documentation>Can be sent in an iq set stanza to initiate verification.</xs:documentation>
+			<xs:documentation>Can be sent in a message stanza back to the sender of the request, to verify a trust link.</xs:documentation>
+			<xs:documentation>Empty response expected to the request.</xs:documentation>
+			<xs:documentation>The recipient of the verification message must verify the domain of the sender, to see that it matches the parent Broker in the trust chain, of the recipient of the original request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='proof' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>A string that will be forwarded in the verifyTrustLink message sent to the sender of the request using the parent broker connection.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name='getIdentityReferences'>
 		<xs:annotation>
 			<xs:documentation>Sent by one broker to another broker in an iq get stanza, when it needs to get references to valid legal identities used by a JID on the recipient.</xs:documentation>
