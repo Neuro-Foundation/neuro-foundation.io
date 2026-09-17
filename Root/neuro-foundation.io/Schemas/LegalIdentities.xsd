@@ -1257,9 +1257,10 @@
 										<xs:documentation>Name of a meta-data tag.</xs:documentation>
 									</xs:annotation>
 								</xs:attribute>
-								<xs:attribute name='value' type='xs:string' use='required'>
+								<xs:attribute name='value' type='xs:string' use='optional'>
 									<xs:annotation>
 										<xs:documentation>Value of a meta-data tag.</xs:documentation>
+										<xs:documentation>A missing value is considered a null value.</xs:documentation>
 									</xs:annotation>
 								</xs:attribute>
 								<xs:attribute name='type' type='xs:string' use='optional'>
@@ -1302,6 +1303,11 @@
 							<xs:documentation>Identity claim key.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+					<xs:attribute name='service' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>Reference to service validating claim.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name='validatedPhoto' minOccurs='0' maxOccurs='unbounded'>
@@ -1312,6 +1318,11 @@
 					<xs:attribute name='fileName' type='xs:string' use='required'>
 						<xs:annotation>
 							<xs:documentation>File name of photo.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='service' type='xs:string' use='optional'>
+						<xs:annotation>
+							<xs:documentation>Reference to service validating photo.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 				</xs:complexType>

@@ -834,6 +834,7 @@ follow the indicated meaning for the attachment.
 | `IdCardBack`			  | `image/*`    | The attachment is a photo of the back of an ID card belonging to the identified person. |
 | `DriverLicenseFront`	  | `image/*`    | The attachment is a photo of the front of a Driver's License belonging to the identified person. |
 | `DriverLicenseBack`	  | `image/*`    | The attachment is a photo of the back of a Driver's License belonging to the identified person. |
+| `ApplicationReview`     | `text/xml`   | The attachment is an Identity Review document, containing results from individual services and their findings concerning claimed properties and attachments. |
 
 ### XML attachments
 
@@ -1807,7 +1808,119 @@ Acknowledgement of selection:
 Feedback messages
 --------------------
 
-TODO
+The client can follow the results of an application review, by the reception of Identity 
+state change messages, or by the reception of feedback messages. There are two types of
+feedback messages: A normal message containing a `<clientMessage>` element is sent when
+an Identity Application review fails validation. The `<clientMessage>` element contains 
+information about which claims and photos failed, which ones validated, which ones were
+not processed. The `<clientMessage>` element may also contain additional errors with tags,
+providing more information. The `<clientMessage>` element has an `id` attribute, referencing
+the Identity application, a `code` attribute, with an implementation-specific error code
+for the main (or first) error, and a `type` attribute, that can be either `Client`, `Server`
+or `Service`, depending on where the error originates. The `<body>` of the `<message>` stanza
+contains the message text correspondig to the main (or first) error. The `<clientMessage>` 
+element also  contains a sequence of `<invalidClaim>`, `<invalidPhoto>`, `<error>`, 
+`<validatedClaim>`, `<validatedPhoto>`, `<potentialClaim>`, `<unvalidatedClaim>`, and 
+`<unvalidatedPhoto>` elements, each element type may occur zero or more times in the 
+sequence. These child elements specify details about the results of the review.
+
+A normal message containing a `<identityReview>` element, on the other hand, is sent when
+an Identity Application review is successful, or partially successful with unverified 
+claims and/or photos. The `<identityReview>` element contains information about which 
+claims and photos validated, which ones were not processed. The `<identityReview>` element 
+has an `id` attribute, referencing the Identity application. The `<identityReview>` 
+element also  contains a sequence of `<validatedClaim>`, `<validatedPhoto>`, 
+`<potentialClaim>`, `<unvalidatedClaim>`, and `<unvalidatedPhoto>` elements, each element 
+type may occur zero or more times in the sequence. These child elements specify details 
+about the results of the review. Once the client receives an `<identityReview>` message, 
+should add the contents of the review as an attachment to the application. The broker must
+reject any such attachment that is not an exact copy of the `<identityReview>` element just
+sent.
+
+Example of a successful identity review message:
+
+```xml
+<message to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
+   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="323e9ad6-2457-23a2-bc0f-f93fdd22176c@legal.lab.tagroot.io">
+      <validatedClaim claim="ID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Account" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Provider" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="State" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Created" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="From" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="To" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="JID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="PHONE" service="TAG.Identity.NeuroAccess.NeuroAccessAuthenticator" />
+      <validatedClaim claim="COUNTRY" service="TAG.Identity.NeuroAccess.NeuroAccessAuthenticator" />
+   </identityReview>
+</message>
+```
+
+Example of a partially successful identity review message:
+
+```xml
+<message to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
+   <identityReview xmlns="urn:nfi:iot:leg:id:1.0" id="3236c747-86fc-bb0c-7c10-11175cde2e6f@legal.lab.tagroot.io">
+      <validatedClaim claim="ID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Account" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Provider" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="State" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Created" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="Updated" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="From" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="To" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="DEVICE_ID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="JID" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="PHONE" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <validatedClaim claim="EMAIL" service="Waher.Service.IoTBroker.Legal.LegalComponent" />
+      <unvalidatedClaim claim="FIRST" />
+      <unvalidatedClaim claim="LAST" />
+      <unvalidatedClaim claim="PNR" />
+      <unvalidatedClaim claim="BDAY" />
+      <unvalidatedClaim claim="BMONTH" />
+      <unvalidatedClaim claim="BYEAR" />
+      <unvalidatedClaim claim="COUNTRY" />
+      <unvalidatedClaim claim="GENDER" />
+      <unvalidatedClaim claim="PREVIEW" />
+      <unvalidatedPhoto fileName="ProfilePhoto.jpg" />
+   </identityReview>
+</message>
+```
+
+Example of an Identity review error report:
+
+```xml
+<message to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' 
+         from='legal.example.org'
+         xml:lang='en'>
+   <body>EMail or Phone Number invalid.</body>
+   <clientMessage xmlns='urn:nfi:iot:leg:id:1.0' 
+                  id='323edc02-2c04-d116-1801-9212503d4a3c@legal.example.org'
+                  code='EMailOrPhoneInvalid'
+                  type='Client'>
+      <invalidClaim claim='EMAIL' message='EMail or Phone Number invalid.' code='EMailOrPhoneInvalid' service='TAG.Identity.NeuroAccess.NeuroAccessAuthenticator' xml:lang='en'/>
+      <validatedClaim claim='ID' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='Account' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='Provider' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='State' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='Created' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='Updated' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='From' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='To' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <validatedClaim claim='JID' service='Waher.Service.IoTBroker.Legal.LegalComponent'/>
+      <unvalidatedClaim claim='FIRST'/>
+      <unvalidatedClaim claim='LAST'/>
+      <unvalidatedClaim claim='COUNTRY'/>
+      <unvalidatedClaim claim='NATIONALITY'/>
+      <unvalidatedClaim claim='GENDER'/>
+      <unvalidatedClaim claim='BDAY'/>
+      <unvalidatedClaim claim='BMONTH'/>
+      <unvalidatedClaim claim='BYEAR'/>
+      <unvalidatedClaim claim='ORGCOUNTRY'/>
+      <unvalidatedPhoto fileName='ProfilePhoto.jpg'/>
+   </clientMessage>
+</message>
+```
 
 Trust Chains
 ---------------
