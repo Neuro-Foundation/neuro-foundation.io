@@ -1980,7 +1980,7 @@ message must verify that the `proof` attribute matches the one sent in the origi
 and that the domain part of the sender of the message matches the domain of the parent Broker,
 as provided in the Trust Chain response.
 
-Example of requesting the Trust Chain of a Broker:
+Example of requesting the Trust Chain of a Broker (or a Legal Component):
 
 ```xml
 <iq id='24' type='get' to='legal.sub.example2.org'>
