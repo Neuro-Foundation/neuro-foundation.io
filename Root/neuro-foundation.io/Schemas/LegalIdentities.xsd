@@ -1088,7 +1088,7 @@
 			</xs:annotation>
 		</xs:attribute>
 	</xs:complexType>
-	
+
 	<xs:element name='selectReviewService'>
 		<xs:annotation>
 			<xs:documentation>Selects a Peer Review service.</xs:documentation>
