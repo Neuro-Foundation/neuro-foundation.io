@@ -2125,10 +2125,12 @@ server. Clients who are parts in a contract can always retrieve the contract fro
 clients to compare the server contract with the fraudulent contract, and detect differences, or if the contract at all exists. An attacker
 would have to have control of the server, to be able to introduce fraudulent contracts into the system.
 
-To minimize the risk of attackers getting hold of both the server private key, as be able to inject smart contracts, these should
-be stored in a protected storage, such as an encrypted database or key vault.
+To minimize the risk of attackers getting hold of the server private key, and be able to inject smart contracts, 
+the keys should be stored in a protected storage, such as an encrypted database or key vault.
 
-If the server generates a new private key, any server signatures in attested artefacts have to be recalculated to match the new public key.
+To allow servers to generaate new keys, servers must keep a history of the keys used over 
+time. This allows clients to validate signatures made by the server, at different points in 
+time.
 
 The server should use a relatively high security strength for its keys, at least 192 or 256, depending on use case.
 
