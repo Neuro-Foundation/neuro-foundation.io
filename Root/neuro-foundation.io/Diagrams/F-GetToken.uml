@@ -1,0 +1,29 @@
+@startuml
+Activate Client
+Client -> "Provisioning Server" : getToken(Certificate.Pub)
+
+Activate "Provisioning Server"
+
+"Provisioning Server" -> "Provisioning Server" : Validate(Certificate.Pub)
+
+"Provisioning Server" -> "Provisioning Server" : Challenge:=Certificate.Pub.Encrypt(Random,OAEP)
+
+Client <- "Provisioning Server" : getTokenChallenge(seqnr,Challenge)
+Deactivate "Provisioning Server"
+
+Activate Client
+
+Client -> Client : Certificate.Priv.Decrypt(Challenge,OAEP)
+
+Client -> "Provisioning Server" : getTokenChallengeResponse(seqnr,Response)
+
+Activate "Provisioning Server"
+
+"Provisioning Server" -> "Provisioning Server" : Response=Random?
+
+Client <- "Provisioning Server" : getTokenResponse(token) [yes]
+
+Deactivate "Provisioning Server"
+Deactivate Client
+Deactivate Client
+@enduml
