@@ -185,15 +185,21 @@ internal rules and configurations. After the application has been received, the 
 notified, and validation can be performed, either manually, or automatically, depending on the 
 context. How this process is done lies outside the scope of this specification.
 
-The `<apply/>` element must contain the information about the legal identity, encoded in an `<identity/>` element. This element must not contain
-an `id` attribute, or attachments or attachment references. Such requests must be rejected. 
-The `id` attribute is added by the broker, after validating the request. Attachments can be
-added once the identity object has been created. Attachment references are added by the
-broker to provide short-lived URIs to uploaded attachments. The `<identity/>`
-element contains a sequence of child elements, however. The first is a `<clientPublicKey/>` element, which contains the public key of the client 
-making the request. The corresponding private key will be used to sign the request later. Then comes a sequence of `<property/>` elements. Each 
-one encodes a `name`/`value` attribute pair. It is up to the client to decide the number of properties included, and which ones. Any names can be used.
-Some names are predefined however, as described in the following table:
+The `<apply/>` element must contain the information about the legal identity, encoded in an 
+`<identity/>` element. This element must not contain an `id` attribute, or attachments or 
+attachment references. Such requests must be rejected. The `id` attribute is added by the 
+broker, after validating the request. Attachments can be added once the identity object has 
+been created. The `<identity>` element may have a `visibility` attribute, that can either have
+the value `Domain` or `Public`. By default, identity visibility is `Private`. The `visibility`
+attribute must not be serialized, if the identity is `Private`, as this is the default value,
+and affects the signature of the identity. Attachment references are added by the broker to 
+provide short-lived URIs to uploaded attachments. The `<identity/>` element contains a 
+sequence of child elements, however. The first is a `<clientPublicKey/>` element, which 
+contains the public key of the client making the request. The corresponding private key will 
+be used to sign the request later. Then comes a sequence of `<property/>` elements. Each one 
+encodes a `name`/`value` attribute pair. It is up to the client to decide the number of 
+properties included, and which ones. Any names can be used. Some names are predefined however,
+as described in the following table:
 
 | Property      | Description                                                           |
 |:--------------|:----------------------------------------------------------------------|
