@@ -453,11 +453,14 @@ Example:
 </message>
 ```
 
-Getting legal identities belonging to the account
-----------------------------------------------------
+Getting legal identities
+---------------------------
 
-You can get a legal identity from the server, if it belongs to you. You send the `<getLegalIdentity/>` element 
-with the `id` attribute set to the identity of the legal identity object in an `<iq type='get'/>` to the server.
+You can get a legal identity from the server, if it belongs to you. You send the 
+`<getLegalIdentity/>` element with the `id` attribute set to the identity of the legal 
+identity object in an `<iq type='get'/>` to the server. You can also get Legal Identities
+with `Domain` visibility, if you have an account on the same domain. Anyone can get Legal
+Identities with `Public` visibility.
 
 **Notes**:
 
