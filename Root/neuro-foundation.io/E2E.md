@@ -291,7 +291,7 @@ public keys for available asymmetric ciphers, as well as support for symmetric c
 In the following example, a sender sends a `<message/>` stanza end-to-end encrypted using
 the Edwards25519 curve, Elliptic Curve Diffie-Hellman (ECDH) for shared secret evaluation, 
 Edwards-curve Digital Signature Algorithm (EdDSA) algorithm for digital signatures and the
-AES-256 symmetric cipher to encrypt the payload. (BASE-64 encoded values have been
+AES-256 symmetric cipher to encrypt the payload. (BASE64 encoded values have been
 shortened for readability.)
 
 ```
@@ -312,7 +312,7 @@ from its broker and uses it to decrypt the end-to-end encrypted content.
 In the following example, a sender sends a `<iq type="set"/>` stanza end-to-end encrypted 
 using the Curve25519 curve, Elliptic Curve Diffie-Hellman (ECDH) for shared secret 
 evaluation, and Authenticated Encryption with Associated Data using ChaCha20 and Poly1305
-symmetric cipher to encrypt the payload. (BASE-64 encoded values have been shortened for 
+symmetric cipher to encrypt the payload. (BASE64 encoded values have been shortened for 
 readability.)
 
 ```

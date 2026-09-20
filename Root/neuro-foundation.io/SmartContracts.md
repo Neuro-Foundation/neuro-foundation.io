@@ -940,7 +940,7 @@ digest as a value of the element. The digest is simply computed over the binary 
 To get the contents of a specific schema, the client sends a `<getSchema/>` element in an `<iq type="get"/>` stanza to the Trust Provider. The
 namespace is specified in the `namespace` attribute of the `<getSchema/>` element. If a specific version of the schema is desired, a `<digest/>`
 child element is added, specifying the version the client is interested in. If the `<digest/>` element is omitted, the latest version of the schema
-is returned. The expected response element is `<schema/>`, which contains the binary representation of the XML schema file, base-64 encoded, as its 
+is returned. The expected response element is `<schema/>`, which contains the binary representation of the XML schema file, BASE64 encoded, as its 
 value.
 
 

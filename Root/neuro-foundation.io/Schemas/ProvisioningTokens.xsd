@@ -88,14 +88,14 @@
 	<xs:element name='tokenChallenge'>
 		<xs:annotation>
 			<xs:documentation>The recipient of a token can challenge the sender, especially the first time a token is received from a given sender.</xs:documentation>
-			<xs:documentation>The challenge consists of a BASE-64 encoded encrypted binary challenge, that the sender needs to decrypt and return.</xs:documentation>
+			<xs:documentation>The challenge consists of a BASE64 encoded encrypted binary challenge, that the sender needs to decrypt and return.</xs:documentation>
 			<xs:documentation>In distributed transactions, where tokens are forwarded, challenges need to be forwarded to the original issuer of the request.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base='xs:base64Binary'>
 					<xs:annotation>
-						<xs:documentation>BASE-64 encoded encrypted binary challenge</xs:documentation>
+						<xs:documentation>BASE64 encoded encrypted binary challenge</xs:documentation>
 					</xs:annotation>
 					<xs:attribute name='token' type='xs:string' use='required'>
 						<xs:annotation>
