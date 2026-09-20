@@ -10,11 +10,12 @@ Tokens
 =============
 
 This document outlines the XML representation of token management. Using tokens is an optional 
-feature that services, users or devices can use to identify themselves. The recipient of 
-sensor or actuator commands can base their security decisions based on the XMPP address of the 
-immediate sender, the domain of the immediate sender, and any device, user or service tokens
-presented, representing the origin of the transaction resulting in the request. All tokens can
-be challenged. The XML representation is modelled using an annotated XML Schema:
+feature that services, users or devices can use to identify themselves in distributed
+environments. The recipient of sensor or actuator commands can base their security decisions 
+based on the XMPP address of the immediate sender, the domain of the immediate sender, and any 
+device, user or service tokens presented, representing the origin of the transaction resulting 
+in the request. Most tokens can be challenged. The XML representation is modelled using an 
+annotated XML Schema:
 
 | Tokens                                                                ||
 | ------------|----------------------------------------------------------|
@@ -34,12 +35,12 @@ The method of token management described here, is designed with the following go
 
 * Tokens should be easy to validate, regardless who issued the token.
 
+* Tokens can be challenged, to reduce the risk of malicious actors reutilizing tokens they
+find.
+
 * Tokens should be difficult to forge.
 
 * Transmitting shared secrets or private keys should be avoided.
-
-* Tokens can be challenged, to reduce the risk of malicious actors reutilizing tokens they
-find.
 
 
 Requirements
@@ -47,17 +48,55 @@ Requirements
 
 ![Tokens Requirements](TokensRequirements.md)
 
+Types of tokens
+------------------
 
-Getting a token
-------------------------
+There are three different kinds of tokens that can be used with this infrastructure:
 
-For a client to use a token, it needs to get one from its provisioning server first. This is 
-accomplished using two request/response pairs. First, the client requests a token, by sending 
-an `<iq type="get"/>` request containing a `<getToken/>` element with the *public part* of a 
-certificate identifying the client (whether it be as a device, service or user) to the 
-provisioning server. The provisioning server validates the certificate. If OK, it generates a 
-random number with sufficient entropy, encrypts it with the public certificate sent by the
-client (using OAEP padding), and sends it as a challenge to the client in an 
+#. A Legal Identity identifier is a token that can be easily distributed. It is presented in 
+the form `GUID@DOMAIN`, as defined in the [Legal Identities section](LegalIdentities.md). The
+`DOMAIN` is the domain name of the Legal Component validating the corresponding Legal Identity.
+
+#. An [X.509 Certificate](https://datatracker.ietf.org/doc/html/rfc5280) token. It is a 
+short-form representation of an X.509 Certificate, in the form `DOMAIN:RND`. The `DOMAIN` 
+part is the domain of the Provisioning Component where the public part of the certificate has 
+been registered, and `RND` is a random identifier referencing this registration.
+
+#. A [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519). JWT tokens can be
+used as well. Challenging and validating such tokens must be done out-of-scope however.
+
+Common for all these tokens, is that they do not include white-space characters. When 
+providing tokens in a request, it is therefore possible to provide multiple tokens of 
+different types, separated by space characters.
+
+Creating a token
+-------------------
+
+For a client to use a token, it needs to create one first. Creating a token is done 
+differently, depending on the type of token.
+
+### Creating a Legal Identity token
+
+Legal Identity identifiers are created when [applying for a Legal Identity](LegalIdentities.md#applyingForLegalIdentityRegistration).
+These identifiers can be used as tokens as-is.
+
+### Creating a JWT token
+
+JWT tokens are created out-of-band, and is not described further in this specification. JWT
+tokens can be used in this specification, as a means to integrate web-based systems using
+JWT Bearer tokens as the basis for authenticating entities.
+
+### Creating an X.509 Certificate token
+
+An X.509 Certificate token is created, by registering the certificate with the Provisioning
+Component, as follows.
+
+The registration is accomplished using two request/response pairs. First, the client requests 
+a token, by sending an `<iq type="get"/>` request containing a `<getToken/>` element with the 
+*public part* of a certificate identifying the client (whether it be as a device, service or 
+user) to the provisioning server. The provisioning server validates the certificate. If OK, 
+it generates a random number with sufficient entropy, encrypts it with the public certificate 
+sent by the client (using OAEP padding), and sends it as a challenge to the client in an 
 `<iq type="result">` with a `<getTokenChallenge/>` element, to see if the client holds the 
 *private part* of the certificate. The client decrypts the challenge and returns the response 
 in a new `<iq type="get"/>` request with a `<getTokenChallengeResponse/>` element. The 
@@ -101,57 +140,87 @@ Deactivate Client
 Following are some details on the XML elements defined by the 
 [ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) schema.
 
-### getToken
+#### getToken
 
 Gets a token from the provisioning server. The contents of the element should be the BASE64 
 encoded public part of a X.509 certificate, for which the server is to provide a token.
 
-### getTokenChallenge
+#### getTokenChallenge
 
 The provisioning server response to the `<getToken/>` request with a challenge. It contains 
 BASE64-encoded binary data, encrypted with the public key of the certificate provided, using 
 OAEP padding. The provisioning server adds a `seqnr` attribute to be able to match responses 
 to challenges.
 
-### getTokenChallengeResponse
+#### getTokenChallengeResponse
 
 The client responds to the challenge issuing a new request, containing the decrypted binary 
 data, BASE64-encoded, to the provisioning server, using the same `seqnr` provided with the 
 challenge.
 
-### getTokenResponse
+#### getTokenResponse
 
 On the receipt of a successful response to the challenge, the provisioning server responds 
 with a token. It's placed in the `token` attribute of a `<getTokenResponse/>` element. The 
 format of the token should be the address of the provisioning server issuing the token, 
 followed by a colon (`:`), followed by a random string with sufficient entropy.
 
+Getting the Identity represented by a token
+----------------------------------------------
+
+Getting the identity represented by a token is done differently, depending on the type of 
+token. The following subsections descrube the different methods.
+
+### Getting a Legal Identity
+
+Getting a Legal Identity, using its identifier, is described in the
+[Legal Identities section](#gettingLegalIdentities). If the Identity has `Public` visibility, 
+anyone can get the Legal Identity directly. If it has `Domain` visibility, only Entities with
+accounts on the same domain can get it directly. Other Entities must first
+[Petition access to the Legal Identity](LegalIdentities.md#petitioningAccessToALegalIdentity)
+from the owner. If the Legal Identity has `Private` visibilty (which is the default), all
+Entities must first petition access to the Legal Identity, to be able to get it.
+
+### Getting an Identity from a JWT token
+
+JWT tokens encode the identity into the token itself. Getting the identity is a matter of
+parsing it. JWT tokens should only be used if the distribution of its JWT tokens can be
+controlled.
+
+### Getting the X.509 Certificate from a Certificate token
+
+To get the certificate corresponding to a token, the address to the provisioning server is 
+extracted from the token. (There may be multiple provisioning servers used in the network.) 
+The client then sends the token to the corresponding component using an `<iq type="get"/>` 
+request with a `<getCertificate/>` element containing the token in the `token` attribute. If 
+the provisioning server recognizes the token, it returns the public part of the certificate 
+base64-encoded inside a `<certificate/>` element in an `<iq type="result"/>` response stanza
+back to the client.
+
+
 Challenging a token
------------------------
+----------------------
 
-The first time an entity receives a token in a request from a particular sender, it can 
-challenge it to make sure the original sender has the right to use the token. To do this, the 
-receiver needs to get the certificate from the corresponding provisioning server first, unless
-it has it from an earlier operation. To get the corresponding certificate, first, the address 
-to the provisioning server is extracted from the token. (There may be multiple provisioning 
-servers used in the network.) It then sends the token to the corresponding broker using an 
-`<iq type="get"/>` request with a `<getCertificate/>` element containing the token in the 
-`token` attribute. If the provisioning server recognizes the token, it returns the public 
-part of the certificate base64-encoded inside a `<certificate/>` element in an 
-`<iq type="result"/>` response stanza.
+The first time an entity receives a token in a request from a particular sender, it must 
+challenge the sender to make sure the sender has the right to use the token. Challenging a
+token is done differently, depending on the type of token.
 
-The next step is to challenge the sender of the token. The challenge consists of a BASE64 
-encoded binary challenge inside a `<tokenChallenge/>` element. The challenge consists of a 
-random number with sufficient entropy, encrypted using the public part of the certificate 
-(using OAEP padding). It also includes the original token in the `token` attribute. If an 
-intermediate sender receives such a challenge, it needs to pass it on to the entity it 
-received the original request from, since only the original sender is able to respond to the 
-challenge. The original sender in turn, when receiving the challenge, first has to make sure 
-it sent a request to the entity receiving the challenge from recently. If so, it decrypts the 
-challenge using the private part of the certificate and returns the result base64 encoded in 
-a `<tokenChallengeResponse/>` element in an `<iq type="result">` stanza. An intermediate must 
-pass the result on to the entity sending the original challenge. If the challenge response is
-not equal to the original random number, the original request should be rejected.
+### Challenging a Legal Identity or X.509 Certificate token
+
+To challenge the sender of a Legal Identity or an X.509 Certificate token, a 
+`<tokenChallenge/>` element is sent in an `iq type="set">` stanza to the sender. The challenge 
+consists of a random number with sufficient entropy, encrypted using either the public key in
+the Legal Identity, or the public part of the certificate (using OAEP padding). It also 
+includes the original token in the `token` attribute. If an intermediate sender 
+receives such a challenge, it needs to forward it to the entity it received the original 
+request from, since only the original sender is able to respond to the challenge. The original 
+sender in turn, when receiving the challenge, first has to make sure it sent a request to the 
+entity receiving the challenge from recently. If so, it decrypts the challenge using either 
+the private key of the Legal Identity, or the private part of the certificate and returns the 
+result base64 encoded in a `<tokenChallengeResponse/>` element in an `<iq type="result">` 
+stanza. An intermediate must pass the result on to the entity sending the original challenge. 
+If the challenge response is not equal to the original random number, the original request 
+must be rejected.
 
 ```uml:Challenging a token
 @startuml
@@ -202,23 +271,32 @@ Deactivate Sender
 @enduml
 ```
 
-### getCertificate
+Following are some details on the XML elements defined by the 
+[ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) schema.
+
+#### getCertificate
 
 Anyone presented with a token, can send a request with this element to the provisioning server 
 in order to get the public part of the corresponding X.509 certificate. Token is provided in 
 `token` attribute.
 
-### certificate
+#### certificate
 
 Contains an X.509 certificate, BASE64 encoded.
 
-### tokenChallenge
+#### tokenChallenge
 
-The recipient of a token can challenge the sender, especially the first time a token is received from a given sender.
-The challenge consists of a BASE64 encoded encrypted binary challenge, that the sender needs to decrypt and return.
-In distributed transactions, where tokens are forwarded, challenges need to be forwarded to the original issuer of the request.
+The recipient of a token can challenge the sender, especially the first time a token is 
+received from a given sender. The challenge consists of a BASE64 encoded encrypted binary 
+challenge, that the sender needs to decrypt and return. In distributed transactions, where 
+tokens are forwarded, challenges need to be forwarded to the original issuer of the request.
 Token being challenge is available in the `token` attribute.
 
-### tokenChallengeResponse
+#### tokenChallengeResponse
 
 Decrypted binary data, base64-encodded as a response to the challenge.
+
+### Challenging a JWT token
+
+Challenging the use of a JWT token is handled out-of-band, and not covered by this 
+specification.
