@@ -1,0 +1,46 @@
+@startuml
+Activate Sender
+
+Sender -> Intermediary : operation(token)
+
+Intermediary -> Receiver : suboperation(token)
+
+Activate Receiver
+
+Receiver -> Receiver : Extract address to provisioning server from token
+
+Receiver -> "Provisioning Server" : getCertificate(token)
+
+Activate "Provisioning Server"
+
+Receiver <- "Provisioning Server" : certificate(Certificate.Pub)
+
+Deactivate "Provisioning Server"
+
+Receiver -> Receiver : Challenge:=Certificate.Pub.Encrypt(Random,OAEP)
+
+Receiver -> Intermediary : tokenChallenge(Challenge)
+
+Intermediary -> Sender : tokenChallenge(Challenge)
+
+Activate Sender
+
+Sender -> Sender : Certificate.Priv.Decrypt(Challenge,OAEP)
+
+Intermediary <- Sender : tokenChallengeResponse(Response)
+
+Receiver <- Intermediary : tokenChallengeResponse(Response)
+
+Deactivate Sender
+
+Receiver -> Receiver : Response=Random?
+
+Receiver -> Receiver : Perform action [yes]
+
+Intermediary <- Receiver : subResult
+
+Sender <- Intermediary : Result
+
+Deactivate Receiver
+Deactivate Sender
+@enduml

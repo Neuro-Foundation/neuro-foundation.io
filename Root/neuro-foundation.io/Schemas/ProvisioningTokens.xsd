@@ -102,6 +102,16 @@
 							<xs:documentation>Token being challenged.</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+					<xs:attribute name='ln' type='xs:string' use='optional' default='aes'>
+						<xs:annotation>
+							<xs:documentation>Local Name of symmetric cipher used to encrypt the challenge, when challenging a Legal Identity. Default is AES-256 encryption.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name='ns' type='xs:string' use='optional' default='urn:nfi:iot:e2e:1.0'>
+						<xs:annotation>
+							<xs:documentation>Namespace of symmetric cipher used to encrypt the challenge, when challenging a Legal Identity, if different from the default E2EE namespace.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>

@@ -169,7 +169,7 @@ Getting the Identity represented by a token
 ----------------------------------------------
 
 Getting the identity represented by a token is done differently, depending on the type of 
-token. The following subsections descrube the different methods.
+token. The following subsections describe the different methods.
 
 ### Getting a Legal Identity
 
@@ -197,6 +197,19 @@ the provisioning server recognizes the token, it returns the public part of the 
 base64-encoded inside a `<certificate/>` element in an `<iq type="result"/>` response stanza
 back to the client.
 
+Following are some details on the XML elements defined by the 
+[ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) schema.
+
+#### getCertificate
+
+Anyone presented with a token, can send a request with this element to the provisioning server 
+in order to get the public part of the corresponding X.509 certificate. Token is provided in 
+`token` attribute.
+
+#### certificate
+
+Contains an X.509 certificate, BASE64 encoded.
+
 
 Challenging a token
 ----------------------
@@ -208,19 +221,24 @@ token is done differently, depending on the type of token.
 ### Challenging a Legal Identity or X.509 Certificate token
 
 To challenge the sender of a Legal Identity or an X.509 Certificate token, a 
-`<tokenChallenge/>` element is sent in an `iq type="set">` stanza to the sender. The challenge 
-consists of a random number with sufficient entropy, encrypted using either the public key in
-the Legal Identity, or the public part of the certificate (using OAEP padding). It also 
-includes the original token in the `token` attribute. If an intermediate sender 
-receives such a challenge, it needs to forward it to the entity it received the original 
-request from, since only the original sender is able to respond to the challenge. The original 
-sender in turn, when receiving the challenge, first has to make sure it sent a request to the 
-entity receiving the challenge from recently. If so, it decrypts the challenge using either 
-the private key of the Legal Identity, or the private part of the certificate and returns the 
-result base64 encoded in a `<tokenChallengeResponse/>` element in an `<iq type="result">` 
-stanza. An intermediate must pass the result on to the entity sending the original challenge. 
-If the challenge response is not equal to the original random number, the original request 
-must be rejected.
+`<tokenChallenge/>` element is sent in an `<iq type="set">` stanza to the sender. The 
+challenge consists of a random number with sufficient entropy, encrypted using either the 
+public key in the Legal Identity, or the public part of the certificate (using OAEP padding). 
+When encrypting the challenge for a Legal Identity, a symmetric cipher needs to be selected 
+as well, as the Legal Identity only contains a reference to the asymmetric cipher. The
+symmetric cipher used is defined using the `ln` and `ns` attributes, which are selected to
+be `aes` and `urn:nfi:iot:e2e:1.0` by default, if not specified. (See section about
+[End-to-End Encryption](E2E.md) for more information about ciphers available.) The 
+`<tokenChallenge/>` element also includes the original token in the `token` attribute. If an
+intermediate sender receives such a challenge, it needs to forward it to the entity it 
+received the original request from, since only the original sender is able to respond to the 
+challenge. The original sender in turn, when receiving the challenge, first has to make sure 
+it sent a request to the entity receiving the challenge from recently. If so, it decrypts the 
+challenge using either the private key of the Legal Identity, or the private part of the 
+certificate and returns the result base64 encoded in a `<tokenChallengeResponse/>` element 
+in an `<iq type="result">` stanza. An intermediate must pass the result on to the entity 
+sending the original challenge. If the challenge response is not equal to the original random 
+number, the original request must be rejected.
 
 ```uml:Challenging a token
 @startuml
@@ -274,23 +292,15 @@ Deactivate Sender
 Following are some details on the XML elements defined by the 
 [ProvisioningTokens.xsd](Schemas/ProvisioningTokens.xsd) schema.
 
-#### getCertificate
-
-Anyone presented with a token, can send a request with this element to the provisioning server 
-in order to get the public part of the corresponding X.509 certificate. Token is provided in 
-`token` attribute.
-
-#### certificate
-
-Contains an X.509 certificate, BASE64 encoded.
-
 #### tokenChallenge
 
 The recipient of a token can challenge the sender, especially the first time a token is 
 received from a given sender. The challenge consists of a BASE64 encoded encrypted binary 
 challenge, that the sender needs to decrypt and return. In distributed transactions, where 
 tokens are forwarded, challenges need to be forwarded to the original issuer of the request.
-Token being challenge is available in the `token` attribute.
+Token being challenge is available in the `token` attribute. If encrypting a challenge for
+a Legal Identity token, the attributes `ln` and `ns` are used to specify the symmetric
+cipher used in the encryption, if different from AES-256, which is the default cipher.
 
 #### tokenChallengeResponse
 
