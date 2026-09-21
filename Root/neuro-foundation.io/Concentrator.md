@@ -9,9 +9,10 @@ Master: Master.md
 Concentrator ("Thing of Things")
 ==================================
 
-This document outlines the XML representation of interacting with concentrators and their underlying nodes. A concentrator "concentrates" a set 
-of underlying physical or virtual devices, called *nodes*, into one unit using one XMPP address (network identity). The XML representation is 
-modelled using an annotated XML Schema:
+This document outlines the XML representation of interacting with concentrators and their 
+underlying nodes. A concentrator "concentrates" a set of underlying physical or virtual 
+devices, called *nodes*, into one unit using one XMPP address (network identity). The XML 
+representation is modelled using an annotated XML Schema:
 
 | Concentrator                                              ||
 | ------------|----------------------------------------------|
@@ -101,11 +102,11 @@ The concentrator is free to authorize requests based on the identities provided 
 the client is authorized to interact with. Apart from the JID the caller uses, and the implicit domain on which the caller has an account, each call 
 can also be annotated using tokens. There are three different types of tokens that can be used:
 
-| Attribute  | Type          | Description       | 
-|:-----------|:--------------|:------------------| 
-| `dt`       | `xs:string`   | Device token\(s\)   |
-| `st`       | `xs:string`   | Service token\(s\)  |
-| `ut`       | `xs:string`   | User token\(s\)     |
+| Attribute | Type        | Description        | 
+|:----------|:------------|:-------------------| 
+| `dt`      | `xs:string` | Device token\(s\)  |
+| `st`      | `xs:string` | Service token\(s\) |
+| `ut`      | `xs:string` | User token\(s\)    |
 
 If multiple tokens of the same type are used, they are simply separated using the space character.
 
