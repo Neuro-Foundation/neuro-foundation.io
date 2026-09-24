@@ -407,6 +407,138 @@ application will be considered automatically valid.
 **Note**: Preview applications will only be available for a limited time on the broker. The
 time the previews will be available, is implementation and configuration specific.
 
+### Identity Profiles
+
+Using the `PROFILE` property, an application can declare support for one or more Identity
+Profiles. An Identity Profile consists of a set of well-known required and optional claims,
+and optionally a set of additional rules associated with them. By declaring these Identity
+Profiles, additional validation on the set of parameters are performed. Any property listed
+in an Identity Profile, must not also be referenced in a `PSEUDONYM` property in the same
+application. The following table lists Identity Profiles supported by this specification.
+The following sections list requirements for each.
+
+| Profile          | Description                                                                              |
+|:-----------------|:-----------------------------------------------------------------------------------------|
+| `PERSONAL`       | Represents a Personal Legal Identity                                                     |
+| `PRIVATE`        | Represents a Private Personal Identity containing partial information only.              |
+| `AGE`            | Represents a Digital Identity used to prove a minimum age of the user.                   |
+| `ORGANIZATIONAL` | Represents a Legal Identity where a person acts as a representative for an organization. |
+| `MACHINE`        | Represents a Digital Identity for a machine.                                             |
+| `CONTACT`        | Represents a Digital Identity containing contact information.                            |
+
+#### Personal Legal Identity (Profile: `PERSONAL`)
+
+Personal Legal Identities represent a natural legal person. They shall have either `FIRST`, 
+and/or `MIDDLE`, and/or `LAST` properties defined, or the `FULLNAME` property defined. 
+
+| Property      | Description                                                     | Use      |
+|:--------------|:----------------------------------------------------------------|:---------|
+| `FIRST`       | First name                                                      | Either   |
+| `MIDDLE`      | Middle name(s)                                                  |          |
+| `LAST`        | Last name(s)                                                    |          |
+| `FULLNAME`    | Full name. Can be used instead of `FIRST`, `MIDDLE` and `LAST`. | Or       |
+| `PNR`         | Personal number, as defined in `COUNTRY`                        | Required |
+| `ADDR`        | Address                                                         | Optional |
+| `ADDR2`       | Address, second line                                            | Optional |
+| `ZIP`         | Zip or postal code                                              | Optional |
+| `AREA`        | Area                                                            | Optional |
+| `CITY`        | City                                                            | Optional |
+| `REGION`      | Region, state                                                   | Optional |
+| `COUNTRY`     | Country                                                         | Required |
+| `NATIONALITY` | Nationality                                                     | Optional |
+| `BDAY`        | Birth Day                                                       | Optional |
+| `BMONTH`      | Borth Month                                                     | Optional |
+| `BYEAR`       | Birth Year                                                      | Optional |
+| `GENDER`      | Gender (`M` or `F`)                                             | Optional |
+
+
+#### Private Personal Identity (Profile: `PRIVATE`)
+
+Private Personal Identities represent natural persons that only want to provide a subset of 
+personal information for identification purposes. The most extreme Private Personal Identity 
+contains only the `PREVIEW` property, and it is used to prove that an Identity has been 
+verified without sharing any of its personal information.
+
+| Property    | Description                                                    | Use      |
+|:------------|:---------------------------------------------------------------|:---------|
+| `PREVIEW`   | A reference to a preview of the identity application.          | Required |
+| `PSEUDONYM` | Lists which properties are pseudonymous. Comma-separated list. | Optional |
+
+#### Age Compliance Identities (Profile: `AGE`)
+
+Age Compliance Identities represent a natural person that wants to prove its age, without 
+declaring when the person was born, or who the person is.
+
+| Property   | Description                                                    | Use      |
+|:-----------|:---------------------------------------------------------------|:---------|
+| `PREVIEW`  | A reference to a preview of the identity application.          | Optional |
+| `AGEABOVE` | Having an age above the stated number of years.                | Required |
+
+#### Organizational Legal Identities (Profile: `ORGANIZATIONAL`)
+
+Organizational Legal Identities represent a natural legal person that represents an 
+organization. It extends the Personal Legal Identity profile (Profile: `PERSONAL`) with 
+the following properties.
+
+| Property     | Description                                      | Use      |
+|:-------------|:-------------------------------------------------|:---------|
+| `ORGNAME`    | Name of organization 	                          | Required |
+| `ORGNR`      | Organization number, as defined in ORGCOUNTRY.	  | Required |
+| `ORGDEPT`    | Organization department, where the person works. | Optional |
+| `ORGROLE`    | Role of person in organization. 	              | Optional |
+| `ORGADDR`    | Address of organization. 	                      | Optional |
+| `ORGADDR2`   | Address of organization, second line 	          | Optional |
+| `ORGZIP`     | Zip or postal code of organization 	          | Optional |
+| `ORGAREA`    | Area of organization. 	                          | Optional |
+| `ORGCITY`    | City of organization. 	                          | Optional |
+| `ORGREGION`  | Region or state of organization. 	              | Optional |
+| `ORGCOUNTRY` | Country code of organization. 	                  | Required |
+
+#### Machine Identities (Profile: `MACHINE`)
+
+Machine Identities are Digital Identities that Things can use to identify themselves in the 
+Network, and to participate in agreements. The Machine Identities may include as properties 
+their non-variable tags they use to register themselves with their Thing Registry. The only 
+difference is that numeric tag values need to be converted to strings, using the canonical 
+culture-independent manner.
+
+| Property   | Description                                  | Use      |
+|:-----------|:---------------------------------------------|:---------|
+| `ALT`      | Altitude (meters)	                        | Optional |
+| `APT`      | Apartment associated with the Thing	        | Optional |
+| `AREA`     | Area associated with the Thing	            | Optional |
+| `BLD`      | Building associated with the Thing	        | Optional |
+| `CITY`     | City associated with the Thing	            | Optional |
+| `CLASS`    | Class of Thing	                            | Optional |
+| `COUNTRY`  | Country associated with the Thing	        | Optional |
+| `LAT`      | Latitude (degrees)	                        | Optional |
+| `LON`      | Longitude (degrees)	                        | Optional |
+| `MAN`      | Domain name owned by the Manufacturer	    | Required |
+| `MLOC`     | Meter Location ID	                        | Optional |
+| `MNR`      | Meter Number	                                | Optional |
+| `MODEL`    | Name of Model	                            | Required |
+| `NAME`     | Name associated with the Thing	            | Optional |
+| `PURL`     | URL to product information for the Thing	    | Required |
+| `R`        | Registry Address. Used in iotdisco URIs only	| Optional |
+| `REGION`   | Region associated with the Thing	            | Optional |
+| `ROOM`     | Room associated with the Thing	            | Optional |
+| `SN`       | Serial Number	                            | Required |
+| `STREET`   | Street Name	                                | Optional |
+| `STREETNR` | Street Number	                            | Optional |
+| `V`        | Version Number	                            | Required |
+
+#### Contact Identities (Profile: `CONTACT`)
+
+Contact Identities are digital identities that provide basic digital contact information to 
+recipients.
+
+| Property   | Description	                                                        | Use      |
+|:-----------|:---------------------------------------------------------------------|:---------|
+| `PHONE`    | Validated phone number, using the international phone number format. | Optional |
+| `EMAIL`    | Validated e-mail address. 	                                        | Optional |
+| `JID`      | Validated XMPP address (Jabber ID). 	                                | Required |
+| `HOMEPAGE` | Validated home page.	                                                | Optional |
+
 Identity state changes
 ----------------------------
 
