@@ -47,7 +47,7 @@ were connected to the XMPP network via a concentrator.
 Requirements
 ---------------
 
-![Concentrator Requirements](ConcentratorRequirements.md)]
+![Concentrator Requirements](ConcentratorRequirements.md)
 
 Extended addressing
 -------------------------
