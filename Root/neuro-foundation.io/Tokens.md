@@ -165,6 +165,59 @@ with a token. It's placed in the `token` attribute of a `<getTokenResponse/>` el
 format of the token should be the address of the provisioning server issuing the token, 
 followed by a colon (`:`), followed by a random string with sufficient entropy.
 
+#### Example of creating an X.509 Certificate token
+
+Example of a client registering a public certificate to its Provisioning Component:
+
+```xml
+<iq type='get'
+    from='service@example.org/abcd'
+    to='provisioning.example.org'
+    id='28'>
+   <getToken xmlns='urn:nfi:iot:prov:t:1.0'>
+      BASE64-encoded public DER-encoded X.509 certificate
+   </getToken>
+</iq>
+```
+
+A challenge is returned in the response:
+
+```xml
+<iq type='result'
+    from='provisioning.example.org'
+    to='service@example.org/abcd'
+    id='28'>
+   <getTokenChallenge xmlns='urn:nfi:iot:prov:t:1.0' seqnr='3'>
+      BASE64-encoded binary challenge
+   </getTokenChallenge>
+</iq>
+```
+
+The challenge is decrypted and sent to the Provisioning Component:
+
+```xml
+<iq type='get'
+    from='service@example.org/abcd'
+    to='provisioning.example.org'
+    id='29'>
+   <getTokenChallengeResponse xmlns='urn:nfi:iot:prov:t:1.0' seqnr='3'>
+      BASE64-encoded decrypted challenge
+   </getTokenChallengeResponse>
+</iq>
+```
+
+A token representing the X.509 certificate is returned in the response:
+
+```xml
+<iq type='result'
+    from='provisioning.example.org'
+    to='service@example.org/abcd'
+    id='29'>
+   <getTokenResponse xmlns='urn:nfi:iot:prov:t:1.0' 
+                     token='provisioning.example.org:...'/>
+</iq>
+```
+
 Getting the Identity represented by a token
 ----------------------------------------------
 
@@ -210,6 +263,34 @@ in order to get the public part of the corresponding X.509 certificate. Token is
 
 Contains an X.509 certificate, BASE64 encoded.
 
+#### Example of getting the X.509 Certificate from a Certificate token
+
+A client requests the public X.509 certificate associated with a token from the 
+Provisioning Component encoded into the token:
+
+```xml
+<iq type='get'
+    from='service2@example.org/efgh'
+    to='provisioning.example.org'
+    id='30'>
+   <getCertificate xmlns='urn:nfi:iot:prov:t:1.0'>
+      provisioning.example.org:...
+   </getCertificate>
+</iq>
+```
+
+A challenge is returned in the response:
+
+```xml
+<iq type='result'
+    from='provisioning.example.org'
+    to=service2@example.org/efgh'
+    id='30'>
+   <certificate xmlns='urn:nfi:iot:prov:t:1.0'>
+      BASE64-encoding of DER-encoded X.509 Certificate
+   </certificate>
+</iq>
+```
 
 Challenging a token
 ----------------------
@@ -305,6 +386,65 @@ cipher used in the encryption, if different from AES-256, which is the default c
 #### tokenChallengeResponse
 
 Decrypted binary data, base64-encodded as a response to the challenge.
+
+#### Example of challenging a Legal Identity or X.509 Certificate token
+
+A client sends a challenge to an Entity from which it has received a token:
+
+```xml
+<iq type='get'
+    from='service2@example.org/efgh'
+    to='service@example.org/abcd'
+    id='31'>
+   <tokenChallenge xmlns='urn:nfi:iot:prov:t:1.0'
+                   Token='provisioning.example.org:...'>
+      BASE64-encoded binary challenge
+   </tokenChallenge>
+</iq>
+```
+
+The decrypted challenge is returned as a response to the challenge:
+
+```xml
+<iq type='result'
+    from='service@example.org/abcd'
+    to='service2@example.org/efgh'
+    id='31'>
+   <tokenChallengeResponse xmlns='urn:nfi:iot:prov:t:1.0'>
+      BASE64-encoded decrypted challenge
+   </tokenChallengeResponse>
+</iq>
+```
+
+#### Example of challenging a Legal Identity token
+
+A client sends a challenge to an Entity from which it has received a token:
+
+```xml
+<iq type='get'
+    from='service2@example.org/efgh'
+    to='service@example.org/abcd'
+    id='32'>
+   <tokenChallenge xmlns='urn:nfi:iot:prov:t:1.0'
+                   token='...@provisioning.example.org'
+                   ln='acp'>
+      BASE64-encoded binary challenge
+   </tokenChallenge>
+</iq>
+```
+
+The decrypted challenge is returned as a response to the challenge:
+
+```xml
+<iq type='result'
+    from='service@example.org/abcd'
+    to='service2@example.org/efgh'
+    id='32'>
+   <tokenChallengeResponse xmlns='urn:nfi:iot:prov:t:1.0'>
+      BASE64-encoded decrypted challenge
+   </tokenChallengeResponse>
+</iq>
+```
 
 ### Challenging a JWT token
 
