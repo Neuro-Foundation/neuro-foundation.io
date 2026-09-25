@@ -1,0 +1,21 @@
+@startuml
+class Concentrator
+Concentrator : xs:string JID
+
+class "Data Source" as DataSource
+DataSource : xs:string src
+Concentrator "1" *-- "*" DataSource
+DataSource "1" *-- "*" DataSource
+
+class Partition
+Partition : xs:string pt
+Concentrator "1" *-- "*" Partition
+DataSource "1" *-- "*" Partition
+
+class Node
+Node : xs:string id
+Concentrator "1" *-- "*" Node
+DataSource "1" *-- "*" Node
+Partition "1" *-- "*" Node
+Node "1" *-- "*" Node
+@enduml
