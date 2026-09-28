@@ -882,6 +882,15 @@
 		</xs:annotation>
 	</xs:element>
 
+	<!-- destroyNodes -->
+
+	<xs:element name='destroyNodes' type='NodeReferencesRequest'>
+		<xs:annotation>
+			<xs:documentation>Destroys a set of nodes in a concentrator.</xs:documentation>
+			<xs:documentation>Expected empty response element, if ok.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
 	<!-- Node ordering -->
 	<!-- moveNodeUp -->
 
