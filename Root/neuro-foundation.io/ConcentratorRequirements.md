@@ -33,6 +33,7 @@ clients and concentrator servers.
 | `getParametersForNewNode`          | `iq get`    | ==>                 | Optional^1          |
 | `createNewNode`                    | `iq set`    | ==>                 | Optional^1          |
 | `destroyNode`                      | `iq set`    | ==>                 | Optional^1          |
+| `destroyNodes`                     | `iq set`    | ==>                 | Optional^1          |
 | `moveNodeUp`                       | `iq set`    | ==>                 | Optional^1          |
 | `moveNodeDown`                     | `iq set`    | ==>                 | Optional^1          |
 | `moveNodesUp`                      | `iq set`    | ==>                 | Optional^1          |
