@@ -154,10 +154,11 @@ The following table lists defined operations. It also suggests what types of con
 | `getParametersForNewNode`          |                    |        x       |     x     | 
 | `createNewNode`                    |                    |        x       |     x     | 
 | `destroyNode`                      |                    |        x       |     x     | 
+| `destroyNodes`                     |                    |                |     x     | 
 | `moveNodeUp`                       |                    |        x       |     x     | 
 | `moveNodeDown`                     |                    |        x       |     x     | 
-| `moveNodesUp`                      |                    |        x       |     x     | 
-| `moveNodesDown`                    |                    |        x       |     x     | 
+| `moveNodesUp`                      |                    |                |     x     | 
+| `moveNodesDown`                    |                    |                |     x     | 
 | `subscribe`                        |                    |        x       |     x     | 
 | `unsubscribe`                      |                    |        x       |     x     | 
 | `getNodeCommands`                  |         x          |        x       |     x     | 
@@ -198,14 +199,16 @@ in the stanza element, as defined in [RFC 6121](https://tools.ietf.org/html/rfc6
 Sources
 ----------------
 
-Manageable concentrators order their nodes in data sources. The following sets of operations allow the client to discover what data sources are available
-in a concentrator.
+Manageable concentrators order their nodes in data sources. The following sets of operations 
+allow the client to discover what data sources are available in a concentrator.
 
 ### getAllDataSources
 
-A client can request a list of all data sources available on a concentrator server by sending a `<getAllDataSources/>` element in an 
-`<iq type="get"/>` to the concentrator. The concentrator returns a `<dataSources/>` element in the response, consisting of a set of 
-`<dataSource/>` elements, each describing a single data source. Each `<dataSource/>` contains the following attributes:
+A client can request a list of all data sources available on a concentrator server by sending 
+a `<getAllDataSources/>` element in an `<iq type="get"/>` to the concentrator. The 
+concentrator returns a `<dataSources/>` element in the response, consisting of a set of 
+`<dataSource/>` elements, each describing a single data source. Each `<dataSource/>` contains 
+the following attributes:
 
 | Element             | Attribute     | Type          | Use      | Default  | Description        | 
 |:--------------------|:--------------|:--------------|:---------|:---------|:-------------------| 
@@ -257,13 +260,15 @@ element in the response, consisting of a set of `<dataSource/>` elements, each d
 Nodes
 ----------
 
-All concentrators consist of nodes. These might be static, or dynamic, and manageable by clients with sufficient access rights. The following sets of operations
-allow clients to discover (given access rights), what nodes are available in the concentrator.
+All concentrators consist of nodes. These might be static, or dynamic, and manageable by 
+clients with sufficient access rights. The following sets of operations allow clients to 
+discover (given access rights), what nodes are available in the concentrator.
 
 ### containsNode
 
-Checks if a node exists (and visible to the caller). It is sent in an `<iq type="get"/>` to the concentrator, which responds with a 
-`<bool/>` element containing the response to the question.
+Checks if a node exists (and visible to the caller). It is sent in an `<iq type="get"/>` to 
+the concentrator, which responds with a `<bool/>` element containing the response to the 
+question.
 
 | Element        | Attribute  | Type          | Use      | Default  | Description              | 
 |:---------------|:-----------|:--------------|:---------|:---------|:-------------------------| 
@@ -277,10 +282,11 @@ Checks if a node exists (and visible to the caller). It is sent in an `<iq type=
 
 ### containsNodes
 
-Allows a client to check the existence of multiple nodes in one request. The client sends a `<containsNodes/>` element containing a set of 
-`<nd/>` elements, each referencing a node in the concentrator. All is sent in an `<iq type="get"/>` to the concentrator, which responds with 
-a `<bools/>` element, containing a sequence of `<bool/>` elements, each one containing the response related to the corresponding node in the 
-request.
+Allows a client to check the existence of multiple nodes in one request. The client sends a 
+`<containsNodes/>` element containing a set of `<nd/>` elements, each referencing a node in 
+the concentrator. All is sent in an `<iq type="get"/>` to the concentrator, which responds 
+with a `<bools/>` element, containing a sequence of `<bool/>` elements, each one containing 
+the response related to the corresponding node in the request.
 
 | Element         | Attribute  | Type          | Use      | Default  | Description                                 | 
 |:----------------|:-----------|:--------------|:---------|:---------|:--------------------------------------------| 
@@ -295,8 +301,9 @@ request.
 
 ### getNode
 
-Gets information about a node in the concentrator. It is sent in an `<iq type="get"/>` to the concentrator, which responds with a 
-`<nodeInfo/>` element containing the information. The `<nodeInfo/>` element in turn can have a sequence of parameter elements, named after 
+Gets information about a node in the concentrator. It is sent in an `<iq type="get"/>` to the 
+concentrator, which responds with a `<nodeInfo/>` element containing the information. The 
+`<nodeInfo/>` element in turn can have a sequence of parameter elements, named after 
 their corresponding data type, and messages, if the request asked for such information.
 
 | Element        | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
@@ -369,7 +376,8 @@ Node states are defined by the `NodeState` enumeration, which can take the follo
 | `ErrorSigned`     | Represents a node with error messages logged on it that have been signed.		   |
 | `ErrorUnsigned`   | Represents a node with error messages logged on it that have not been signed.	   |
 
-Message types are defined by the `MessageType` enumeration, which can take the following values:
+Message types are defined by the `MessageType` enumeration, which can take the following 
+values:
 
 | Value             | Description                                                              |
 |:------------------|:-------------------------------------------------------------------------|
@@ -379,10 +387,11 @@ Message types are defined by the `MessageType` enumeration, which can take the f
 
 ### getNodes
 
-Gets information about a set of nodes in the concentrator. It is sent in an `<iq type="get"/>` to the concentrator, which responds with a 
-`<nodeInfos/>` element containing a sequence of `<nodeInfo/>` elements, each corresponding to a node in the request. The `<nodeInfo/>` 
-element in turn can have a sequence of parameter elements, named after their corresponding data type, and messages, if the request asked 
-for such information.
+Gets information about a set of nodes in the concentrator. It is sent in an `<iq type="get"/>`
+to the concentrator, which responds with a `<nodeInfos/>` element containing a sequence of 
+`<nodeInfo/>` elements, each corresponding to a node in the request. The `<nodeInfo/>` element 
+in turn can have a sequence of parameter elements, named after their corresponding data type, 
+and messages, if the request asked for such information.
 
 | Element        | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -415,10 +424,12 @@ for such information.
 
 ### getAllNodes
 
-Gets information about all nodes in a source. The set of nodes can be restricted to nodes that derive from particular types. To restrict 
-the request to nodes derived from a given set of types, `<onlyIfDerivedFrom/>` elements are added to the `<getAllNodes/>` element, each one
-containing as a value the name of the corresponding type. The `<getAllNodes/>` element is sent in an `<iq type="get"/>` to the concentrator, 
-which responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` elements, each corresponding to a node in the request.
+Gets information about all nodes in a source. The set of nodes can be restricted to nodes that
+derive from particular types. To restrict the request to nodes derived from a given set of 
+types, `<onlyIfDerivedFrom/>` elements are added to the `<getAllNodes/>` element, each one 
+containing as a value the name of the corresponding type. The `<getAllNodes/>` element is sent 
+in an `<iq type="get"/>` to the concentrator, which responds with a `<nodeInfos/>` element 
+containing a sequence of `<nodeInfo/>` elements, each corresponding to a node in the request.
 
 | Element             | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -450,9 +461,10 @@ which responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo
 
 ### getNodeInheritance
 
-Gets the type/class inheritances of a node in a concentrator. It is sent in an `<iq type="get"/>` to the concentrator, who responds with an 
-`<inheritance/>` element, containing both base classes in a `<baseClasses/>` child element, and optionally also implemented interfaces in an 
-`<interfaces/>` child element.
+Gets the type/class inheritances of a node in a concentrator. It is sent in an 
+`<iq type="get"/>` to the concentrator, who responds with an `<inheritance/>` element, 
+containing both base classes in a `<baseClasses/>` child element, and optionally also 
+implemented interfaces in an `<interfaces/>` child element.
 
 | Element              | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -469,8 +481,10 @@ Gets the type/class inheritances of a node in a concentrator. It is sent in an `
 
 ### getRootNodes
 
-Gets information about all root nodes in a source. The `<getRootNodes/>` element is sent in an `<iq type="get"/>` to the concentrator, which 
-responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` elements, each corresponding to a root node in the source.
+Gets information about all root nodes in a source. The `<getRootNodes/>` element is sent in an
+`<iq type="get"/>` to the concentrator, which responds with a `<nodeInfos/>` element 
+containing a sequence of `<nodeInfo/>` elements, each corresponding to a root node in the 
+source.
 
 | Element             | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -501,8 +515,10 @@ responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` el
 
 ### getChildNodes
 
-Gets information about all child nodes of a node. The `<getChildNodes/>` element is sent in an `<iq type="get"/>` to the concentrator, which 
-responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` elements, each corresponding to a root node in the source.
+Gets information about all child nodes of a node. The `<getChildNodes/>` element is sent in an 
+`<iq type="get"/>` to the concentrator, which responds with a `<nodeInfos/>` element 
+containing a sequence of `<nodeInfo/>` elements, each corresponding to a root node in the 
+source.
 
 | Element             | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -535,9 +551,10 @@ responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` el
 
 ### getAncestors
 
-Gets information about the node and all its ancestors (parent, grandparent, etc., until a root node is found). The `<getAncestors/>` element 
-is sent in an `<iq type="get"/>` to the concentrator, which responds with a `<nodeInfos/>` element containing a sequence of `<nodeInfo/>` 
-elements, each corresponding to a node in sequence.
+Gets information about the node and all its ancestors (parent, grandparent, etc., until a root 
+node is found). The `<getAncestors/>` element is sent in an `<iq type="get"/>` to the 
+concentrator, which responds with a `<nodeInfos/>` element containing a sequence of 
+`<nodeInfo/>` elements, each corresponding to a node in sequence.
 
 | Element             | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:--------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -571,14 +588,17 @@ elements, each corresponding to a node in sequence.
 Managing Nodes
 --------------------
 
-Dynamic concentrators allow clients (with sufficient access rights) to manage (create, edit and delete) nodes. The following operations provide means for
-such clients to perform these tasks. The group operations should be implemented by concentrators supporting huge quantities of nodes, where individual
-management is not always feasible or desirable, and where batch access is required.
+Dynamic concentrators allow clients (with sufficient access rights) to manage (create, edit 
+and delete) nodes. The following operations provide means for such clients to perform these 
+tasks. The group operations should be implemented by concentrators supporting huge quantities 
+of nodes, where individual management is not always feasible or desirable, and where batch 
+access is required.
 
 ### getNodeParametersForEdit
 
-Gets the parameters for a node, for editing. The `<getNodeParametersForEdit/>` element is sent in an `<iq type="get"/>` to the concentrator, 
-which returns a data form containing the editable node parameters.
+Gets the parameters for a node, for editing. The `<getNodeParametersForEdit/>` element is sent
+in an `<iq type="get"/>` to the concentrator, which returns a data form containing the 
+editable node parameters.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -601,10 +621,11 @@ Some useful extensions related to data forms in XMPP:
 
 ### setNodeParametersAfterEdit
 
-Sets the parameters for a node, after editing. The `<setNodeParametersForEdit/>` element, containing the parameters as a submitted form, is 
-sent in an `<iq type="set"/>` to the concentrator, which returns a `<nodeinfo/>` element (in an `<iq type="result"/>`) if the parameters 
-could be set, or a data form (in an `<iq type="error"/>`) containing the editable node parameters and any error messages, if the operation 
-could not be completed.
+Sets the parameters for a node, after editing. The `<setNodeParametersForEdit/>` element, 
+containing the parameters as a submitted form, is sent in an `<iq type="set"/>` to the 
+concentrator, which returns a `<nodeinfo/>` element (in an `<iq type="result"/>`) if the 
+parameters could be set, or a data form (in an `<iq type="error"/>`) containing the editable 
+node parameters and any error messages, if the operation could not be completed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -616,16 +637,18 @@ could not be completed.
 |                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 | `x:x`                      |                   |               |          |          | Contains a data form with edited node parameters.                                                                   |
 
-**Note**: The form might be partial, i.e. only contain a subset of the parameters available on the node. Parameters not referenced, should keep their
-values unchanged.
+**Note**: The form might be partial, i.e. only contain a subset of the parameters available on 
+the node. Parameters not referenced, should keep their values unchanged.
 
 ### getCommonNodeParametersForEdit
 
-To get a set of parameters that are common to a set of nodes, the `<getCommonNodeParametersForEdit/>` element is sent in an 
-`<iq type="get"/>` to the concentrator. Each node is referenced by a separate `<nd/>` child element. The response is a data form, in which 
-all parameters that do not exist in at least one of the referenced nodes have been removed. Parameters that have different values in the 
-different referenced nodes should report the value of the first node, and then mark the field with the `<xdd:notSame/>` element, as defined 
-in [XEP-0336](https://xmpp.org/extensions/xep-0336.html#sect-idm45589980289936).
+To get a set of parameters that are common to a set of nodes, the 
+`<getCommonNodeParametersForEdit/>` element is sent in an `<iq type="get"/>` to the 
+concentrator. Each node is referenced by a separate `<nd/>` child element. The response is a 
+data form, in which all parameters that do not exist in at least one of the referenced nodes 
+have been removed. Parameters that have different values in the different referenced nodes 
+should report the value of the first node, and then mark the field with the `<xdd:notSame/>` 
+element, as defined in [XEP-0336](https://xmpp.org/extensions/xep-0336.html#sect-idm45589980289936).
 
 | Element                          | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -640,10 +663,12 @@ in [XEP-0336](https://xmpp.org/extensions/xep-0336.html#sect-idm45589980289936).
 
 ### setCommonNodeParametersAfterEdit
 
-Sets the parameters for a set of nodes, after editing. The `<setCommonNodeParametersAfterEdit/>` element, containing the parameters as a 
-submitted form, is sent in an `<iq type="set"/>` to the concentrator, which returns with an empty response (in an `<iq type="result"/>`) 
-if the parameters could be set, or a data form (in an `<iq type="error"/>`) containing the editable node parameters and any error messages, 
-if the operation could not be completed.
+Sets the parameters for a set of nodes, after editing. The 
+`<setCommonNodeParametersAfterEdit/>` element, containing the parameters as a submitted form, 
+is sent in an `<iq type="set"/>` to the concentrator, which returns with an empty response (in 
+an `<iq type="result"/>`) if the parameters could be set, or a data form (in an 
+`<iq type="error"/>`) containing the editable node parameters and any error messages, if the 
+operation could not be completed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -655,13 +680,14 @@ if the operation could not be completed.
 |                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
 | `x:x`                      |                   |               |          |          | Contains a data form with edited node parameters.                                                                   |
 
-**Note**: The form might be partial, i.e. only contain a subset of the parameters available on the node. Parameters not referenced, should keep their
-values unchanged.
+**Note**: The form might be partial, i.e. only contain a subset of the parameters available on 
+the node. Parameters not referenced, should keep their values unchanged.
 
 ### getAddableNodeTypes
 
-Gets the types of nodes that can be added to a given node in a concentrator. A `<getAddableNodeTypes/>` element is sent in an 
-`<iq type="get"/>` to the concentrator, who responds with a `<nodeTypes/>` element. This element contains a sequence of `<nodeType/>` 
+Gets the types of nodes that can be added to a given node in a concentrator. A 
+`<getAddableNodeTypes/>` element is sent in an `<iq type="get"/>` to the concentrator, who 
+responds with a `<nodeTypes/>` element. This element contains a sequence of `<nodeType/>` 
 elements, each one describing a node type.
 
 | Element               | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
@@ -678,9 +704,10 @@ elements, each one describing a node type.
 
 ### getParametersForNewNode
 
-Gets editable parameters for the creation of a new node. The `<getParametersForNewNode/>` element is sent in an `<iq type="get"/>` to the 
-concentrator, which returns a data form containing the editable node parameters. The node referenced in the request, is the node that will 
-receive the new created node as a child.
+Gets editable parameters for the creation of a new node. The `<getParametersForNewNode/>` 
+element is sent in an `<iq type="get"/>` to the concentrator, which returns a data form 
+containing the editable node parameters. The node referenced in the request, is the node that 
+will receive the new created node as a child.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -695,10 +722,12 @@ receive the new created node as a child.
 
 ### createNewNode
 
-Creates a new node. The `<createNewNode/>` element, containing the parameters as a submitted form, is sent in an `<iq type="set"/>` to the 
-concentrator, which returns a `<nodeinfo/>` element (in an `<iq type="result"/>`) if the node could be created, or a data form (in an 
-`<iq type="error"/>`) containing the editable node parameters and any error messages, if the operation could not be completed. The node 
-referenced in the request, is the node that will receive the new created node as a child.
+Creates a new node. The `<createNewNode/>` element, containing the parameters as a submitted 
+form, is sent in an `<iq type="set"/>` to the concentrator, which returns a `<nodeinfo/>` 
+element (in an `<iq type="result"/>`) if the node could be created, or a data form (in an 
+`<iq type="error"/>`) containing the editable node parameters and any error messages, if the 
+operation could not be completed. The node referenced in the request, is the node that will 
+receive the new created node as a child.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -713,8 +742,9 @@ referenced in the request, is the node that will receive the new created node as
 
 ### destroyNode
 
-Destroys a new node. The `<destroyNode/>` element is sent in an `<iq type="set"/>` to the concentrator, which returns an empty response 
-(in an `<iq type="result"/>`) if the node was destroyed.
+Destroys an existing node. The `<destroyNode/>` element is sent in an `<iq type="set"/>` to 
+the concentrator, which returns an empty response (in an `<iq type="result"/>`) if the node 
+was destroyed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -725,10 +755,26 @@ Destroys a new node. The `<destroyNode/>` element is sent in an `<iq type="set"/
 |                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
 |                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
 
+### destroyNodes
+
+Destroys a set of existing nodes. The `<destroyNodes/>` element containing one `<nd/>` 
+reference for each Node to be destroyed, is sent in an `<iq type="set"/>` to the concentrator, 
+which returns an empty response (in an `<iq type="result"/>`) if the nodes were destroyed.
+
+| Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
+|:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
+| `destroyNodes`             | `dt`              | `xs:string`   | optional |          | Device token\(s\).                                                                                                  |
+|                            | `st`              | `xs:string`   | optional |          | Service token\(s\).                                                                                                 |
+|                            | `ut`              | `xs:string`   | optional |          | User token\(s\).                                                                                                    |
+| `nd`                       | `id`              | `xs:string`   | required |          | Node identity.                                                                                                      |
+|                            | `src`             | `xs:string`   | optional |          | Source identity.                                                                                                    |
+|                            | `pt`              | `xs:string`   | optional |          | Partition.                                                                                                          |
+
 ### moveNodeUp
 
-Moves a node up one step among its siblings. The `<moveNodeUp/>` element is sent in an `<iq type="set"/>` to the concentrator, which 
-returns an empty response (in an `<iq type="result"/>`) if the operation was performed.
+Moves a node up one step among its siblings. The `<moveNodeUp/>` element is sent in an 
+`<iq type="set"/>` to the concentrator, which returns an empty response (in an 
+`<iq type="result"/>`) if the operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -741,8 +787,9 @@ returns an empty response (in an `<iq type="result"/>`) if the operation was per
 
 ### moveNodeDown
 
-Moves a node down one step among its siblings. The `<moveNodeDown/>` element is sent in an `<iq type="set"/>` to the concentrator, which 
-returns an empty response (in an `<iq type="result"/>`) if the operation was performed.
+Moves a node down one step among its siblings. The `<moveNodeDown/>` element is sent in an 
+`<iq type="set"/>` to the concentrator, which returns an empty response (in an 
+`<iq type="result"/>`) if the operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
@@ -755,8 +802,9 @@ returns an empty response (in an `<iq type="result"/>`) if the operation was per
 
 ### moveNodesUp
 
-Moves a set of nodes up one step among its siblings. The `<moveNodesUp/>` element references the nodes to move in separate `<nd/>` child 
-elements, and is sent in an `<iq type="set"/>` to the concentrator, which returns an empty response (in an `<iq type="result"/>`) if the 
+Moves a set of nodes up one step among its siblings. The `<moveNodesUp/>` element references 
+the nodes to move in separate `<nd/>` child elements, and is sent in an `<iq type="set"/>` to 
+the concentrator, which returns an empty response (in an `<iq type="result"/>`) if the 
 operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
@@ -770,9 +818,10 @@ operation was performed.
 
 ### moveNodesDown
 
-Moves a set of nodes down one step among its siblings. The `<moveNodesDown/>` element references the nodes to move in separate `<nd/>` child 
-elements, and is sent in an `<iq type="set"/>` to the concentrator, which returns an empty response (in an `<iq type="result"/>`) if the 
-operation was performed.
+Moves a set of nodes down one step among its siblings. The `<moveNodesDown/>` element 
+references the nodes to move in separate `<nd/>` child elements, and is sent in an 
+`<iq type="set"/>` to the concentrator, which returns an empty response (in an 
+`<iq type="result"/>`) if the operation was performed.
 
 | Element                    | Attribute         | Type          | Use      | Default  | Description                                                                                                         | 
 |:---------------------------|:------------------|:--------------|:---------|:---------|:--------------------------------------------------------------------------------------------------------------------| 
