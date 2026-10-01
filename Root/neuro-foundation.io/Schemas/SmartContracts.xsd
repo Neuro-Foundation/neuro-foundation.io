@@ -272,7 +272,7 @@
 						</xs:attribute>
 						<xs:attribute name='state' type='ContractState' use='required'>
 							<xs:annotation>
-								<xs:documentation>Contains information about the current statue of the contract.</xs:documentation>
+								<xs:documentation>Contains information about the current state of the contract.</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
 						<xs:attribute name='created' type='xs:dateTime' use='required'>
@@ -866,29 +866,10 @@
 						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
-				<xs:attribute name='altitude' use='optional' default='optional'>
+				<xs:attribute name='altitude' type='AltitudeUse' use='optional' default='optional'>
 					<xs:annotation>
 						<xs:documentation>Defines how to handle altitude in the position.</xs:documentation>
 					</xs:annotation>
-					<xs:simpleType>
-						<xs:restriction base='xs:string'>
-							<xs:enumeration value='required'>
-								<xs:annotation>
-									<xs:documentation>Altitude is required by the parameter.</xs:documentation>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value='optional'>
-								<xs:annotation>
-									<xs:documentation>Altitude is optional by the parameter.</xs:documentation>
-								</xs:annotation>
-							</xs:enumeration>
-							<xs:enumeration value='prohibited'>
-								<xs:annotation>
-									<xs:documentation>Altitude is prohibited by the parameter.</xs:documentation>
-								</xs:annotation>
-							</xs:enumeration>
-						</xs:restriction>
-					</xs:simpleType>
 				</xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
@@ -902,6 +883,26 @@
 		</xs:annotation>
 		<xs:restriction base='xs:string'>
 			<xs:pattern value="(?'Lat'-?\d+(\.\d+)?),(?'Long'-?\d+(\.\d+)?)(,(?'Alt'-?\d+(\.\d+)?))?"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AltitudeUse">
+		<xs:restriction base='xs:string'>
+			<xs:enumeration value='required'>
+				<xs:annotation>
+					<xs:documentation>Altitude is required by the parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='optional'>
+				<xs:annotation>
+					<xs:documentation>Altitude is optional by the parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='prohibited'>
+				<xs:annotation>
+					<xs:documentation>Altitude is prohibited by the parameter.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -964,7 +965,7 @@
 				<xs:sequence>
 					<xs:element name='label' minOccurs='0' maxOccurs='unbounded'>
 						<xs:annotation>
-							<xs:documentation>Human-readable label to be shown in stead of a reference, in contract text.</xs:documentation>
+							<xs:documentation>Human-readable label to be shown instead of a reference, in contract text.</xs:documentation>
 							<xs:documentation>Note: Multiple localized labels can be provided.</xs:documentation>
 							<xs:documentation>Note: Use the xml:lang attribute to specify language used.</xs:documentation>
 						</xs:annotation>
@@ -1012,7 +1013,7 @@
 				</xs:attribute>
 				<xs:attribute name='creatorRole' type='xs:string' use='optional'>
 					<xs:annotation>
-						<xs:documentation>Restriction on the role the creator must have in the referenced contract.</xs:documentation>
+						<xs:documentation>Restriction on the role the creator of the current contract must have in the referenced contract.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -1027,7 +1028,7 @@
 			<xs:extension base='Parameter'>
 				<xs:attribute name='value' type='xs:string' use='optional'>
 					<xs:annotation>
-						<xs:documentation>The file name of the attachment to upload.</xs:documentation>
+						<xs:documentation>The file name of the uploaded attachment.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='required' type='xs:boolean' use='optional' default='false'>
@@ -1204,17 +1205,32 @@
 		<xs:restriction base='xs:string'>
 			<xs:enumeration value='SHA256'>
 				<xs:annotation>
-					<xs:documentation>SHA-256 Hash function</xs:documentation>
+					<xs:documentation>SHA2-256 Hash function</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value='SHA384'>
 				<xs:annotation>
-					<xs:documentation>SHA-384 Hash function</xs:documentation>
+					<xs:documentation>SHA2-384 Hash function</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value='SHA512'>
 				<xs:annotation>
-					<xs:documentation>SHA-512 Hash function</xs:documentation>
+					<xs:documentation>SHA2-512 Hash function</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='SHA3_256'>
+				<xs:annotation>
+					<xs:documentation>SHA3-256 Hash function</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='SHA3_384'>
+				<xs:annotation>
+					<xs:documentation>SHA3-384 Hash function</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='SHA3_512'>
+				<xs:annotation>
+					<xs:documentation>SHA3-512 Hash function</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
@@ -2739,24 +2755,24 @@
 			<xs:documentation>An attachment can	be assigned to smart contracts.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name='id' type='xs:string' use='required'>
+			<xs:attribute name='id' type='NonEmptyString' use='required'>
 				<xs:annotation>
 					<xs:documentation>The identity of the attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name='legalId' type='xs:string' use='required'>
+			<xs:attribute name='legalId' type='NonEmptyString' use='required'>
 				<xs:annotation>
 					<xs:documentation>The legal identity of the uploader of the attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name='contentType' type='xs:string' use='required'>
+			<xs:attribute name='contentType' type='NonEmptyString' use='required'>
 				<xs:annotation>
 					<xs:documentation>Internet Content-Type of attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:attribute name='fileName' type='xs:string' use='required'>
+			<xs:attribute name='fileName' type='NonEmptyString' use='required'>
 				<xs:annotation>
-					<xs:documentation>Filename of attachment.</xs:documentation>
+					<xs:documentation>Local Filename of attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 			<xs:attribute name='s' type='xs:base64Binary' use='required'>

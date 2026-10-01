@@ -9,12 +9,14 @@ Master: Master.md
 Smart Contracts
 =====================
 
-Users with [legal identities](LegalIdentities.md) can sign smart contracts. Smart contracts are machine-readable contracts that are legally 
-binding for the parts that have signed them. Smart contracts are divided into two parts: One container, that encapsulates the contract and 
-provides state information and signatures. The second part is an XML document, whose semantic meaning is defined by the qualified name of 
-the root. By providing XML schemas, the server can make sure contracts are well-defined and contain all required information. The server 
-attests to the validity of the contents of the contract, its integrity and all signatures. Contracts can be used to automate different 
-aspects in a smart city, such as provisioning for instance.
+Users with [legal identities](LegalIdentities.md) can sign smart contracts. Smart contracts 
+are machine-readable contracts that are legally binding for the parts that have signed them. 
+Smart contracts are divided into two parts: One container, that encapsulates the contract and 
+provides state information and signatures. The second part is an XML document, whose semantic 
+meaning is defined by the qualified name of the root. By providing XML schemas, the server can
+make sure contracts are well-defined and contain all required information. The server attests 
+to the validity of the contents of the contract, its integrity and all signatures. Contracts 
+can be used to automate different aspects in a smart city, such as provisioning for instance.
 
 | Legal Identities                                                      ||
 | ------------|----------------------------------------------------------|
@@ -26,38 +28,44 @@ aspects in a smart city, such as provisioning for instance.
 Motivation and design goal
 ----------------------------
 
-The method of managing smart contracts, as described here, is designed with the following goals in mind:
+The method of managing smart contracts, as described here, is designed with the following 
+goals in mind:
 
 * Smart Contracts must be both machine readable and human readable.
 
-* The contents and legal integrity of each contract must be assured, and verifiable. The role of validating the integrity of a smart contract
-is called an *electronic notary*.
+* The contents and legal integrity of each contract must be assured, and verifiable. The role
+of validating the integrity of a smart contract is called an *electronic notary*.
 
-* The contract model must support variable amounts of roles, parts and parameters, a completely customizable machine-readable section and
-the possibility for multiple localizations of the human-readable section.
+* The contract model must support variable amounts of roles, parts and parameters, a 
+completely customizable machine-readable section and the possibility for multiple 
+localizations of the human-readable section.
 
-* To allow for automatic use of smart contracts, validated templates must be supported. Such templates have the integrity of their contents 
-asserted by the electronic notary but may lack parameter values and signatures. Validated templates can be used as the foundation of 
-creating new valid smart contracts.
+* To allow for automatic use of smart contracts, validated templates must be supported. Such 
+templates have the integrity of their contents asserted by the electronic notary but may lack 
+parameter values and signatures. Validated templates can be used as the foundation of creating 
+new valid smart contracts.
 
-* Contracts are signed using the cryptographic keys defined for the corresponding [legal identities](LegalIdentities.md) signing the 
-contract. Parts of contracts may be from any domain in the federated network, as long as they have validated 
-[legal identities](LegalIdentities.md). The signatures form cryptographic proof that the holder of the private key of corresponding
-to the legal identity, has signed the contract.
+* Contracts are signed using the cryptographic keys defined for the corresponding 
+[legal identities](LegalIdentities.md) signing the contract. Parts of contracts may be from 
+any domain in the federated network, as long as they have validated 
+[legal identities](LegalIdentities.md). The signatures form cryptographic proof that the 
+holder of the private key of corresponding to the legal identity, has signed the contract.
 
-* Contents of a contract must be updatable. Once signed by the first part, contract contents and parameters become immutable.
+* Contents of a contract must be updatable. Once signed by the first part, contract contents 
+and parameters become immutable.
 
-* Privacy must be considered. Access to contracts must be restricted to authorized individuals only. By default, this is restricted to
-the parts of the contract, as well as the designated staff acting as electronic notaries of the operator (Trust Provider) that hosts the 
-contract.
+* Privacy must be considered. Access to contracts must be restricted to authorized individuals 
+only. By default, this is restricted to the parts of the contract, as well as the designated 
+staff acting as electronic notaries of the operator (Trust Provider) that hosts the contract.
 
-* Other entities can make petitions to access the personal information available in smart contracts. At least one part in the contract 
-must consent before access to the contract can be granted, mimicking real-world management of contracts: Each part retains a copy of a 
-contract, and can share it with others for their purposes. The other parts in a contract cannot deny this. But at least one part must 
-consent before access to the smart contract can be granted.
+* Other entities can make petitions to access the personal information available in smart 
+contracts. At least one part in the contract must consent before access to the contract can be 
+granted, mimicking real-world management of contracts: Each part retains a copy of a contract,
+and can share it with others for their purposes. The other parts in a contract cannot deny 
+this. But at least one part must consent before access to the smart contract can be granted.
 
-* Contracts are limited in time. After being obsoleted, and after a specified archiving period specific to the contract, contracts must 
-be purged from the corresponding domains.
+* Contracts are limited in time. After being obsoleted, and after a specified archiving period 
+specific to the contract, contracts must be purged from the corresponding domains.
 
 * Contracts can have a variable number of signed attachments associated with it.
 
@@ -76,6 +84,13 @@ contract, a brief introduction to the contract object, and its XML representatio
 
 ```uml:Contract
 @startuml
+left to right direction
+
+skinparam nodesep 20
+skinparam ranksep 50
+skinparam groupInheritance 2
+skinparam linetype polyline
+
 object contract
 contract : id
 contract : visibility
@@ -85,6 +100,7 @@ contract : archiveReq
 contract : archiveOpt
 contract : signAfter
 contract : signBefore
+contract : nonce
 
 object "~#~#any" as any
 contract "1" *-- "1" any
@@ -94,6 +110,7 @@ contract "1" *-- "*" role
 role : name
 role : minCount
 role : maxCount
+role : canRevoke
 
 object description
 role "1" *-- "1..*" description 
@@ -114,47 +131,138 @@ parts "1" *-- "1" templateOnly
 
 role "1" -- "*" part
 
-note "Only one of these options are used." as N1
-part .. N1
-open .. N1
-templateOnly .. N1
+note "Only one of the parts-related options are used." as N1
+part .[norank]. N1
+open .[norank]. N1
+templateOnly .[norank]. N1
 
 object parameters
 contract "1" *-- "0..1" parameters
 
-parameters "1" *-- "1..*" Parameter
+parameters "1" *-[norank]- "1..*" Parameter
 Parameter : name
+Parameter : guide
+Parameter : exp
+Parameter : protection
+Parameter : protected
 
 object "description" as description2
 Parameter "1" *-- "1..*" description2
 
 object stringParameter
-Parameter <|-- stringParameter
+Parameter <|-[norank]- stringParameter
 stringParameter : value
+stringParameter : regEx
+stringParameter : min
+stringParameter : minIncluded
+stringParameter : max
+stringParameter : maxIncluded
+stringParameter : minLength
+stringParameter : maxLength
 
 object numericalParameter
-Parameter <|-- numericalParameter
+Parameter <|-[norank]- numericalParameter
 numericalParameter : value
+numericalParameter : min
+numericalParameter : minIncluded
+numericalParameter : max
+numericalParameter : maxIncluded
 
 object booleanParameter
-Parameter <|-- booleanParameter
+Parameter <|-[norank]- booleanParameter
 booleanParameter : value
 
 object dateParameter
-Parameter <|-- dateParameter
+Parameter <|-[norank]- dateParameter
 dateParameter : value
+dateParameter : min
+dateParameter : minIncluded
+dateParameter : max
+dateParameter : maxIncluded
 
 object dateTimeParameter
-Parameter <|-- dateTimeParameter
+Parameter <|-[norank]- dateTimeParameter
 dateTimeParameter : value
+dateTimeParameter : min
+dateTimeParameter : minIncluded
+dateTimeParameter : max
+dateTimeParameter : maxIncluded
 
 object timeParameter
-Parameter <|-- timeParameter
+Parameter <|-[norank]- timeParameter
 timeParameter : value
+timeParameter : min
+timeParameter : minIncluded
+timeParameter : max
+timeParameter : maxIncluded
 
 object durationParameter
-Parameter <|-- durationParameter
+Parameter <|-[norank]- durationParameter
 durationParameter : value
+durationParameter : min
+durationParameter : minIncluded
+durationParameter : max
+durationParameter : maxIncluded
+
+object geoParameter
+Parameter <|-[norank]- geoParameter
+geoParameter : value
+geoParameter : contractLocation
+geoParameter : min
+geoParameter : minIncluded
+geoParameter : max
+geoParameter : maxIncluded
+geoParameter : altitude
+
+object calcParameter
+Parameter <|-[norank]- calcParameter
+
+object recordSet
+Parameter <|-[norank]- recordSet
+recordSet : maxRecords
+recordSet : minRecords
+
+object roleParameter
+Parameter <|-[norank]- roleParameter
+roleParameter : role
+roleParameter : index
+roleParameter : property
+roleParameter : required
+roleParameter : contentType
+
+object contractReferenceParameter
+Parameter <|-[norank]- contractReferenceParameter
+contractReferenceParameter : value
+contractReferenceParameter : required
+contractReferenceParameter : localName
+contractReferenceParameter : namespace
+contractReferenceParameter : templateId
+contractReferenceParameter : provider
+contractReferenceParameter : creatorRole
+
+object label
+contractReferenceParameter "0" *-[norank]- "*" label
+
+object attachmentParameter
+Parameter <|-[norank]- attachmentParameter
+attachmentParameter : value
+attachmentParameter : required
+attachmentParameter : contentType
+attachmentParameter : minSize
+attachmentParameter : maxSize
+attachmentParameter : minWidth
+attachmentParameter : maxWidth
+attachmentParameter : minHeight
+attachmentParameter : maxHeight
+
+object recordDefinition
+recordSet "1" *-- "1" recordDefinition
+
+object record
+recordSet "1" *-- "0..*" record
+
+recordDefinition "1" *-[norank]- "1..*" Parameter
+record "1" *-[norank]- "1..*" Parameter
 
 object humanReadableText
 contract "1" *-- "1..*" humanReadableText
@@ -165,7 +273,16 @@ signature : legalId
 signature : bareJid
 signature : role
 signature : timestamp
-signature : s
+signature : BASE64
+
+object attachment
+contract "1" *-- "0..*" attachment
+attachment : id
+attachment : legalId
+attachment : contentType
+attachment : fileName
+attachment : s
+attachment : timestamp
 
 object status
 contract "1" *-- "0..1" status
@@ -179,15 +296,89 @@ status : templateId
 status : schemaDigest
 status : schemaHashFunction
 
+object roleParameters
+status "1" *-- "0..1" roleParameters
+
+object parameter
+roleParameters "1" *-- "0..*" parameter
+parameter : name
+parameter : value
+parameter : contentType
+parameter : legalId
+parameter : fileName
+parameter : signature
+parameter : timestamp
+parameter : url
+parameter : BASE64
+
 object serverSignature
 contract "1" *-- "0..1" serverSignature
 serverSignature : timestamp
-serverSignature : s
+serverSignature : BASE64
 
-note "Each instance represents the same human readable text, but for different locales." as N2
-description .. N2
-description2 .. N2
-humanReadableText .. N2
+object attachmentRef
+contract "1" *-- "0..*" attachmentRef
+attachmentRef : attachmentId
+attachmentRef : url
+
+attachmentRef "1" .[norank]. "1" attachment
+
+note "Each instance represents a different locale\nof the same human readable text." as N2
+description .[norank]. N2
+description2 .[norank]. N2
+humanReadableText .[norank]. N2
+
+' Invisible layout links for left-to-right direction.
+' Lane 1: one dash keeps these subclasses in the same column.
+
+stringParameter -[hidden]> numericalParameter
+numericalParameter -[hidden]> booleanParameter
+booleanParameter -[hidden]> dateParameter
+dateParameter -[hidden]> dateTimeParameter
+
+' Lane 2: one dash keeps these subclasses in the same column.
+
+timeParameter -[hidden]> durationParameter
+durationParameter -[hidden]> geoParameter
+geoParameter -[hidden]> calcParameter
+calcParameter -[hidden]> recordSet
+
+' Lane 3: one dash keeps these subclasses in the same column.
+
+roleParameter -[hidden]> contractReferenceParameter
+contractReferenceParameter -[hidden]> label
+label -[hidden]> attachmentParameter
+
+' Two dashes establish successive columns.
+
+Parameter -[hidden]-> stringParameter
+stringParameter -[hidden]-> timeParameter
+timeParameter -[hidden]-> roleParameter
+
+numericalParameter -[hidden]-> durationParameter
+booleanParameter -[hidden]-> geoParameter
+dateParameter -[hidden]-> calcParameter
+
+durationParameter -[hidden]-> contractReferenceParameter
+geoParameter -[hidden]-> attachmentParameter
+
+' Put Parameter in the same main column as the parameters collection.
+parameters -[hidden]> Parameter
+
+' Keep the main contract members and Parameter in a common column.
+
+any -[hidden]> role
+role -[hidden]> parts
+parts -[hidden]> parameters
+parameters -[hidden]> Parameter
+Parameter -[hidden]> humanReadableText
+humanReadableText -[hidden]> signature
+signature -[hidden]> attachment
+attachment -[hidden]> status
+status -[hidden]> serverSignature
+serverSignature -[hidden]> attachmentRef
+recordDefinition -[hidden]> record
+
 @enduml
 ```
 
@@ -866,7 +1057,7 @@ wishes to delete. Expected response element is `<contract/>`.
 * A contract that is legally binding cannot be deleted before its required archive duration has expired.
 * `<contractDeleted/>` message notifications are generated when contracts are obsoleted.
 
-### Getting legal identities of a contract
+### Getting legal identities involved in a contract
 
 A client can get a list of legal identities related to parts in a contract the client has access to. This is done by sending a `<getLegalIdentities/>`
 element in an `<iq type="get"/>` stanza to the Trust Provider. The `<getLegalIdentities/>` has the following attributes:
@@ -888,7 +1079,7 @@ The expected response is an `<identities/>` element from the [legal identities](
 * If the request is sent to a different Trust Provider, only legal identities on that Trust Provider, associated with the contract are returned, 
 if the sender is the same as the domain of the referenced contract.
 
-### Getting network identities related to a contract
+### Getting network identities involved in a contract
 
 A client can get a list of network identities associated with the legal identities that have signed a contract. This is done by sending a 
 `<getNetworkIdentities/>` element in an `<iq type="get"/>` stanza to the Trust Provider. The `<getNetworkIdentities/>` has one attribute `contractId`,
@@ -1126,6 +1317,11 @@ element in turn can take either any number of child elements:
 | `<lte/>`      | `xs:duration` | Return public contracts with a duration lesser than or equal to this value.   |
 
 Petitioning access to a smart contract
+-----------------------------------------
+
+TODO
+
+Authorizing access to a smart contract
 -----------------------------------------
 
 TODO

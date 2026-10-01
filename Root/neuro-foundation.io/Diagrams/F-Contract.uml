@@ -1,0 +1,297 @@
+@startuml
+left to right direction
+
+skinparam nodesep 20
+skinparam ranksep 50
+skinparam groupInheritance 2
+skinparam linetype polyline
+
+object contract
+contract : id
+contract : visibility
+contract : canActAsTemplate
+contract : duration
+contract : archiveReq
+contract : archiveOpt
+contract : signAfter
+contract : signBefore
+contract : nonce
+
+object "~#~#any" as any
+contract "1" *-- "1" any
+
+object role
+contract "1" *-- "*" role
+role : name
+role : minCount
+role : maxCount
+role : canRevoke
+
+object description
+role "1" *-- "1..*" description 
+
+object parts
+contract "1" *-- "0..1" parts
+
+object part
+parts "1" *-- "1..*" part
+part : legalId
+part : role
+
+object open
+parts "1" *-- "1" open
+
+object templateOnly
+parts "1" *-- "1" templateOnly
+
+role "1" -- "*" part
+
+note "Only one of the parts-related options are used." as N1
+part .[norank]. N1
+open .[norank]. N1
+templateOnly .[norank]. N1
+
+object parameters
+contract "1" *-- "0..1" parameters
+
+parameters "1" *-[norank]- "1..*" Parameter
+Parameter : name
+Parameter : guide
+Parameter : exp
+Parameter : protection
+Parameter : protected
+
+object "description" as description2
+Parameter "1" *-- "1..*" description2
+
+object stringParameter
+Parameter <|-[norank]- stringParameter
+stringParameter : value
+stringParameter : regEx
+stringParameter : min
+stringParameter : minIncluded
+stringParameter : max
+stringParameter : maxIncluded
+stringParameter : minLength
+stringParameter : maxLength
+
+object numericalParameter
+Parameter <|-[norank]- numericalParameter
+numericalParameter : value
+numericalParameter : min
+numericalParameter : minIncluded
+numericalParameter : max
+numericalParameter : maxIncluded
+
+object booleanParameter
+Parameter <|-[norank]- booleanParameter
+booleanParameter : value
+
+object dateParameter
+Parameter <|-[norank]- dateParameter
+dateParameter : value
+dateParameter : min
+dateParameter : minIncluded
+dateParameter : max
+dateParameter : maxIncluded
+
+object dateTimeParameter
+Parameter <|-[norank]- dateTimeParameter
+dateTimeParameter : value
+dateTimeParameter : min
+dateTimeParameter : minIncluded
+dateTimeParameter : max
+dateTimeParameter : maxIncluded
+
+object timeParameter
+Parameter <|-[norank]- timeParameter
+timeParameter : value
+timeParameter : min
+timeParameter : minIncluded
+timeParameter : max
+timeParameter : maxIncluded
+
+object durationParameter
+Parameter <|-[norank]- durationParameter
+durationParameter : value
+durationParameter : min
+durationParameter : minIncluded
+durationParameter : max
+durationParameter : maxIncluded
+
+object geoParameter
+Parameter <|-[norank]- geoParameter
+geoParameter : value
+geoParameter : contractLocation
+geoParameter : min
+geoParameter : minIncluded
+geoParameter : max
+geoParameter : maxIncluded
+geoParameter : altitude
+
+object calcParameter
+Parameter <|-[norank]- calcParameter
+
+object recordSet
+Parameter <|-[norank]- recordSet
+recordSet : maxRecords
+recordSet : minRecords
+
+object roleParameter
+Parameter <|-[norank]- roleParameter
+roleParameter : role
+roleParameter : index
+roleParameter : property
+roleParameter : required
+roleParameter : contentType
+
+object contractReferenceParameter
+Parameter <|-[norank]- contractReferenceParameter
+contractReferenceParameter : value
+contractReferenceParameter : required
+contractReferenceParameter : localName
+contractReferenceParameter : namespace
+contractReferenceParameter : templateId
+contractReferenceParameter : provider
+contractReferenceParameter : creatorRole
+
+object label
+contractReferenceParameter "0" *-[norank]- "*" label
+
+object attachmentParameter
+Parameter <|-[norank]- attachmentParameter
+attachmentParameter : value
+attachmentParameter : required
+attachmentParameter : contentType
+attachmentParameter : minSize
+attachmentParameter : maxSize
+attachmentParameter : minWidth
+attachmentParameter : maxWidth
+attachmentParameter : minHeight
+attachmentParameter : maxHeight
+
+object recordDefinition
+recordSet "1" *-- "1" recordDefinition
+
+object record
+recordSet "1" *-- "0..*" record
+
+recordDefinition "1" *-[norank]- "1..*" Parameter
+record "1" *-[norank]- "1..*" Parameter
+
+object humanReadableText
+contract "1" *-- "1..*" humanReadableText
+
+object signature
+contract "1" *-- "0..*" signature
+signature : legalId
+signature : bareJid
+signature : role
+signature : timestamp
+signature : BASE64
+
+object attachment
+contract "1" *-- "0..*" attachment
+attachment : id
+attachment : legalId
+attachment : contentType
+attachment : fileName
+attachment : s
+attachment : timestamp
+
+object status
+contract "1" *-- "0..1" status
+status : provider
+status : state
+status : created
+status : updated
+status : from
+status : to
+status : templateId
+status : schemaDigest
+status : schemaHashFunction
+
+object roleParameters
+status "1" *-- "0..1" roleParameters
+
+object parameter
+roleParameters "1" *-- "0..*" parameter
+parameter : name
+parameter : value
+parameter : contentType
+parameter : legalId
+parameter : fileName
+parameter : signature
+parameter : timestamp
+parameter : url
+parameter : BASE64
+
+object serverSignature
+contract "1" *-- "0..1" serverSignature
+serverSignature : timestamp
+serverSignature : BASE64
+
+object attachmentRef
+contract "1" *-- "0..*" attachmentRef
+attachmentRef : attachmentId
+attachmentRef : url
+
+attachmentRef "1" .[norank]. "1" attachment
+
+note "Each instance represents a different locale\nof the same human readable text." as N2
+description .[norank]. N2
+description2 .[norank]. N2
+humanReadableText .[norank]. N2
+
+' Invisible layout links for left-to-right direction.
+' Lane 1: one dash keeps these subclasses in the same column.
+
+stringParameter -[hidden]> numericalParameter
+numericalParameter -[hidden]> booleanParameter
+booleanParameter -[hidden]> dateParameter
+dateParameter -[hidden]> dateTimeParameter
+
+' Lane 2: one dash keeps these subclasses in the same column.
+
+timeParameter -[hidden]> durationParameter
+durationParameter -[hidden]> geoParameter
+geoParameter -[hidden]> calcParameter
+calcParameter -[hidden]> recordSet
+
+' Lane 3: one dash keeps these subclasses in the same column.
+
+roleParameter -[hidden]> contractReferenceParameter
+contractReferenceParameter -[hidden]> label
+label -[hidden]> attachmentParameter
+
+' Two dashes establish successive columns.
+
+Parameter -[hidden]-> stringParameter
+stringParameter -[hidden]-> timeParameter
+timeParameter -[hidden]-> roleParameter
+
+numericalParameter -[hidden]-> durationParameter
+booleanParameter -[hidden]-> geoParameter
+dateParameter -[hidden]-> calcParameter
+
+durationParameter -[hidden]-> contractReferenceParameter
+geoParameter -[hidden]-> attachmentParameter
+
+' Put Parameter in the same main column as the parameters collection.
+parameters -[hidden]> Parameter
+
+' Keep the main contract members and Parameter in a common column.
+
+any -[hidden]> role
+role -[hidden]> parts
+parts -[hidden]> parameters
+parameters -[hidden]> Parameter
+Parameter -[hidden]> humanReadableText
+humanReadableText -[hidden]> signature
+signature -[hidden]> attachment
+attachment -[hidden]> status
+status -[hidden]> serverSignature
+serverSignature -[hidden]> attachmentRef
+recordDefinition -[hidden]> record
+
+@enduml
