@@ -397,6 +397,7 @@ lifecycle of the contract:
 | `archiveOpt`       | `xs:duration`        | Required | After a legally binding contract expires, and the `archiveReq` period has expired, this attribute specifies an additional duration after which it is automatically deleted. |
 | `signAfter`        | `xs:dateTime`        | Optional | Signatures will only be accepted after this point in time.[^SignatureAfterBefore] |
 | `signBefore`       | `xs:dateTime`        | Optional | Signatures will only be accepted until this point in time.[^SignatureAfterBefore] |
+| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values. |
 
 [^SignatureAfterBefore]: `signAfter` (if provided) must occur before `signBefore` (if provided).
 
@@ -479,7 +480,9 @@ String-valued parameters are defined using the `<stringParameter/>` element.
 | Attribute     | Type                    | Use      | Description                                                                |
 |:--------------|:------------------------|:---------|----------------------------------------------------------------------------|
 | `name`        | `NonEmptyString`        | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:string`             | Optional | The value of the parameter.                                                |
+| `value`       | `xs:string`             | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel`       | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary`       | Optional | Protected value, for protection levels Encrypted or Transient.             |
 | `guide`       | `xs:string`             | Optional | A guiding text, that can be displayed to a user if no value is available.  |
 | `exp`         | `xs:string`             | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 | `regEx`       | `xs:string`             | Optional | Optional regular expression to validate the value of the string parameter. |
@@ -489,99 +492,123 @@ String-valued parameters are defined using the `<stringParameter/>` element.
 | `maxIncluded` | `xs:boolean`            | Optional | If the `max` value is part of the valid range or not.                      |
 | `minLength`   | `xs:nonNegativeInteger` | Optional | Optional minimum lenth of the value of the parameter.                      |
 | `maxLength`   | `xs:PositiveInteger`    | Optional | Optional maximum lenth of the value of the parameter.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
 
 ##### Numerical parameters
 
 Numerical parameters are defined using the `<numericalParameter/>` element.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:decimal`     | Optional | The value of the parameter.                                                |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `min`         | `xs:decimal`     | Optional | Optional minimum value of the parameter.                                   |
-| `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
-| `max`         | `xs:decimal`     | Optional | Optional maximum value of the parameter.                                   |
-| `maxIncluded` | `xs:boolean`     | Optional | If the `max` value is part of the valid range or not.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute     | Type              | Use      | Description                                                                |
+|:--------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`       | `xs:decimal`      | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`       | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`         | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`         | `xs:decimal`      | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded` | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`         | `xs:decimal`      | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded` | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
 
 ##### Boolean parameters
 
 Boolean parameters are defined using the `<booleanParameter/>` element.
 
-| Attribute   | Type             | Use      | Description                                                                |
-|:------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`      | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`     | `xs:boolean`     | Optional | The value of the parameter.                                                |
-| `guide`     | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`       | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `transient` | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute    | Type              | Use      | Description                                                                |
+|:-------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`       | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`      | `xs:boolean`      | Optional | The value of the parameter, for normal parameters.                         |
+| `protection` | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`  | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`      | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`        | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
 
 ##### Date parameters
 
 Date parameters are defined using the `<dateParameter/>` element.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:date`        | Optional | The value of the parameter.                                                |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `min`         | `xs:date`        | Optional | Optional minimum value of the parameter.                                   |
-| `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
-| `max`         | `xs:date`        | Optional | Optional maximum value of the parameter.                                   |
-| `maxIncluded` | `xs:boolean`     | Optional | If the `max` value is part of the valid range or not.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute     | Type              | Use      | Description                                                                |
+|:--------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`       | `xs:date`         | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`       | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`         | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`         | `xs:date`         | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded` | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`         | `xs:date`         | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded` | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
 
 ##### Date & Time parameters
 
 Date & time parameters are defined using the `<dateTimeParameter/>` element.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:dateTime`    | Optional | The value of the parameter.                                                |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `min`         | `xs:dateTime`    | Optional | Optional minimum value of the parameter.                                   |
-| `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
-| `max`         | `xs:dateTime`    | Optional | Optional maximum value of the parameter.                                   |
-| `maxIncluded` | `xs:boolean`     | Optional | If the `max` value is part of the valid range or not.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute     | Type              | Use      | Description                                                                |
+|:--------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`       | `xs:dateTime`     | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`       | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`         | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`         | `xs:dateTime`     | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded` | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`         | `xs:dateTime`     | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded` | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
 
 ##### Duration parameters
 
 Duration parameters are defined using the `<durationParameter/>` element.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:duration`    | Optional | The value of the parameter.                                                |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `min`         | `xs:duration`    | Optional | Optional minimum value of the parameter.                                   |
-| `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
-| `max`         | `xs:duration`    | Optional | Optional maximum value of the parameter.                                   |
-| `maxIncluded` | `xs:boolean`     | Optional | If the `max` value is part of the valid range or not.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute     | Type              | Use      | Description                                                                |
+|:--------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`       | `xs:duration`     | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`       | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`         | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`         | `xs:duration`     | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded` | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`         | `xs:duration`     | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded` | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
 
 ##### Time parameters
 
 Date parameters are defined using the `<timeParameter/>` element.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `value`       | `xs:time`        | Optional | The value of the parameter.                                                |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
-| `exp`         | `xs:string`      | Optional | A simple [script expression](/Script.md) validating the parameter.         |
-| `min`         | `xs:time`        | Optional | Optional minimum value of the parameter.                                   |
-| `minIncluded` | `xs:boolean`     | Optional | If the `min` value is part of the valid range or not.                      |
-| `max`         | `xs:time`        | Optional | Optional maximum value of the parameter.                                   |
-| `maxIncluded` | `xs:boolean`     | Optional | If the `max` value is part of the valid range or not.                      |
-| `transient`   | `xs:boolean`     | Optional | If parameter is transient or not.                                          |
+| Attribute     | Type              | Use      | Description                                                                |
+|:--------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`       | `xs:time`         | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`  | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`   | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `guide`       | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`         | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`         | `xs:time`         | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded` | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`         | `xs:time`         | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded` | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
+
+##### Geo-spatial parameters
+
+Geo-spatial parameters are defined using the `<geoParameter/>` element.
+
+| Attribute          | Type              | Use      | Description                                                                |
+|:-------------------|:------------------|:---------|----------------------------------------------------------------------------|
+| `name`             | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                    |
+| `value`            | `GeoSpatial`      | Optional | The value of the parameter, for normal parameters.                         |
+| `protection`       | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.     |
+| `protected`        | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.             |
+| `contractLocation` | `xs:boolean`      | Optional | If the value of the parameter is the location of the contract.             |
+| `guide`            | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| `exp`              | `xs:string`       | Optional | A simple [script expression](/Script.md) validating the parameter.         |
+| `min`              | `GeoSpatial`      | Optional | Optional minimum value of the parameter.                                   |
+| `minIncluded`      | `xs:boolean`      | Optional | If the `min` value is part of the valid range or not.                      |
+| `max`              | `GeoSpatial`      | Optional | Optional maximum value of the parameter.                                   |
+| `maxIncluded`      | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
+| `altitude`		 | `AltitudeUse`     | Optional | Defines how to handle altitude in positions.                               |
 
 ##### Calculation parameters
 
@@ -595,6 +622,34 @@ parameter being evaluated, can be referenced however, in order to avoid circular
 | `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
 | `exp`         | `xs:string`      | Optional | A simple script expression providing the value of the parameter.           |
 | `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+
+##### Role parameters
+
+Role parameters are parameters whose values are taken automatically from Legal Identities at
+the time of signature. This minimizes the risk of entering values incorrectly, as weel as
+removes a parameter that needs to be entered manually.
+
+| Attribute     | Type                 | Use      | Description                                                                                                        |
+|:--------------|:---------------------|:---------|--------------------------------------------------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`     | Required | Name of the parameter within the scope of the contract.                                                            |
+| `protection`  | `ProtectionLevel`    | Optional | Level of confidentiality of the information provided by the parameter.                                             |
+| `protected`   | `xs:base64Binary`    | Optional | Protected value, for protection levels Encrypted or Transient.                                                     |
+| `guide`       | `xs:string`          | Optional | A guiding text, that can be displayed to a user if no value is available.                                          |
+| `exp`         | `xs:string`          | Optional | A simple [script expression](/Script.md) validating the parameter.                                                 |
+| `role`        | `NonEmptyString`     | Required | Name of the role of the signatory.                                                                                 |
+| `index`       | `xs:positiveInteger` | Required | Index of signature of the of the signatory for the corresponding role.                                             |
+| `property`    | `xs:string`          | Required | Name of the ID property of the signatory.                                                                          |
+| `required`    | `xs:boolean`         | Optional | If existance of the signatory and property value is required or not for the contract to be complete.               |
+| `contentType` | `xs:string`          | Optional | If the property refers to an attachment, the expected Internet Content-Type (wildcards allowed) of the attachment. |
+
+##### Contract reference parameters
+
+TODO
+
+##### Attachment parameters
+
+TODO
+
 
 #### Parameter Validation
 
