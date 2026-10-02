@@ -644,84 +644,183 @@ removes a parameter that needs to be entered manually.
 
 ##### Contract reference parameters
 
-TODO
+Contract reference parameters are parameters whose values are references to other contracts.
+Variables in the referenced contract can be access from the contract by using object-oriented
+naming. Contract reference parameters are presented in human-readable text using a special
+human-readable label that the contract can define.
+
+| Attribute     | Type                 | Use      | Description                                                                                       |
+|:--------------|:---------------------|:---------|---------------------------------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`     | Required | Name of the parameter within the scope of the contract.                                           |
+| `protection`  | `ProtectionLevel`    | Optional | Level of confidentiality of the information provided by the parameter.                            |
+| `protected`   | `xs:base64Binary`    | Optional | Protected value, for protection levels Encrypted or Transient.                                    |
+| `guide`       | `xs:string`          | Optional | A guiding text, that can be displayed to a user if no value is available.                         |
+| `exp`         | `xs:string`          | Optional | A simple [script expression](/Script.md) validating the parameter.                                |
+| `value`       | `xs:string`          | Optional | Contract identifier of reference contract.                                                        |
+| `required`    | `xs:boolean`         | Optional | If the reference parameter is required or not.                                                    |
+| `localName`   | `xs:string`          | Optional | Restriction on the local name of the machine-readable part of the referenced contract.            |
+| `namespace`   | `xs:string`          | Optional | Restriction on the namespace of the machine-readable part of the referenced contract.             |
+| `templateId`  | `xs:string`          | Optional | Restriction on the Template ID of the referenced contract.                                        |
+| `provider`    | `xs:string`          | Optional | Restriction on the provider of the referenced contract.                                           |
+| `creatorRole` | `xs:string`          | Optional | Restriction on the role the creator of the current contract must have in the referenced contract. |
 
 ##### Attachment parameters
 
-TODO
+Attachment reference parameters are parameters that refer to attachments in the same contract.
+They make it possible to include the contents of the referenced attachments into both
+human-readable content, as well as machine-readable content.
 
+| Attribute     | Type                 | Use      | Description                                                                 |
+|:--------------|:---------------------|:---------|-----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`     | Required | Name of the parameter within the scope of the contract.                     |
+| `protection`  | `ProtectionLevel`    | Optional | Level of confidentiality of the information provided by the parameter.      |
+| `protected`   | `xs:base64Binary`    | Optional | Protected value, for protection levels Encrypted or Transient.              |
+| `guide`       | `xs:string`          | Optional | A guiding text, that can be displayed to a user if no value is available.   |
+| `exp`         | `xs:string`          | Optional | A simple [script expression](/Script.md) validating the parameter.          |
+| `value`       | `xs:string`          | Optional | The file name of the uploaded attachment.                                   |
+| `required`    | `xs:boolean`         | Optional | If the attachment is required or not.                                       |
+| `contentType` | `xs:string`          | Optional | Restriction on the Content-Type of the attachment. Wildcards are permitted. |
+| `minSize`     | `xs:positiveInteger` | Optional | Smallest acceptable size of attachment, in bytes.                           |
+| `maxSize`     | `xs:positiveInteger` | Optional | Largest acceptable size of attachment, in bytes.                            |
+| `minWidth`    | `xs:positiveInteger` | Optional | Smallest acceptable width of attachment, in pixels, if relevant.            |
+| `maxWidth`    | `xs:positiveInteger` | Optional | Largest acceptable width of attachment, in pixels, if relevant.             |
+| `minHeight`   | `xs:positiveInteger` | Optional | Smallest acceptable height of attachment, in pixels, if relevant.           |
+| `maxHeight`   | `xs:positiveInteger` | Optional | Largest acceptable height of attachment, in pixels, if relevant.            |
+
+##### Recordsets
+
+Recordsets are groups of parameters that can be repeated, creating vectors, or tables of
+parameters, accessible both from human-readable and machine-readable content in the contract.
+A recordset first contains a record definition (`<recordDefinition/>` element), which contains 
+the parameter definitions. This definition is then following by a sequence (possibly empty) 
+of records (`<record/>` elements), containing parameter values for the parameters in the 
+corresponding definition. 
+
+| Attribute     | Type                    | Use      | Description                                                                 |
+|:--------------|:------------------------|:---------|-----------------------------------------------------------------------------|
+| `name`        | `NonEmptyString`        | Required | Name of the recordset within the scope of the contract.                     |
+| `exp`         | `xs:string`             | Optional | A simple [script expression](/Script.md) validating the recordset.          |
+| `value`       | `xs:string`             | Optional | The file name of the uploaded attachment.                                   |
+| `required`    | `xs:boolean`            | Optional | If the attachment is required or not.                                       |
+| `contentType` | `xs:string`             | Optional | Restriction on the Content-Type of the attachment. Wildcards are permitted. |
+| `minRecords`  | `xs:nonNegativeInteger` | Required | Minimum number of records in the record set.                                |
+| `maxRecords`  | `xs:positiveInteger`    | Required | Maximum number of records in the record set.                                |
 
 #### Parameter Validation
 
-Parameters can have optional validation rules attached to them. Some apply to only one parameter type, others apply to different parameter
-types. The following subsections lists available validation rules that can be applied.
+Parameters can have optional validation rules attached to them. Some apply to only one 
+parameter type, others apply to different parameter types. The following subsections lists 
+available validation rules that can be applied.
 
-**Note**: A server must not allow the creation of contracts whose parameters break validation rules. When creating a contract from a
-template, it is also important to assure that client does not attempt to change types of parameters, and any validation rules defined
-in the template.
+**Note**: A server must not allow the creation of contracts whose parameters break validation 
+rules. When creating a contract from a template, it is also important to assure that client 
+does not attempt to change types of parameters, and any validation rules defined in the 
+template.
 
 ##### Range validation
 
-A valid range can be specified using four optional attributes: `min`, `max`, `minIncluded` and `maxIncluded`. Open ranges can be
-specified by omitting either `min` or `max`. Ranges include the endpoints by default. By excluding them, set the `minIncluded` or
-`maxIncluded` to `false` respectively. Comparison is done in accordance with the underlying parameter data type.
+A valid range can be specified using four optional attributes: `min`, `max`, `minIncluded` and
+`maxIncluded`. Open ranges can be specified by omitting either `min` or `max`. Ranges include 
+the endpoints by default. By excluding them, set the `minIncluded` or `maxIncluded` to `false`
+respectively. Comparison is done in accordance with the underlying parameter data type.
+
+Note: Maximum values must not be smaller than minimum values, if both are specified.
 
 ##### Size validation
 
-The size of a string parameter value can be controlled by the two optional attributes `minLength` and `maxLength`. By omitting both, no
-size limits are imposed. By omitting one, no limit in the corresponding direction exists.
+The size of a string parameter value can be controlled by the two optional attributes 
+`minLength` and `maxLength`. By omitting both, no size limits are imposed. By omitting one, 
+no limit in the corresponding direction exists.
+
+For attachment reference parameters, different minimum and maximum sizes can be specified.
+`minSize` and `maxSize` refer to the size of the attachment in bytes, while `minWidth`, 
+`maxWidth`, `minHeight` and `maxHeight` refer to the size of the attachment in pixels, if 
+relevant.
+
+For recordsets, the number of records can be controlled by the two optional attributes 
+`minRecords` and `maxRecords`.
+
+Note: Maximum values must not be smaller than minimum values, if both are specified.
 
 ##### Regular Expression validation
 
-String parameters can be validated using regular expressions. Named groups can be used to extract parts of the value, and referencing them
-from [mathematical expression](/Script.md) validation rules.
+String parameters can be validated using regular expressions. Named groups can be used to 
+extract parts of the value, and referencing them from [mathematical expression](/Script.md) 
+validation rules.
 
-**Note**: Due to lack of standards for regular expressions, evaluation of expressions is done mainly on the server side, and is considered
-implementation specific. A client or a peer that understands the syntax of a regular expression, can use it to guide users in user interfaces
-during the creation of a contract. But when retrieving a created contract, it is assumed servers have already validated parameter values 
-before allowing the contract to be created. Still, most regular expression dialects share common elements, which makes common regular 
+**Note**: Due to lack of standards for regular expressions, evaluation of expressions is done 
+mainly on the server side, and is considered implementation specific. A client or a peer that 
+understands the syntax of a regular expression, can use it to guide users in user interfaces
+during the creation of a contract. But when retrieving a created contract, it is assumed 
+servers have already validated parameter values before allowing the contract to be created. 
+Still, most regular expression dialects share common elements, which makes common regular 
 expressions understandable across clients and technology boundaries.
 
 ##### Mathematical Expression validation
 
-Parameters, as a set, can be validated using [mathematical script expressions](/Script.md). Such expressions may refer to parameter values 
-using their parameter names, and use common arithmetic and comparison operators to impose rules on valid values, referencing multiple parameters 
-in a single expression. Expressions may also reference intrinsic contract properties. The following table lists such contract properties:
+Parameters, as a set, can be validated using [mathematical script expressions](/Script.md). 
+Such expressions may refer to parameter values using their parameter names, as if they were
+variables, and use common arithmetic and comparison operators to impose rules on valid values,
+referencing multiple parameters in a single expression. Expressions may also reference 
+intrinsic contract properties. The following table lists such contract properties:
 
-| Property   | Type          | Description                    |
-|:-----------|:--------------|:-------------------------------|
-| `Duration` | `xs:duration` | The duration of the contract . |
+| Property   | Type          | Description                                                                                                   |
+|:-----------|:--------------|:--------------------------------------------------------------------------------------------------------------|
+| `Duration` | `xs:duration` | The duration of the contract .                                                                                |
+| `Now`      | `xs:dateTime` | The current local date and time, if not signed, otherwise the local date and time of the first signature.     |
+| `NowUtc`   | `xs:dateTime` | The current date and time in UTC, if not signed, otherwise the date and time, in UTC, of the first signature. |
 
-**Note**: Evaluation of [mathematical expressions](/Script.md) is done mainly on the server side, and is considered implementation specific. 
-A client or a peer that understands the syntax of an expression, can use it to guide users in user interfaces during the creation of a contract. 
-But when retrieving a created contract, it is assumed servers have already validated parameter values before allowing the contract to be created.
-Still, common operators (`+`, `-`, `*`, `/`, `<`, `>`, `=`, `!=`, `<=`, `>=`, `!`) are often understood by many expression evaluators, which 
-makes common expressions understandable across clients and technology boundaries.
+When referencing contract properties in referenced contract, object-oriented naming notation
+is used, by first referencing the name of the contract reference parameter, following by a
+period (`.`), following by the name of the property in the referenced contract. This
+object notation can be nested, if the referenced contract has a contract reference parameter 
+itself.
 
-**Note 2**: If the script engine understands variables or constants (such as `Now` or `NoteUtc`) that return the current date and time, using 
-some time coordinate, such references must return the time point of the first contract signature, once the contract has received its first 
-signature.
+Example: `ContractRef.Parameter`
+
+When referencing recordset parameters, object-oriented naming notation is used to reference
+the record definition, while vector notation is used to reference records in the recordset.
+Each record then uses object-oriented naming notation to reference the parameters inside each
+record.
+
+Example: `Recordset.Parameter` references the definition, while `Recordset[1].Parameter`
+references a parameter in a specific record.
+
+**Note**: Evaluation of [mathematical expressions](/Script.md) is done mainly on the server 
+side, and is considered implementation specific. A client or a peer that understands the 
+syntax of an expression, can use it to guide users in user interfaces during the creation of 
+a contract. But when retrieving a created contract, it is assumed servers have already 
+validated parameter values before allowing the contract to be created. Still, common operators 
+(`+`, `-`, `*`, `/`, `<`, `>`, `=`, `!=` (or `<>`), `<=`, `>=`, `!`) are often understood by 
+many expression evaluators, which makes common expressions understandable across clients and 
+technology boundaries.
 
 ##### Transient parameters
 
-Transient parameters are parameters whose values are only available *in transit*, i.e. they are not persisted together with the contract.
-Instead, the values are replaced by GUID values, and the actual values are transmitted outside the scope of the contract. All signatures
-are calculated on the GUIDs, not the actual parameter values.
+Transient parameters are parameters whose values are only available *in transit*, i.e. they 
+are not persisted together with the contract. Instead, the values are replaced by GUID values,
+and the actual values are transmitted outside the scope of the contract. All signatures are 
+calculated on the GUIDs, not the actual parameter values.
 
-Transient parameter can be used in special circumstances where special care has to be made to protect the privacy or confidentiality of
-the underlying information, but still use smart contracts and digital signatures to show that the signatories have agreed on the terms
-of the contract. Examples can inlclude sensitive information such as choices during closed voting procedures, credit card details for
-payments, etc.
+Transient parameter can be used in special circumstances where special care has to be made to 
+protect the privacy or confidentiality of the underlying information, but still use smart 
+contracts and digital signatures to show that the signatories have agreed on the terms of the 
+contract. Examples can include sensitive information such as choices during closed voting 
+procedures, credit card details for payments, etc.
 
 ### Human-readable text
 
-Human-readable text matching the machine-readable contents defined in the first contract element is defined in one or more `<humanReadableText/>`
-elements. if specifying multiple elements, the `xml:lang` attribute is used to specify the language used for each element. When validating the
-consistency and legal integrity of the contract, the electronic notary must validate that each human-readable section corresponds to the machine-readable
-contents of the contract, and that the content is legal.
+Human-readable text matching the machine-readable contents defined in the first contract 
+element is defined in one or more `<humanReadableText/>` elements. If specifying multiple 
+elements, the `xml:lang` attribute is used to specify the language used for each element. When 
+validating the consistency and legal integrity of the contract, the electronic notary must 
+validate that each human-readable section corresponds to the machine-readable contents of the 
+contract, and that the content is legal.
 
-All human-readable text, whether it is defined using the `<humanReadableText/>` element, or any of the `<description/>` elements, consists of a sequence
-of one or more *block elements*, defined in the following subsections.
+Human-readable text, whether it is defined using the `<humanReadableText/>` element, or any 
+of the `<description/>` elements, consists of a sequence of one or more *block elements*, 
+defined in the following subsections. Human-readable text defined in `<label/>` elements only
+consist of *inline elements*, also defined below.
 
 #### Block elements
 
@@ -729,83 +828,120 @@ Block elements define blocks of text, typically ordered vertically in a flowing 
 
 ##### Paragraphs
 
-Paragraphs of human-readable text are defined using `<paragraph/>` elements. Paragraphs take a sequence of one or more *inline elements*.
+Paragraphs of human-readable text are defined using `<paragraph/>` elements. Paragraphs take 
+a sequence of one or more *inline elements*.
 
 ##### Sections
 
-Sections and sub-sections are defined using the `<section/>` element. Each `<section/>` element contains a `<header/>` element and a `<body/>` element.
-The `<header/>` element contains one or more *inline elements*, while the `<body/>` element contains one or more *block elements*. Nested use of
-the `<section/>` element creates sub-sections to the current section. Any level of nesting is permitted by the representation.
+Sections and sub-sections are defined using the `<section/>` element. Each `<section/>` 
+element contains a `<header/>` element and a `<body/>` element. The `<header/>` element 
+contains one or more *inline elements*, while the `<body/>` element contains one or more 
+*block elements*. Nested use of the `<section/>` element creates sub-sections to the current 
+section. Any level of nesting is permitted by the representation.
 
 ##### Bullet lists
 
-Bullet lists are defined using the `<bulletItems/>` element. Each item in the list is defined in a separate `<item/>` element, each one containing
-one or more *inline elements*.
+Bullet lists are defined using the `<bulletItems/>` element. Each item in the list is defined 
+in a separate `<item/>` element, each one containing one or more *inline elements*.
 
 ##### Numbered lists
 
-Numbered lists are defined using the `<numberedItems/>` element. Each item in the list is defined in a separate `<item/>` element, each one containing
-one or more *inline elements*.
+Numbered lists are defined using the `<numberedItems/>` element. Each item in the list is 
+defined in a separate `<item/>` element, each one containing one or more *inline elements*.
+
+##### Standalone images
+
+TODO
+
+##### Horizontal separators
+
+TODO
+
+##### Tables
+
+TODO
 
 #### Inline elements
 
-Inline elements define portions of human-readable text, typically ordered horizontally in a flowing text, with the exception of word-wrapping along
-any margins.
+Inline elements define portions of human-readable text, typically ordered horizontally in a 
+flowing text, with the exception of word-wrapping along any margins.
 
 ##### Readable text
 
-Readable text is provided using the `<text/>` element. The actual text is provided between the start and ending tag of the element.
+Readable text is provided using the `<text/>` element. The actual text is provided between the 
+start and ending tag of the element.
 
 ##### parameter
 
-A reference to a parameter value is made using the `<parameter/>` element. The element is replaced by the value of the parameter being referenced.
-This removes the need to edit the human-readable text, just because parameters vary across contracts. The parameter being referenced is defined in the
-`name` attribute of the element.
+A reference to a parameter value is made using the `<parameter/>` element. The element is 
+replaced by the value of the parameter being referenced. This removes the need to edit the 
+human-readable text, just because parameters vary across contracts. The parameter being 
+referenced is defined in the `name` attribute of the element.
 
 ##### Bold text
 
-Bold text is specified using the `<bold/>` element. It contains a sequence of one or more *inline elements*.
+Bold text is specified using the `<bold/>` element. It contains a sequence of one or more 
+*inline elements*.
 
 ##### Italic text
 
-Italic text is specified using the `<italic/>` element. It contains a sequence of one or more *inline elements*.
+Italic text is specified using the `<italic/>` element. It contains a sequence of one or more 
+*inline elements*.
 
 ##### Underlined text
 
-Underlined text is specified using the `<underline/>` element. It contains a sequence of one or more *inline elements*.
+Underlined text is specified using the `<underline/>` element. It contains a sequence of one
+or more *inline elements*.
 
 ##### Strike-through
 
-Text that is stricken through is specified using the `<strikeThrough/>` element. It contains a sequence of one or more *inline elements*.
+Text that is stricken through is specified using the `<strikeThrough/>` element. It contains 
+a sequence of one or more *inline elements*.
 
 ##### Super-script
 
-Super-script text is specified using the `<super/>` element. It contains a sequence of one or more *inline elements*.
+Super-script text is specified using the `<super/>` element. It contains a sequence of one or 
+more *inline elements*.
 
 ##### Sub-script
 
-Sub-script text is specified using the `<sub/>` element. It contains a sequence of one or more *inline elements*.
+Sub-script text is specified using the `<sub/>` element. It contains a sequence of one or
+more *inline elements*.
+
+##### Line breaks
+
+TODO
+
+##### Inline images
+
+TODO
 
 ### Signatures
 
-Following the human-readable text, comes signatures made by parts in the contract. Each signature is represented by a `<signature/>` element.
-Signatures are calculated using the private key corresponding to the [legal identity](LegalIdentities.md) performing the signature. It is calculated
-on the contract contents according to the following rules:
+Following the human-readable text, comes signatures made by parts in the contract. Each 
+signature is represented by a `<signature/>` element. Signatures are calculated using the 
+private key corresponding to the [legal identity](LegalIdentities.md) performing the signature.
+It is calculated on the contract contents according to the following rules:
 
-* Signatures are calculated on the contract element excluding the `id` attribute and the `<signature/>`, `<status/>` and `<serverSignature/>` elements.
+* Signatures are calculated on the contract element excluding the `id` attribute and the 
+`<signature/>`, `<status/>` and `<serverSignature/>` elements.
 * All text nodes and attribute values are normalized (using Unicode NFC).
 * Unnecessary whitespace is removed.
 * The SPACE character is the only allowed whitespace.
-* `&`, `<`, `>`, `"` and `'` consistently escaped to `&amp;`, `&lt;`, `&gt;`, `&quot;` and `&apos;` respectively.
+* `&`, `<`, `>`, `"` and `'` consistently escaped to `&amp;`, `&lt;`, `&gt;`, `&quot;` and 
+`&apos;` respectively.
 * Empty elements are closed using `/>` (without whitespace).
 * XML Attributes are serialized in alphabetical order, using double quotes.
-* The `xmlns` attribute of the `<contract/>` element is omitted. The Smart Contract namespace used by the client is assumed.[^Versioning] 
-The `xmlns` attribute is then only used when needed to define new default namespaces or namespace prefixes.
+* The `xmlns` attribute of the `<contract/>` element is omitted. The Smart Contract namespace 
+used by the client is assumed.[^Versioning] The `xmlns` attribute is then only used when 
+needed to define new default namespaces or namespace prefixes.
 * The generated content is UTF-8 encoded before being signed.
 
-[^Versioning]: The reasoning behind omitting the namespace declaration of the `<contract/>` element, is to allow the protocol version to be increased,
-without affecting signatures. It would also allow clients using different versions of the communication protocol, to agree on signatures for the
-contracts object, as long as unrecognized elements and attributes are normalized and ordered according to the rules defined.
+[^Versioning]: The reasoning behind omitting the namespace declaration of the `<contract/>` 
+element, is to allow the protocol version to be increased, without affecting signatures. It 
+would also allow clients using different versions of the communication protocol, to agree on
+signatures for the contracts object, as long as unrecognized elements and attributes are 
+normalized and ordered according to the rules defined.
 
 The attributes available for the `<signature/>` element are:
 
@@ -819,10 +955,12 @@ The attributes available for the `<signature/>` element are:
 
 ### Contract Status
 
-The broker (i.e. Trust Provider) hosting the contract, and attesting to the validity, consistency and integrity of the contract, adds a `<status/>` 
-element describing the current status of the contract object. The status object is created and managed by the Trust Provider.
-Authorized clients can always get the latest version of the contract by requesting it from the trust provider, given the `id` of the contract.
-The `<status/>` element contains the following attributes:
+The broker (i.e. Trust Provider) hosting the contract, and attesting to the validity, 
+consistency and integrity of the contract, adds a `<status/>` element describing the current 
+status of the contract object. The status object is created and managed by the Trust Provider.
+Authorized clients can always get the latest version of the contract by requesting it from the 
+trust provider, given the `id` of the contract. The `<status/>` element contains the following 
+attributes:
 
 | Attribute            | Type              | Use      | Description                                                                            |
 |:---------------------|:------------------|:---------|----------------------------------------------------------------------------------------|
@@ -836,7 +974,8 @@ The `<status/>` element contains the following attributes:
 | `schemaDigest`       | `xs:base64Binary` | Optional | If the contents element has been validated using a schema, the hash digest of the schema used, base64 encoded, will be made available here. |
 | `schemaHashFunction` | `HashFunction`    | Optional | The Hash function used to compute the Hash Digest. |
 
-Possible states of a contract is defined by the `ContractState` enumeration. Possible values are:
+Possible states of a contract is defined by the `ContractState` enumeration. Possible values 
+are:
 
 | `ContractState` | Description                                                                                                                            |
 |:----------------|:---------------------------------------------------------------------------------------------------------------------------------------|
@@ -850,38 +989,45 @@ Possible states of a contract is defined by the `ContractState` enumeration. Pos
 
 Possible values of the `HashFunction` enumeration are:
 
-| `HashFunction` | Description                                                                                                                            |
-|:---------------|:-----------------------|
-| `SHA256`       | SHA-256 Hash function. |
-| `SHA384`       | SHA-384 Hash function. |
-| `SHA512`       | SHA-512 Hash function. |
+| `HashFunction` | Description             |
+|:---------------|:------------------------|
+| `SHA256`       | SHA2-256 Hash function. |
+| `SHA384`       | SHA2-384 Hash function. |
+| `SHA512`       | SHA2-512 Hash function. |
+| `SHA3_256`     | SHA3-256 Hash function. |
+| `SHA3_384`     | SHA3-384 Hash function. |
+| `SHA3_512`     | SHA3-512 Hash function. |
 
 ### Server Attestation
 
-The Trust Provider always attests any changes made to the contract object. This attestation is made available in a `<serverSignature/>` element at the end,
-which can be verified by clients.[^PublicKey] Server Signatures are calculated using the private key of the Trust Provider. It is calculated
-on the contract contents according to the following rules:
+The Trust Provider always attests any changes made to the contract object. This attestation is
+made available in a `<serverSignature/>` element at the end, which can be verified by 
+clients.[^PublicKey] Server Signatures are calculated using the private key of the Trust 
+Provider. It is calculated on the contract contents according to the following rules:
 
 * Signatures are calculated on the contract element excluding the `<serverSignature/>` element.
 * All text nodes and attribute values are normalized (using Unicode NFC).
 * Unnecessary whitespace is removed.
 * The SPACE character is the only allowed whitespace.
-* `&`, `<`, `>`, `"` and `'` consistently escaped to `&amp;`, `&lt;`, `&gt;`, `&quot;` and `&apos;` respectively.
+* `&`, `<`, `>`, `"` and `'` consistently escaped to `&amp;`, `&lt;`, `&gt;`, `&quot;` and 
+`&apos;` respectively.
 * Empty elements are closed using `/>` (without whitespace).
 * XML Attributes are serialized in alphabetical order, using double quotes.
-* The `xmlns` attribute of the `<contract/>` element is omitted. The Smart Contract namespace used by the client is assumed.[^Versioning] 
-The `xmlns` attribute is then only used when needed to define new default namespaces or namespace prefixes.
+* The `xmlns` attribute of the `<contract/>` element is omitted. The Smart Contract namespace 
+used by the client is assumed.[^Versioning] The `xmlns` attribute is then only used when 
+needed to define new default namespaces or namespace prefixes.
 * The generated content is UTF-8 encoded before being signed.
 
-[^PublicKey]: The public key used to validate a signature of a Trust Provider can be retrieved using `<getPublicKey/>` request, 
-as defined in [legal identities](LegalIdentities.md). Server keys may change over time. If a signature does not validate, make sure to get the most 
-recent public key from the server and check signature again.
+[^PublicKey]: The public key used to validate a signature of a Trust Provider can be retrieved 
+using `<getPublicKey/>` request, as defined in [legal identities](LegalIdentities.md). Server 
+keys may change over time. If a signature does not validate, make sure to get the most recent 
+public key from the server and check signature again.
 
 The attributes available for the `<serverSignature/>` element are:
 
-| Attribute   | Type              | Use      | Description                                                                            |
-|:------------|:------------------|:---------|----------------------------------------------------------------------------------------|
-| `timestamp` | `xs:dateTime`     | Required | When the signature was generated. |
+| Attribute   | Type              | Use      | Description                                                                   |
+|:------------|:------------------|:---------|-------------------------------------------------------------------------------|
+| `timestamp` | `xs:dateTime`     | Required | When the signature was generated.                                             |
 | `s`         | `xs:base64Binary` | Required | Digital signature generated by the corresponding asymmetric cipher algorithm. |
 
 
