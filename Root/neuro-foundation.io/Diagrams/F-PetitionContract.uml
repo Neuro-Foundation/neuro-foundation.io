@@ -1,0 +1,47 @@
+@startuml
+participant "Entity A" as EntityA
+participant "Legal Component A" as LegalComponentA
+participant "Legal Component B" as LegalComponentB
+participant "Entity B<sub>1</sub>" as EntityB1
+participant "Entity B<sub>n</sub>" as EntityBn
+
+activate EntityA
+activate EntityB1
+activate EntityBn
+activate LegalComponentA
+activate LegalComponentB
+
+activate EntityA
+EntityA -> LegalComponentB : petitionContract(C.Id,pid,n,s,purpose)
+activate LegalComponentB
+
+LegalComponentB -> LegalComponentA : validateSignature(A,s)
+activate LegalComponentA
+LegalComponentA -> LegalComponentB : identity(A)
+deactivate LegalComponentA
+
+LegalComponentB --> EntityA
+
+LegalComponentB -> EntityB1 : petitionContractMsg(C.Id,A,pid,pupose)
+activate EntityB1
+
+LegalComponentB -> EntityBn : petitionContractMsg(C.Id,A,pid,pupose)
+deactivate LegalComponentB
+
+activate EntityBn
+
+EntityB1 -> EntityB1 : view and decide (yes)
+EntityBn -> EntityBn : view and decide (ignore)
+deactivate EntityBn
+
+EntityB1 -> LegalComponentB : petitionContractResponse(C.Id,pid,[B])
+activate LegalComponentB
+LegalComponentB --> EntityB1
+deactivate EntityB1
+
+LegalComponentB -> EntityA : petitionContractResponseMsg(C,pid,[B])
+deactivate LegalComponentB
+
+EntityA -> EntityA : process
+deactivate EntityA
+@enduml
