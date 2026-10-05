@@ -21,13 +21,13 @@ deactivate "Legal Component A"
 
 "Legal Component B" --> "Entity A"
 
-"Legal Component B" -> "Entity B" : petitionIdentityMsg(A,pid,pupose)
+"Legal Component B" -> "Entity B" : petitionIdentityMsg(A,pid,from,pupose)
 deactivate "Legal Component B"
 
 "Entity B" -> "Entity B" : view and decide
 activate "Entity B"
 
-"Entity B" -> "Legal Component B" : petitionIdentityResponse(pid,[B])
+"Entity B" -> "Legal Component B" : petitionIdentityResponse(pid,jid,[B])
 activate "Legal Component B"
 "Legal Component B" --> "Entity B"
 deactivate "Entity B"

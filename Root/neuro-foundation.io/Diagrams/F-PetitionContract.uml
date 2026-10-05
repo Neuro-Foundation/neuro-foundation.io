@@ -22,10 +22,10 @@ deactivate LegalComponentA
 
 LegalComponentB --> EntityA
 
-LegalComponentB -> EntityB1 : petitionContractMsg(C.Id,A,pid,pupose)
+LegalComponentB -> EntityB1 : petitionContractMsg(C.Id,A,pid,from,pupose)
 activate EntityB1
 
-LegalComponentB -> EntityBn : petitionContractMsg(C.Id,A,pid,pupose)
+LegalComponentB -> EntityBn : petitionContractMsg(C.Id,A,pid,from,pupose)
 deactivate LegalComponentB
 
 activate EntityBn
@@ -34,7 +34,7 @@ EntityB1 -> EntityB1 : view and decide (yes)
 EntityBn -> EntityBn : view and decide (ignore)
 deactivate EntityBn
 
-EntityB1 -> LegalComponentB : petitionContractResponse(C.Id,pid,[B])
+EntityB1 -> LegalComponentB : petitionContractResponse(C.Id,pid,jid,[B])
 activate LegalComponentB
 LegalComponentB --> EntityB1
 deactivate EntityB1
