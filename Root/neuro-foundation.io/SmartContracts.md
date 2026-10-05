@@ -851,15 +851,28 @@ defined in a separate `<item/>` element, each one containing one or more *inline
 
 ##### Standalone images
 
-TODO
+Standalone images (images that are shown by themselves in a separate block) are defined using
+the `<imageStandalone/>` element. This element has three required attributes: The `contentType`
+attribute contains the Internet Content-Type of the binary image, and the `width` and `height`
+attributes contain the image width and height respectively. Image sizes must be a positive
+integer, not exceeting 2048. The element contains two child elements: First a `<binary/>` 
+element containing the BASE64-encoded binary image, following by a `<caption/>` element 
+containing a sequence  of one or more *inline elements*.
 
 ##### Horizontal separators
 
-TODO
+A horizontal separator is introduced by adding an empty `<separator/>` element.
 
 ##### Tables
 
-TODO
+A table is defined using the `<table/>` element. It has no attributes, and contains a sequence
+of `<row/>` elements. Each `<row/>` element, which does not have any attributes either, 
+consists of a sequence of `<cell/>` elements. Each `<cell/>` element takes three required
+attributes: The `alignment` attribute defines horizontal alignment of text in the cell (`Left`,
+`Right` or `Center`). The `colSpan` attribute defines the number of columns spanned by the
+cell. The Boolean `header` attribute determines if the cell is presented as a header (`true`)
+or a normal (`false`) cell. Each `<cell/>` element consists of either zero or more 
+*block elements*, or zero or more *inline elements*.
 
 #### Inline elements
 
@@ -910,11 +923,17 @@ more *inline elements*.
 
 ##### Line breaks
 
-TODO
+A line break is inserted in inline text by adding an empty `<lineBreak/>` element.
 
 ##### Inline images
 
-TODO
+Inline images (images that are presented in inline text) are defined using the 
+`<imageInline/>` element. This element has three required attributes: The `contentType`
+attribute contains the Internet Content-Type of the binary image, and the `width` and `height`
+attributes contain the image width and height respectively. Image sizes must be a positive
+integer, not exceeting 2048. The element contains two child elements: First a `<binary/>` 
+element containing the BASE64-encoded binary image, following by a `<caption/>` element 
+containing a sequence  of one or more *inline elements*.
 
 ### Signatures
 
