@@ -7,7 +7,7 @@ Master: Master.md
 =============================================
 
 End-to-End encryption
-===============================
+========================
 
 This document outlines the XML representation of end-to-end encryption. The XML representation is modelled using an annotated XML Schema:
 
