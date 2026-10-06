@@ -683,9 +683,18 @@ Example:
 Validating signature
 ---------------------------
 
-If an endpoint receives a signature on some data, referenced only through its legal identity ID, the endpoint can 
-ask the Trust Provider hosting the legal identity to validate the signature. If it is valid, the Trust Provider 
-returns the legal identity.
+If an endpoint receives a signature on some data, referenced only through its legal identity 
+ID, the endpoint can ask the Trust Provider hosting the legal identity to validate the 
+signature. If it is valid, the Trust Provider returns the legal identity. If a successful
+signature validation should authorize access to the Legal Identity that performed the 
+signature to one or more Bare JIDs, these can be specified by embedding a `<for/>` element
+for each Bare JID to authorize access inside the `<validateSignature/>` element. An Identity
+or Signature petition, for example, should include the Bare JID corresponding to the 
+requestor, so that the recipient of the request can validate the identity of the requestor,
+without having to perform a petition itself, to get access to the identity. A Contract
+petition should include the Bare JIDs of each part that has signed the Contract, so that
+they can get access to the requestor's Legal Identity.
+
 
 Example:
 
@@ -695,7 +704,9 @@ Example:
       data="UJCr/5nIuJdrijSdGpeQzW7XgPGKXXNVTwvN32zmW6aCeG2DttdeOGUbKx1..."
 	  id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org"
 	  s="urdAv/mtnKxG6I9WnStDNpAytiqW3/zN4KQefhFKBLV1tK9SC/JGd6QugxTC+f..."
-	  xmlns="urn:nfi:iot:leg:id:1.0"/>
+	  xmlns="urn:nfi:iot:leg:id:1.0">
+        <for>requestor@example.org</for>
+    <validateSignature>
 </iq>
 ```
 
@@ -1104,7 +1115,7 @@ activate "Entity A"
 "Entity A" -> "Legal Component B" : petitionIdentity(B,pid,n,s,purpose)
 activate "Legal Component B"
 
-"Legal Component B" -> "Legal Component A" : validateSignature(A,s)
+"Legal Component B" -> "Legal Component A" : validateSignature(A,s,for)
 activate "Legal Component A"
 "Legal Component A" -> "Legal Component B" : identity(A)
 deactivate "Legal Component A"
@@ -1149,7 +1160,9 @@ deactivate "Entity A"
 
 #.  Legal Component B validates the signature with Legal Component A, to ensure Entity A has 
     access to its private keys. This validation also provides access to the Legal Identity of 
-    Entity A.
+    Entity A. If the signature is valid, Legal Component B also authorizes access to the
+    Legal Identity of Entity A, to the Bare JID corresponding to Entity B, specified using a
+    `<for>` element in the `<validateSignature>` request.
 
 #.  The Legal Component B sends a `<petitionIdentityMsg>` element in a `<message>` stanza to
     Entity B. It retains the `pid`, `purpose` and `id` attributes from the first request,
@@ -1166,7 +1179,8 @@ deactivate "Entity A"
     attributes of the message, and adds a `jid` attribute containing the Bare JID of the
     Requestor, and an optional Boolean `repsonse` attribute, declaring if the petition should
     be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
-    is assumed to be `false`.
+    is assumed to be `false`. The Legal Component checks all attributes, and that the sender
+    is from the account owning the petitioned Legal Identity.
 
 #.  Legal Component B sends a `<petitionIdentityResponseMsg>` in a `<message>` stanza back
     to the Requestor, informing the Requestor of the decision made by Entity B. The
@@ -1235,7 +1249,7 @@ Legal Component forwards the petition to the second client:
                         from="client@example.org/032e50a69ad719e1e347661394fb6a45"
                         clientEp="1.2.3.4"
                         xmlns="urn:nfi:iot:leg:id:1.0">
-      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org">
          <clientPublicKey>
             <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
          </clientPublicKey>
@@ -1334,7 +1348,7 @@ activate "Entity A"
 "Entity A" -> "Legal Component B" : petitionSignature(B,pid,n,s,purpose,content)
 activate "Legal Component B"
 
-"Legal Component B" -> "Legal Component A" : validateSignature(A,s)
+"Legal Component B" -> "Legal Component A" : validateSignature(A,s,for)
 activate "Legal Component A"
 "Legal Component A" -> "Legal Component B" : identity(A)
 deactivate "Legal Component A"
@@ -1380,7 +1394,9 @@ deactivate "Entity A"
 
 #.  Legal Component B validates the signature with Legal Component A, to ensure Entity A has 
     access to its private keys. This validation also provides access to the Legal Identity of
-    Entity A.
+    Entity A. If the signature is valid, Legal Component B also authorizes access to the
+    Legal Identity of Entity A, to the Bare JID corresponding to Entity B, specified using a
+    `<for>` element in the `<validateSignature>` request.
 
 #.  The Legal Component B sends a `<petitionSignatureMsg>` element in a `<message>` stanza to
     Entity B. It retains the `pid`, `purpose` and `id` attributes from the first request,
@@ -1401,7 +1417,8 @@ deactivate "Entity A"
     is assumed to be `false`. If the `response` is `true`, the `<petitionSignatureResponse>` 
     element also contains a `<content>` element with the BASE64-encoded binary content to be
     signed, and a `<signature>` element, with the BASE64-encoded digital signature of the
-    content.
+    content. The Legal Component checks all attributes, and that the sender is from the 
+    account associated with the petitioned Signature.
 
 #.  Legal Component B sends a `<petitionSignatureResponseMsg>` in a `<message>` stanza back
     to the Requestor, informing the Requestor of the decision made by Entity B. The
@@ -1461,7 +1478,7 @@ Legal Component forwards the petition to the second client:
                          from="client@example.org/032e50a69ad719e1e347661394fb6a45"
                          clientEp="1.2.3.4"
                          xmlns="urn:nfi:iot:leg:id:1.0">
-      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org">
          <clientPublicKey>
             <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
          </clientPublicKey>

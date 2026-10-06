@@ -1539,7 +1539,223 @@ element in turn can take either any number of child elements:
 Petitioning access to a smart contract
 -----------------------------------------
 
-TODO
+An Entity A, with a Legal Identity, can petition the parties (with for Entity A unknown Legal 
+Identities B[1], ..., B[n]) for a Contract C, using only the identifier of the Contract, and 
+without knowing the network address of the Entities B[i]. The procedure constsists of four 
+messages, two performed using `iq` stanzas, and two using `message` stanzas:
+
+```uml
+@startuml
+participant "Entity A" as EntityA
+participant "Legal Component A" as LegalComponentA
+participant "Legal Component B" as LegalComponentB
+participant "Entity B<sub>1</sub>" as EntityB1
+participant "Entity B<sub>n</sub>" as EntityBn
+
+activate EntityA
+activate EntityB1
+activate EntityBn
+activate LegalComponentA
+activate LegalComponentB
+
+activate EntityA
+EntityA -> LegalComponentB : petitionContract(C.Id,pid,n,s,purpose)
+activate LegalComponentB
+
+LegalComponentB -> LegalComponentA : validateSignature(A,s,for)
+activate LegalComponentA
+LegalComponentA -> LegalComponentB : identity(A)
+deactivate LegalComponentA
+
+LegalComponentB --> EntityA
+
+LegalComponentB -> EntityB1 : petitionContractMsg(C.Id,A,pid,from,pupose)
+activate EntityB1
+
+LegalComponentB -> EntityBn : petitionContractMsg(C.Id,A,pid,from,pupose)
+deactivate LegalComponentB
+
+activate EntityBn
+
+EntityB1 -> EntityB1 : view and decide (yes)
+EntityBn -> EntityBn : view and decide (ignore)
+deactivate EntityBn
+
+EntityB1 -> LegalComponentB : petitionContractResponse(C.Id,pid,jid,[B])
+activate LegalComponentB
+LegalComponentB --> EntityB1
+deactivate EntityB1
+
+LegalComponentB -> EntityA : petitionContractResponseMsg(C,pid,[B])
+deactivate LegalComponentB
+
+EntityA -> EntityA : process
+deactivate EntityA
+@enduml
+```
+
+#.  Entity A sends a `<petitionContract>` stanza to Legal Component B (taken from the domain
+    part of the identifier of the Contract) in an `<iq type="set">` stanza. The element 
+    must contain a petition identifier in `pid`, a purpose string to display to Entities 
+    B[1], ..., B[n], in `purpose`, the identifier of the Contract in `id`, a random string in 
+    `nonce` and the BASE64-encoded digital signature of the request in `s`. The Legal 
+    Component returns an empty `<iq type="result">` stanza to acknowledge receipt, if request 
+    is correctly formed.
+    
+    The signature is calculated on the UTF-8 encoding of the following string concatenation:
+    
+    ```
+    pid | ":" | id | ":" | purpose | ":" | nonce | ":" | LOWER(BAREJID)
+    ```
+    
+    where `LOWER(BAREJID)` represents the Bare JID of the sender, in lower case.
+
+#.  Legal Component B (which hosts the petitioned contract) validates the signature with 
+    Legal Component A, to ensure Entity A has access to its private keys. This validation also 
+    provides access to the Legal Identity of Entity A. If the signature is valid, Legal 
+    Component B also authorizes access to the Legal Identity of Entity A, to the Bare JIDs 
+    corresponding to the Entities B[i], specified using `<for>` elements in the 
+    `<validateSignature>` request.
+
+#.  The Legal Component B sends a `<petitionContractMsg>` element in a `<message>` stanza to
+    all Entities B[i]. It retains the `pid`, `purpose` and `id` attributes from the first 
+    request, and adds a `from` attribute containing the Full JID of the client making the 
+    petition, and an optional `clientEp` attribute, containing the remote endpoint of the 
+    client, if available. The `<petitionContractMsg>` also contains an `<identity>` element, 
+    representing the Legal Identity of the Requestor making the request.
+
+#.  All Entities B[i] review the request, in their own time. Each entity must ignore the 
+    request if it is received from someone other than its own Trust Provider. Each Entity B[i]
+    can ignore the request for any other reason as well. If Entity B[i] chooses to return a 
+    response, it does so by sending a `<petitionContractResponse>` element in an 
+    `<iq type="set">` stanza back to Legal Component B. The `<petitionContractResponse>` 
+    element retains the `pid` and `id` attributes of the message, and adds a `jid` attribute 
+    containing the Bare JID of the Requestor, and an optional Boolean `repsonse` attribute, 
+    declaring if the petition should be accepted (`true`) or rejected (`false`). If a 
+    `response` attribute is not provided, it is assumed to be `false`. The Legal Component 
+    checks all attributes, and that the sender is a part in the petitioned Contract.
+
+#.  Legal Component B sends a `<petitionContractResponseMsg>` in a `<message>` stanza back
+    to the Requestor, informing the Requestor of the decision made by Entity B[i]. The
+    `<petitionContractResponseMsg>` element retains the `pid` and `response` attributes
+    (explicitly including `response="false"` if not provided in the response from Entity 
+    B[i]\). The element also contains a `from` attribute, containing the Bare JID of
+    Entity B[i]. If Entity B[i] gave consent to share the Contract, the 
+    `<petitionContractResponseMsg>` element also contains the requested Contract using 
+    its `<contract>` object representation.
+    
+    Note: A Contract may have multiple parts. This means multiple Entities B[i] will receive
+    the peitition, and respond individually. This means Entity A may receive multiple 
+    responses to the petition. Some of these may be negative, others positive. Authorization
+    to the Contract is granted if one of the parties approves the petition. A client should
+    retain the petition active in memory until a positive response is received, or until a
+    suitable time has passed when the petition can be assumed to have been expired.
+
+### Adding server-specific context to petitions
+
+Legal Component B is free to add server-specific and context-specific information to the
+petition. This is done by adding at most one context-specific element as the last child
+element to the `<petitionContractMsg>` message. It must likewise be forwarded in the
+`<petitionContractResponse>` element, and the `<petitionContractResponseMsg>` element.
+Entities do not need to understand or parse this context-sensitive element, but it can be
+used by Trust Providers or application-specific application to do tasks connected to the
+petition.
+
+### Example
+
+Following is an example of a Contract petition:
+
+```xml
+<iq id='10' type='set' to='legal.example.org'>
+   <petitionContract pid="--fgeB9nXL2X_P7bdyNZt1B303CRMAQiwARbpOvQ-L8"
+                     purpose="For demonstration purposes."
+                     id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+                     nonce="v2r5_KHfateYTi_oQQKFeO7zVD7fsSHQDaUeabVfrYA"
+                     s="Xj2RiFA283-SoIy_G..."
+                     xmlns="urn:nfi:iot:leg:sc:1.0"/>
+</iq>
+```
+
+Legal Component acknowledges petition with an empty response:
+
+```xml
+<iq id='10' type='result' from='legal.example.org'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'/>
+```
+
+Legal Component forwards the petition to the second client (as one of the parts of the 
+contract; similar messages are sent to the other parts as well):
+
+```xml
+<message id='11' to='client2@example.org/fOKp6kmp06quBeY9_V0rKQC0i'>
+   <petitionContractMsg pid="--fgeB9nXL2X_P7bdyNZt1B303CRMAQiwARbpOvQ-L8"
+                        purpose="For demonstration purposes."
+                        id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+                        from="client@example.org/032e50a69ad719e1e347661394fb6a45"
+                        clientEp="1.2.3.4"
+                        xmlns="urn:nfi:iot:leg:sc:1.0">
+      <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
+         <clientPublicKey>
+            <ed448 pub="XXSelFWISKeUi..." xmlns="urn:nfi:iot:e2e:1.0"/>
+         </clientPublicKey>
+         <property name="FIRST" value="John"/>
+         <property name="LAST" value="Smith"/>
+         <property name="PNR" value="234567890-1"/>
+         <property name="ADDR" value="Street 2A"/>
+         <property name="ZIP" value="23456"/>
+         <property name="CITY" value="Metropolis"/>
+         <clientSignature>nTXnxsEXdTt...</clientSignature>
+         <status created="2019-05-01T13:12:45Z" 
+                 from="2019-05-01Z" 
+                 provider="legal.example.org" 
+                 state="Approved" 
+                 to="2021-05-01Z" 
+                 updated="2019-05-01T13:12:46Z"/>
+         <serverSignature>...</serverSignature>
+      </identity>
+   </petitionContractMsg>
+</message>
+```
+
+The second client responds affirmative to the petition:
+
+```xml
+<iq id='12' type='set' to='legal.example.org'>
+   <petitionContractResponse pid="--fgeB9nXL2X_P7bdyNZt1B303CRMAQiwARbpOvQ-L8"
+                             id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+                             jid="client@example.org"
+                             response="true"
+                             xmlns="urn:nfi:iot:leg:sc:1.0"/>
+</iq>
+```
+
+The Legal Component acknowledges the petition response with an empty response:
+
+```xml
+<iq id='12' type='result' from='legal.example.org'
+    to='client2@example.org/fOKp6kmp06quBeY9_V0rKQC0i'/>
+```
+
+It then forwards the response, together with the identity, to the original Requestor:
+
+```xml
+<message id='13'
+         to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+         from='legal.example.org'>
+   <petitionContractResponseMsg pid="--fgeB9nXL2X_P7bdyNZt1B303CRMAQiwARbpOvQ-L8"
+                                response="true"
+                                xmlns="urn:nfi:iot:leg:sc:1.0">
+      <contract archiveOpt="P1Y"
+                archiveReq="P2Y"
+                canActAsTemplate="false"
+                duration="P5Y"
+                id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+                visibility="Private">
+         ...
+      </contract>
+   </petitionContractResponseMsg>
+</message>
+```
 
 Authorizing access to a smart contract
 -----------------------------------------

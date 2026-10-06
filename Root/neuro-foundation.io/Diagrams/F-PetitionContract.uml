@@ -15,7 +15,7 @@ activate EntityA
 EntityA -> LegalComponentB : petitionContract(C.Id,pid,n,s,purpose)
 activate LegalComponentB
 
-LegalComponentB -> LegalComponentA : validateSignature(A,s)
+LegalComponentB -> LegalComponentA : validateSignature(A,s,for)
 activate LegalComponentA
 LegalComponentA -> LegalComponentB : identity(A)
 deactivate LegalComponentA

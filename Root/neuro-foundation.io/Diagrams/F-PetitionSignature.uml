@@ -14,7 +14,7 @@ activate "Entity A"
 "Entity A" -> "Legal Component B" : petitionSignature(B,pid,n,s,purpose,content)
 activate "Legal Component B"
 
-"Legal Component B" -> "Legal Component A" : validateSignature(A,s)
+"Legal Component B" -> "Legal Component A" : validateSignature(A,s,for)
 activate "Legal Component A"
 "Legal Component A" -> "Legal Component B" : identity(A)
 deactivate "Legal Component A"
