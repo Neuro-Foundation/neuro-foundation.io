@@ -1203,6 +1203,191 @@ containing the identity of the contract that has been updated. If the contact is
 **Note**: Only the contract identity is sent, not the contract itself. It is up to each recipient if they are interested in retrieving the latest version of 
 the contract or not. Access to the contract is only granted to authorized clients, however.
 
+### Adding attachments
+
+Adding attachments to a Contract in the `Created` state can be done by using 
+[XEP-0363: HTTP File Upload](https://xmpp.org/extensions/xep-0363.html) in conjunction 
+with a sequence of requests to ensure the upload is managed securely, and is attached to the
+correct Legal Identity. The following steps are performed:
+
+#. A `<prepare>` element using namespace `urn:nfi:iot:upl:it:1.0` is sent to the HTTP File
+Upload component in an `<iq type="set">` stanza, to ensure it manages the upload as an 
+*Internal Transfer*. This means the file cannot be retrieved using its GET URL, and that it 
+is only used as a means to transfer the uploaded file to the intended recipient. The 
+`<prepare>` element takes a `filename` attribute specifying the name of the file to be 
+uploaded, a `size` attribute specifying the size of the file in bytes, and a `content-type` 
+attribute specifying the Internet Content-Type of the file. The HTTP File Upload component
+responds with an empty `<iq type="result">` stanza.
+
+#. Secondly, the client requests to upload the file using HTTP File Upload, using the same 
+file name, size and Content-Type as specified in the `<prepare>` element. The HTTP File Upload 
+component will return a GET URL and a PUT URL for the file upload. The GET URL cannot be used
+except as an identifier in the last step.
+
+#. Thirdly, the client uploads the file using HTTP PUT, to the PUT URL provided in the
+previous step.
+
+#. Fourthly, the client sends an `<addAttachment>` element to the Legal Component in an
+`<iq type="set">` stanza, with the `contractId` attribute set to the identifier of the of the
+Contract to receive the attachment, a `getUrl` attribute containing the GET URL provided by 
+the HTTP File Upload component, and a `s` attribute with a BASE64-encoded digital signature 
+of the attachment, using the same keys used when signing the original Identity Application. 
+The Legal Component responds with an `<iq type="result">` stanza, containing updated 
+`<contract>` element with the attachment added, and updated `Updated` property and server 
+signature.
+
+Example of a preparation command:
+
+```xml
+<iq type='set' id='6' to='upload.example.org'>
+   <prepare xmlns="urn:nfi:iot:upl:it:1.0"
+            filename="Layout.png" 
+            size="123456" 
+            content-type="image/png"/>
+</iq>
+```
+
+With empty reponse from the Broker:
+
+```xml
+<iq type='result' 
+    id='6' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45' 
+    from='upload.example.org'/>
+```
+
+Requesting upload slot for uploading attachment file:
+
+```xml
+<iq type='get' id='7' to='upload.example.org'>
+   <request xmlns='urn:xmpp:http:upload:0'
+            filename='Layout.png'
+            size='123456'
+            content-type='image/png' />
+</iq>
+```
+
+Receiving the upload slot from the component.
+
+```xml
+<iq type='result'
+    from='upload.example.org'
+    id='7'
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'>
+   <slot xmlns='urn:xmpp:http:upload:0'>
+      <put url='https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk'/>
+      <get url='https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk'/>
+   </slot>
+</iq>
+```
+
+After uploading the file using HTTP PUT to the PUT url provided in the upload slot, the
+attachment is added to the identity application:
+
+```xml
+<iq id='8' type='set' to='legal.example.org'>
+   <addAttachment id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+                  getUrl="https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk"
+                  s="..."
+                  xmlns="urn:nfi:iot:leg:sc:1.0"/>
+</iq>
+```
+
+The result is the updated contract:
+
+```xml
+<iq id='8' 
+    type='result' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    from='legal.example.org'>
+   <contract archiveOpt="P1Y"
+             archiveReq="P2Y"
+             canActAsTemplate="false"
+             duration="P5Y"
+             id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+             visibility="Private"
+             xmlns="urn:nfi:iot:leg:sc:1.0">
+      ...
+   </contract>
+</iq>
+```
+
+### Getting attachments
+
+To get an attachment, you download it via the URL provided in the corresponding
+`<attachmentRef>` element. This element may vary over time, which is why it resides outside
+of the scope of the server signature. The URL must be authenticated using the 
+`WWW-Authenticate` mechanism `NeuroFoundation.Sign`. The procedure is as follows:
+
+#.  First, a GET is performed without an `Authorization` header.
+
+#.  The server returns an HTTP `Unauthorized` error, with a `WWW-Authenticate` challenge
+if the form:
+    
+    ```
+    "NeuroFoundation.Sign realm=\"" | REALM | "\", n=\"" | NONCE | "\""
+    ```
+
+    `REALM` is the domain or realm used during authentication, and `NONCE` is a BASE64-encoded
+    random number with sufficient entropy.
+
+#.  The client then reattempts the GET operation, this time with an `Authorization` header
+of the form:
+    
+    ```
+    "NeuroFoundation.Sign jid=\"" | FULLJID | "\", realm=\"" | REALM | "\", n=\"" | NONCE | "\", s=\"" | SIGNATURE | "\""
+    ```
+
+    Where `REALM` and `NONCE` are taken from the request, `FULLJID` is taken from the Full JID
+    of the XMPP client making the request, and `s` is the BASE64-encoded signature of the
+    binary (BASE64-decoded) `NONCE` value.
+
+#.  The server shall verify the `REALM` and `NONCE` values correspond to values it sent to the
+    client. `NONCE` values must expire after one minute, or after first use, using HTTP GET.
+    (HTTP HEAD should not expire the `NONCE` value.) The signature must correspond to a
+    Legal Identity associated with the Bare JID of the client (taken from the `FULLJID`),
+    and must be in the `Approved` state (or `Created` state if requesting one of its own
+    attachments). If authentication succeeds, the attachment is returned. If authentication
+    fails, a `Forbidden` error is returned.
+
+
+### Removing attachments
+
+A client can remove an attachment from a Contract in the `Created` state. This is done
+by sending a `<removeAttachment>` element with the attachment specified in the `attachmentId`
+attribute, in an `<iq type="set">` stanza to the Legal Component of the Broker.
+
+The Broker validates that the attachment exists, and belongs to a Contract in the `Created` 
+state, belonging to the sender of the request. If the request is valid, the attachment
+is removed from the Contract, and the Contract is updated and returned to the caller.
+
+Example:
+
+```xml
+<iq id='9' type='set' to='legal.example.org'>
+   <removeAttachment attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org"
+                     xmlns="urn:nfi:iot:leg:sc:1.0"/>
+</iq>
+```
+
+The result is the updated identity object:
+
+```xml
+<iq id='9' 
+    type='result' 
+    to='client@example.org/032e50a69ad719e1e347661394fb6a45'
+    from='legal.example.org'>
+   <contract archiveOpt="P1Y"
+             archiveReq="P2Y"
+             canActAsTemplate="false"
+             duration="P5Y"
+             id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+             visibility="Private"
+             xmlns="urn:nfi:iot:leg:sc:1.0">
+      ...
+   </contract>
+</iq>
+```
 
 ### Signing a contract
 
@@ -1333,18 +1518,51 @@ if the sender is the same as the domain of the referenced contract.
 
 ### Proposing a contract to a new party
 
-Once a contract is created, and made available for signing, the creator can inform parties about the contract proposal. This is done by
-sending a normal message stanza directly to the indended parties, containing a `contractProposal` element. The client receiving such a
+Once a contract is created, and made available for signing, the creator can inform parties 
+about the contract proposal. This is done by sending a normal message stanza directly to the 
+indended parties, containing a `<contractProposal/>` element. The client receiving such a
 message, can decide wether they wish to review the contract, and proposed role.
 
-The `contractProposal` element takes the following attributes:
+The `<contractProposal/>` element takes the following attributes:
 
-| Attribute          | Type                 | Use      | Description                                                                            |
-|:-------------------|:---------------------|:---------|----------------------------------------------------------------------------------------|
-| `contractId`       | `xs:string`          | Required | The identity of the proposed contract. |
-| `role`             | `xs:string`          | Required | The proposed role of the recipient in the proposed contract. |
-| `message`          | `xs:string`          | Optional | An optional message to present to the recipient. |
+| Attribute    | Type        | Use      | Description                                                  |
+|:-------------|:------------|:---------|--------------------------------------------------------------|
+| `contractId` | `xs:string` | Required | The identity of the proposed contract.                       |
+| `role`       | `xs:string` | Required | The proposed role of the recipient in the proposed contract. |
+| `message`    | `xs:string` | Optional | An optional message to present to the recipient.             |
 
+If the Contract contains encrypted parameters, the proposal must contain the shared secret.
+This is done by embedding a `<sharedSecret/>` element in the `<contractProposal/>` element.
+This `<sharedSecret/>` element contains a `key` attribute with the BASE64-encoded binary
+shared secret, and an `algorithm` attribute containing the local name of the symmetric
+cipher used, as defined in [End-to-End encryption](E2E.md).
+
+**Note**: Sending the shared secret securely requires the use of End-to-End encryption between
+the sender and the receiver of the proposal.
+
+### Failing a contract
+
+A Broker can send a `<failContract/>` element in a `<message/>` stanza to another Broker to
+indicate that a Contract the recipient hosts has failed. Only brokers hosting the template of 
+the contract referred to, a contract reference pointed to by the contract, or hosting a 
+signatory of the contract, is allowed to send this message. The message must be ignored if 
+received from another party. If the message is received from a legitimate sender, the
+Contract is put in the `Failed` state, and contract update events are sent to relevant
+parties.
+
+The `<failContract/>` element takes the following attributes:
+
+| Attribute    | Type        | Use      | Description                                   |
+|:-------------|:------------|:---------|-----------------------------------------------|
+| `contractId` | `xs:string` | Required | The identity of the contract that has failed. |
+| `reason`     | `xs:string` | Required | The reason for failing the contract.          |
+
+Example: A template, or framework agreement, containing machine instructions, is hosted on 
+one broker, and a call-off agreement referencing the framework agreement on another broker.
+An action is performed, or condition occurs that breaks the framework agreement. The broker
+of the framework agreement, hosting the machine-instructions that classifies the call-off
+agreement as failed, informs the broker hosting the call-off agreement that the contract has
+failed, and the reason why.
 
 Working with schemas
 -------------------------
