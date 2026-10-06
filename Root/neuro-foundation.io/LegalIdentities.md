@@ -848,7 +848,7 @@ Example:
 Adding attachments
 ---------------------
 
-Adding attachment to Legal Identities are done by using
+Adding attachments to a Legal Identity is done by using 
 [XEP-0363: HTTP File Upload](https://xmpp.org/extensions/xep-0363.html) in conjunction with
 a sequence of requests to ensure the upload is managed securely, and is attached to the
 correct Legal Identity. The following steps are performed:
@@ -871,13 +871,12 @@ except as an identifier in the last step.
 previous step.
 
 #. Fourthly, the client sends an `<addAttachment>` element to the Legal Component in an
-`<iq type="set">` stanza, with the `id` attribute set to the identity of the of the
-Legal Identity to receive the attachment, a `getUrl` attribute containing the GET URL
-provided by the HTTP File Upload component, and a `s` attribute with a BASE64-encoded
-digital signature of the attachment, using the same keys used when signing the original
-Identity Application. The Legal Component responds with an `<iq type="result">` stanza, 
-containing updated `<identity>` element with the attachment added, and updated `Updated`
-property and server signature.
+`<iq type="set">` stanza, with the `id` attribute set to the identifier of the Legal Identity 
+to receive the attachment, a `getUrl` attribute containing the GET URL provided by the HTTP 
+File Upload component, and a `s` attribute with a BASE64-encoded digital signature of the 
+attachment, using the same keys used when signing the original Identity Application. The 
+Legal Component responds with an `<iq type="result">` stanza, containing updated `<identity>` 
+element with the attachment added, and updated `Updated` property and server signature.
 
 Example of a preparation command:
 
@@ -1048,15 +1047,16 @@ by sending a `<removeAttachment>` element with the attachment specified in the `
 attribute, in an `<iq type="set">` stanza to the Legal Component of the Broker.
 
 The Broker validates that the attachment exists, and belongs to a Legal Identity in the 
-`Created` state belonging to the sender of the request. If request is valid, the attachment
-is removed from the Legal Identity, and the Legal Identity is updated and returned to the
-caller.
+`Created` state belonging to the sender of the request. If the request is valid, the 
+attachment is removed from the Legal Identity, and the Legal Identity is updated and returned 
+to the caller.
 
 Example:
 
 ```xml
 <iq id='9' type='set' to='legal.example.org'>
-   <removeAttachment attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org"/>
+   <removeAttachment attachmentId="3215ec22-a31c-0312-4420-caeebd4b8ff1@legal.example.org"
+                     xmlns="urn:nfi:iot:leg:id:1.0"/>
 </iq>
 ```
 
