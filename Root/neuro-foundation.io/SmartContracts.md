@@ -808,6 +808,9 @@ contracts and digital signatures to show that the signatories have agreed on the
 contract. Examples can include sensitive information such as choices during closed voting 
 procedures, credit card details for payments, etc.
 
+When creating a new Contract, containing transient parameters, these are placed in a separate
+`<transient>` element, placed as the last child element of the `<createContract>` element.
+
 ### Human-readable text
 
 Human-readable text matching the machine-readable contents defined in the first contract 
