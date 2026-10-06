@@ -882,7 +882,11 @@
 			<xs:documentation>The floating-point values are not validated to be in the ranges [-90,90] and [-180,180] by the regular expression. Software must perform such validation separately.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base='xs:string'>
-			<xs:pattern value="(?'Lat'-?\d+(\.\d+)?),(?'Long'-?\d+(\.\d+)?)(,(?'Alt'-?\d+(\.\d+)?))?"/>
+			<xs:pattern value="(-?\d+(\.\d+)?),(-?\d+(\.\d+)?)(,(-?\d+(\.\d+)?))?">
+				<xs:annotation>
+					<xs:documentation>The following expression using named groups can also be used: (?'Lat'-?\d+(\.\d+)?),(?'Long'-?\d+(\.\d+)?)(,(?'Alt'-?\d+(\.\d+)?))?</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -1534,7 +1538,7 @@
 			</xs:annotation>
 			<xs:simpleType>
 				<xs:restriction base='xs:string'>
-					<xs:pattern value='(^image)(\/)[a-zA-Z0-9_\-+]*'/>
+					<xs:pattern value='image\/[a-zA-Z0-9_\-+]*'/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
@@ -2571,7 +2575,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:complexType name='PetitionMessage' abstract='true'>
+	<xs:complexType name='PetitionMessage'>
 		<xs:complexContent>
 			<xs:extension base='Petition'>
 				<xs:sequence>
@@ -2587,9 +2591,19 @@
 						</xs:annotation>
 					</xs:any>
 				</xs:sequence>
+				<xs:attribute name='id' type='xs:string' use='required'>
+					<xs:annotation>
+						<xs:documentation>Identifier of the contract referred to by the petition.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 				<xs:attribute name='from' type='xs:string' use='required'>
 					<xs:annotation>
 						<xs:documentation>The Bare JID of the entity requesting the information.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name='clientEp' type='xs:string' use='optional'>
+					<xs:annotation>
+						<xs:documentation>The remote endpoint of the entity requesting the information.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -2674,6 +2688,11 @@
 					<xs:documentation>The Bare JID of the part of the contract that consented to the petition.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+				<xs:attribute name='clientEp' type='xs:string' use='optional'>
+					<xs:annotation>
+						<xs:documentation>The remote endpoint of the entity responding to the information.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

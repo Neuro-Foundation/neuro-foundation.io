@@ -387,17 +387,17 @@ recordDefinition -[hidden]> record
 The root element is the `<contract/>` element. It contains general properties related to visibility, template usage and key time-points in the 
 lifecycle of the contract:
 
-| Attribute          | Type                 | Use      | Description                                                                            |
-|:-------------------|:---------------------|:---------|----------------------------------------------------------------------------------------|
+| Attribute          | Type                 | Use      | Description                                                                                                                                                                                                                                            |
+|:-------------------|:---------------------|:---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`               | `xs:string`          | Optional | An identifier assigned to the contract. The identifier is formed as a JID but is not a JID. The domain part corresponds to the domain of the Trust Provider. A client must not include an identifier when it creates a contract on the Trust Provider. |
-| `visibility`       | `ContractVisibility` | Required | What visibility the contract should have. |
-| `canActAsTemplate` | `xs:boolean`         | Required | If the contract can act as a template for future contracts. |
-| `duration`         | `xs:duration`        | Required | The duration of the contract. The duration is calculated from the time of the last required signature. |
-| `archiveReq`       | `xs:duration`        | Required | After a legally binding contract expires, this attribute specifies for how long the contract is required to be persisted in the archives before it can be manually deleted. |
-| `archiveOpt`       | `xs:duration`        | Required | After a legally binding contract expires, and the `archiveReq` period has expired, this attribute specifies an additional duration after which it is automatically deleted. |
-| `signAfter`        | `xs:dateTime`        | Optional | Signatures will only be accepted after this point in time.[^SignatureAfterBefore] |
-| `signBefore`       | `xs:dateTime`        | Optional | Signatures will only be accepted until this point in time.[^SignatureAfterBefore] |
-| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values. |
+| `visibility`       | `ContractVisibility` | Required | What visibility the contract should have.                                                                                                                                                                                                              |
+| `canActAsTemplate` | `xs:boolean`         | Required | If the contract can act as a template for future contracts.                                                                                                                                                                                            |
+| `duration`         | `xs:duration`        | Required | The duration of the contract. The duration is calculated from the time of the last required signature.                                                                                                                                                 |
+| `archiveReq`       | `xs:duration`        | Required | After a legally binding contract expires, this attribute specifies for how long the contract is required to be persisted in the archives before it can be manually deleted.                                                                            |
+| `archiveOpt`       | `xs:duration`        | Required | After a legally binding contract expires, and the `archiveReq` period has expired, this attribute specifies an additional duration after which it is automatically deleted.                                                                            |
+| `signAfter`        | `xs:dateTime`        | Optional | Signatures will only be accepted after this point in time.[^SignatureAfterBefore]                                                                                                                                                                      |
+| `signBefore`       | `xs:dateTime`        | Optional | Signatures will only be accepted until this point in time.[^SignatureAfterBefore]                                                                                                                                                                      |
+| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values.                                                                                                                                                        |
 
 [^SignatureAfterBefore]: `signAfter` (if provided) must occur before `signBefore` (if provided).
 
@@ -467,6 +467,17 @@ in the contract, they are defined inside a `<parameters/>` element. The type of 
 Regardless of type, each parameter can have any number of `<description/>` elements containing localized human-readable text describing the parameter.
 The languages used for each descriptive text is specified using the `xml:lang` attribute. When creating contracts from a template, descriptions need not 
 to be provided if text is available in the template.
+
+#### Protection Levels
+
+Parameters can have one of three protection levels: Normal, Encrypted or Transient. These are
+encoded using the `protection` attribute for each parameters, as follows:
+
+| Level     | Attribute value   | Description                                                                                                                                                                |
+|:----------|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Normal    | Attribute omitted | Parameter value is encoded into the contract.                                                                                                                              |
+| Encrypted | `Encrypted`       | The BASE64-encoding of the encrypted parameter value is encoded into the contract.                                                                                         |
+| Transient | `Transient`       | BASE64-encoded binary GUID representations are encoded into the contract. The values themselves are delivered outside of the contract to services processing the contract. |
 
 #### Parameter Types
 
@@ -617,11 +628,13 @@ using the `<calcParameter/>` element. Expressions used to calculate values refer
 Only non-calculation parameters (anywhere in the contract), or calculation parameters defined before a calculation 
 parameter being evaluated, can be referenced however, in order to avoid circular recursion.
 
-| Attribute     | Type             | Use      | Description                                                                |
-|:--------------|:-----------------|:---------|----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString` | Required | Name of the parameter within the scope of the contract.                    |
-| `exp`         | `xs:string`      | Optional | A simple script expression providing the value of the parameter.           |
-| `guide`       | `xs:string`      | Optional | A guiding text, that can be displayed to a user if no value is available.  |
+| Attribute    | Type              | Use      | Description                                                               |
+|:-------------|:------------------|:---------|---------------------------------------------------------------------------|
+| `name`       | `NonEmptyString`  | Required | Name of the parameter within the scope of the contract.                   |
+| `exp`        | `xs:string`       | Optional | A simple script expression providing the value of the parameter.          |
+| `guide`      | `xs:string`       | Optional | A guiding text, that can be displayed to a user if no value is available. |
+| `protection` | `ProtectionLevel` | Optional | Level of confidentiality of the information provided by the parameter.    |
+| `protected`  | `xs:base64Binary` | Optional | Protected value, for protection levels Encrypted or Transient.            |
 
 ##### Role parameters
 
@@ -636,7 +649,7 @@ removes a parameter that needs to be entered manually.
 | `protected`   | `xs:base64Binary`    | Optional | Protected value, for protection levels Encrypted or Transient.                                                     |
 | `guide`       | `xs:string`          | Optional | A guiding text, that can be displayed to a user if no value is available.                                          |
 | `exp`         | `xs:string`          | Optional | A simple [script expression](/Script.md) validating the parameter.                                                 |
-| `role`        | `NonEmptyString`     | Required | Name of the role of the signatory.                                                                                 |
+| `role`        | `xs:string`          | Required | Name of the role of the signatory.                                                                                 |
 | `index`       | `xs:positiveInteger` | Required | Index of signature of the of the signatory for the corresponding role.                                             |
 | `property`    | `xs:string`          | Required | Name of the ID property of the signatory.                                                                          |
 | `required`    | `xs:boolean`         | Optional | If existance of the signatory and property value is required or not for the contract to be complete.               |
@@ -696,15 +709,12 @@ the parameter definitions. This definition is then following by a sequence (poss
 of records (`<record/>` elements), containing parameter values for the parameters in the 
 corresponding definition. 
 
-| Attribute     | Type                    | Use      | Description                                                                 |
-|:--------------|:------------------------|:---------|-----------------------------------------------------------------------------|
-| `name`        | `NonEmptyString`        | Required | Name of the recordset within the scope of the contract.                     |
-| `exp`         | `xs:string`             | Optional | A simple [script expression](/Script.md) validating the recordset.          |
-| `value`       | `xs:string`             | Optional | The file name of the uploaded attachment.                                   |
-| `required`    | `xs:boolean`            | Optional | If the attachment is required or not.                                       |
-| `contentType` | `xs:string`             | Optional | Restriction on the Content-Type of the attachment. Wildcards are permitted. |
-| `minRecords`  | `xs:nonNegativeInteger` | Required | Minimum number of records in the record set.                                |
-| `maxRecords`  | `xs:positiveInteger`    | Required | Maximum number of records in the record set.                                |
+| Attribute    | Type                    | Use      | Description                                                        |
+|:-------------|:------------------------|:---------|--------------------------------------------------------------------|
+| `name`       | `NonEmptyString`        | Required | Name of the recordset within the scope of the contract.            |
+| `exp`        | `xs:string`             | Optional | A simple [script expression](/Script.md) validating the recordset. |
+| `minRecords` | `xs:nonNegativeInteger` | Required | Minimum number of records in the record set.                       |
+| `maxRecords` | `xs:positiveInteger`    | Required | Maximum number of records in the record set.                       |
 
 #### Parameter Validation
 
@@ -795,18 +805,90 @@ validated parameter values before allowing the contract to be created. Still, co
 many expression evaluators, which makes common expressions understandable across clients and 
 technology boundaries.
 
+##### Encrypted parameters
+
+Encrypted parameters have their values encrypted and then BASE64-encoded, before being encoded
+into the contract. This encryption is done using a shared key, a symmetric algorithm, the
+parameter name, the type of parameter (the local name of the parameter element used to encode
+the parameter in the contract), the zero-based parameter index (counted from top to bottom in
+the contract), the Bare JID of the creator of the contract, a binary contract nonce, and 
+a clear text string representation of the value (the string-representation used, if the 
+parameter would have been normally encoded into the contract).
+
+The following sequence describes the encryption of a parameter value:
+
+#.  A byte array is formed by concatenating:
+    
+    KEY | NONCE | LE(INDEX)
+
+    where `LE(INDEX)` is the 4-byte Little Endian encoding of the 32-bit parameter index.
+
+#.  Compute the `SHA-256` hash digest of the concatenated binary string.
+
+#.  Take as the `SuffixLength` the first byte of the hash digest.
+
+#.  If the parameter value to encode is the `null` value, use as value to encrypt a byte
+    array of `SuffixLength` zeroes.
+
+#.  If the parameter value to encode is not `null`, create a binary byte array as follows:
+
+    #.  Compute `Prefix` as the index of the first non-zero byte after the `SuffixLength`
+        byte in the computed hash digest (first byte has index 1). If all bytes after
+        `SuffixLength` are zeroes, set `Prefix` to 1.
+
+    #.  Use as value to encrypt the following concatenated binary string:
+
+        Prefix | UTF8(VALUE) | ZEROES(SuffixLength)
+
+        Where `Prefix` is the single byte `Prefix`, `UTF8(VALUE)` is the UTF-8 encoding
+        of the string-representation of the value to encrypt, and `ZEROES(SuffixLength)`
+        is an array of `SuffixLength` zeroes.
+
+#.  From the End-to-end encryption symmetric cipher, generate the Initialization Vector `IV`
+    by using the Parameter Name as the `id` attribute, the Parameter Type as the `type`
+    attribute, the Creator Bare JID as the `from` attribute, the BASE64-encoding of the
+    contract nonce value as the `to` attribute, and the Parameter Index as the counter.
+
+#.  Use as Associated Data (if required by the symmetric cipher), the UTF-8 encoding of 
+    the Parameter Name.
+
+#.  Encypt the byte array generated earlier with the symmetric cipher, the Key, the
+    Initialization Vector `IV` and the Associated Data, using zeros to fill the last buffer, 
+    if necessary.
+
+#.  Encode the encypted value in the `protected` attribute of the paramter, instead of the
+    normal `value` attribute.
+    
+The following sequence describes the decryption of an encrypted parameter value:
+
+#.  Generate the Initialization Vector `IV` and Associated Data as described above.
+
+#.  Decrypt the encrypted value using the symmetric cipher selected and the shared secret
+    as key.
+
+#.  If the Length of the decrypted byte array is zero, or the first byte is zero, the
+    decrypted value is the `null` value.
+
+#.  Remove the first byte, and trailing zero bytes. UTF-8 decode the remaining byte string
+    to get the normal text-representation of the parameter value.
+
 ##### Transient parameters
 
 Transient parameters are parameters whose values are only available *in transit*, i.e. they 
-are not persisted together with the contract. Instead, the values are replaced by GUID values,
-and the actual values are transmitted outside the scope of the contract. All signatures are 
-calculated on the GUIDs, not the actual parameter values.
+are not persisted together with the contract. Instead, the values are replaced by 
+BASE64-encoded binary GUID representations, encoded into the `protected` attribute instead of
+the normal `value` attribute. The actual values are transmitted outside the scope of the 
+contract. All signatures are calculated on the BASE64-encoded binary GUID representations, 
+not the actual parameter values.
 
 Transient parameter can be used in special circumstances where special care has to be made to 
 protect the privacy or confidentiality of the underlying information, but still use smart 
 contracts and digital signatures to show that the signatories have agreed on the terms of the 
 contract. Examples can include sensitive information such as choices during closed voting 
 procedures, credit card details for payments, etc.
+
+**Note**: Transient parameter values must not be persisted or logged by the broker, or by
+services processing the values.
 
 When creating a new Contract, containing transient parameters, these are placed in a separate
 `<transient>` element, placed as the last child element of the `<createContract>` element.
@@ -965,15 +1047,16 @@ would also allow clients using different versions of the communication protocol,
 signatures for the contracts object, as long as unrecognized elements and attributes are 
 normalized and ordered according to the rules defined.
 
-The attributes available for the `<signature/>` element are:
+The signature is BASE64-encoded using the corresponding asymmetric cipher algorithm, and put
+as content text in the `<signature/>` element. This element also defines the following 
+attributes:
 
-| Attribute   | Type              | Use      | Description                                                                            |
-|:------------|:------------------|:---------|----------------------------------------------------------------------------------------|
-| `legalId`   | `NonEmptyString`  | Required | The ID of the legal identity used to generate the signature. |
-| `bareJid`   | `NonEmptyString`  | Required | The Bare JID of the client used to generate the signature. |
-| `role`      | `NonEmptyString`  | Required | The role the legal identity assumes when signing the contract. |
-| `timestamp` | `xs:dateTime`     | Required | When the signature was generated. |
-| `s`         | `xs:base64Binary` | Required | Digital signature generated by the corresponding asymmetric cipher algorithm. |
+| Attribute   | Type             | Use      | Description                                                    |
+|:------------|:-----------------|:---------|----------------------------------------------------------------|
+| `legalId`   | `NonEmptyString` | Required | The ID of the legal identity used to generate the signature.   |
+| `bareJid`   | `NonEmptyString` | Required | The Bare JID of the client used to generate the signature.     |
+| `role`      | `NonEmptyString` | Required | The role the legal identity assumes when signing the contract. |
+| `timestamp` | `xs:dateTime`    | Required | When the signature was generated.                              |
 
 ### Contract Status
 
@@ -1045,12 +1128,13 @@ using `<getPublicKey/>` request, as defined in [legal identities](LegalIdentitie
 keys may change over time. If a signature does not validate, make sure to get the most recent 
 public key from the server and check signature again.
 
-The attributes available for the `<serverSignature/>` element are:
+The server signature is BASE64-encoded using the corresponding asymmetric cipher algorithm, 
+and put as content text in the `<serverSignature/>` element. This element also defines the 
+following attributes:
 
-| Attribute   | Type              | Use      | Description                                                                   |
-|:------------|:------------------|:---------|-------------------------------------------------------------------------------|
-| `timestamp` | `xs:dateTime`     | Required | When the signature was generated.                                             |
-| `s`         | `xs:base64Binary` | Required | Digital signature generated by the corresponding asymmetric cipher algorithm. |
+| Attribute   | Type          | Use      | Description                       |
+|:------------|:--------------|:---------|-----------------------------------|
+| `timestamp` | `xs:dateTime` | Required | When the signature was generated. |
 
 
 Creating a new contract
@@ -1830,8 +1914,8 @@ deactivate EntityA
 #.  Entity A sends a `<petitionContract>` stanza to Legal Component B (taken from the domain
     part of the identifier of the Contract) in an `<iq type="set">` stanza. The element 
     must contain a petition identifier in `pid`, a purpose string to display to Entities 
-    B[1], ..., B[n], in `purpose`, the identifier of the Contract in `id`, a random string in 
-    `nonce` and the BASE64-encoded digital signature of the request in `s`. The Legal 
+    B[1], ..., B[n], in `purpose`, the identifier of the Contract in `id`, a random string 
+    in `nonce` and the BASE64-encoded digital signature of the request in `s`. The Legal 
     Component returns an empty `<iq type="result">` stanza to acknowledge receipt, if request 
     is correctly formed.
     
