@@ -2883,4 +2883,30 @@
 		</xs:complexType>
 	</xs:element>
 
+	<xs:element name='authorizeAccess'>
+		<xs:annotation>
+			<xs:documentation>Sent in an iq set stanza from a client to a Trust Provider, to add or remove authorization to access one of its Contracts.</xs:documentation>
+			<xs:documentation>A client can only control authorization to contracts it intrinsically has access rights to.</xs:documentation>
+			<xs:documentation>An empty response is expected to be returned, to acknowledge the request.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name='id' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Identifier of the Contract to authorize access to.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='remoteId' type='xs:string' use='required'>
+				<xs:annotation>
+					<xs:documentation>Remote ID, either a Legal Identity identifier or a Bare JID.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='auth' type='xs:boolean' use='optional' default='true'>
+				<xs:annotation>
+					<xs:documentation>If true, authorizes access to the contract to the remote ID.</xs:documentation>
+					<xs:documentation>If false, removes authorization to access the contract from the remote ID.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
