@@ -18,8 +18,8 @@
 			<xs:documentation>Expected response element: contract</xs:documentation>
 			<xs:documentation>Note: The client is required to have a valid legal identity to create a contract, even if the contract is not signed.</xs:documentation>
 			<xs:documentation>Note: Whenever the state of the contract is changed on the server, a message is sent to the bare JIDs of all parties of the contract, including the creator if not signed, containing the updated contract, in a contract element. Contracts should only be accepted by clients, if the sender corresponds to the provider, and if the server signature is valid, and corresponds to the public key of the server.</xs:documentation>
-			<xs:documentation>If an XML schema is available on the server defining the structure of the machine-readable contents of the contract, based on its qualified name, it will be used to validate the contents of the contract. If that validation fails, an error is returned, and the contract is not created. If validation succeeds, information about this will be made available in the state portion of the contract.</xs:documentation>
-			<xs:documentation>XML Schemas can either be registered with the Trust Provider out-of-band, or downloaded by the Trust Provider automatically, if accessible through the namespace URI, if it's using a downloadable URI scheme. The XML Schema must not contain processing instructions.</xs:documentation>
+			<xs:documentation>An XML schema must be available on the server defining the structure of the machine-readable contents of the contract, based on its qualified name, it will be used to validate the contents of the contract. If that validation fails, an error is returned, and the contract is not created. If validation succeeds, information about this will be made available in the state portion of the contract.</xs:documentation>
+			<xs:documentation>XML Schemas can either be registered with the Trust Provider out-of-band, or downloaded by the Trust Provider automatically, if accessible through the namespace URI, if it's using a downloadable URI scheme. The XML Schema must not contain any DTD or processing instructions.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
@@ -89,7 +89,7 @@
 				<xs:any minOccurs='1' maxOccurs='1' namespace='##any' processContents='lax'>
 					<xs:annotation>
 						<xs:documentation>Contents of the contract. Semantics is defined by qualified name of the element.</xs:documentation>
-						<xs:documentation>If an XML scheme validating the contents is registered with the Trust Provider, it will be used to validate that the contents is well-formed and complete.</xs:documentation>
+						<xs:documentation>An XML schema validating the contents must be registered with the Trust Provider, or downloaded by the Trust Provider from the namespace URI. The schema will be used to validate that the contents is well-formed and complete.</xs:documentation>
 					</xs:annotation>
 				</xs:any>
 				<xs:element name='role' minOccurs='0' maxOccurs='unbounded'>
@@ -110,7 +110,6 @@
 						<xs:attribute name='name' type='NonEmptyString' use='required'>
 							<xs:annotation>
 								<xs:documentation>Machine readable name of the role.</xs:documentation>
-								<xs:documentation>Note: Names are case-insensitive in searches and references.</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
 						<xs:attribute name='minCount' type='xs:nonNegativeInteger' use='required'>
@@ -480,7 +479,6 @@
 		<xs:attribute name='name' type='NonEmptyString' use='required'>
 			<xs:annotation>
 				<xs:documentation>The name of the record set.</xs:documentation>
-				<xs:documentation>Note: Names are case-insensitive in searches and references.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name='exp' type='xs:string' use='optional'>
@@ -517,7 +515,6 @@
 		<xs:attribute name='name' type='NonEmptyString' use='required'>
 			<xs:annotation>
 				<xs:documentation>The name of the parameter.</xs:documentation>
-				<xs:documentation>Note: Names are case-insensitive in searches and references.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name='guide' type='xs:string' use='optional'>
@@ -601,7 +598,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:string' use='optional'>
@@ -611,7 +608,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='minLength' type='xs:nonNegativeInteger' use='optional'>
@@ -647,7 +644,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:decimal' use='optional'>
@@ -657,7 +654,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -699,7 +696,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:date' use='optional'>
@@ -709,7 +706,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -735,7 +732,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:dateTime' use='optional'>
@@ -745,7 +742,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -771,7 +768,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:time' use='optional'>
@@ -781,7 +778,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -807,7 +804,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='xs:duration' use='optional'>
@@ -817,7 +814,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -851,7 +848,7 @@
 				</xs:attribute>
 				<xs:attribute name='minIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `min` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the min value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='max' type='GeoSpatial' use='optional'>
@@ -863,7 +860,7 @@
 				</xs:attribute>
 				<xs:attribute name='maxIncluded' type='xs:boolean' use='optional' default='true'>
 					<xs:annotation>
-						<xs:documentation>If the `max` value is part of the valid range or not.</xs:documentation>
+						<xs:documentation>If the max value is part of the valid range or not.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 				<xs:attribute name='altitude' type='AltitudeUse' use='optional' default='optional'>
@@ -892,17 +889,17 @@
 
 	<xs:simpleType name="AltitudeUse">
 		<xs:restriction base='xs:string'>
-			<xs:enumeration value='required'>
+			<xs:enumeration value='Required'>
 				<xs:annotation>
 					<xs:documentation>Altitude is required by the parameter.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value='optional'>
+			<xs:enumeration value='Optional'>
 				<xs:annotation>
 					<xs:documentation>Altitude is optional by the parameter.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value='prohibited'>
+			<xs:enumeration value='Prohibited'>
 				<xs:annotation>
 					<xs:documentation>Altitude is prohibited by the parameter.</xs:documentation>
 				</xs:annotation>
@@ -1148,13 +1145,13 @@
 		<xs:attribute name='signAfter' type='xs:dateTime'	use='optional'>
 			<xs:annotation>
 				<xs:documentation>Signatures will only be accepted after this point in time.</xs:documentation>
-				<xs:documentation>Note: signatureAfter (if provided) must occur before signatureBefore (if provided).</xs:documentation>
+				<xs:documentation>Note: signAfter (if provided) must occur before signBefore (if provided).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name='signBefore' type='xs:dateTime'	use='optional'>
 			<xs:annotation>
 				<xs:documentation>Signatures will only be accepted until this point in time.</xs:documentation>
-				<xs:documentation>Note: signatureAfter (if provided) must occur before signatureBefore (if provided).</xs:documentation>
+				<xs:documentation>Note: signAfter (if provided) must occur before signBefore (if provided).</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:attributeGroup>
@@ -1200,6 +1197,11 @@
 			<xs:enumeration value='Obsoleted'>
 				<xs:annotation>
 					<xs:documentation>The contract has been explicitly obsoleted by its owner, or by the Trust Provider.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value='Deleted'>
+				<xs:annotation>
+					<xs:documentation>The contract has been explicitly deleted by its owner, or by the Trust Provider.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
@@ -1409,13 +1411,11 @@
 											<xs:attribute name='colSpan' type='xs:positiveInteger' use='required'>
 												<xs:annotation>
 													<xs:documentation>The number of columns the cell spans.</xs:documentation>
-													<xs:documentation>Default value is 1, i.e. the cell only spans one column.</xs:documentation>
 												</xs:annotation>
 											</xs:attribute>
 											<xs:attribute name='header' type='xs:boolean' use='required'>
 												<xs:annotation>
 													<xs:documentation>If the cell represents a header cell (true) or a normal cell (false).</xs:documentation>
-													<xs:documentation>Default value is false, i.e. cell is a normal cell.</xs:documentation>
 												</xs:annotation>
 											</xs:attribute>
 										</xs:complexType>
@@ -1831,14 +1831,15 @@
 		<xs:annotation>
 			<xs:documentation>Sent by a client in an iq set to a Trust Provider, to obsolete one of its contracts.</xs:documentation>
 			<xs:documentation>Expected response element: contract</xs:documentation>
-			<xs:documentation>Note: A contract that is legally binding cannot be obsoleted, unless done so by a part, having a role where canRevoke is true.</xs:documentation>
+			<xs:documentation>Note: Only the creator of a contract or a part of the contract signed for a role that can be revoked may be able to obsolete the contract. For all others, a forbidden error is returned.</xs:documentation>
+			<xs:documentation>Note: A contract that is legally binding cannot be obsoleted, even by its creator, unless request comes from an entity that has signed the contract using a role that allows the signature to be revoked.</xs:documentation>
+			<xs:documentation>Note: Attempting to obsolete a contract that is either Rejected, Failed or Deleted (but still accessible), returns a forbidden error.</xs:documentation>
+			<xs:documentation>Note: Obsoleting a proposed contract that has not yet been approved, automatically turns it to Rejected. Other contracts that are to be obsoleted, will be in the Obsoleted state.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name='id' type='xs:string' use='required'>
 				<xs:annotation>
 					<xs:documentation>Identifier of the contract to obsolete.</xs:documentation>
-					<xs:documentation>Note: Obsoleting a proposed contract that has not been approved, automatically turns it to Rejected.</xs:documentation>
-					<xs:documentation>Note: Trying to obsolete a rejected or legally binding contract (without revoke permissions) returns a forbidden error.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>
@@ -1915,7 +1916,7 @@
 				<xs:element ref='contract'>
 					<xs:annotation>
 						<xs:documentation>The contract the legal identity of the client wants to update.</xs:documentation>
-						<xs:documentation>Note: The contract will be put in a Proposed state after the update.</xs:documentation>
+						<xs:documentation>Note: If the contract is Approved, the contract will be put in a Proposed state after the update, with one exception: If the parameters validate, and the contract is based on a template, and only parameter values have changed within the valid range of each parameter, and no other changes have been made to the contract, the contract will remain Approved.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -2526,7 +2527,7 @@
 			<xs:complexContent>
 				<xs:extension base='PetitionRequest'>
 					<xs:sequence>
-						<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+						<xs:any minOccurs='0' maxOccurs='1' namespace='##other' processContents='skip'>
 							<xs:annotation>
 								<xs:documentation>Optional element that can provide machine-readable context for petition.</xs:documentation>
 							</xs:annotation>
@@ -2568,7 +2569,7 @@
 					<xs:annotation>
 						<xs:documentation>Digital signature of the request using the legal identity (or one of the approved legal identities) of the caller.</xs:documentation>
 						<xs:documentation>The signature is calculated on the following data: UTF8Encode(pid + ":" + id + ":" + purpose + ":" + nonce + ":" + fromBareJid), where fromBareJid is the Bare JID of the sender.</xs:documentation>
-						<xs:documentation>Note: If a sender has multiple approved legal identities associated with it, the Trust Provider uses the signature to identify which identity has been used to form the signature. It is this identity that is later forwarded to the owner of the requested identity.</xs:documentation>
+						<xs:documentation>Note: If a sender has multiple approved legal identities associated with it, the Trust Provider uses the signature to identify which identity has been used to form the signature. It is this identity that is later forwarded to the parties in the requested contract.</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -2585,7 +2586,7 @@
 							<xs:documentation>This information can be used by the recipient of the message to make an informed decision on wether to accept, deny or ignore the request.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+					<xs:any minOccurs='0' maxOccurs='1' namespace='##other' processContents='skip'>
 						<xs:annotation>
 							<xs:documentation>Optional element that can provide machine-readable context for petition.</xs:documentation>
 						</xs:annotation>
@@ -2626,7 +2627,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+				<xs:any minOccurs='0' maxOccurs='1' namespace='##other' processContents='skip'>
 					<xs:annotation>
 						<xs:documentation>Optional element that can provide machine-readable context for petition response.</xs:documentation>
 					</xs:annotation>
@@ -2663,11 +2664,11 @@
 			<xs:sequence>
 				<xs:element ref='contract' minOccurs='0' maxOccurs='1'>
 					<xs:annotation>
-						<xs:documentation>The legal identity requested, if available, and the owner of the identity consented in sharing the information.</xs:documentation>
+						<xs:documentation>The requested contract and the party consenting to share it.</xs:documentation>
 						<xs:documentation>This information must only be used for the purposes described in the original petition.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
+				<xs:any minOccurs='0' maxOccurs='1' namespace='##other' processContents='skip'>
 					<xs:annotation>
 						<xs:documentation>Optional element that can provide machine-readable context for petition response.</xs:documentation>
 					</xs:annotation>
@@ -2794,7 +2795,7 @@
 			<xs:attribute name='url' type='xs:anyURI' use='required'>
 				<xs:annotation>
 					<xs:documentation>An URL to download the attachment.</xs:documentation>
-					<xs:documentation>Attachments must be protected using the Neuro.Foundation.Sign WWW-authentication mechanism to make sure only authorized clients can access the attachment.</xs:documentation>
+					<xs:documentation>Attachments must be protected using the NeuroFoundation.Sign WWW-authentication mechanism to make sure only authorized clients can access the attachment.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
 		</xs:complexType>

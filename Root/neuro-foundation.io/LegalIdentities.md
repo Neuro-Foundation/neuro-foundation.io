@@ -1177,7 +1177,7 @@ deactivate "Entity A"
     `<petitionIdentityResponse>` element in an `<iq type="set">` stanza back to Legal 
     Component B. The `<petitionIdentityResponse>` element retains the `pid` and `id` 
     attributes of the message, and adds a `jid` attribute containing the Bare JID of the
-    Requestor, and an optional Boolean `repsonse` attribute, declaring if the petition should
+    Requestor, and an optional Boolean `response` attribute, declaring if the petition should
     be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
     is assumed to be `false`. The Legal Component checks all attributes, and that the sender
     is from the account owning the petitioned Legal Identity.
@@ -1412,7 +1412,7 @@ deactivate "Entity A"
     `<petitionSignatureResponse>` element in an `<iq type="set">` stanza back to Legal 
     Component B. The `<petitionSignatureResponse>` element retains the `pid` and `id` 
     attributes of the message, and adds a `jid` attribute containing the Bare JID of the
-    Requestor, and an optional Boolean `repsonse` attribute, declaring if the petition should
+    Requestor, and an optional Boolean `response` attribute, declaring if the petition should
     be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
     is assumed to be `false`. If the `response` is `true`, the `<petitionSignatureResponse>` 
     element also contains a `<content>` element with the BASE64-encoded binary content to be

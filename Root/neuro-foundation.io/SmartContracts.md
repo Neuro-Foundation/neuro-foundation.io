@@ -13,12 +13,13 @@ Users with [legal identities](LegalIdentities.md) can sign smart contracts. Smar
 are machine-readable contracts that are legally binding for the parts that have signed them. 
 Smart contracts are divided into two parts: One container, that encapsulates the contract and 
 provides state information and signatures. The second part is an XML document, whose semantic 
-meaning is defined by the qualified name of the root. By providing XML schemas, the server can
-make sure contracts are well-defined and contain all required information. The server attests 
-to the validity of the contents of the contract, its integrity and all signatures. Contracts 
-can be used to automate different aspects in a smart city, such as provisioning for instance.
+meaning is defined by the qualified name of the root. By providing XML schemas, the server 
+must make sure contracts are well-defined and contain all required information. The server 
+attests to the validity of the contents of the contract, its integrity and all signatures. 
+Contracts can be used to automate different aspects in a smart city, such as provisioning for 
+instance.
 
-| Legal Identities                                                      ||
+| Smart Contracts                                                       ||
 | ------------|----------------------------------------------------------|
 | Namespace:  | `urn:nfi:iot:leg:sc:1.0`                                 |
 | Schema:     | [SmartContracts.xsd](Schemas/SmartContracts.xsd)         |
@@ -390,6 +391,7 @@ lifecycle of the contract:
 | Attribute          | Type                 | Use      | Description                                                                                                                                                                                                                                            |
 |:-------------------|:---------------------|:---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`               | `xs:string`          | Optional | An identifier assigned to the contract. The identifier is formed as a JID but is not a JID. The domain part corresponds to the domain of the Trust Provider. A client must not include an identifier when it creates a contract on the Trust Provider. |
+| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values.                                                                                                                                                        |
 | `visibility`       | `ContractVisibility` | Required | What visibility the contract should have.                                                                                                                                                                                                              |
 | `canActAsTemplate` | `xs:boolean`         | Required | If the contract can act as a template for future contracts.                                                                                                                                                                                            |
 | `duration`         | `xs:duration`        | Required | The duration of the contract. The duration is calculated from the time of the last required signature.                                                                                                                                                 |
@@ -397,7 +399,6 @@ lifecycle of the contract:
 | `archiveOpt`       | `xs:duration`        | Required | After a legally binding contract expires, and the `archiveReq` period has expired, this attribute specifies an additional duration after which it is automatically deleted.                                                                            |
 | `signAfter`        | `xs:dateTime`        | Optional | Signatures will only be accepted after this point in time.[^SignatureAfterBefore]                                                                                                                                                                      |
 | `signBefore`       | `xs:dateTime`        | Optional | Signatures will only be accepted until this point in time.[^SignatureAfterBefore]                                                                                                                                                                      |
-| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values.                                                                                                                                                        |
 
 [^SignatureAfterBefore]: `signAfter` (if provided) must occur before `signBefore` (if provided).
 
@@ -502,7 +503,7 @@ String-valued parameters are defined using the `<stringParameter/>` element.
 | `max`         | `xs:string`             | Optional | Optional maximum value of the parameter.                                   |
 | `maxIncluded` | `xs:boolean`            | Optional | If the `max` value is part of the valid range or not.                      |
 | `minLength`   | `xs:nonNegativeInteger` | Optional | Optional minimum lenth of the value of the parameter.                      |
-| `maxLength`   | `xs:PositiveInteger`    | Optional | Optional maximum lenth of the value of the parameter.                      |
+| `maxLength`   | `xs:positiveInteger`    | Optional | Optional maximum lenth of the value of the parameter.                      |
 
 ##### Numerical parameters
 
@@ -587,7 +588,7 @@ Duration parameters are defined using the `<durationParameter/>` element.
 
 ##### Time parameters
 
-Date parameters are defined using the `<timeParameter/>` element.
+Time parameters are defined using the `<timeParameter/>` element.
 
 | Attribute     | Type              | Use      | Description                                                                |
 |:--------------|:------------------|:---------|----------------------------------------------------------------------------|
@@ -620,6 +621,20 @@ Geo-spatial parameters are defined using the `<geoParameter/>` element.
 | `max`              | `GeoSpatial`      | Optional | Optional maximum value of the parameter.                                   |
 | `maxIncluded`      | `xs:boolean`      | Optional | If the `max` value is part of the valid range or not.                      |
 | `altitude`		 | `AltitudeUse`     | Optional | Defines how to handle altitude in positions.                               |
+
+`GeoSpatial` values can be expressed as two floating-point values as `Latitude,Longitude` or
+as three floating-point values as `Latitude,Longitude,Altitude`. `Latitude` and `Longitude`
+are expressed in decimal degrees, while `Altitude` is expressed in meters above sea level.
+Floating-point values are expressed using `.` as decimal separator, and `-` for negative 
+values, and cannot include exponents.
+
+`AltitudeUse` can have the following values:
+
+| `AltitudeUse` | Description                              |
+|:--------------|:-----------------------------------------|
+| `Required`    | Altitude is required by the parameter.   |
+| `Optional`    | Altitude is optional by the parameter.   |
+| `Prohibited`  | Altitude is prohibited by the parameter. |
 
 ##### Calculation parameters
 
@@ -927,12 +942,14 @@ section. Any level of nesting is permitted by the representation.
 ##### Bullet lists
 
 Bullet lists are defined using the `<bulletItems/>` element. Each item in the list is defined 
-in a separate `<item/>` element, each one containing one or more *inline elements*.
+in a separate `<item/>` element, each one containing either one or more *inline elements* or
+one or more *block elements*.
 
 ##### Numbered lists
 
 Numbered lists are defined using the `<numberedItems/>` element. Each item in the list is 
-defined in a separate `<item/>` element, each one containing one or more *inline elements*.
+defined in a separate `<item/>` element, each one containing either one or more 
+*inline elements* or one or more *block elements*.
 
 ##### Standalone images
 
@@ -1024,11 +1041,12 @@ containing a sequence  of one or more *inline elements*.
 
 Following the human-readable text, comes signatures made by parts in the contract. Each 
 signature is represented by a `<signature/>` element. Signatures are calculated using the 
-private key corresponding to the [legal identity](LegalIdentities.md) performing the signature.
-It is calculated on the contract contents according to the following rules:
+private key corresponding to the [legal identity](LegalIdentities.md) performing the 
+signature. It is calculated on the contract contents according to the following rules:
 
 * Signatures are calculated on the contract element excluding the `id` attribute and the 
-`<signature/>`, `<status/>` and `<serverSignature/>` elements.
+`<signature/>`, `<attachment/>`, `<status/>`, `<serverSignature/>` and `<attachmentRef/>` 
+elements.
 * All text nodes and attribute values are normalized (using Unicode NFC).
 * Unnecessary whitespace is removed.
 * The SPACE character is the only allowed whitespace.
@@ -1058,6 +1076,22 @@ attributes:
 | `role`      | `NonEmptyString` | Required | The role the legal identity assumes when signing the contract. |
 | `timestamp` | `xs:dateTime`    | Required | When the signature was generated.                              |
 
+### Attachments
+
+After client signatures, comes a sequence of zero or more attachment elements. Each 
+`<attachment/>` element represents an attachment that has been uploaded to the contract. 
+Attachments are individually signed by clients, and the collection of attachments is 
+negotiated and managed by the broker. The attributes for the `<attachment/>` element are:
+
+| Attribute     | Type              | Use      | Description                                           |
+|:--------------|:------------------|:---------|-------------------------------------------------------|
+| `id`          | `NonEmptyString`  | Required | The identity of the attachment.                       |
+| `legalId`     | `NonEmptyString`  | Required | The legal identity of the uploader of the attachment. |
+| `contentType` | `NonEmptyString`  | Required | Internet Content-Type of attachment.                  |
+| `fileName`    | `NonEmptyString`  | Required | Local Filename of attachment.                         |
+| `s`           | `xs:base64Binary` | Required | Signature of attachment, made by the uploader.        |
+| `timestamp`   | `xs:dateTime`     | Required | Timestamp of attachment upload.                       |
+
 ### Contract Status
 
 The broker (i.e. Trust Provider) hosting the contract, and attesting to the validity, 
@@ -1082,15 +1116,16 @@ attributes:
 Possible states of a contract is defined by the `ContractState` enumeration. Possible values 
 are:
 
-| `ContractState` | Description                                                                                                                            |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------|
-| `Proposed`      | The contract has been proposed as a new contract. It needs to be reviewed and approved by the Trust Provider before it can be used as a template or be signed. |
+| `ContractState` | Description                                                                                                                                                                                                                              |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Proposed`      | The contract has been proposed as a new contract. It needs to be reviewed and approved by the Trust Provider before it can be used as a template or be signed.                                                                           |
 | `Rejected`      | The contract has been deemed incomplete, inconsistent, or otherwise faulty. A rejected contract cannot be used as a template or be signed. A rejected contract can be updated by the creator, and thus be put in a Proposed state again. |
-| `Approved`      | The contract has been reviewed and approved. It is still not signed, but can act as a template for other contracts. |
-| `BeingSigned`   | The contract is being signed. Not all required roles have signed however, and the contract is not legally binding. |
-| `Signed`        | The contract has been signed by all required parties, and is legally binding. |
-| `Failed`        | The contract, once signed, has either manually, or automatically, been deemed failed, by the Trust Provider. This can happen when any of the parties fail to fulfill their obligations as defined by the contract. |
-| `Obsoleted`     | The contract has been explicitly obsoleted by its owner, or by the Trust Provider. |
+| `Approved`      | The contract has been reviewed and approved. It is still not signed, but can act as a template for other contracts.                                                                                                                      |
+| `BeingSigned`   | The contract is being signed. Not all required roles have signed however, and the contract is not legally binding.                                                                                                                       |
+| `Signed`        | The contract has been signed by all required parties, and is legally binding.                                                                                                                                                            |
+| `Failed`        | The contract, once signed, has either manually, or automatically, been deemed failed, by the Trust Provider. This can happen when any of the parties fail to fulfill their obligations as defined by the contract.                       |
+| `Obsoleted`     | The contract has been explicitly obsoleted by its owner, or by the Trust Provider.                                                                                                                                                       |
+| `Deleted`       | The contract has been explicitly deleted by its owner, or by the Trust Provider.                                                                                                                                                         |
 
 Possible values of the `HashFunction` enumeration are:
 
@@ -1103,6 +1138,26 @@ Possible values of the `HashFunction` enumeration are:
 | `SHA3_384`     | SHA3-384 Hash function. |
 | `SHA3_512`     | SHA3-512 Hash function. |
 
+#### Role Parameter values
+
+The `<status/>` element may also contain role reference parameter values, taken from Legal
+Identities used to sign the contract. Such references are shown by the presence of a
+`<roleParameters>` element embedded in the `<status/>` element. This element in turn contains
+a sequence (possibly empty) of `<parameter/>` values, each one containing a role parameter 
+value. If the role reference parameter value is an attachment value, the `<parameter/>`
+element will contain the BASE64-encoded content as its content. Following are its attributes:
+
+| Attribute     | Type              | Use      | Description                                                                                                             |
+|:--------------|:------------------|:---------|-------------------------------------------------------------------------------------------------------------------------|
+| `name`        | `xs:string`       | Required | The name of the role reference parameter.                                                                               |
+| `value`       | `xs:string`       | Required | The value of the role reference parameter. If the value is an attachment reference, the value will be the attachment ID.|
+| `contentType` | `xs:string`       | Optional | Actual Internet Content Type of binary attachment.                                                                      |
+| `legalId`     | `xs:string`       | Optional | Legal ID of uploader of the attachment.                                                                                 |
+| `fileName`    | `xs:string`       | Optional | File name of attachment.                                                                                                |
+| `signature`   | `xs:base64Binary` | Optional | Binary signature of the attachment, generated by the Legal Identity of the uploader.                                    |
+| `timestamp`   | `xs:dateTime`     | Optional | Timestamp of signature.                                                                                                 |
+| `url`         | `xs:anyURI`       | Optional | URI of attachment.                                                                                                      |
+
 ### Server Attestation
 
 The Trust Provider always attests any changes made to the contract object. This attestation is
@@ -1110,7 +1165,8 @@ made available in a `<serverSignature/>` element at the end, which can be verifi
 clients.[^PublicKey] Server Signatures are calculated using the private key of the Trust 
 Provider. It is calculated on the contract contents according to the following rules:
 
-* Signatures are calculated on the contract element excluding the `<serverSignature/>` element.
+* Signatures are calculated on the contract element excluding the `<serverSignature/>` and
+`<attachmentRef/>` elements.
 * All text nodes and attribute values are normalized (using Unicode NFC).
 * Unnecessary whitespace is removed.
 * The SPACE character is the only allowed whitespace.
@@ -1136,57 +1192,85 @@ following attributes:
 |:------------|:--------------|:---------|-----------------------------------|
 | `timestamp` | `xs:dateTime` | Required | When the signature was generated. |
 
+### Attachment references
+
+Following the server signature, comes a sequence of zero or more attachment reference 
+elements `<attachmentRef/>`. These refer to the attachments in the contract, but also contain
+URLs to access the individual attachments. As these may be time limited and thus vary over
+time, they lie outside the scope of the server signature. The attributes for the
+`<attachmentRef/>` element are:
+
+| Attribute      | Type        | Use      | Description                             |
+|:---------------|:------------|:---------|-----------------------------------------|
+| `attachmentId` | `xs:string` | Required | The ID of the attachment referenced to. |
+| `url`          | `xs:anyURI` | Required | An URL to download the attachment.      |
+
+**Note**: Attachments must be protected using the `NeuroFoundation.Sign` WWW-authentication 
+mechanism to make sure only authorized clients can access the attachment.
 
 Creating a new contract
 -----------------------------
 
-To create a new smart contract in the account of the sender, a `<createContract/>` element is sent in an `<iq type="set"/>` stanza to the Trust Provider.
-The expected response in a `<contract/>` element with the created contract. There are two options to the client creating a new contract:
+To create a new smart contract in the account of the sender, a `<createContract/>` element is 
+sent in an `<iq type="set"/>` stanza to the Trust Provider. The expected response in a 
+`<contract/>` element with the created contract. There are two options to the client creating 
+a new contract:
 
 1. Create a completely new contract.
 2. Create a contract based on an existing template.
 
-**Note**: The client creating a contract is required to have a valid legal identity to create a contract, even if the contract is not signed. It is the
-legal identity that is considered the creator of the new contract.
+**Note**: The client creating a contract is required to have a valid legal identity to create 
+a contract, even if the contract is not signed. It is the legal identity that is considered 
+the creator of the new contract.
 
 ### Creating a completely new contract
 
-When creating a completely new contract, the `<createContract/>` element simply includes a `<contract/>` element specifying the contract it wishes to
-create. The Trust Provider validates the consistency of the request and makes sure no rules are broken. If passing all tests, a new contract object
-with a new identity is created in the `Proposed` state and returned to the client.
+When creating a completely new contract, the `<createContract/>` element simply includes a 
+`<contract/>` element specifying the contract it wishes to create. The Trust Provider 
+validates the consistency of the request and makes sure no rules are broken. If passing all 
+tests, a new contract object with a new identity is created in the `Proposed` state and 
+returned to the client.
 
-**Note**: A contract has to be reviewed and approved by the electronic notary of the Trust Provider before the contract can be signed. The review-process is 
-performed out-of-band.
+**Note**: A contract has to be reviewed and approved by the electronic notary of the Trust 
+Provider before the contract can be signed. The review-process is performed out-of-band.
 
-If an XML schema is available on the server defining the structure of the machine-readable contents of the contract, based on its qualified name, 
-it will be used to validate the contents of the contract. If that validation fails, an error is returned, and the contract is not created. If validation 
-succeeds, information about this will be made available in the state portion of the contract. XML Schemas can either be registered with the Trust Provider 
-out-of-band, or downloaded by the Trust Provider automatically, if accessible through the namespace URI, if it's using a downloadable URI scheme. The XML 
-Schema must not contain processing instructions.
+An XML schema must be available on the server defining the structure of the machine-readable 
+contents of the contract, based on its qualified name, it will be used to validate the 
+contents of the contract. If that validation fails, an error is returned, and the contract
+is not created. If validation succeeds, information about this will be made available in the 
+state portion of the contract. XML Schemas can either be registered with the Trust Provider 
+out-of-band, or downloaded by the Trust Provider automatically, if accessible through the 
+namespace URI, if it's using a downloadable URI scheme. The XML Schema must not contain 
+any DTD or processing instructions.
 
-Whenever a contract is created on the server, a `<message/>` stanza is sent to the bare JIDs of all parties of the contract, including the 
-creator if not signed, containing a reference to the created contract in a `<contractCreated/>` element. The element contains only a `contractId` attribute 
-containing the identity of the contract that has been created.
+Whenever a contract is created on the server, a `<message/>` stanza is sent to the bare 
+JIDs of all parties of the contract, including the creator if not signed, containing a 
+reference to the created contract in a `<contractCreated/>` element. The element contains
+only a `contractId` attribute containing the identity of the contract that has been created.
 
 ### Creating a contract based on a template
 
-By referencing a reviewed and approved contract instead of creating an absolutely new one, the legal identity can skip the review and approval steps 
-otherwise required when creating a new contract. The client must be authorized to access the referenced contract, in order to be able to create new 
-contracts based on the referenced one. The referenced contract must also permit it being used as a template (having the `canActAsTemplate` attribute set
-to `true`. The new contract will contain the same information available in the template contract, except for certain properties that are allowed to be 
-changed:
+By referencing a reviewed and approved contract instead of creating an absolutely new one, the 
+legal identity can skip the review and approval steps otherwise required when creating a new 
+contract. The client must be authorized to access the referenced contract, in order to be able 
+to create new contracts based on the referenced one. The referenced contract must also permit 
+it being used as a template (having the `canActAsTemplate` attribute set to `true`. The new 
+contract will contain the same information available in the template contract, except for 
+certain properties that are allowed to be changed:
 
 * Parts of the contract may change.
 * Parameter values may be changed.
 * Visibility and duration properties can be changed.
 * The new contract will receive a new identity.
 
-To create a new contract based on a template, the `<createContract/>` element includes a `<template/>` element specifying the referenced template contract,
-together with the changes to make. The following attributes are available for the `<template/>` element:
+To create a new contract based on a template, the `<createContract/>` element includes a 
+`<template/>` element specifying the referenced template contract, together with the changes 
+to make. The following attributes are available for the `<template/>` element:
 
 | Attribute          | Type                 | Use      | Description                                                                            |
 |:-------------------|:---------------------|:---------|----------------------------------------------------------------------------------------|
 | `id`               | `xs:string`          | Required | The identifier of a contract the legal identity wishes to base the new contract on (i.e. act as template for the new contract). Contract must exist, be well-defined, and be in an `Approved`, `BeingSigned` or `Signed` state to be used. Referencing contracts that are `Proposed`, `Obsolete`, `Rejected` or `Failed` will result in a failure. If the contract resides on another trust provider, the actual trust provider must first get it using `<getContract/>`. If not able to, the operation fails. Contract IDs are case insensitive in searches and references. |
+| `nonce`            | `xs:base64Binary`    | Optional | An optional base64-encoded nonce value that is used when encrypting protected parameter values.                                                                                                                                                        |
 | `visibility`       | `ContractVisibility` | Required | What visibility the contract should have. |
 | `canActAsTemplate` | `xs:boolean`         | Required | If the contract can act as a template for future contracts. |
 | `duration`         | `xs:duration`        | Required | The duration of the contract. The duration is calculated from the time of the last required signature. |
@@ -1195,26 +1279,34 @@ together with the changes to make. The following attributes are available for th
 | `signAfter`        | `xs:dateTime`        | Optional | Signatures will only be accepted after this point in time.[^SignatureAfterBefore] |
 | `signBefore`       | `xs:dateTime`        | Optional | Signatures will only be accepted until this point in time.[^SignatureAfterBefore] |
 
-If the new contract has modified parts, the `<template/>` element must contain a `<parts/>` element containing the parts the new contract is supposed to
-include. The structure of the `<parts/>` element is the same as for the `<contract/>` element. Descriptive texts will be copied from the template, if
-new texts are not provided.
+If the new contract has modified parts, the `<template/>` element must contain a `<parts/>` 
+element containing the parts the new contract is supposed to include. The structure of the 
+`<parts/>` element is the same as for the `<contract/>` element. Descriptive texts will be 
+copied from the template, if new texts are not provided.
 
-If the new contract has modified parameter values, the `<template/>` element must contain a `<parameters/>` element containing the new parameter values
-the new contract is supposed to use. The structure of the `<parameters/>` element is the same as for the `<contract/>` element but must not contain 
-parameters not available in the referenced template contract. Parameters in the template not referenced in the `<template/>` element are used as-is,
-and simply copied into the new contract. There is therefore no need to copy all parameters, if the new contract will be using the same values as the
-template does.
+If the new contract has modified parameter values, the `<template/>` element must contain a
+`<parameters/>` element containing the new parameter values the new contract is supposed to
+use. The structure of the `<parameters/>` element is the same as for the `<contract/>` element
+but must not contain parameters not available in the referenced template contract. Parameters 
+in the template not referenced in the `<template/>` element are used as-is, and simply copied 
+into the new contract. There is therefore no need to copy all parameters, if the new contract 
+will be using the same values as the template does.
 
-Whenever a contract is created on the server, a `<message/>` stanza is sent to the bare JIDs of all parties of the contract, including the 
-creator if not signed, containing a reference to the created contract in a `<contractCreated/>` element. The element contains only a `contractId` attribute 
-containing the identity of the contract that has been created.
+Whenever a contract is created on the server, a `<message/>` stanza is sent to the bare JIDs 
+of all parties of the contract, including the creator if not signed, containing a reference 
+to the created contract in a `<contractCreated/>` element. The element contains only a 
+`contractId` attribute containing the identity of the contract that has been created.
 
 ### Getting created contracts
 
-A client can send a `<getCreatedContracts/>` element in an `<iq type="get"/>` stanza to a Trust Provider, to retrieve a list (possibly empty) of 
-contracts created by the legal identity of the client on the provider. The expected response element is `<contractReferences/>`, if references
-are to be returned, which contains a sequence of `<ref/>` elements, each one containing a reference to a contract in its `id` attribute.
-Otherwise, a `<contracts>` element will be returnedwith a sequence of `<contract>` elements containing the actual contracts.
+A client can send a `<getCreatedContracts/>` element in an `<iq type="get"/>` stanza to a 
+Trust Provider, to retrieve a list (possibly empty) of contracts created by the legal 
+identity of the client on the provider. The expected response element is 
+`<contractReferences/>`, if references are to be returned, which contains a sequence of 
+`<ref/>` elements, each one containing a reference to a contract in its `id` attribute.
+Otherwise, a `<contracts>` element will be returned with a sequence of `<contract>` elements 
+containing the actual contracts, or `<ref/>` elements, if the corresponding contracts could
+not be retrieved by the broker.
 
 Attributes for request:
 
@@ -1259,37 +1351,51 @@ operations that can be made on contracts. Parts of contracts are always informed
 
 ### Updating a contract
 
-To update an existing contract, the creator sends an `<updateContract/>` element in an `<iq type="set"/>` stanza to the Trust Provider.
-The expected response is a `<contract/>` element with the updated contract. The `<updateContract/>` element must include a `<contract/>` element 
-specifying the updated contract. The Trust Provider validates the consistency of the request and makes sure no rules are broken. The expected
-response element is `<contract/>`, with the updated contract.
+To update an existing contract, the creator sends an `<updateContract/>` element in an 
+`<iq type="set"/>` stanza to the Trust Provider. The expected response is a `<contract/>` 
+element with the updated contract. The `<updateContract/>` element must include a 
+`<contract/>` element specifying the updated contract. The Trust Provider validates the 
+consistency of the request and makes sure no rules are broken. The expected response element 
+is `<contract/>`, with the updated contract.
 
 **Notes**:
 
-* Only contracts that are `Proposed`, `Rejected`, `Approved` (but without signatures) and `Obsoleted` (but without signatures) can be updated.
-* If the contract is Approved, the contract will be put in a `Proposed` state after the update, with one exception: If the parameters 
-validate, and the contract is based on a template, and only parameter values have changed within the valid range of each parameter, and
-no other changes have been made to the contract, the contract will remain Approved.
+* Only contracts that are `Proposed`, `Rejected`, `Approved` (but without signatures) and 
+`Obsoleted` (but without signatures) can be updated.
 
-If an XML schema is available on the server defining the structure of the machine-readable contents of the contract, based on its qualified name, 
-it will be used to validate the contents of the contract. If that validation fails, an error is returned, and the contract is not created. If validation 
-succeeds, information about this will be made available in the state portion of the contract. XML Schemas can either be registered with the Trust Provider 
-out-of-band, or downloaded by the Trust Provider automatically, if accessible through the namespace URI, if it's using a downloadable URI scheme. The XML 
-Schema must not contain processing instructions.
+* If the contract is `Approved`, the contract will be put in a `Proposed` state after the 
+update, with one exception: If the parameters validate, and the contract is based on a 
+template, and only parameter values have changed within the valid range of each parameter, 
+and no other changes have been made to the contract, the contract will remain `Approved`.
 
+* An XML schema must be available on the server defining the structure of the machine-readable
+contents of the contract, based on its qualified name, it will be used to validate the 
+contents of the contract. If that validation fails, an error is returned, and the contract 
+is not updated. If validation succeeds, information about this will be made available in the 
+state portion of the contract. XML Schemas can either be registered with the Trust Provider 
+out-of-band, or downloaded by the Trust Provider automatically, if accessible through the 
+namespace URI, if it's using a downloadable URI scheme. The XML Schema must not contain 
+any DTD or processing instructions.
+
+* The contract nonce value will be preserved from the original contract, and cannot therefore
+not be updated.
+
+* The contract being updated must not have a status element, or client or server signatures.
 
 ### Contract updates
 
-Whenever the state of the contract is changed on the server, a `<message/>` stanza is sent to the bare JIDs of all parties of the contract, including the 
-creator if not signed, containing a reference to the updated contract in a `<contractUpdated/>` element. The element contains only a `contractId` attribute 
-containing the identity of the contract that has been updated. If the contact is deleted, a `<contractDeleted/>` element is sent instead.
+Whenever the state of the contract is changed on the server, a `<message/>` stanza is sent to
+the bare JIDs of all parties of the contract, including the creator if not signed, containing 
+a reference to the updated contract in a `<contractUpdated/>` element. The element contains 
+only a `contractId` attribute containing the identity of the contract that has been updated.
+If the contact is deleted, a `<contractDeleted/>` element is sent instead.
 
 **Note**: Only the contract identity is sent, not the contract itself. It is up to each recipient if they are interested in retrieving the latest version of 
 the contract or not. Access to the contract is only granted to authorized clients, however.
 
 ### Adding attachments
 
-Adding attachments to a Contract in the `Created` state can be done by using 
+Adding attachments to a Contract in the `Proposed` or `Approved` states can be done by using 
 [XEP-0363: HTTP File Upload](https://xmpp.org/extensions/xep-0363.html) in conjunction 
 with a sequence of requests to ensure the upload is managed securely, and is attached to the
 correct Legal Identity. The following steps are performed:
@@ -1370,7 +1476,7 @@ attachment is added to the identity application:
 
 ```xml
 <iq id='8' type='set' to='legal.example.org'>
-   <addAttachment id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+   <addAttachment contractId="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
                   getUrl="https://example.org/Upload/vWnL0N_OTKSdYZwqz71J41hHXhebNErM2lJHPXJUZrk"
                   s="..."
                   xmlns="urn:nfi:iot:leg:sc:1.0"/>
@@ -1388,8 +1494,8 @@ The result is the updated contract:
              archiveReq="P2Y"
              canActAsTemplate="false"
              duration="P5Y"
-             id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
-             visibility="Private"
+             id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+             visibility="CreatorAndParts"
              xmlns="urn:nfi:iot:leg:sc:1.0">
       ...
    </contract>
@@ -1437,13 +1543,14 @@ of the form:
 
 ### Removing attachments
 
-A client can remove an attachment from a Contract in the `Created` state. This is done
-by sending a `<removeAttachment>` element with the attachment specified in the `attachmentId`
-attribute, in an `<iq type="set">` stanza to the Legal Component of the Broker.
+A client can remove an attachment from a Contract in the `Proposed` or `Approved` states. This 
+is done by sending a `<removeAttachment>` element with the attachment specified in the 
+`attachmentId` attribute, in an `<iq type="set">` stanza to the Legal Component of the Broker.
 
-The Broker validates that the attachment exists, and belongs to a Contract in the `Created` 
-state, belonging to the sender of the request. If the request is valid, the attachment
-is removed from the Contract, and the Contract is updated and returned to the caller.
+The Broker validates that the attachment exists, and belongs to a Contract in the `Proposed`
+or `Approved` states, belonging to the sender of the request. If the request is valid, the 
+attachment is removed from the Contract, and the Contract is updated and returned to the 
+caller.
 
 Example:
 
@@ -1465,8 +1572,8 @@ The result is the updated identity object:
              archiveReq="P2Y"
              canActAsTemplate="false"
              duration="P5Y"
-             id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
-             visibility="Private"
+             id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+             visibility="CreatorAndParts"
              xmlns="urn:nfi:iot:leg:sc:1.0">
       ...
    </contract>
@@ -1522,10 +1629,13 @@ The `<authorizeJid/>` element defines the following attributes:
 
 ### Getting signed contracts
 
-A client can send a `<getSignedContracts/>` element in an `<iq type="get"/>` stanza to its Trust Provider, to retrieve a list (possibly empty) of 
-contracts signed by the legal identity of the client on the provider. The expected response element is `<contractReferences/>`, if references
-are to be returned, which contains a sequence of `<ref/>` elements, each one containing a reference to a contract in its `id` attribute.
-Otherwise, a `<contracts>` element will be returnedwith a sequence of `<contract>` elements containing the actual contracts.
+A client can send a `<getSignedContracts/>` element in an `<iq type="get"/>` stanza to its 
+Trust Provider, to retrieve a list (possibly empty) of contracts signed by the legal identity 
+of the client on the provider. The expected response element is `<contractReferences/>`, if 
+references are to be returned, which contains a sequence of `<ref/>` elements, each one 
+containing a reference to a contract in its `id` attribute. Otherwise, a `<contracts>` element 
+will be returned with a sequence of `<contract>` elements containing the actual contracts, or 
+`<ref/>` elements, if the corresponding contracts could not be retrieved by the broker.
 
 Attributes for request:
 
@@ -1535,31 +1645,46 @@ Attributes for request:
 | `maxCount`   | `xs:positiveInteger`    | Optional | Result will be limited to this number of items.                     |
 | `references` | `xs:boolean`            | Optional | If references to contracts are to be returned. Default=`true`       |
 
-
 ### Obsoleting a contract
 
-To obsolete one of its contracts, a client sends a `<obsoleteContract/>` element in an `<iq type="set"/>` stanza to the Trust Provider hosting the 
-contract that the client wants to obsolete. The element only contains an `id` attribute, which must be set to the contract identity that the client 
-wishes to obsolete. Expected response element is `<contract/>`.
+To obsolete one of its contracts, a client sends a `<obsoleteContract/>` element in an 
+`<iq type="set"/>` stanza to the Trust Provider hosting the contract that the client wants 
+to obsolete. The element only contains an `id` attribute, which must be set to the contract 
+identity that the client wishes to obsolete. Expected response element is `<contract/>`.
 
 **Notes**: 
 
-* A contract that is legally binding cannot be obsoleted.
-* Obsoleting a proposed contract that has not been approved, automatically turns it to `Rejected`.
-* Trying to obsolete a rejected or legally binding contract returns a forbidden error.
-* `<contractUpdated/>` message notifications are generated when contracts are obsoleted.
+* Only the creator of a contract or a part of the contract signed for a role that can be 
+revoked may be able to obsolete the contract. For all others, a forbidden error is returned.
 
+* A contract that is legally binding cannot be obsoleted, even by its creator, unless request
+comes from an entity that has signed the contract using a role that allows the signature to be 
+revoked.
+
+* Attempting to obsolete a contract that is either `Rejected`, `Failed` or `Deleted` (but
+still accessible), returns a forbidden error.
+
+* Obsoleting a proposed contract that has not yet been approved, automatically turns it to 
+`Rejected`. Other contracts that are to be obsoleted, will be in the `Obsoleted` state.
+
+* `<contractUpdated/>` message notifications are generated when contracts are obsoleted.
 
 ### Deleting a contract
 
-To delete one of its contracts, a client sends a `<deleteContract/>` element in an `<iq type="set"/>` stanza to the Trust Provider hosting the 
-contract that the client wants to delete. The element only contains an `id` attribute, which must be set to the contract identity that the client 
-wishes to delete. Expected response element is `<contract/>`.
+To delete one of its contracts, a client sends a `<deleteContract/>` element in an 
+`<iq type="set"/>` stanza to the Trust Provider hosting the contract that the client wants 
+to delete. The element only contains an `id` attribute, which must be set to the contract 
+identity that the client wishes to delete. Expected response element is `<contract/>`.
 
 **Notes**: 
 
-* A contract that is legally binding cannot be deleted before its required archive duration has expired.
-* `<contractDeleted/>` message notifications are generated when contracts are obsoleted.
+* A contract that is legally binding cannot be deleted.
+
+* A contract cannot be deleted before its required archive duration has expired.
+
+* `<contractDeleted/>` message notifications are generated when contracts are deleted. The
+state of the contract in this event sill be `Deleted`. The contract and its attachments must
+also be deleted from persistent storage.
 
 ### Getting legal identities involved in a contract
 
@@ -1657,19 +1782,24 @@ by its operator. Clients can access the schemas used by the Trust Provider, if i
 
 ### Getting a list of available schemas
 
-A client can get a list of XML Schemas available on the Trust Provider, by sending a `<getSchemas/>` element in an `<iq type="get"/>` stanza to it.
-The expected response is a `<schemas/>` element which contains a sequence of `<schemaRef/>` elements. Each `<schemaRef/>` element references a
-schema namespace in its `namespace` attribute. The element also contains a sequence of at least one `<digest/>` element, each one representing a
-specific version of the schema. The `<digest/>` element specifies the hash function used in a `function` attribute and contains the base64-encoded
-digest as a value of the element. The digest is simply computed over the binary representation of the corresponding XML schema file.
+A client can get a list of XML Schemas available on the Trust Provider, by sending a 
+`<getSchemas/>` element in an `<iq type="get"/>` stanza to it. The expected response is a 
+`<schemas/>` element which contains a sequence of `<schemaRef/>` elements. Each `<schemaRef/>`
+element references a schema namespace in its `namespace` attribute. The element also contains 
+a sequence of at least one `<digest/>` element, each one representing a specific version of 
+the schema. The `<digest/>` element specifies the hash function used in a `function` attribute
+and contains the base64-encoded digest as a value of the element. The digest is simply 
+computed over the binary representation of the corresponding XML schema file.
 
 ### Getting a specific schema
 
-To get the contents of a specific schema, the client sends a `<getSchema/>` element in an `<iq type="get"/>` stanza to the Trust Provider. The
-namespace is specified in the `namespace` attribute of the `<getSchema/>` element. If a specific version of the schema is desired, a `<digest/>`
-child element is added, specifying the version the client is interested in. If the `<digest/>` element is omitted, the latest version of the schema
-is returned. The expected response element is `<schema/>`, which contains the binary representation of the XML schema file, BASE64 encoded, as its 
-value.
+To get the contents of a specific schema, the client sends a `<getSchema/>` element in an 
+`<iq type="get"/>` stanza to the Trust Provider. The namespace is specified in the `namespace`
+attribute of the `<getSchema/>` element. If a specific version of the schema is desired, a 
+`<digest/>` child element is added, specifying the version the client is interested in. If 
+the `<digest/>` element is omitted, the latest version of the schema is returned. The 
+expected response element is `<schema/>`, which contains the binary representation of the 
+XML schema file, BASE64 encoded, as its value.
 
 
 Searching for public contracts
@@ -1756,8 +1886,8 @@ elements, as follows:
 | `<gteNum/>`   | `xs:decimal`  | Return public contracts defining a named numerical parameter greater than or equal to this value.      |
 | `<ltNum/>`    | `xs:decimal`  | Return public contracts defining a named numerical parameter lesser than this value.                   |
 | `<lteNum/>`   | `xs:decimal`  | Return public contracts defining a named numerical parameter lesser than or equal to this value.       |
-| `<eqB/>`      | `xs:bool`     | Return public contracts defining a named Boolean parameter equal to this value.                        |
-| `<neqB/>`     | `xs:bool`     | Return public contracts defining a named Boolean parameter not equal to this value.                    |
+| `<eqB/>`      | `xs:boolean`  | Return public contracts defining a named Boolean parameter equal to this value.                        |
+| `<neqB/>`     | `xs:boolean`  | Return public contracts defining a named Boolean parameter not equal to this value.                    |
 | `<eqD/>`      | `xs:date`     | Return public contracts defining a named date parameter equal to this value.                           |
 | `<neqD/>`     | `xs:date`     | Return public contracts defining a named date parameter not equal to this value.                       |
 | `<gtD/>`      | `xs:date`     | Return public contracts defining a named date parameter greater than this value.                       |
@@ -1947,7 +2077,7 @@ deactivate EntityA
     response, it does so by sending a `<petitionContractResponse>` element in an 
     `<iq type="set">` stanza back to Legal Component B. The `<petitionContractResponse>` 
     element retains the `pid` and `id` attributes of the message, and adds a `jid` attribute 
-    containing the Bare JID of the Requestor, and an optional Boolean `repsonse` attribute, 
+    containing the Bare JID of the Requestor, and an optional Boolean `response` attribute, 
     declaring if the petition should be accepted (`true`) or rejected (`false`). If a 
     `response` attribute is not provided, it is assumed to be `false`. The Legal Component 
     checks all attributes, and that the sender is a part in the petitioned Contract.
@@ -2042,6 +2172,7 @@ The second client responds affirmative to the petition:
                              id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
                              jid="client@example.org"
                              response="true"
+                             from="client2@example.org"
                              xmlns="urn:nfi:iot:leg:sc:1.0"/>
 </iq>
 ```
@@ -2053,7 +2184,7 @@ The Legal Component acknowledges the petition response with an empty response:
     to='client2@example.org/fOKp6kmp06quBeY9_V0rKQC0i'/>
 ```
 
-It then forwards the response, together with the identity, to the original Requestor:
+It then forwards the response, together with the contract, to the original Requestor:
 
 ```xml
 <message id='13'
@@ -2066,8 +2197,8 @@ It then forwards the response, together with the identity, to the original Reque
                 archiveReq="P2Y"
                 canActAsTemplate="false"
                 duration="P5Y"
-                id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
-                visibility="Private">
+                id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
+                visibility="CreatorAndParts">
          ...
       </contract>
    </petitionContractResponseMsg>
@@ -2092,7 +2223,7 @@ Example request:
 
 ```xml
 <iq id='14' type='set' to='legal.example.org'>
-   <authorizeAccess id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+   <authorizeAccess id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
                     remoteId="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org"
                     auth="true"
                     xmlns="urn:nfi:iot:leg:sc:1.0"/>
@@ -2119,14 +2250,14 @@ trust the validity and integrity of the report, as long as signatures are valid.
           archiveReq="P2Y"
           canActAsTemplate="false"
           duration="P5Y"
-          id="ed1632fdf5ce45a8a5d2546e62aeab04@example.org"
+          id="ed1632fdf5ce45a8a5d2546e62aeab04@legal.example.org"
           visibility="Public">
   <nd id="Device" xmlns="urn:nfi:iot:sd:1.0">
     <ts v="2019-07-19T10:19:23Z">
       <s n="Overall Rating" v="B" m="true"/>
       <q n="Certificate" v="100" u="%" m="true"/>
       <q n="Protocol Support" v="95" u="%" m="true"/>
-      <q n="Key Exchange" v="70" u="%" m="true"/>
+      <q n="Key Exchange" v="90" u="%" m="true"/>
       <q n="Cipher Strength" v="90" u="%"/>
       <s n="X.509, Subject" v="*.neuro-foundation.org" s="true"/>
       <!-- More X.509 fields -->
@@ -2159,8 +2290,8 @@ trust the validity and integrity of the report, as long as signatures are valid.
     </description>
   </role>
   <parts>
-    <part role="Manufacturer" legalId="manufacturer@example.org"/>
-    <part role="Authority" legalId="authority@example.org"/>
+    <part role="Manufacturer" legalId="9d308bf2d2004bff924049fb6c039484@legal.example.org"/>
+    <part role="Authority" legalId="a6b8d8318e7540d4b38e5491222e1305@legal.example.org"/>
   </parts>
   <parameters>
     <stringParameter name="Overall Rating" value="B">
@@ -2184,7 +2315,7 @@ trust the validity and integrity of the report, as long as signatures are valid.
         </paragraph>
       </description>
     </numericalParameter>
-    <numericalParameter name="Key Exchange" value="70">
+    <numericalParameter name="Key Exchange" value="90">
       <description>
         <paragraph>
           <text>Summary rating of key exchange capabilities, in percent.</text>
@@ -2243,12 +2374,12 @@ trust the validity and integrity of the report, as long as signatures are valid.
     </section>
   </humanReadableText>
   <signature bareJid="manufacturer@example.org"
-             legalId="9d308bf2d2004bff924049fb6c039484@example.org"
+             legalId="9d308bf2d2004bff924049fb6c039484@legal.example.org"
              role="Manufacturer"
              timestamp="2019-07-19T11:19:54Z"
              s="SGwfX9UpcCk4GmAa6u0DgimojoMeQB5bkbM2PlX9xak="/>
   <signature bareJid="authority@example.org"
-             legalId="a6b8d8318e7540d4b38e5491222e1305@example.org"
+             legalId="a6b8d8318e7540d4b38e5491222e1305@legal.example.org"
              role="Authority"
              timestamp="2019-07-19T11:21:43Z"
              s="aLZB8rcWqVLVPjc0oQvUOwLKHFSd35jWHbIGQ6PVwf8="/>
@@ -2258,8 +2389,8 @@ trust the validity and integrity of the report, as long as signatures are valid.
           provider="provisioning.example.org" 
           schemaDigest="tPN8gzgusTSM56q9Se6uUyptnqFT9bTIACShZt+4xY0="
           schemaHashFunction="SHA256" 
-          state="Approved" 
-          templateId="9aadcc318c104d848ec5215264f5bf68@example.org"/>
+          state="Signed" 
+          templateId="9aadcc318c104d848ec5215264f5bf68@legal.example.org"/>
   <serverSignature timestamp="2019-07-19T11:21:43Z"
                    s="swAqEaR9uDaZLxv/5xAvucj5OFX3+3vU1+pbP4jgUwY/IbPFYH7SHD+U/33WHaepMI9VKf61ASk="/>
 </contract>
