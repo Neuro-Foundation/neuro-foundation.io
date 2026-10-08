@@ -2065,11 +2065,11 @@ deactivate EntityA
     `<validateSignature>` request.
 
 #.  The Legal Component B sends a `<petitionContractMsg>` element in a `<message>` stanza to
-    all Entities B[i]. It retains the `pid`, `purpose` and `id` attributes from the first 
-    request, and adds a `from` attribute containing the Full JID of the client making the 
-    petition, and an optional `clientEp` attribute, containing the remote endpoint of the 
-    client, if available. The `<petitionContractMsg>` also contains an `<identity>` element, 
-    representing the Legal Identity of the Requestor making the request.
+    all Entities B[i] that have signed the contract. It retains the `pid`, `purpose` and `id` 
+    attributes from the first request, and adds a `from` attribute containing the Full JID of 
+    the client making the petition, and an optional `clientEp` attribute, containing the 
+    remote endpoint of the client, if available. The `<petitionContractMsg>` also contains an 
+    `<identity>` element, representing the Legal Identity of the Requestor making the request.
 
 #.  All Entities B[i] review the request, in their own time. Each entity must ignore the 
     request if it is received from someone other than its own Trust Provider. Each Entity B[i]
