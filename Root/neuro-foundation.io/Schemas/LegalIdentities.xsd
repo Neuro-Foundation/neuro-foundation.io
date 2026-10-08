@@ -634,7 +634,7 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:complexType name='PetitionMessage' abstract='true'>
+	<xs:complexType name='PetitionMessage'>
 		<xs:complexContent>
 			<xs:extension base='Petition'>
 				<xs:sequence>
@@ -684,7 +684,7 @@
 		</xs:annotation>
 	</xs:element>
 
-	<xs:complexType name='PetitionResponse' abstract='true'>
+	<xs:complexType name='PetitionResponse'>
 		<xs:sequence>
 			<xs:any minOccurs='0' maxOccurs='1' namespace='##other'>
 				<xs:annotation>

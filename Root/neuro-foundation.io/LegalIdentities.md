@@ -73,20 +73,23 @@ Example:
 ```
 
 The response contains the public key in a `<publicKey/>` element, if successful. Public keys 
-are encoded using the [End-to-End Encryption](E2E.md) namespace and elements.
+are encoded using the [End-to-End Encryption](E2E.md) namespace and elements. If no public key 
+was found for a requested timestamp, an `item-not-found` error must be returned. The 
+`<publicKey/>` element contains a required `from` attribute, that specifies the time from 
+which the public key is valid. It may also have an optional `to` attribute, that specifies 
+the time until which the public key is valid.
 
 Example:
 
 ```xml
 <iq id='3' type='result' to='client@example.org/e36120d6a04244576b22c2f7b2c8bc5c' from='legal.example.org'>
-   <publicKey xmlns='urn:nfi:iot:leg:id:1.0'>
+   <publicKey xmlns='urn:nfi:iot:leg:id:1.0' from='2024-03-12T15:10:00Z'>
       <ed448 pub='24XPfS5oQ2nljCLpJGHn9O9sSiJ0K5/yymfiHssXGizeV+TS9dLWxQHKXXRYHjKptWieSD+OZdeA' xmlns='urn:nfi:iot:e2e:1.0'/>
    </publicKey>
 </iq>
 ```
 
-If no public key was found for a requested timestamp, an `item-not-found` error must be
-returned.
+
 
 Getting Identity Application Attributes
 ------------------------------------------
