@@ -32,7 +32,7 @@
 					<xs:documentation>If the symmetric AEAD-ChaCha20-Poly1305 cipher is supported.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-			<xs:anyAttribute namespace="##other">
+			<xs:anyAttribute namespace="##other" processContents="lax">
 				<xs:annotation>
 					<xs:documentation>Symmetric Cipher extensions declare their support using attributes from other namespaces.</xs:documentation>
 				</xs:annotation>

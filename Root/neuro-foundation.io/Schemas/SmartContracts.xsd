@@ -2689,11 +2689,11 @@
 					<xs:documentation>The Bare JID of the part of the contract that consented to the petition.</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
-				<xs:attribute name='clientEp' type='xs:string' use='optional'>
-					<xs:annotation>
-						<xs:documentation>The remote endpoint of the entity responding to the information.</xs:documentation>
-					</xs:annotation>
-				</xs:attribute>
+			<xs:attribute name='clientEp' type='xs:string' use='optional'>
+				<xs:annotation>
+					<xs:documentation>The remote endpoint of the entity responding to the information, if response is positive.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

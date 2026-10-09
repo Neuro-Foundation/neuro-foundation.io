@@ -2066,7 +2066,7 @@ deactivate EntityA
 
 #.  The Legal Component B sends a `<petitionContractMsg>` element in a `<message>` stanza to
     all Entities B[i] that have signed the contract. It retains the `pid`, `purpose` and `id` 
-    attributes from the first request, and adds a `from` attribute containing the Full JID of 
+    attributes from the first request, and adds a `from` attribute containing the Bare JID of 
     the client making the petition, and an optional `clientEp` attribute, containing the 
     remote endpoint of the client, if available. The `<petitionContractMsg>` also contains an 
     `<identity>` element, representing the Legal Identity of the Requestor making the request.
@@ -2087,9 +2087,10 @@ deactivate EntityA
     `<petitionContractResponseMsg>` element retains the `pid` and `response` attributes
     (explicitly including `response="false"` if not provided in the response from Entity 
     B[i]\). The element also contains a `from` attribute, containing the Bare JID of
-    Entity B[i]. If Entity B[i] gave consent to share the Contract, the 
-    `<petitionContractResponseMsg>` element also contains the requested Contract using 
-    its `<contract>` object representation.
+    Entity B[i], and an optional `clientEp` attribute, containing the remote endpoint of 
+    the client, if available and the response is positive. If Entity B[i] gave consent to 
+    share the Contract, the `<petitionContractResponseMsg>` element also contains the 
+    requested Contract using its `<contract>` object representation.
     
     Note: A Contract may have multiple parts. This means multiple Entities B[i] will receive
     the peitition, and respond individually. This means Entity A may receive multiple 
@@ -2106,7 +2107,7 @@ element to the `<petitionContractMsg>` message. It must likewise be forwarded in
 `<petitionContractResponse>` element, and the `<petitionContractResponseMsg>` element.
 Entities do not need to understand or parse this context-sensitive element, but it can be
 used by Trust Providers or application-specific application to do tasks connected to the
-petition.
+petition. The context element must have a different namespace.
 
 ### Example
 
