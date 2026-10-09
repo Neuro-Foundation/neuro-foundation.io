@@ -1,0 +1,53 @@
+digraph G {
+
+Proposed
+Rejected
+Approved
+BeingSigned
+Signed
+Failed
+Obsoleted
+Deleted
+
+Start [
+    shape=circle
+    label=""
+    width=0.15
+    fixedsize=true
+    style=filled
+    fillcolor=black
+]
+
+Start -> Proposed [label="Create\nTemplate"]
+Proposed->Rejected [label="Unsuccessful\nReview"]
+Proposed->Rejected [label="Manually\nObsoleted"]
+Proposed->Approved [label="Successful\nReview"]
+Start -> Approved [label="Create from\nApproved\nTemplate"]
+Approved->BeingSigned [label="First\nSignature"]
+Approved->Obsoleted [label="Manually\nObsoleted"]
+BeingSigned->Signed [label="Required\nSignatures"]
+BeingSigned->Obsoleted [label="Manually\nObsoleted"]
+Signed->Obsoleted [label="Duration\nExpires"]
+Signed->Failed [label="Instructions\nFail"]
+Signed->Obsoleted [label="Consent\nRevoked"]
+Obsoleted->Deleted [label="Delete\nRequest"]
+Obsoleted->Deleted [label="Archiving\nExpires"]
+Failed->Deleted [label="Delete\nRequest"]
+Failed->Deleted [label="Archiving\nExpires"]
+Rejected->Deleted [label="Delete\nRequest"]
+BeingSigned->Deleted [label="Delete\nRequest"]
+BeingSigned->Deleted [label="Archiving\nExpires"]
+Approved->Deleted [label="Delete\nRequest"]
+Proposed->Deleted [label="Delete\nRequest"]
+Deleted->End
+
+End [
+    shape=doublecircle
+    label=""
+    width=0.15
+    fixedsize=true
+    style=filled
+    fillcolor=black
+]
+
+}
