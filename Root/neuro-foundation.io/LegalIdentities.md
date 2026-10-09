@@ -89,8 +89,6 @@ Example:
 </iq>
 ```
 
-
-
 Getting Identity Application Attributes
 ------------------------------------------
 
@@ -100,22 +98,22 @@ the goal is to validate the application via a peer review process. This is done 
 an empty `<applicationAttributes>` element in an `<iq type="get">` stanza to the Legal 
 Component of the Broker. The Broker responds with an `<idApplicationAttributes>` element 
 containing relevant attributes and required properties for peer review. The
-`reuqired` attribute of the `<idApplicationAttributes>` element lets the client know if the
-Broker accepts peer-review as a valid method of validation of the applcation. If so, the
-`nrReviewers` attribute specifies the number of reviewers that must validate the contents of
-the application before the Broker validates the application. The `nrPhotos` attribute tells
-the client the minimum number of photos that need to be provided in the application for it
-to participate in peer review. The `iso3166` attribute informs the client is all country
-code reference must adhere to ISO-3166. The `reviewTimeout` attribute specifies the time the
-client has from receiving an identity review document, to sign and add it as an attachment to
-the recently approved application. The `<idApplicationAttributes>` element
-may also contain a sequence of `<required/>` elements, that list the names of required 
-properties that must be included in the identity application, for it to be considered for
-peer-review. The list of required properties for peer review may be followed by a sequence
-of `<authenticator>` elements listing available identity authenticator services and their
-requirements, followed by a sequence of `<peerReviewService>` elements listing available
-peer review services and their requirements. The client may use this information to decide 
-which properties to include in the application.
+`peerReview` attribute of the `<idApplicationAttributes>` element let the client know 
+if the Broker accepts peer-review as a valid method of validation of the application. Also, 
+the `nrReviewers` attribute specifies the number of reviewers that must validate the contents 
+of the application before the Broker validates the application. The `nrPhotos` attribute tells
+the client the minimum number of photos that need to be provided in the application for it to 
+participate in peer review. The `iso3166` attribute informs the client is all country code 
+reference must adhere to ISO-3166. The `reviewTimeout` attribute specifies the time the client 
+has from receiving an identity review document, to sign and add it as an attachment to the 
+recently approved application. The `<idApplicationAttributes>` element may also contain a 
+sequence of `<required/>` elements, that list the names of required properties that must be 
+included in the identity application, for it to be considered for peer-review. The list of 
+required properties for peer review may be followed by a sequence of `<authenticator>` 
+elements listing available identity authenticator services and their requirements, followed 
+by a sequence of `<peerReviewService>` elements listing available peer review services and 
+their requirements. The client may use this information to decide which properties to include 
+in the application.
 
 Example:
 
@@ -698,7 +696,6 @@ without having to perform a petition itself, to get access to the identity. A Co
 petition should include the Bare JIDs of each part that has signed the Contract, so that
 they can get access to the requestor's Legal Identity.
 
-
 Example:
 
 ```xml
@@ -708,7 +705,7 @@ Example:
 	  id="2490219e-6e17-46c2-fc55-bae978d9a180@legal.example.org"
 	  s="urdAv/mtnKxG6I9WnStDNpAytiqW3/zN4KQefhFKBLV1tK9SC/JGd6QugxTC+f..."
 	  xmlns="urn:nfi:iot:leg:id:1.0">
-        <for>requestor@example.org</for>
+        <for>petitionrecipient@example.org</for>
     <validateSignature>
 </iq>
 ```
@@ -1169,7 +1166,7 @@ deactivate "Entity A"
 
 #.  The Legal Component B sends a `<petitionIdentityMsg>` element in a `<message>` stanza to
     Entity B. It retains the `pid`, `purpose` and `id` attributes from the first request,
-    and adds a `from` attribute containing the Full JID of the client making the petition,
+    and adds a `from` attribute containing the Bare JID of the client making the petition,
     and an optional `clientEp` attribute, containing the remote endpoint of the client, if
     available. The `<petitionIdentityMsg>` also contains an `<identity>` element, representing
     the Legal Identity of the Requestor making the request.
@@ -1189,9 +1186,17 @@ deactivate "Entity A"
     to the Requestor, informing the Requestor of the decision made by Entity B. The
     `<petitionIdentityResponseMsg>` element retains the `pid` and `response` attributes
     (explicitly including `response="false"` if not provided in the response from Entity B\).
-    If Entity B gave consent to share the Legal Identity, the `<petitionIdentityResponseMsg>` 
-    element also contains the requested Legal Identity using its `<identity>` object 
-    representation.
+    The element also contains an optional `clientEp` attribute, containing the remote endpoint 
+    of the client that responded, if available and the response is positive. If Entity B gave 
+    consent to share the Legal Identity, the `<petitionIdentityResponseMsg>` element also 
+    contains the requested Legal Identity using its `<identity>` object representation.
+
+**Note**: Recipients of `<peititonIdentity>`, `<peititonIdentityMsg>`, 
+`<peititonIdentityResponse>` and `<peititonIdentityResponseMsg>` should ignore the order of
+child elements, if not received in the order specified in this document or schema. The
+schema-specific elements are defined using the schema namespace and identified by their local
+names. The context element, which must be at most one element, must be defined using another
+namespace.
 
 ### Specifying properties and attachments
 
@@ -1218,7 +1223,7 @@ element to the `<petitionIdentityMsg>` message. It must likewise be forwarded in
 `<petitionIdentityResponse>` element, and the `<petitionIdentityResponseMsg>` element.
 Entities do not need to understand or parse this context-sensitive element, but it can be
 used by Trust Providers or application-specific application to do tasks connected to the
-petition.
+petition. The context element must have a different namespace.
 
 ### Example
 
@@ -1249,7 +1254,7 @@ Legal Component forwards the petition to the second client:
    <petitionIdentityMsg pid="OOmZ6nrG6LmDGrLjdkRHeaJ1oKdkBwaurX2G52jrqjs"
                         purpose="For demonstration purposes."
                         id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
-                        from="client@example.org/032e50a69ad719e1e347661394fb6a45"
+                        from="client@example.org"
                         clientEp="1.2.3.4"
                         xmlns="urn:nfi:iot:leg:id:1.0">
       <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org">
@@ -1390,7 +1395,7 @@ deactivate "Entity A"
     The signature is calculated on the UTF-8 encoding of the following string concatenation:
     
     ```
-    pid | ":" | id | ":" | purpose | ":" | nonce | ":" | LOWER(BAREJID) | BASE64(CONTENT)
+    pid | ":" | id | ":" | purpose | ":" | nonce | ":" | LOWER(BAREJID) | ":" | BASE64(CONTENT)
     ```
     
     where `LOWER(BAREJID)` represents the Bare JID of the sender, in lower case.
@@ -1403,7 +1408,7 @@ deactivate "Entity A"
 
 #.  The Legal Component B sends a `<petitionSignatureMsg>` element in a `<message>` stanza to
     Entity B. It retains the `pid`, `purpose` and `id` attributes from the first request,
-    and adds a `from` attribute containing the Full JID of the client making the petition,
+    and adds a `from` attribute containing the Bare JID of the client making the petition,
     and an optional `clientEp` attribute, containing the remote endpoint of the client, if
     available. The `<petitionSignatureMsg>` also contains an `<identity>` element, 
     representing the Legal Identity of the Requestor making the request, following by the
@@ -1411,27 +1416,42 @@ deactivate "Entity A"
 
 #.  Entity B reviews the request, in its own time. It ignores the request if it is received 
     from someone other than its own Trust Provider. Entity B can ignore the request for any
-    other reason as well. If Entity B chooses to return a response, it does so by sending a
-    `<petitionSignatureResponse>` element in an `<iq type="set">` stanza back to Legal 
-    Component B. The `<petitionSignatureResponse>` element retains the `pid` and `id` 
-    attributes of the message, and adds a `jid` attribute containing the Bare JID of the
-    Requestor, and an optional Boolean `response` attribute, declaring if the petition should
-    be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
-    is assumed to be `false`. If the `response` is `true`, the `<petitionSignatureResponse>` 
-    element also contains a `<content>` element with the BASE64-encoded binary content to be
-    signed, and a `<signature>` element, with the BASE64-encoded digital signature of the
-    content. The Legal Component checks all attributes, and that the sender is from the 
-    account associated with the petitioned Signature.
+    other reason as well.
+
+    #.  If Entity B is a Peer Review service, it may send a `<petitionClientUrl/>` message
+        to the client making the petition, requesting the client to open a URL in a browser,
+        to complete the petition request.
+    
+    #.  If Entity B chooses to return a response, it does so by sending a
+        `<petitionSignatureResponse>` element in an `<iq type="set">` stanza back to Legal 
+        Component B. The `<petitionSignatureResponse>` element retains the `pid` and `id` 
+        attributes of the message, and adds a `jid` attribute containing the Bare JID of the
+        Requestor, and an optional Boolean `response` attribute, declaring if the petition should
+        be accepted (`true`) or rejected (`false`). If a `response` attribute is not provided, it
+        is assumed to be `false`. If the `response` is `true`, the `<petitionSignatureResponse>` 
+        element also contains a `<content>` element with the BASE64-encoded binary content to be
+        signed, and a `<signature>` element, with the BASE64-encoded digital signature of the
+        content. The Legal Component checks all attributes, and that the sender is from the 
+        account associated with the petitioned Signature.
 
 #.  Legal Component B sends a `<petitionSignatureResponseMsg>` in a `<message>` stanza back
     to the Requestor, informing the Requestor of the decision made by Entity B. The
     `<petitionSignatureResponseMsg>` element retains the `pid` and `response` attributes
     (explicitly including `response="false"` if not provided in the response from Entity B\).
-    If Entity B gave consent to digitally sign the content, the 
-    `<petitionSignatureResponseMsg>` element also contains first a `<content>` element with
-    the BASE64-encoded content that was signed, a `<signature>` element with the BASE64-encoded
-    sigital signature, followed by the requested Legal Identity using its `<identity>` object 
-    representation.
+    The element also contains an optional `clientEp` attribute, containing the remote endpoint 
+    of the client that responded, if available and response is positive. If Entity B gave 
+    consent to digitally sign the content, the requested Legal Identity using its `<identity>` 
+    object representation is embedded first. Regardless of response, follows any context 
+    element, if defined. If the response is positive, a `<content>` element with the 
+    BASE64-encoded content that was signed, and a `<signature>` element with the 
+    BASE64-encoded sigital signature, is finally added.
+
+**Note**: Recipients of `<peititonSignature>`, `<peititonSignatureMsg>`, 
+`<peititonSignatureResponse>` and `<peititonSignatureResponseMsg>` should ignore the order of
+child elements, if not received in the order specified in this document or schema. The
+schema-specific elements are defined using the schema namespace and identified by their local
+names. The context element, which must be at most one element, must be defined using another
+namespace.
 
 ### Specifying properties and attachments
 
@@ -1478,7 +1498,7 @@ Legal Component forwards the petition to the second client:
    <petitionSignatureMsg pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
                          purpose="Sign this for demonstration purposes."
                          id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org"
-                         from="client@example.org/032e50a69ad719e1e347661394fb6a45"
+                         from="client@example.org"
                          clientEp="1.2.3.4"
                          xmlns="urn:nfi:iot:leg:id:1.0">
       <identity id="2c595b91-2497-4f49-a6a9-055360c01039@legal.example.org">
@@ -1536,8 +1556,6 @@ It then forwards the response, together with the identity, to the original Reque
    <petitionSignatureResponseMsg pid="MLi6XA4SD4aNxHbxFnSLqnwc55XqqUQQikJcVQ-ODzo"
                                 response="true"
                                 xmlns="urn:nfi:iot:leg:id:1.0">
-      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
-      <signature>qrNt3V3xCBMltc9WNOvyD8Qcwhe...</signature>
       <identity id="2490219d-6e17-46c1-fc55-bae9783cf992@legal.example.org" xmlns="urn:nfi:iot:leg:id:1.0">
          <clientPublicKey>
             <ed448 pub="0nvHYWUD3BZZe..." xmlns="urn:nfi:iot:e2e:1.0"/>
@@ -1557,6 +1575,8 @@ It then forwards the response, together with the identity, to the original Reque
                  updated="2019-06-09T21:59:39Z"/>
          <serverSignature>...</serverSignature>
       </identity>
+      <content>naONB+tl9u3PFL6jGf2DVpw+FwBZTLVCXzqpXBFJzSM=</content>
+      <signature>qrNt3V3xCBMltc9WNOvyD8Qcwhe...</signature>
    </petitionSignatureResponseMsg>
 </message>
 ```
@@ -1732,7 +1752,6 @@ Example of a Peer Review attachment:
    </reviewer>
 </peerReview>
 ```
-
 
 Getting Network Identity of Identifier
 -----------------------------------------
