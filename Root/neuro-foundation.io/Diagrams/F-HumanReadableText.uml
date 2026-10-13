@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+
+skinparam nodesep 20
+skinparam ranksep 50
+skinparam groupInheritance 2
+skinparam linetype polyline
+
+object humanReadableText
+humanReadableText : xml:lang
+
+object description
+description : xml:lang
+
+object label
+label : xml:lang
+
+humanReadableText --|> HumanReadableText
+description --|> HumanReadableText
+
+HumanReadableText "1" *-- "*" BlockElement
+
+label "1" *-- "*" InlineElement
+
+paragraph --|> BlockElement
+paragraph "1" *-- "*" InlineElement
+
+section --|> BlockElement
+section *-- header
+section *-- body
+header "1" *-- InlineElement
+body "1" *-- BlockElement
+
+bulletItems --|> BlockElement
+bulletItems "1" *-- "*" item
+item "0/1" *-- InlineElement
+item "1/0" *-- BlockElement
+
+numberedItems --|> BlockElement
+numberedItems "1" *-- "*" item
+
+imageStandalone --|> ImageType
+ImageType --|> BlockElement
+ImageType *-- caption
+ImageType : binary
+ImageType : contentType
+ImageType : width
+ImageType : height
+caption "1" *-- "*" InlineElement
+
+separator --|> BlockElement
+
+table --|> BlockElement
+table "1" *-- "*" row
+row "1" *-- "*" cell
+cell : alignment
+cell : colSpan
+cell : header
+cell "0/1" *-- InlineElement
+cell "0/1" *-- BlockElement
+
+
+text --|> InlineElement
+
+parameter --|> InlineElement
+parameter : name
+
+bold --|> InlineElement
+bold "1" *-- "*" InlineElement
+
+italic --|> InlineElement
+italic "1" *-- "*" InlineElement
+
+underline --|> InlineElement
+underline "1" *-- "*" InlineElement
+
+strikeThrough --|> InlineElement
+strikeThrough "1" *-- "*" InlineElement
+
+super --|> InlineElement
+super "1" *-- "*" InlineElement
+
+sub --|> InlineElement
+sub "1" *-- "*" InlineElement
+
+lineBreak --|> InlineElement
+
+imageInline --|> ImageType
+
+@enduml

@@ -789,11 +789,15 @@ variables, and use common arithmetic and comparison operators to impose rules on
 referencing multiple parameters in a single expression. Expressions may also reference 
 intrinsic contract properties. The following table lists such contract properties:
 
-| Property   | Type          | Description                                                                                                   |
-|:-----------|:--------------|:--------------------------------------------------------------------------------------------------------------|
-| `Duration` | `xs:duration` | The duration of the contract .                                                                                |
-| `Now`      | `xs:dateTime` | The current local date and time, if not signed, otherwise the local date and time of the first signature.     |
-| `NowUtc`   | `xs:dateTime` | The current date and time in UTC, if not signed, otherwise the date and time, in UTC, of the first signature. |
+| Property   | Description                                                                                                   |
+|:-----------|:--------------------------------------------------------------------------------------------------------------|
+| `Duration` | The duration of the contract .                                                                                |
+| `Now`      | The current local date and time, if not signed, otherwise the local date and time of the first signature.     |
+| `NowUtc`   | The current date and time in UTC, if not signed, otherwise the date and time, in UTC, of the first signature. |
+| `Time`     | The current local time, if not signed, otherwise the local time of the first signature.                       |
+| `TimeUtc`  | The current time in UTC, if not signed, otherwise the time, in UTC, of the first signature.                   |
+| `Today`    | The current local date, if not signed, otherwise the local date of the first signature.                       |
+| `TodayUtc` | The current date in UTC, if not signed, otherwise the date, in UTC, of the first signature.                   |
 
 When referencing contract properties in referenced contract, object-oriented naming notation
 is used, by first referencing the name of the contract reference parameter, following by a
@@ -896,7 +900,7 @@ the normal `value` attribute. The actual values are transmitted outside the scop
 contract. All signatures are calculated on the BASE64-encoded binary GUID representations, 
 not the actual parameter values.
 
-Transient parameter can be used in special circumstances where special care has to be made to 
+Transient parameters can be used in special circumstances where special care has to be made to 
 protect the privacy or confidentiality of the underlying information, but still use smart 
 contracts and digital signatures to show that the signatories have agreed on the terms of the 
 contract. Examples can include sensitive information such as choices during closed voting 
@@ -921,6 +925,99 @@ Human-readable text, whether it is defined using the `<humanReadableText/>` elem
 of the `<description/>` elements, consists of a sequence of one or more *block elements*, 
 defined in the following subsections. Human-readable text defined in `<label/>` elements only
 consist of *inline elements*, also defined below.
+
+```uml
+@startuml
+left to right direction
+
+skinparam nodesep 20
+skinparam ranksep 50
+skinparam groupInheritance 2
+skinparam linetype polyline
+
+object humanReadableText
+humanReadableText : xml:lang
+
+object description
+description : xml:lang
+
+object label
+label : xml:lang
+
+humanReadableText --|> HumanReadableText
+description --|> HumanReadableText
+
+HumanReadableText "1" *-- "*" BlockElement
+
+label "1" *-- "*" InlineElement
+
+paragraph --|> BlockElement
+paragraph "1" *-- "*" InlineElement
+
+section --|> BlockElement
+section *-- header
+section *-- body
+header "1" *-- InlineElement
+body "1" *-- BlockElement
+
+bulletItems --|> BlockElement
+bulletItems "1" *-- "*" item
+item "0/1" *-- InlineElement
+item "1/0" *-- BlockElement
+
+numberedItems --|> BlockElement
+numberedItems "1" *-- "*" item
+
+imageStandalone --|> ImageType
+ImageType --|> BlockElement
+ImageType *-- caption
+ImageType : binary
+ImageType : contentType
+ImageType : width
+ImageType : height
+caption "1" *-- "*" InlineElement
+
+separator --|> BlockElement
+
+table --|> BlockElement
+table "1" *-- "*" row
+row "1" *-- "*" cell
+cell : alignment
+cell : colSpan
+cell : header
+cell "0/1" *-- InlineElement
+cell "0/1" *-- BlockElement
+
+
+text --|> InlineElement
+
+parameter --|> InlineElement
+parameter : name
+
+bold --|> InlineElement
+bold "1" *-- "*" InlineElement
+
+italic --|> InlineElement
+italic "1" *-- "*" InlineElement
+
+underline --|> InlineElement
+underline "1" *-- "*" InlineElement
+
+strikeThrough --|> InlineElement
+strikeThrough "1" *-- "*" InlineElement
+
+super --|> InlineElement
+super "1" *-- "*" InlineElement
+
+sub --|> InlineElement
+sub "1" *-- "*" InlineElement
+
+lineBreak --|> InlineElement
+
+imageInline --|> ImageType
+
+@enduml
+```
 
 #### Block elements
 
