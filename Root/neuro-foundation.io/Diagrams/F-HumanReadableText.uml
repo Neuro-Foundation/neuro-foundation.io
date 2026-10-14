@@ -1,26 +1,39 @@
 @startuml
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam nodesep 24
+skinparam ranksep 30
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor #B7C2CE
+  RoundCorner 12
+}
+
+rectangle Group1 [
+<b>Block Elements</b>
+{{
 left to right direction
 
-skinparam nodesep 20
-skinparam ranksep 50
-skinparam groupInheritance 2
-skinparam linetype polyline
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
 
-object humanReadableText
-humanReadableText : xml:lang
-
-object description
-description : xml:lang
-
-object label
-label : xml:lang
-
-humanReadableText --|> HumanReadableText
-description --|> HumanReadableText
-
-HumanReadableText "1" *-- "*" BlockElement
-
-label "1" *-- "*" InlineElement
+object paragraph
+object section
+object header
+object body
+object bulletItems
+object item
+object numberedItems
+object imageStandalone
+object separator
+object table
+object row
+object cell
+abstract class InlineElement #EAF2FA
+abstract class BlockElement #EAF2FA
+abstract class ImageType #EAF2FA
 
 paragraph --|> BlockElement
 paragraph "1" *-- "*" InlineElement
@@ -40,13 +53,6 @@ numberedItems --|> BlockElement
 numberedItems "1" *-- "*" item
 
 imageStandalone --|> ImageType
-ImageType --|> BlockElement
-ImageType *-- caption
-ImageType : binary
-ImageType : contentType
-ImageType : width
-ImageType : height
-caption "1" *-- "*" InlineElement
 
 separator --|> BlockElement
 
@@ -58,7 +64,30 @@ cell : colSpan
 cell : header
 cell "0/1" *-- InlineElement
 cell "0/1" *-- BlockElement
+}}
+]
 
+rectangle Group2 [
+<b>Inline Elements</b>
+{{
+left to right direction
+
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+
+object text
+object parameter
+object bold
+object italic
+object underline
+object strikeThrough
+object super
+object sub
+object lineBreak
+object imageInline
+abstract class InlineElement #EAF2FA
+abstract class ImageType #EAF2FA
 
 text --|> InlineElement
 
@@ -86,5 +115,61 @@ sub "1" *-- "*" InlineElement
 lineBreak --|> InlineElement
 
 imageInline --|> ImageType
+}}
+]
+
+rectangle Group3 [
+<b>Images</b>
+{{
+left to right direction
+
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+
+object caption
+abstract class InlineElement #EAF2FA
+abstract class ImageType #EAF2FA
+
+ImageType *-- caption
+ImageType : binary
+ImageType : contentType
+ImageType : width
+ImageType : height
+caption "1" *-- "*" InlineElement
+
+}}
+]
+
+rectangle Group4 [
+<b>Contract Elements with human-readable content</b>
+{{
+left to right direction
+
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+
+object humanReadableText
+object description
+object label
+abstract class HumanReadableText #EAF2FA
+abstract class BlockElement #EAF2FA
+abstract class InlineElement #EAF2FA
+
+humanReadableText : xml:lang
+
+description : xml:lang
+
+label : xml:lang
+
+humanReadableText --|> HumanReadableText
+description --|> HumanReadableText
+
+HumanReadableText "1" *-- "*" BlockElement
+
+label "1" *-- "*" InlineElement
+}}
+]
 
 @enduml
