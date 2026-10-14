@@ -941,7 +941,7 @@ skinparam rectangle {
 
 rectangle Group1 [
 <b>Block Elements</b>
-{{
+%chr(123)%chr(123)
 left to right direction
 
 skinparam classAttributeIconSize 0
@@ -993,12 +993,12 @@ cell : colSpan
 cell : header
 cell "0/1" *-- InlineElement
 cell "0/1" *-- BlockElement
-}}
+%chr(125)%chr(125)
 ]
 
 rectangle Group2 [
 <b>Inline Elements</b>
-{{
+%chr(123)%chr(123)
 left to right direction
 
 skinparam classAttributeIconSize 0
@@ -1044,12 +1044,12 @@ sub "1" *-- "*" InlineElement
 lineBreak --|> InlineElement
 
 imageInline --|> ImageType
-}}
+%chr(125)%chr(125)
 ]
 
 rectangle Group3 [
 <b>Images</b>
-{{
+%chr(123)%chr(123)
 left to right direction
 
 skinparam classAttributeIconSize 0
@@ -1067,12 +1067,12 @@ ImageType : width
 ImageType : height
 caption "1" *-- "*" InlineElement
 
-}}
+%chr(125)%chr(125)
 ]
 
 rectangle Group4 [
 <b>Contract Elements with human-readable content</b>
-{{
+%chr(123)%chr(123)
 left to right direction
 
 skinparam classAttributeIconSize 0
@@ -1098,7 +1098,7 @@ description --|> HumanReadableText
 HumanReadableText "1" *-- "*" BlockElement
 
 label "1" *-- "*" InlineElement
-}}
+%chr(125)%chr(125)
 ]
 
 @enduml
