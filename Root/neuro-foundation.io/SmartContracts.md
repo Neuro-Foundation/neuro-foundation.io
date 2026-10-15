@@ -1478,7 +1478,7 @@ An XML schema must be available on the server defining the structure of the mach
 contents of the contract, based on its qualified name, it will be used to validate the 
 contents of the contract. If that validation fails, an error is returned, and the contract
 is not created. If validation succeeds, information about this will be made available in the 
-state portion of the contract. XML Schemas can either be registered with the Trust Provider 
+status portion of the contract. XML Schemas can either be registered with the Trust Provider 
 out-of-band, or downloaded by the Trust Provider automatically, if accessible through the 
 namespace URI, if it's using a downloadable URI scheme. The XML Schema must not contain 
 any DTD or processing instructions.
@@ -1530,7 +1530,10 @@ use. The structure of the `<parameters/>` element is the same as for the `<contr
 but must not contain parameters not available in the referenced template contract. Parameters 
 in the template not referenced in the `<template/>` element are used as-is, and simply copied 
 into the new contract. There is therefore no need to copy all parameters, if the new contract 
-will be using the same values as the template does.
+will be using the same values as the template does. The referenced Template must not be in
+any of the states `Proposed`, `Obsoleted`, `Deleted`, `Rejected` or `Failed`, or an error
+must be returned. The client referencing the template must be authorized to access the 
+template contract, or an error must be returned.
 
 Whenever a contract is created on the server, a `<message/>` stanza is sent to the bare JIDs 
 of all parties of the contract, including the creator if not signed, containing a reference 
