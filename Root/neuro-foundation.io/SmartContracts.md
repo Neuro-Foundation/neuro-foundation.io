@@ -1562,20 +1562,28 @@ Attributes for request:
 
 ### Getting a contract
 
-To retrieve a specific contract given its ID, a client sends a `<getContract/>` element in an `<iq type="get"/>` stanza to a Trust Provider. 
-The element only contains an `id` attribute, which must be set to the contract identity that the client wishes to get.
-The server only returns contracts registered on itself. It also authorizes all request, only returning 
+To retrieve a specific contract given its ID, a client sends a `<getContract/>` element in an 
+`<iq type="get"/>` stanza to a Trust Provider. The element only contains an `id` attribute, 
+which must be set to the contract identity that the client wishes to get. The server only 
+returns contracts registered on itself. It also authorizes all request, only returning 
 contracts the client is authorized to see. Expected response element is `<contract/>`.
 
-If the client represents a part with a legal identity registered on a Trust Provider ("legal identity host") different from the Trust Provider hosting the 
-contract ("contract host"), the contract host must check that the network identity used by the sender of the request, corresponds to any of the legal 
-identities used by parts in the contract, before returning contracts limited to its parts to the client. This is done by sending an `<isPart/>` element in 
-an `<iq type="get"/>` stanza from the contract host to the legal identity host. The element contains a `bareJid` attribute with the bare network identity
-to check. The element also contains one or more `<idRef/>` child elements, each with an `id` attribute containing a legal identity hosted by the legal 
-identity host. The expected response is a `<part/>` element, whose value is a `xs:boolean` showing if the Bare JID is related to any of the legal identities
-referenced in the request.
+If the client represents a part with a legal identity registered on a Trust Provider 
+("legal identity host") different from the Trust Provider hosting the contract 
+("contract host"), the contract host must check that the network identity used by the sender 
+of the request, corresponds to any of the legal identities used by parts in the contract, 
+before returning contracts limited to its parts to the client. This is done by sending an 
+`<isPart/>` element in an `<iq type="get"/>` stanza from the contract host to the legal 
+identity host. The element contains a `bareJid` attribute with the bare network identity to 
+check. The element also contains one or more `<idRef/>` child elements, each with an `id` 
+attribute containing a legal identity hosted by the legal identity host. The expected 
+response is a `<part/>` element, whose value is a `xs:boolean` showing if the Bare JID is 
+related to any of the legal identities referenced in the request.
 
 **Note**: This request automatically fails if the request is sent by a client.
+
+**Note 2**: Each Legal Identity referenced in `<idRef/>` must not be `Rejected` or 
+`Compromised`. They may be `Created`, `Approved` or `Obsoleted`.
 
 
 ### Getting a set of contracts
