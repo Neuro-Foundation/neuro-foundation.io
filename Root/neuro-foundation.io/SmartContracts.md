@@ -1953,20 +1953,22 @@ if the sender is the same as the domain of the referenced contract.
 
 ### Getting network identities involved in a contract
 
-A client can get a list of network identities associated with the legal identities that have signed a contract. This is done by sending a 
-`<getNetworkIdentities/>` element in an `<iq type="get"/>` stanza to the Trust Provider. The `<getNetworkIdentities/>` has one attribute `contractId`,
-which is used to identify the contract.
+A client can get a list of network identities associated with the legal identities that have
+signed a contract. This is done by sending a `<getNetworkIdentities/>` element in an 
+`<iq type="get"/>` stanza to the Trust Provider. The `<getNetworkIdentities/>` has one 
+attribute `contractId`, which is used to identify the contract.
 
-The expected response is a `<networkIdentities/>` element. It contains a sequence of `<networkIdentity/>` elements, each one relating a network identity
-with a corresponding legal identity using the attributes `bareJid` for the network identity, and `legalId` for the legal identity.
+The expected response is a `<networkIdentities/>` element. It contains a sequence of 
+`<networkIdentity/>` elements, each one relating a network identity with a corresponding legal 
+identity using the attributes `bareJid` for the network identity, and `legalId` for the legal 
+identity.
 
 **Notes**:
 
-* If the request is sent to the Trust Provider on which the contract is hosted, all network identities are returned, if authorized.
-* If the request is sent to a different Trust Provider, only network identities on that Trust Provider, associated with the contract are returned, 
-if the sender is the same as the domain of the referenced contract.
-* Only clients authorized to view the contract itself, are allowed to view its associated network identities.
-* Request is authorized only if (1) the client has access to smart contract, or (2) sender is the same domain hosting the referenced contract.
+* If the request is sent to the Trust Provider on which the contract is hosted, all network 
+identities are returned, if authorized.
+* Only clients authorized to view the contract itself, are allowed to view its associated 
+network identities.
 
 ### Proposing a contract to a new party
 
