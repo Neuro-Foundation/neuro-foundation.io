@@ -44,19 +44,27 @@ Requirements
 Process
 ------------------------
 
-The Synchronization namespace defines one element: `<req/>`, which is used in an `<iq type="get"/>` stanza to request information about the clock of the destination.
-It responds with an `<iq type="result"/>` stanza containing an `<resp/>` element. It has a required value containing the current date and time, in the format of
-simple type `xs:dateTime`. Note that an arbitrary precision can be used in the decimal part of the second portion of the `xs:dateTime` data type.
-Optionally, the `<resp/>` element can also contain information about the high-frequency timer on the destination machine, if one is available. This is done
-through the optional attributes `hf` and `freq`. The `hf` attribute contains the number of ticks since the timer started, and the `freq` attribute contains
-the number of increments `hf` makes in one second. This high-frequency timer can be used instead of the date and time value, if high-precision synchronization 
-is required, without knowledge about the exact date and time of day.
+The Synchronization namespace defines one element: `<req/>`, which is used in an 
+`<iq type="get"/>` stanza to request information about the clock of the destination. It 
+responds with an `<iq type="result"/>` stanza containing an `<resp/>` element. It has a 
+required value containing the current date and time, in the format of simple type 
+`xs:dateTime`. Note that an arbitrary precision can be used in the decimal part of the second 
+portion of the `xs:dateTime` data type. Optionally, the `<resp/>` element can also contain 
+information about the high-frequency timer on the destination machine, if one is available. 
+This is done through the optional attributes `hf` and `freq`. The `hf` attribute contains the 
+number of ticks since the timer started, and the `freq` attribute contains the number of 
+increments `hf` makes in one second. This high-frequency timer can be used instead of the 
+date and time value, if high-precision synchronization is required, without knowledge about 
+the exact date and time of day.
 
-**Note**: The reference of the high-frequency timer may change when the clock source restarts, or if another machine responds, such as might be the case if the
-clock source is hosted in a cluster or in the cloud.
+**Note**: The reference of the high-frequency timer may change when the clock source restarts,
+or if another machine responds, such as might be the case if the clock source is hosted in a 
+cluster or in the cloud.
 
-The client makes a note of its time (in UTC) ct<sub>1</sub> of its internal clock. It then sends a `<req/>` request to the clock source, who immediately responds 
-with a `<resp/>` element of its own, containing its time (in UTC) st. When the client receives the response, it notes its own time again (in UTC) ct<sub>2</sub>.
+The client makes a note of its time (in UTC) ct<sub>1</sub> of its internal clock. It then 
+sends a `<req/>` request to the clock source, who immediately responds with a `<resp/>` 
+element of its own, containing its time (in UTC) st. When the client receives the response, 
+it notes its own time again (in UTC) ct<sub>2</sub>.
 
 ```uml:Clock Synchronization
 @startuml

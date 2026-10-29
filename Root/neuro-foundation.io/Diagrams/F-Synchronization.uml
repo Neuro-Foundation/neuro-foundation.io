@@ -1,0 +1,28 @@
+﻿@startuml
+Activate Client
+
+group Average results using time window
+
+Client -> Client : <math>ct_1=ClientTime_{UTC}</math>
+Client -> Source : req
+
+Activate Source
+
+Source -> Source : <math>st=SourceTime_{UTC}</math>
+Client <-- Source : resp(st)
+
+Deactivate Source
+
+Client -> Client : <math>ct_2=ClientTime_{UTC}</math>
+
+note right
+<math>Δt_1=st-ct_1≈l+Δt</math>
+<math>Δt_2=ct_2-st≈l-Δt</math>
+<math>Δt_1+Δt_2≈2*l</math>
+<math>Δt_1-Δt_2≈2*Δt</math>
+end note
+
+end
+
+Deactivate Client
+@enduml
