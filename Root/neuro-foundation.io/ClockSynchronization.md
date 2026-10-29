@@ -97,15 +97,20 @@ Deactivate Client
 @enduml
 ```
 
-Given variation in the network and operating system processes, Δt<sub>1</sub>=st-ct<sub>1</sub> is approximately equal to the latency in the network l plus the 
-difference between the client and source clocks Δt. The response, which travels in the other direction, can be used to calculate Δt<sub>2</sub>=ct<sub>2</sub>-st,
-which is approximately equal to the latency in the network l minus the difference between the client and source clocks Δt. The latency l is therefore approximately 
-half of Δt<sub>1</sub>+Δt<sub>2</sub>. The difference in clocks Δt is approximately half of Δt<sub>1</sub>-Δt<sub>2</sub>.
+Given variation in the network and operating system processes, Δt<sub>1</sub>=st-ct<sub>1</sub> 
+is approximately equal to the latency in the network l plus the difference between the client 
+and source clocks Δt. The response, which travels in the other direction, can be used to 
+calculate Δt<sub>2</sub>=ct<sub>2</sub>-st, which is approximately equal to the latency in 
+the network l minus the difference between the client and source clocks Δt. The latency l is 
+therefore approximately half of Δt<sub>1</sub>+Δt<sub>2</sub>. The difference in clocks Δt is 
+approximately half of Δt<sub>1</sub>-Δt<sub>2</sub>.
 
-To decrease the variation of network and process activity, estimated values should be filtered to remove suspected measurement errors due to random events. An average 
-value over a given window of filtered values should also be used, to decrease error. The internal clocks of the client and server can be
-considered as more stable than the latency in the network. The bulk of the variance in the measured l and Δt can therefore be attributed to variance in the network,
-as well as concurrent processes and loads on the client and clock source.
+To decrease the variation of network and process activity, estimated values should be filtered 
+to remove suspected measurement errors due to random events. An average value over a given 
+window of filtered values should also be used, to decrease error. The internal clocks of the 
+client and server can be considered as more stable than the latency in the network. The bulk 
+of the variance in the measured l and Δt can therefore be attributed to variance in the 
+network, as well as concurrent processes and loads on the client and clock source.
 
 Examples
 -------------
