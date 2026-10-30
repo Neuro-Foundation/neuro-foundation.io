@@ -1,0 +1,28 @@
+@startuml
+node "Root Broker" as RootBroker 
+node "Broker<sub>1</sub>" as Broker1
+node "Broker<sub>2</sub>" as Broker2
+cloud "..." as BrokerE
+node "Broker<sub>N</sub>" as BrokerN
+node "Broker<sub>2,1</sub>" as ChildBroker1
+node "Broker<sub>2,2</sub>" as ChildBroker2
+cloud "..." as ChildBrokerE
+node "Broker<sub>2,M</sub>" as ChildBrokerM
+node "Client<sub>2,2,1</sub>" as Client1
+node "Client<sub>2,2,2</sub>" as Client2
+cloud "..." as ClientE
+node "Client<sub>2,2,K</sub>" as ClientK
+
+RootBroker <-- Broker1
+RootBroker <-- Broker2
+RootBroker <-- BrokerE
+RootBroker <-- BrokerN
+Broker2 <-- ChildBroker1
+Broker2 <-- ChildBroker2
+Broker2 <-- ChildBrokerE
+Broker2 <-- ChildBrokerM
+ChildBroker2 <-- Client1
+ChildBroker2 <-- Client2
+ChildBroker2 <-- ClientE
+ChildBroker2 <-- ClientK
+@enduml

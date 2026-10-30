@@ -9,7 +9,8 @@ Master: Master.md
 Software Updates
 ==================
 
-This document outlines the XML representation of the software updates service. The XML representation is modelled using an annotated XML Schema:
+This document outlines the XML representation of the software updates service. The XML 
+representation is modelled using an annotated XML Schema:
 
 | Discovery                                                             ||
 | ------------|----------------------------------------------------------|
@@ -21,20 +22,23 @@ This document outlines the XML representation of the software updates service. T
 Motivation and design goal
 ----------------------------
 
-It is important for things to be able to update their software, or firmware, in a timely fashion, as soon as manufacturers fix problems or 
-provide new functionality. The federated, decentralized broker infrastructure can be used to distribute signed software packages to things, 
-to facilitate keeping things up-to-date both quickly, and in a scalable manner.
+It is important for things to be able to update their software, or firmware, in a timely 
+fashion, as soon as manufacturers fix problems or provide new functionality. The federated, 
+decentralized broker infrastructure can be used to distribute signed software packages to 
+things, to facilitate keeping things up-to-date both quickly, and in a scalable manner.
 
-The software update feature described in this document, is designed with the following goals in mind:
+The software update feature described in this document, is designed with the following goals 
+in mind:
 
 * Brokers are used to distribute software packages.
-* Software packages must be digitally signed using public-key cryptography, to allow clients to detect the introduction of bad or fraudulent
-software packages.
+* Software packages must be digitally signed using public-key cryptography, to allow clients 
+to detect the introduction of bad or fraudulent software packages.
 * Devices should be notified when new software is available.
 * It should be easy to browse and download available software packages.
 * The contents of software packages is manufacturer-specific.
 * The infrastructure only distributes software packages.
-* Package distribution must be scalable, to allow fo updating large amounts of devices over a short period of time.
+* Package distribution must be scalable, to allow fo updating large amounts of devices over a 
+short period of time.
 
 
 Requirements
@@ -46,9 +50,10 @@ Requirements
 Software packages
 ---------------------
 
-Software packages are single binary files, identified by their local file name (i.e. no folder information in file names). Apart from the
-binary file stored on the broker, the broker also maintains a set of meta-information about the file. This information is typically
-represented as attributes in a `<packageInfo/>` element:
+Software packages are single binary files, identified by their local file name (i.e. no folder 
+information in file names). Apart from the binary file stored on the broker, the broker also 
+maintains a set of meta-information about the file. This information is typically represented 
+as attributes in a `<packageInfo/>` element:
 
 | Attribute    | Type                    | Use      | Description |
 |:-------------|:------------------------|:---------|:------------|
@@ -75,25 +80,34 @@ Example:
 
 ### Downloading software packages
 
-When downloading a software package, the `url` attribute contains a URL to the file. The URI scheme of the URL defines how the file should 
-be downloaded. If it begins with `http:` or `https:`, the HTTP or HTTPS protocols are used respectively to download the file. Broker 
-implementations can choose to provide other mechanisms as well. For instance, if the `httpx:` URI scheme is used, HTTP over XMPP is to be 
-used, as defined in [XEP-0332: HTTP over XMPP](https://xmpp.org/extensions/xep-0332.html). Other well-known URI schemes can also be used, 
-such as `ftp:` for the File Transfer Protocol.
+When downloading a software package, the `url` attribute contains a URL to the file. The URI 
+scheme of the URL defines how the file should be downloaded. If it begins with `http:` or 
+`https:`, the HTTP or HTTPS protocols are used respectively to download the file. Broker 
+implementations can choose to provide other mechanisms as well. For instance, if the `httpx:` 
+URI scheme is used, HTTP over XMPP is to be used, as defined in 
+[XEP-0332: HTTP over XMPP](https://xmpp.org/extensions/xep-0332.html). Other well-known URI 
+schemes can also be used, such as `ftp:` for the File Transfer Protocol. Choice of protocol is
+implementation specific. URI's may also be short-lived, and contain query parameters that are 
+pinned to the specific clienc. Clients should therefore not cache the URL, or distribute it.
 
 ### Distribution of package files
 
-In order to allow for large-scale distribution of software packages, centralized resource locations for software packages should be avoided.
-If millions or billions of devices get notified about the availability of new software from the manufacturer, they will act as an efficient
-Distributed Denial of Service (DDoS) attack on the manufacturer's servers, if requesting the software at the same time, or during a short
-time span. An alternative, is to use the federated broker infrastructure to mirror the software package across the network and allow the
-devices to fetch the updated software from the brokers they are already connected to. This allows the brokers to control the distribution
-of software packages, based on current load, as they also control the client notifications.
+In order to allow for large-scale distribution of software packages, centralized resource 
+locations for software packages should be avoided. If millions or billions of devices get 
+notified about the availability of new software from the manufacturer, they will act as an 
+efficient Distributed Denial of Service (DDoS) attack on the manufacturer's servers, if 
+requesting the software at the same time, or during a short time span. An alternative, is to 
+use the federated broker infrastructure to mirror the software package across the network and 
+allow the devices to fetch the updated software from the brokers they are already connected 
+to. This allows the brokers to control the distribution of software packages, based on current 
+load, as they also control the client notifications.
 
-Furthermore, the brokers can be organized into a tree structure, where a broker can be connected to a parent broker, and so on. A child 
-broker can subscribe to all software packages available on its parent broker, and download new packages as they become available, effectively
-mirroring software packages available on the parent broker. Depending on the depth of such a broker hierarchy, such an architecture
-efficiently distributes the load on the infrastructure, when distributing new software, as illustrated in the following diagram.
+Furthermore, the brokers can be organized into a tree structure, where a broker can be 
+connected to a parent broker, and so on. A child broker can subscribe to all software packages 
+available on its parent broker, and download new packages as they become available, 
+effectively mirroring software packages available on the parent broker. Depending on the depth 
+of such a broker hierarchy, such an architecture efficiently distributes the load on the 
+infrastructure, when distributing new software, as illustrated in the following diagram.
 
 ```uml:Package Distribution
 @startuml
@@ -128,30 +142,36 @@ ChildBroker2 <-- ClientK
 
 ### Signatures and keys
 
-All software packages must be signed, to allow clients to verify that downloaded software packages are complete, and actually from the 
-expected manufacturer. What signature algorithm and keys are used to sign the package, is manufacturer specific. The algorithms can be 
-chosen from the algorithms supported by [End-to-End Encryption](E2E.md), or they can be others. A client must verify the signature of each 
-downloaded package to verify if it is authentic or not. If the signature does not match the downloaded package, the client must discard the 
+All software packages must be signed, to allow clients to verify that downloaded software 
+packages are complete, and actually from the expected manufacturer. What signature algorithm 
+and keys are used to sign the package, is manufacturer specific. The algorithms can be chosen 
+from the algorithms supported by [End-to-End Encryption](E2E.md), or they can be others. A 
+client must verify the signature of each downloaded package to verify if it is authentic or 
+not. If the signature does not match the downloaded package, the client must discard the 
 package, as it is either incomplete, or not generated by the expected manufacturer.
 
 ### Versions
 
-Software packages are identified using their local file names. As clients subscribe to software updates based on the file name, this means 
-that the file name cannot include version information. Instead, the broker publishes timestamps when the software package was published
-on the broker. These timestamps can be used to determine if a software package on the broker is newer than what is currently being executed.
-The contents of the software packages is manufacturer-specific. Any further version-information can be encoded into the software package
-itself.
+Software packages are identified using their local file names. As clients subscribe to 
+software updates based on the file name, this means that the file name cannot include version 
+information. Instead, the broker publishes timestamps when the software package was published
+on the broker. These timestamps can be used to determine if a software package on the broker 
+is newer than what is currently being executed. The contents of the software packages is 
+manufacturer-specific. Any further version-information can be encoded into the software 
+package itself.
 
 ### Performing the update
 
-The update procedure is also manufacturer specific. It is recommended however, that the client backup important data before performing
-an update. It is up to the application to determine, if an operator needs to confirm the update before performing the update, or if the
-update should be automatic.
+The update procedure is also manufacturer specific. It is recommended however, that the client 
+backup important data before performing an update. It is up to the application to determine, 
+if an operator needs to confirm the update before performing the update, or if the update 
+should be automatic.
 
 ### Uploading software packages
 
-Uploading the original software packages, is an implementation issue, and not discussed in this specification. There is no standardized
-communication interface for uploading software packages.
+Uploading the original software packages, is an implementation issue, and not discussed in 
+this specification. There is no standardized communication interface for uploading software 
+packages.
 
 Getting package information
 --------------------------------
