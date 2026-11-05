@@ -176,9 +176,11 @@ packages.
 Getting package information
 --------------------------------
 
-To get information about a specific software package, the client sends a `<getPackageInfo/>` element in an `<iq type='get'/>` stanza to
-the software update service on the broker. The element specifies the package it wants information about, using the `fileName` attribute.
-The service responds with a `<getPackageInfo/>` element with information about the software package, if it exists.
+To get information about a specific software package, the client sends a `<getPackageInfo/>` 
+element in an `<iq type='get'/>` stanza to the software update service on the broker. The 
+element specifies the package it wants information about, using the `fileName` attribute. The 
+service responds with a `<getPackageInfo/>` element with information about the software 
+spackage, if it exists.
 
 Example:
 
@@ -208,16 +210,17 @@ Example:
 Getting available software packages
 --------------------------------------
 
-To get a list of available software packages, a client sends a `<getPackages/>` element in an `<iq type='get'/>` stanza to the software
-update service on the broker. The broker responds with a `<packages/>` element containing a sequence (possibly empty) of `<packageInfo/>`
+To get a list of available software packages, a client sends a `<getPackages/>` element in an 
+`<iq type='get'/>` stanza to the software update service on the broker. The broker responds 
+with a `<packages/>` element containing a sequence (possibly empty) of `<packageInfo/>` 
 elements, each one containing information about a software package available to the client.
 
-```xml:Getting package information
+```xml:Getting available packages
 <iq type='get'
     from='client@example.org/resource'
     to='software.example.org'
     id='2'>
-   <getPackageInfo xmlns='urn:nfi:iot:swu:1.0' fileName='Software.package'/>
+   <getPackages xmlns='urn:nfi:iot:swu:1.0'/>
 </iq>
 
 <iq type='result'
@@ -240,12 +243,14 @@ elements, each one containing information about a software package available to 
 Subscribing to software updates
 ----------------------------------
 
-To subscribe to notifications about a software package, a client sends a `<subscribe/>` element in an `<iq type='set'/>` stanza to the
-software update service with the filename of the software package file of interest in the `fileName` attribute. The client can choose
-to subscribe to notifications about all software packages by subscribing to the filename `*`. The subscription operator is idempotent. 
-Subscribing to a package that is already subscribed to, does not increase the number of subscriptions. The service responds with an
-empty response, even if the software package does not exist (yet). It might, in the future. Invalid requests, or invalid file names
-generate error responses.
+To subscribe to notifications about a software package, a client sends a `<subscribe/>` 
+element in an `<iq type='set'/>` stanza to the software update service with the filename of 
+the software package file of interest in the `fileName` attribute. The client can choose to 
+subscribe to notifications about all software packages by subscribing to the filename `*`. 
+The subscription operator is idempotent. Subscribing to a package that is already subscribed 
+to, does not increase the number of subscriptions. The service responds with an empty 
+response, even if the software package does not exist (yet). It might, in the future. Invalid 
+requests, or invalid file names generate error responses.
 
 ```xml:Subscribing to software package events
 <iq type='set'
@@ -261,17 +266,20 @@ generate error responses.
     id='3'/>
 ```
 
-**Note**: The broker can employ a security mechanism capping the number of subscriptions allowed by a client. If the maximum is reached, new subscriptions return
-error responses, until the client unsubscribes from previous subscriptions.
+**Note**: The broker can employ a security mechanism capping the number of subscriptions 
+allowed by a client. If the maximum is reached, new subscriptions return error responses, 
+until the client unsubscribes from previous subscriptions.
 
 Software package notifications
 ---------------------------------
 
-A client that is subscribed to updates related to a software package, is notified of updates made to the package, through asynchronous
-`<message/>` stanzas containing a `<packageInfo/>` element with the updated information. If the package is deleted from the broker, 
-the message will contain a `<packageDeleted/>` element instead, containing the meta-data about the software package that was deleted.
-If the client is offline when the change occurred, the message can be stored on the broker until the client connects, and is then sent
-to the client, as part of handling off-line messages.
+A client that is subscribed to updates related to a software package, is notified of updates
+made to the package, through asynchronous `<message/>` stanzas containing a `<packageInfo/>` 
+element with the updated information. If the package is deleted from the broker, the message 
+will contain a `<packageDeleted/>` element instead, containing the meta-data about the 
+software package that was deleted. If the client is offline when the change occurred, the 
+message can be stored on the broker until the client connects, and is then sent to the client,
+as part of handling off-line messages.
 
 Example:
 
@@ -293,9 +301,11 @@ Example:
 Unsubscribing from software updates
 -------------------------------------
 
-Similarly, a client can unsubscribe from previous subscriptions by sending an `<unsubscribe/>` element in an `<iq type='set'/>` stanza 
-to the software update service, specifying the software package using the `fileName` attribute. The service returns an empty response, 
-even if a matching subscription does not exist. If the filename is `*`, all subscriptions are removed.
+Similarly, a client can unsubscribe from previous subscriptions by sending an `<unsubscribe/>`
+element in an `<iq type='set'/>` stanza to the software update service, specifying the 
+software package using the `fileName` attribute. The service returns an empty response, even 
+if a matching subscription does not exist. If the filename is `*`, all subscriptions are 
+removed.
 
 ```xml:Unsubscribing from software package events
 <iq type='set'
@@ -314,9 +324,11 @@ even if a matching subscription does not exist. If the filename is `*`, all subs
 Getting current subscriptions
 ---------------------------------
 
-A client can get a list of subscriptions from the software update service. It does this, by sending an empty `<getSubscriptions/>` element
-in an `<iq type='get'/>` stanza to the service, which responds with a `<subscriptions/>` element. This element contains a sequence (possibly
-empty) of `<subscription/>` elements, each one containing a software package file name as a value.
+A client can get a list of subscriptions from the software update service. It does this, by 
+sending an empty `<getSubscriptions/>` element in an `<iq type='get'/>` stanza to the service,
+which responds with a `<subscriptions/>` element. This element contains a sequence (possibly
+empty) of `<subscription/>` elements, each one containing a software package file name as a 
+value.
 
 ```xml:Getting list of subscriptions
 <iq type='get'
