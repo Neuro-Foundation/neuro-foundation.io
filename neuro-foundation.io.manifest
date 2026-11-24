@@ -219,6 +219,7 @@
 			</Folder>
 			<Folder name="Papers">
 				<Content fileName="Biotic - Executive Summary.pdf"/>
+				<Content fileName="Decentralized Post-Quantum Security for Smart Societies.pdf"/>
 				<Content fileName="Federated Clock Synchronization in IIoT.pdf"/>
 				<Content fileName="Harmonized Web API for real-time data.pdf"/>
 				<Content fileName="Identity Architecture for Smart Societies.pdf"/>
